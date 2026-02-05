@@ -5,3 +5,4 @@ __pycache__/
 .DS_Store
 # Local helper scripts to skip from VCS
 test_quick.sh
+data/insights/keyword-trends-*.md
