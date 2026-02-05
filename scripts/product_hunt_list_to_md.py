@@ -1,0 +1,505 @@
+import os
+try:
+    from dotenv import load_dotenv
+    # 加载 .env 文件
+    load_dotenv()
+except ImportError:
+    # 在 GitHub Actions 等环境中，环境变量已经设置好，不需要 dotenv
+    print("dotenv 模块未安装，将直接使用环境变量")
+
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+import requests
+from datetime import datetime, timedelta, timezone
+import openai
+from bs4 import BeautifulSoup
+import pytz
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+from common.storage import save_structured_items, build_item_id
+from common.scoring import score_content
+
+# AI 相关筛选与关键词控制
+AI_KEYWORDS = [
+    'ai', 'artificial intelligence', 'machine learning', 'ml',
+    'deep learning', 'neural network', 'llm', 'gpt', 'claude',
+    'agent', 'autonomous', 'chatbot', 'assistant', 'copilot',
+    'generative', 'diffusion', 'transformer', 'embedding',
+    'rag', 'retrieval', 'vector', 'semantic search',
+    # 新增 agent/AI 相关长尾词
+    'proactive ai', 'agent infra', 'autonomous agents', 'multi-agent', 'openclaw', 'mcp',
+    'context', 'hijacking', 'laude code sdk', 'cowork', 'vibe coding', 'agent-friendly tooling',
+    'human-in-the-loop', 'online learning', 'reward model', 'reward fine-tune', 'sft', 'rlhf',
+    'rlaif', 'dpo', 'hero user', 'product self-iteration', 'intent prediction', 'non-consensus ai',
+    'ai-density', 'agentic workflow', 'workflow'
+]
+
+EXCLUDE_KEYWORDS = [
+    'crypto', 'nft', 'blockchain', 'web3', 'token',
+    'game', 'gaming', 'casino', 'betting',
+    'adult', 'dating', 'porn'
+]
+
+
+def _contains_any(text: str, keywords) -> bool:
+    if not text:
+        return False
+    lowered = text.lower()
+    return any(k in lowered for k in keywords)
+
+
+def is_ai_related(*fields: str) -> bool:
+    """Return True when text contains at least one AI keyword and no excluded keyword."""
+    merged = " ".join(filter(None, fields))
+    if not merged:
+        return False
+    if _contains_any(merged, EXCLUDE_KEYWORDS):
+        return False
+    return _contains_any(merged, AI_KEYWORDS)
+
+# 创建 OpenAI 客户端实例
+api_key = os.getenv('OPENAI_API_KEY')
+base_url = os.getenv('OPENAI_BASE_URL', 'https://api.openai.com/v1')  # 默认使用官方API地址
+if not api_key:
+    print("警告: 未设置 OPENAI_API_KEY 环境变量，将无法使用 OpenAI 服务")
+    client = None
+else:
+    openai.api_key = api_key
+    try:
+        client = openai.Client(api_key=api_key, base_url=base_url)  # 支持自定义API地址
+        print(f"成功初始化 OpenAI 客户端 (使用API地址: {base_url})")
+    except Exception as e:
+        print(f"初始化 OpenAI 客户端失败: {e}")
+        client = None
+
+class Product:
+    def __init__(self, id: str, name: str, tagline: str, description: str, votesCount: int, createdAt: str, featuredAt: str, website: str, url: str, media=None, **kwargs):
+        self.name = name
+        self.tagline = tagline
+        self.description = description
+        self.votes_count = votesCount
+        self.created_at = self.convert_to_beijing_time(createdAt)
+        self.featured = "是" if featuredAt else "否"
+        self.website = website
+        self.url = url
+        self.og_image_url = self.get_image_url_from_media(media)
+        self.keyword = self.generate_keywords()
+        self.translated_tagline = self.translate_text(self.tagline)
+        self.translated_description = self.translate_text(self.description)
+
+    def get_image_url_from_media(self, media):
+        """从API返回的media字段中获取图片URL"""
+        try:
+            if media and isinstance(media, list) and len(media) > 0:
+                # 优先使用第一张图片
+                image_url = media[0].get('url', '')
+                if image_url:
+                    print(f"成功从API获取图片URL: {self.name}")
+                    return image_url
+            
+            # 如果API没有返回图片，尝试使用备用方法
+            print(f"API未返回图片，尝试使用备用方法: {self.name}")
+            backup_url = self.fetch_og_image_url()
+            if backup_url:
+                print(f"使用备用方法获取图片URL成功: {self.name}")
+                return backup_url
+            else:
+                print(f"无法获取图片URL: {self.name}")
+                
+            return ""
+        except Exception as e:
+            print(f"获取图片URL时出错: {self.name}, 错误: {e}")
+            return ""
+
+    def fetch_og_image_url(self) -> str:
+        """获取产品的Open Graph图片URL（备用方法）"""
+        try:
+            response = requests.get(self.url, timeout=10)
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.text, 'html.parser')
+                # 查找og:image meta标签
+                og_image = soup.find("meta", property="og:image")
+                if og_image:
+                    return og_image["content"]
+                # 备用:查找twitter:image meta标签
+                twitter_image = soup.find("meta", name="twitter:image") 
+                if twitter_image:
+                    return twitter_image["content"]
+            return ""
+        except Exception as e:
+            print(f"获取OG图片URL时出错: {self.name}, 错误: {e}")
+            return ""
+
+    def generate_keywords(self) -> str:
+        """生成产品的关键词，显示在一行，用逗号分隔。
+
+        规则：
+        1) 必须包含 >=1 个 AI_KEYWORDS 里的词（但不要输出单独的“AI/人工智能”）；
+        2) 不能包含 EXCLUDE_KEYWORDS；
+        3) 在规则内补充 2-4 个基于产品名称/技术/功能的 AI 相关短词；
+        4) 关键词统一中文为主，专有名词可保留英文；
+        5) 返回英文逗号分隔，去重、去空格。
+        """
+        try:
+            # 如果 OpenAI 客户端不可用，直接使用备用方法
+            if client is None:
+                print(f"OpenAI 客户端不可用，使用备用关键词生成方法: {self.name}")
+                words = set((self.name + ", " + self.tagline).replace("&", ",").replace("|", ",").replace("-", ",").split(","))
+                # 兜底仍要做 AI 过滤
+                filtered = [w.strip() for w in words if w.strip()]
+                filtered = [w for w in filtered if is_ai_related(w)]
+                filtered = [w for w in filtered if w.lower() != 'ai' and w != '人工智能']
+                return ", ".join(filtered)
+
+            prompt = f"根据以下内容生成适合的中文关键词，用英文逗号分隔开：\n\n产品名称：{self.name}\n\n标语：{self.tagline}\n\n描述：{self.description}"
+
+            try:
+                print(f"正在为 {self.name} 生成关键词...")
+                response = client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": (
+                                "你是一名信息抽取助手。\n"
+                                "任务：生成仅限 AI 相关的中文关键词，英文逗号分隔，且满足：\n"
+                                "- 至少包含列表 AI_KEYWORDS 中的 1 个（可用同义或缩写），但不要输出单独的 'AI' 或 '人工智能'。\n"
+                                "- 不得包含 EXCLUDE_KEYWORDS 中任一项。\n"
+                                "- 在保证上述规则后，再补充 2-4 个基于产品名称/技术/功能的 AI 相关短关键词，中文为主，专有名词可保留英文。\n"
+                                "- 去重、去空格，保持 6-10 个词，总长不超过 80 字符。"
+                            ),
+                        },
+                        {
+                            "role": "user",
+                            "content": (
+                                f"AI_KEYWORDS: {', '.join(AI_KEYWORDS)}\n"
+                                f"EXCLUDE_KEYWORDS: {', '.join(EXCLUDE_KEYWORDS)}\n"
+                                f"产品名称: {self.name}\n标语: {self.tagline}\n描述: {self.description}"
+                            ),
+                        },
+                    ],
+                    max_tokens=50,
+                    temperature=0.7,
+                )
+                keywords = response.choices[0].message.content.strip()
+                if ',' not in keywords:
+                    keywords = ', '.join(keywords.split())
+                # 生成后再次本地过滤，确保规则
+                keywords_list = [k.strip() for k in keywords.split(',') if k.strip()]
+                keywords_list = [k for k in keywords_list if k.lower() != 'ai' and k != '人工智能']
+                keywords_list = [k for k in keywords_list if not _contains_any(k, EXCLUDE_KEYWORDS)]
+                if not any(_contains_any(k, AI_KEYWORDS) for k in keywords_list):
+                    # 如果模型未包含AI关键词，强行补上产品名中的可能AI词或默认使用 'agent'
+                    fallback_ai = next((kw for kw in AI_KEYWORDS if kw != 'ai' and kw in (self.name + ' ' + self.tagline + ' ' + self.description).lower()), 'agent')
+                    keywords_list.append(fallback_ai)
+                keywords = ', '.join(dict.fromkeys(keywords_list))  # 去重并保持顺序
+                print(f"成功为 {self.name} 生成关键词")
+                return keywords
+            except Exception as e:
+                print(f"OpenAI API 调用失败，使用备用关键词生成方法: {e}")
+                # 备用方法：从标题和标语中提取关键词
+                words = set((self.name + ", " + self.tagline).replace("&", ",").replace("|", ",").replace("-", ",").split(","))
+                filtered = [w.strip() for w in words if w.strip() and is_ai_related(w)]
+                return ", ".join(filtered)
+        except Exception as e:
+            print(f"关键词生成失败: {e}")
+            return self.name  # 至少返回产品名称作为关键词
+
+    def translate_text(self, text: str) -> str:
+        """使用OpenAI翻译文本内容"""
+        try:
+            # 如果 OpenAI 客户端不可用，直接返回原文
+            if client is None:
+                print(f"OpenAI 客户端不可用，无法翻译: {self.name}")
+                return text
+                
+            try:
+                print(f"正在翻译 {self.name} 的内容...")
+                response = client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[
+                        {"role": "system", "content": "你是世界上最专业的翻译工具，擅长英文和中文互译。你是一位精通英文和中文的专业翻译，尤其擅长将IT公司黑话和专业词汇翻译成简洁易懂的地道表达。你的任务是将以下内容翻译成地道的中文，风格与科普杂志或日常对话相似。"},
+                        {"role": "user", "content": text},
+                    ],
+                    max_tokens=500,
+                    temperature=0.7,
+                )
+                translated_text = response.choices[0].message.content.strip()
+                print(f"成功翻译 {self.name} 的内容")
+                return translated_text
+            except Exception as e:
+                print(f"OpenAI API 翻译失败: {e}")
+                # 如果 API 调用失败，返回原文
+                return text
+        except Exception as e:
+            print(f"翻译过程中出错: {e}")
+            return text
+
+    def convert_to_beijing_time(self, utc_time_str: str) -> str:
+        """将UTC时间转换为北京时间"""
+        utc_time = datetime.strptime(utc_time_str, '%Y-%m-%dT%H:%M:%SZ')
+        beijing_tz = pytz.timezone('Asia/Shanghai')
+        beijing_time = utc_time.replace(tzinfo=pytz.utc).astimezone(beijing_tz)
+        return beijing_time.strftime('%Y年%m月%d日 %p%I:%M (北京时间)')
+
+    def to_markdown(self, rank: int) -> str:
+        """返回产品数据的Markdown格式"""
+        og_image_markdown = f"![{self.name}]({self.og_image_url})"
+        # 简短评分展示
+        score = score_content(
+            f"名称: {self.name}\n标语: {self.tagline}\n描述: {self.description}\n关键词: {self.keyword}",
+            client,
+            kind="producthunt",
+        )
+        total_score = score.get("total", 0)
+        return (
+            f"## [{rank}. {self.name}]({self.url})\n"
+            f"**标语**：{self.translated_tagline}\n"
+            f"**介绍**：{self.translated_description}\n"
+            f"**产品网站**: [立即访问]({self.website})\n"
+            f"**Product Hunt**: [View on Product Hunt]({self.url})\n\n"
+            f"{og_image_markdown}\n\n"
+            f"**关键词**：{self.keyword}\n"
+            f"**票数**: 🔺{self.votes_count}\n"
+            f"**是否精选**：{self.featured}\n"
+            f"**发布时间**：{self.created_at}\n"
+            f"**评分**：{total_score}\n\n"
+            f"---\n\n"
+        )
+
+    def to_content_item(self, rank: int, date_str: str) -> dict:
+        merged_text = f"{self.name} {self.tagline} {self.description}".lower()
+        hit_keywords = [kw for kw in AI_KEYWORDS if kw in merged_text]
+        score = score_content(
+            f"名称: {self.name}\n标语: {self.tagline}\n描述: {self.description}\n关键词: {self.keyword}",
+            client,
+            kind="producthunt",
+        )
+        return {
+            "id": build_item_id("ph", date_str, rank),
+            "source": "producthunt",
+            "date": date_str,
+            "rank": rank,
+            "title": self.name,
+            "url": self.url,
+            "detail_url": self.website,
+            "description_en": self.description,
+            "description_zh": self.translated_description,
+            "keywords": [k.strip() for k in self.keyword.split(",") if k.strip()],
+            "tags": ["Product Hunt"],
+            "metrics": {"votes": self.votes_count, "featured": self.featured},
+            "media": {"image": self.og_image_url},
+            "ai_flags": {"is_ai": True, "hit_keywords": hit_keywords, "hit_excludes": []},
+            "score": score,
+            "raw": {
+                "tagline": self.tagline,
+                "created_at": self.created_at,
+            },
+        }
+
+def get_producthunt_token():
+    """获取 Product Hunt 访问令牌"""
+    # 优先使用 PRODUCTHUNT_DEVELOPER_TOKEN 环境变量
+    developer_token = os.getenv('PRODUCTHUNT_DEVELOPER_TOKEN')
+    if developer_token:
+        print("使用 PRODUCTHUNT_DEVELOPER_TOKEN 环境变量")
+        return developer_token
+    
+    # 如果没有 developer token，尝试使用 client credentials 获取访问令牌
+    client_id = os.getenv('PRODUCTHUNT_CLIENT_ID')
+    client_secret = os.getenv('PRODUCTHUNT_CLIENT_SECRET')
+    
+    if not client_id or not client_secret:
+        raise Exception("Product Hunt client ID or client secret not found in environment variables")
+    
+    # 使用 client credentials 获取访问令牌
+    token_url = "https://api.producthunt.com/v2/oauth/token"
+    payload = {
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "grant_type": "client_credentials"
+    }
+    
+    try:
+        response = requests.post(token_url, json=payload)
+        response.raise_for_status()
+        token_data = response.json()
+        return token_data.get("access_token")
+    except Exception as e:
+        print(f"获取 Product Hunt 访问令牌时出错: {e}")
+        raise Exception(f"Failed to get Product Hunt access token: {e}")
+
+def fetch_product_hunt_data():
+    """从Product Hunt获取前一天的Top 30数据"""
+    token = get_producthunt_token()
+    yesterday = datetime.now(timezone.utc) - timedelta(days=1)
+    date_str = yesterday.strftime('%Y-%m-%d')
+    url = "https://api.producthunt.com/v2/api/graphql"
+    
+    # 添加更多请求头信息
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}",
+        "User-Agent": "DecohackBot/1.0 (https://decohack.com)",
+        "Origin": "https://decohack.com",
+        "Accept-Language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7",
+        "Connection": "keep-alive"
+    }
+
+    # 设置重试策略
+    retry_strategy = Retry(
+        total=3,  # 最多重试3次
+        backoff_factor=1,  # 重试间隔时间
+        status_forcelist=[429, 500, 502, 503, 504]  # 需要重试的HTTP状态码
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session = requests.Session()
+    session.mount("https://", adapter)
+
+    base_query = """
+    {
+      posts(order: VOTES, postedAfter: "%sT00:00:00Z", postedBefore: "%sT23:59:59Z", after: "%s") {
+        nodes {
+          id
+          name
+          tagline
+          description
+          votesCount
+          createdAt
+          featuredAt
+          website
+          url
+          media {
+            url
+            type
+            videoUrl
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    """
+
+    all_posts = []
+    has_next_page = True
+    cursor = ""
+
+    while has_next_page and len(all_posts) < 30:
+        query = base_query % (date_str, date_str, cursor)
+        try:
+            response = session.post(url, headers=headers, json={"query": query})
+            response.raise_for_status()  # 抛出非200状态码的异常
+        except requests.exceptions.RequestException as e:
+            print(f"请求失败: {e}")
+            raise Exception(f"Failed to fetch data from Product Hunt: {e}")
+
+        data = response.json()['data']['posts']
+        posts = data['nodes']
+        all_posts.extend(posts)
+
+        has_next_page = data['pageInfo']['hasNextPage']
+        cursor = data['pageInfo']['endCursor']
+
+    # 只保留前30个产品
+    return [Product(**post) for post in sorted(all_posts, key=lambda x: x['votesCount'], reverse=True)[:30]]
+
+def fetch_mock_data():
+    """生成模拟数据用于测试"""
+    print("使用模拟数据进行测试...")
+    mock_products = [
+        {
+            "id": "1",
+            "name": "Venice",
+            "tagline": "Private & censorship-resistant AI | Unlock unlimited intelligence",
+            "description": "Venice is a private, censorship-resistant AI platform powered by open-source models and decentralized infrastructure. The app combines the benefits of decentralized blockchain technology with the power of generative AI.",
+            "votesCount": 566,
+            "createdAt": "2025-03-07T16:01:00Z",
+            "featuredAt": "2025-03-07T16:01:00Z",
+            "website": "https://www.producthunt.com/r/4D6Z6F7I3SXTGN",
+            "url": "https://www.producthunt.com/posts/venice-3",
+            "media": [
+                {
+                    "url": "https://ph-files.imgix.net/97baee49-6dda-47f5-8a47-91d2c56e1976.jpeg",
+                    "type": "image",
+                    "videoUrl": None
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "Mistral OCR",
+            "tagline": "Introducing the world's most powerful document understanding API",
+            "description": "Introducing Mistral OCR—an advanced, lightweight optical character recognition model focused on speed, accuracy, and efficiency. Whether extracting text from images or digitizing documents, it delivers top-tier performance with ease.",
+            "votesCount": 477,
+            "createdAt": "2025-03-07T16:01:00Z",
+            "featuredAt": "2025-03-07T16:01:00Z",
+            "website": "https://www.producthunt.com/r/SPXNTAWQSVRLGH",
+            "url": "https://www.producthunt.com/posts/mistral-ocr",
+            "media": [
+                {
+                    "url": "https://ph-files.imgix.net/4224517b-29e4-4944-98c9-2eee59374870.png",
+                    "type": "image",
+                    "videoUrl": None
+                }
+            ]
+        }
+    ]
+    return [Product(**product) for product in mock_products]
+
+def generate_markdown(products, date_str):
+    """生成Markdown内容并保存到data/producthunt目录"""
+    # 获取今天的日期并格式化
+    today = datetime.now(timezone.utc)
+    date_today = today.strftime('%Y-%m-%d')
+
+    markdown_content = f"# PH今日热榜 | {date_today}\n\n"
+    rank = 1
+    structured_items = []
+    for product in products:
+        if not is_ai_related(product.name, product.tagline, product.description):
+            print(f"跳过非AI产品: {product.name}")
+            continue
+        markdown_content += product.to_markdown(rank)
+        structured_items.append(product.to_content_item(rank, date_today))
+        rank += 1
+
+    # 确保 data/producthunt 目录存在
+    os.makedirs('data/producthunt', exist_ok=True)
+
+    # 修改文件保存路径到 data/producthunt 目录
+    file_name = f"data/producthunt/producthunt-daily-{date_today}.md"
+    
+    # 如果文件存在，直接覆盖
+    with open(file_name, 'w', encoding='utf-8') as file:
+        file.write(markdown_content)
+    print(f"文件 {file_name} 生成成功并已覆盖。")
+    save_structured_items(date_today, structured_items)
+
+
+def main():
+    # 获取昨天的日期并格式化
+    yesterday = datetime.now(timezone.utc) - timedelta(days=1)
+    date_str = yesterday.strftime('%Y-%m-%d')
+
+    try:
+        # 尝试获取Product Hunt数据
+        products = fetch_product_hunt_data()
+    except Exception as e:
+        print(f"获取Product Hunt数据失败: {e}")
+        print("使用模拟数据继续...")
+        products = fetch_mock_data()
+
+    # 生成Markdown文件
+    generate_markdown(products, date_str)
+
+if __name__ == "__main__":
+    main()

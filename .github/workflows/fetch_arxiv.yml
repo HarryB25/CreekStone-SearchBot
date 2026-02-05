@@ -1,0 +1,52 @@
+name: Fetch arXiv AI Papers
+
+on:
+  schedule:
+    - cron: '01 8 * * *'  # 每天UTC时间早上8:01（北京时间下午4:01）运行，比PH晚1小时
+  workflow_dispatch:  # 手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-arxiv:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip list  # 显示已安装的包及其版本
+
+    - name: Fetch arXiv Papers
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        ARXIV_CATEGORIES: ${{ vars.ARXIV_CATEGORIES }}
+        ARXIV_MAX_RESULTS: ${{ vars.ARXIV_MAX_RESULTS }}
+        ARXIV_MODEL_NAME: ${{ vars.ARXIV_MODEL_NAME }}
+      run: |
+        python scripts/arxiv_papers_to_md.py
+
+    - name: Commit files
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add .
+        git commit -m "Generated daily arXiv AI papers" || echo "No changes to commit"
+
+    - name: Push changes
+      run: |
+        git push https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
+
+
+
