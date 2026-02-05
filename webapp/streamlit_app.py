@@ -5,9 +5,11 @@ from typing import Optional
 
 import pandas as pd
 import streamlit as st
+import altair as alt
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 STRUCTURED_DIR = BASE_DIR / "data" / "structured"
+INSIGHTS_DIR = BASE_DIR / "data" / "insights"
 
 @st.cache_data
 def load_items() -> pd.DataFrame:
@@ -45,6 +47,17 @@ def load_items() -> pd.DataFrame:
         df["date_dt"] = pd.to_datetime(df["date"], errors="coerce")
         df = df.sort_values(by=["date_dt", "rank"], ascending=[False, True])
     return df
+
+
+@st.cache_data
+def load_keyword_trends() -> dict:
+    path = INSIGHTS_DIR / "keyword_trends.json"
+    if not path.exists():
+        return {"dates": [], "keywords": []}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {"dates": [], "keywords": []}
 
 
 def filter_items(df: pd.DataFrame, source: Optional[str], q: Optional[str]):
@@ -126,10 +139,21 @@ def card_html(item):
     ]
     return "\n".join([l for l in lines if l])
 
+def _score_color(norm_score: float) -> str:
+    norm = max(0.0, min(1.0, norm_score))
+    g = (15, 157, 88)
+    r = (239, 68, 68)
+    c = (
+        int(g[0] + (r[0] - g[0]) * norm),
+        int(g[1] + (r[1] - g[1]) * norm),
+        int(g[2] + (r[2] - g[2]) * norm),
+    )
+    return f"#{c[0]:02x}{c[1]:02x}{c[2]:02x}"
+
 
 STYLE = """
 <style>
-.block-container { padding-top: 1.5rem; max-width: 1100px; }
+.block-container { padding-top: 1.5rem; max-width: 1300px; }
 .card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:16px 18px; margin-bottom:14px; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
 .row { display:grid; grid-template-columns:1fr 230px; gap:14px; align-items:start; }
 .row.no-media { grid-template-columns:1fr; }
@@ -159,31 +183,140 @@ if df.empty:
     st.warning("暂无数据，请先生成 structured 数据。")
     st.stop()
 
-date_values = (
-    df["date"]
-    .dropna()
-    .astype(str)
-    .sort_values(ascending=False)
-    .unique()
-    .tolist()
-)
+tab_items, tab_trends = st.tabs(["内容浏览", "关键词趋势"])
 
-col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
-with col1:
-    q = st.text_input("搜索标题 / 关键词 / 描述", "")
-with col2:
-    sources = [""] + sorted(df["source"].dropna().unique().tolist())
-    source = st.selectbox("来源", sources, format_func=lambda x: "全部" if x == "" else x)
-with col3:
-    limit = st.slider("显示条数", 10, 200, 50, 10)
-with col4:
-    date_choice = st.selectbox("日期", date_values)
+with tab_items:
+    trends = load_keyword_trends()
+    t_keywords = trends.get("keywords", []) if trends else []
 
-if date_choice:
-    df = df[df["date"].astype(str) == date_choice]
+    left_col, right_col = st.columns([4, 1])
 
-df_f = filter_items(df, source or None, q or None)
-st.caption(f"共 {len(df_f)} 条，显示前 {min(limit, len(df_f))} 条")
+    date_values = (
+        df["date"]
+        .dropna()
+        .astype(str)
+        .sort_values(ascending=False)
+        .unique()
+        .tolist()
+    )
 
-for _, row in df_f.head(limit).iterrows():
-    st.markdown(card_html(row), unsafe_allow_html=True)
+    with left_col:
+        col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
+        with col1:
+            q = st.text_input("搜索标题 / 关键词 / 描述", "")
+        with col2:
+            sources = [""] + sorted(df["source"].dropna().unique().tolist())
+            source = st.selectbox("来源", sources, format_func=lambda x: "全部" if x == "" else x)
+        with col3:
+            limit = st.slider("显示条数", 10, 200, 50, 10)
+        with col4:
+            date_choice = st.selectbox("日期", date_values)
+
+        if date_choice:
+            df = df[df["date"].astype(str) == date_choice]
+
+        df_f = filter_items(df, source or None, q or None)
+        if not df_f.empty and "score" in df_f.columns:
+            df_f = df_f.copy()
+            df_f["score_total"] = df_f["score"].apply(
+                lambda s: (s or {}).get("total") if isinstance(s, dict) else None
+            )
+            df_f = df_f.sort_values(
+                by=["score_total", "rank"],
+                ascending=[False, True],
+                na_position="last",
+            )
+        st.caption(f"共 {len(df_f)} 条，显示前 {min(limit, len(df_f))} 条")
+
+        for _, row in df_f.head(limit).iterrows():
+            st.markdown(card_html(row), unsafe_allow_html=True)
+
+    with right_col:
+        if t_keywords:
+            t_scores = [float(k.get("score", 0.0)) for k in t_keywords]
+            t_min = min(t_scores) if t_scores else 0.0
+            t_max = max(t_scores) if t_scores else 1.0
+            t_span = t_max - t_min if t_max != t_min else 1.0
+            st.markdown("**关键词趋势排行**")
+            top_sidebar = t_keywords[:6]
+            for idx, k in enumerate(top_sidebar, start=1):
+                score = float(k.get("score", 0.0))
+                ns = (score - t_min) / t_span
+                color = _score_color(ns)
+                kw = str(k.get("keyword", ""))
+                st.markdown(
+                    f"<div style='display:flex;align-items:center;gap:8px;'>"
+                    f"<span style='font-weight:700;color:#0f172a;'>{idx}.</span>"
+                    f"<span style='font-weight:600;color:#0f172a;'>{escape(kw)}</span>"
+                    f"<span style='margin-left:auto;color:{color};font-weight:700;'>"
+                    f"{score:.2f}</span></div>",
+                    unsafe_allow_html=True,
+                )
+                series_df = pd.DataFrame(k.get("series", []))
+                if not series_df.empty:
+                    series_df["norm_score"] = max(0.0, min(1.0, ns))
+                    series_df["date"] = pd.to_datetime(series_df["date"])
+                    series_df = series_df.sort_values("date").tail(7)
+                    mini_base = alt.Chart(series_df).encode(
+                        x=alt.X("date:T", axis=alt.Axis(labels=False, ticks=False, title=None)),
+                        y=alt.Y("count:Q", axis=alt.Axis(labels=False, ticks=False, title=None)),
+                        color=alt.Color(
+                            "norm_score:Q",
+                            scale=alt.Scale(domain=[0, 1], range=["#0f9d58", "#ef4444"]),
+                            legend=None,
+                        ),
+                    )
+                    mini_area = mini_base.mark_area(interpolate="monotone", opacity=0.2)
+                    mini_line = mini_base.mark_line(interpolate="monotone")
+                    mini_points = mini_base.mark_point(filled=False, size=40, strokeWidth=1.5)
+                    mini_chart = alt.layer(mini_area, mini_line, mini_points).properties(height=70)
+                    st.altair_chart(mini_chart, use_container_width=True)
+        else:
+            st.caption("暂无趋势数据")
+
+with tab_trends:
+    trends = load_keyword_trends()
+    keywords = trends.get("keywords", [])
+    dates = trends.get("dates", [])
+    if not keywords:
+        st.warning("暂无趋势数据，请先运行：python scripts/keyword_trends.py")
+    else:
+        col_a, col_b = st.columns([1, 2])
+        with col_a:
+            top_n = st.slider("显示关键词数量", 5, 50, 20, 1, key="trend_topn")
+        with col_b:
+            if dates:
+                st.caption(f"趋势统计区间：{dates[0]} ~ {dates[-1]}")
+
+        scores = [float(k.get("score", 0.0)) for k in keywords]
+        score_min = min(scores) if scores else 0.0
+        score_max = max(scores) if scores else 1.0
+        score_span = score_max - score_min if score_max != score_min else 1.0
+
+        for i, item in enumerate(keywords[:top_n], start=1):
+            st.markdown(
+                f"**{i}. {item['keyword']}**  "
+                f"(趋势分 `{item['score']:.4f}` / growth `{item['growth']:.4f}` / acceleration `{item['acceleration']:.4f}` / total `{item['total']}`)"
+            )
+            series_df = pd.DataFrame(item["series"])
+            if not series_df.empty:
+                norm_score = (float(item.get("score", 0.0)) - score_min) / score_span
+                norm_score = max(0.0, min(1.0, norm_score))
+                series_df["norm_score"] = norm_score
+                series_df["score"] = item["score"]
+                series_df["date"] = pd.to_datetime(series_df["date"])
+                series_df = series_df.sort_values("date").tail(7)
+                base = alt.Chart(series_df).encode(
+                    x=alt.X("date:T", title="", axis=alt.Axis(labelAngle=0, format="%m-%d")),
+                    y=alt.Y("count:Q", title=""),
+                    color=alt.Color(
+                        "norm_score:Q",
+                        scale=alt.Scale(domain=[0, 1], range=["#0f9d58", "#ef4444"]),
+                        legend=None,
+                    ),
+                )
+                area = base.mark_area(interpolate="monotone", opacity=0.18)
+                line = base.mark_line(interpolate="monotone")
+                points = base.mark_point(filled=False, size=70, strokeWidth=2)
+                chart = alt.layer(area, line, points).properties(height=160)
+                st.altair_chart(chart, use_container_width=True)

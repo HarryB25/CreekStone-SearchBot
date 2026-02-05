@@ -37,6 +37,10 @@ jobs:
       run: |
         python scripts/arxiv_papers_to_md.py
 
+    - name: Generate Keyword Trends
+      run: |
+        python scripts/keyword_trends.py
+
     - name: Commit files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -47,6 +51,5 @@ jobs:
     - name: Push changes
       run: |
         git push https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
-
 
 

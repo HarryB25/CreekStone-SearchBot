@@ -36,6 +36,10 @@ jobs:
       run: |
         python scripts/product_hunt_list_to_md.py
 
+    - name: Generate Keyword Trends
+      run: |
+        python scripts/keyword_trends.py
+
     - name: Commit files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
