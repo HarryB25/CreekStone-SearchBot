@@ -41,6 +41,20 @@ EXCLUDE_KEYWORDS = [
     'adult', 'dating', 'porn'
 ]
 
+def _get_int_env(name: str, default: int) -> int:
+    raw = os.getenv(name)
+    if raw is None or raw.strip() == "":
+        return default
+    try:
+        value = int(raw)
+    except ValueError:
+        print(f"警告: 环境变量 {name}={raw!r} 不是整数，回退默认值 {default}")
+        return default
+    if value <= 0:
+        print(f"警告: 环境变量 {name}={raw!r} 必须大于 0，回退默认值 {default}")
+        return default
+    return value
+
 
 def _contains_any(text: str, keywords) -> bool:
     if not text:
@@ -434,7 +448,7 @@ def main():
     # 从环境变量读取配置
     language = os.getenv('GITHUB_LANGUAGE', '')  # 留空表示所有语言
     since = os.getenv('GITHUB_SINCE', 'daily')  # daily, weekly, monthly
-    max_results = int(os.getenv('GITHUB_MAX_RESULTS', '25'))
+    max_results = _get_int_env('GITHUB_MAX_RESULTS', 25)
     
     print(f"=== GitHub Trending 爬取开始 ===")
     print(f"日期: {date_str}")
@@ -454,4 +468,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

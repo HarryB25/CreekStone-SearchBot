@@ -40,6 +40,20 @@ EXCLUDE_KEYWORDS = [
     'adult', 'dating', 'porn'
 ]
 
+def _get_int_env(name: str, default: int) -> int:
+    raw = os.getenv(name)
+    if raw is None or raw.strip() == "":
+        return default
+    try:
+        value = int(raw)
+    except ValueError:
+        print(f"警告: 环境变量 {name}={raw!r} 不是整数，回退默认值 {default}")
+        return default
+    if value <= 0:
+        print(f"警告: 环境变量 {name}={raw!r} 必须大于 0，回退默认值 {default}")
+        return default
+    return value
+
 
 def _contains_any(text: str, keywords) -> bool:
     if not text:
@@ -429,9 +443,14 @@ def main():
     date_str = yesterday.strftime('%Y-%m-%d')
     
     # 从环境变量读取配置
-    categories_str = os.getenv('ARXIV_CATEGORIES', 'cs.AI,cs.LG,cs.CL,cs.CV')
-    categories = [cat.strip() for cat in categories_str.split(',')]
-    max_results = int(os.getenv('ARXIV_MAX_RESULTS', '30'))
+    default_categories = 'cs.AI,cs.LG,cs.CL,cs.CV'
+    categories_str = os.getenv('ARXIV_CATEGORIES', default_categories)
+    if categories_str is None or categories_str.strip() == "":
+        categories_str = default_categories
+    categories = [cat.strip() for cat in categories_str.split(',') if cat.strip()]
+    if not categories:
+        categories = [cat.strip() for cat in default_categories.split(',')]
+    max_results = _get_int_env('ARXIV_MAX_RESULTS', 30)
     
     print(f"=== arXiv AI 论文爬取开始 ===")
     print(f"日期: {date_str}")

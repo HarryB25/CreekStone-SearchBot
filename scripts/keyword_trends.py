@@ -164,27 +164,7 @@ def save_outputs(payload: Dict) -> None:
         json.dump(payload, f, ensure_ascii=False, indent=2)
     print(f"已写入趋势 JSON: {json_path}")
 
-    if payload["dates"]:
-        latest = payload["dates"][-1]
-    else:
-        latest = "unknown"
-    md_path = INSIGHTS_DIR / f"keyword-trends-{latest}.md"
-    topn = payload["keywords"][:30]
-    lines = [
-        f"# 关键词趋势榜 | {latest}",
-        "",
-        f"统计日期范围：{payload['dates'][0]} ~ {payload['dates'][-1]}" if payload["dates"] else "无数据",
-        "",
-        "| 排名 | 关键词 | 趋势分 | Growth | Acceleration | 总出现次数 |",
-        "|---:|---|---:|---:|---:|---:|",
-    ]
-    for i, item in enumerate(topn, start=1):
-        lines.append(
-            f"| {i} | {item['keyword']} | {item['score']:.4f} | {item['growth']:.4f} | {item['acceleration']:.4f} | {item['total']} |"
-        )
-    with md_path.open("w", encoding="utf-8") as f:
-        f.write("\n".join(lines))
-    print(f"已写入趋势 Markdown: {md_path}")
+    # MD 输出已弃用，仅保留 JSON
 
 
 def main():
