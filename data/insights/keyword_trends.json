@@ -4,17 +4,53 @@
     "2026-02-03",
     "2026-02-04",
     "2026-02-05",
-    "2026-02-06"
+    "2026-02-06",
+    "2026-02-07"
   ],
   "keywords": [
     {
-      "keyword": "代理基础设施",
-      "canonical": "代理基础设施",
-      "score": 6.9567,
-      "growth": 14.3333,
-      "acceleration": -1.0,
+      "keyword": "LLM",
+      "canonical": "llm",
+      "score": 2.0557,
+      "growth": 0.0114,
+      "acceleration": 5.5,
+      "total": 26,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 12
+        },
+        {
+          "date": "2026-02-03",
+          "count": 9
+        },
+        {
+          "date": "2026-02-04",
+          "count": 5
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "自动化代理",
+      "canonical": "自动化代理",
+      "score": 0.8649,
+      "growth": 0.0698,
+      "acceleration": 2.0,
       "total": 4,
-      "recent3_avg": 1.3333,
+      "recent3_avg": 0.0,
       "series": [
         {
           "date": "2026-02-02",
@@ -22,123 +58,69 @@
         },
         {
           "date": "2026-02-03",
-          "count": 0
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 2
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "人机交互",
-      "canonical": "人机交互",
-      "score": 5.64,
-      "growth": 11.0,
-      "acceleration": 0.0,
-      "total": 3,
-      "recent3_avg": 1.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 0
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 2
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "语言模型",
-      "canonical": "语言模型",
-      "score": 1.8082,
-      "growth": 0.2063,
-      "acceleration": 4.5,
-      "total": 5,
-      "recent3_avg": 0.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
           "count": 4
         },
         {
-          "date": "2026-02-03",
-          "count": 0
-        },
-        {
           "date": "2026-02-04",
           "count": 0
         },
         {
           "date": "2026-02-05",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "多模态",
-      "canonical": "多模态",
-      "score": 1.3967,
-      "growth": 1.8333,
-      "acceleration": 1.0,
+      "keyword": "autonomous",
+      "canonical": "autonomous",
+      "score": 0.8599,
+      "growth": 0.0698,
+      "acceleration": 2.0,
       "total": 4,
-      "recent3_avg": 1.0,
+      "recent3_avg": 0.0,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 1
-        },
-        {
-          "date": "2026-02-03",
-          "count": 0
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
           "count": 2
         },
         {
+          "date": "2026-02-03",
+          "count": 2
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "代理工作流",
-      "canonical": "代理工作流",
-      "score": 1.283,
-      "growth": 1.6061,
-      "acceleration": 1.0,
+      "keyword": "在线学习",
+      "canonical": "在线学习",
+      "score": 0.8455,
+      "growth": 0.0411,
+      "acceleration": 2.0,
       "total": 7,
-      "recent3_avg": 1.6667,
+      "recent3_avg": 0.0,
       "series": [
         {
           "date": "2026-02-02",
@@ -146,7 +128,7 @@
         },
         {
           "date": "2026-02-03",
-          "count": 1
+          "count": 5
         },
         {
           "date": "2026-02-04",
@@ -154,72 +136,14 @@
         },
         {
           "date": "2026-02-05",
-          "count": 4
+          "count": 0
         },
         {
           "date": "2026-02-06",
           "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "AI代理",
-      "canonical": "ai代理",
-      "score": 0.7739,
-      "growth": 1.2778,
-      "acceleration": 0.0,
-      "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
         },
         {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 2
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "编程助手",
-      "canonical": "编程助手",
-      "score": 0.7739,
-      "growth": 1.2778,
-      "acceleration": 0.0,
-      "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 2
-        },
-        {
-          "date": "2026-02-06",
+          "date": "2026-02-07",
           "count": 0
         }
       ]
@@ -227,8 +151,8 @@
     {
       "keyword": "ml",
       "canonical": "ml",
-      "score": 0.7383,
-      "growth": 0.1667,
+      "score": 0.7726,
+      "growth": 0.2453,
       "acceleration": 1.5,
       "total": 6,
       "recent3_avg": 0.3333,
@@ -252,17 +176,126 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
-      "keyword": "自动化助手",
-      "canonical": "自动化助手",
-      "score": 0.7017,
-      "growth": 1.8333,
-      "acceleration": -1.0,
+      "keyword": "上下文理解",
+      "canonical": "上下文理解",
+      "score": 0.7005,
+      "growth": 0.0909,
+      "acceleration": 1.5,
+      "total": 3,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "视觉语言模型",
+      "canonical": "视觉语言模型",
+      "score": 0.6955,
+      "growth": 0.0909,
+      "acceleration": 1.5,
+      "total": 3,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 1
+        },
+        {
+          "date": "2026-02-03",
+          "count": 2
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "语言模型",
+      "canonical": "语言模型",
+      "score": 0.6262,
+      "growth": 0.3023,
+      "acceleration": 1.0,
+      "total": 5,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 4
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "自动化工作流",
+      "canonical": "自动化工作流",
+      "score": 0.502,
+      "growth": 0.3939,
+      "acceleration": 0.5,
       "total": 4,
-      "recent3_avg": 1.0,
+      "recent3_avg": 0.3333,
       "series": [
         {
           "date": "2026-02-02",
@@ -270,69 +303,147 @@
         },
         {
           "date": "2026-02-03",
-          "count": 1
+          "count": 3
         },
         {
           "date": "2026-02-04",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-05",
-          "count": 2
+          "count": 1
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "embedding",
-      "canonical": "embedding",
-      "score": 0.677,
-      "growth": 0.3939,
-      "acceleration": 1.0,
+      "keyword": "AI代理",
+      "canonical": "ai代理",
+      "score": 0.4896,
+      "growth": 1.7692,
+      "acceleration": -1.5,
       "total": 3,
-      "recent3_avg": 0.3333,
+      "recent3_avg": 0.6667,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-02-03",
-          "count": 0
-        },
-        {
-          "date": "2026-02-04",
           "count": 1
         },
         {
-          "date": "2026-02-05",
+          "date": "2026-02-04",
           "count": 0
         },
         {
+          "date": "2026-02-05",
+          "count": 2
+        },
+        {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "零样本学习",
-      "canonical": "零样本学习",
-      "score": 0.677,
-      "growth": 0.3939,
-      "acceleration": 1.0,
+      "keyword": "编程助手",
+      "canonical": "编程助手",
+      "score": 0.4896,
+      "growth": 1.7692,
+      "acceleration": -1.5,
+      "total": 3,
+      "recent3_avg": 0.6667,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 2
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "工作流",
+      "canonical": "工作流",
+      "score": 0.4126,
+      "growth": 0.5652,
+      "acceleration": 0.0,
       "total": 3,
       "recent3_avg": 0.3333,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-02-03",
+          "count": 2
+        },
+        {
+          "date": "2026-02-04",
           "count": 0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "任务管理",
+      "canonical": "任务管理",
+      "score": 0.3399,
+      "growth": 0.0698,
+      "acceleration": 0.5,
+      "total": 4,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3
         },
         {
           "date": "2026-02-04",
@@ -344,6 +455,45 @@
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "数据集",
+      "canonical": "数据集",
+      "score": 0.3349,
+      "growth": 0.0698,
+      "acceleration": 0.5,
+      "total": 4,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 2
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
@@ -351,11 +501,11 @@
     {
       "keyword": "大语言模型",
       "canonical": "大语言模型",
-      "score": 0.6358,
-      "growth": 0.3116,
-      "acceleration": 1.0,
+      "score": 0.3113,
+      "growth": 0.0226,
+      "acceleration": 0.5,
       "total": 13,
-      "recent3_avg": 1.3333,
+      "recent3_avg": 0.0,
       "series": [
         {
           "date": "2026-02-02",
@@ -376,29 +526,68 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
-      "keyword": "自然语言处理",
-      "canonical": "自然语言处理",
-      "score": 0.63,
+      "keyword": "强化学习",
+      "canonical": "强化学习",
+      "score": 0.3113,
+      "growth": 0.0226,
+      "acceleration": 0.5,
+      "total": 13,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 4
+        },
+        {
+          "date": "2026-02-03",
+          "count": 5
+        },
+        {
+          "date": "2026-02-04",
+          "count": 4
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "Claude",
+      "canonical": "claude",
+      "score": 0.28,
       "growth": 1.0,
-      "acceleration": 0.0,
-      "total": 5,
-      "recent3_avg": 1.0,
+      "acceleration": -1.0,
+      "total": 4,
+      "recent3_avg": 0.6667,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-03",
-          "count": 1
+          "count": 2
         },
         {
           "date": "2026-02-04",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-05",
@@ -407,264 +596,20 @@
         {
           "date": "2026-02-06",
           "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "context",
-      "canonical": "context",
-      "score": 0.3035,
-      "growth": 0.697,
-      "acceleration": -0.5,
-      "total": 4,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 1
         },
         {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "嵌入",
-      "canonical": "嵌入",
-      "score": 0.3035,
-      "growth": 0.697,
-      "acceleration": -0.5,
-      "total": 4,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 1
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "数据集",
-      "canonical": "数据集",
-      "score": 0.2654,
-      "growth": 0.2708,
+      "keyword": "embedding",
+      "canonical": "embedding",
+      "score": 0.1705,
+      "growth": 0.0909,
       "acceleration": 0.0,
-      "total": 4,
-      "recent3_avg": 0.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 2
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "上下文注入",
-      "canonical": "上下文注入",
-      "score": 0.2489,
-      "growth": 1.2778,
-      "acceleration": -1.5,
       "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "代码插件",
-      "canonical": "代码插件",
-      "score": 0.2489,
-      "growth": 1.2778,
-      "acceleration": -1.5,
-      "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "数据分析",
-      "canonical": "数据分析",
-      "score": 0.2489,
-      "growth": 1.2778,
-      "acceleration": -1.5,
-      "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "项目管理",
-      "canonical": "项目管理",
-      "score": 0.2489,
-      "growth": 1.2778,
-      "acceleration": -1.5,
-      "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "Claude Code",
-      "canonical": "claude code",
-      "score": 0.1767,
-      "growth": 1.8333,
-      "acceleration": -2.5,
-      "total": 4,
-      "recent3_avg": 1.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "autonomous",
-      "canonical": "autonomous",
-      "score": 0.1538,
-      "growth": 0.0476,
-      "acceleration": 0.0,
-      "total": 4,
       "recent3_avg": 0.0,
       "series": [
         {
@@ -673,11 +618,11 @@
         },
         {
           "date": "2026-02-03",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-02-04",
-          "count": 0
+          "count": 1
         },
         {
           "date": "2026-02-05",
@@ -686,48 +631,126 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
-      "keyword": "Claude",
-      "canonical": "claude",
-      "score": 0.1335,
-      "growth": 0.697,
+      "keyword": "奖励模型",
+      "canonical": "奖励模型",
+      "score": 0.1705,
+      "growth": 0.0909,
+      "acceleration": 0.0,
+      "total": 3,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 1
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "零样本学习",
+      "canonical": "零样本学习",
+      "score": 0.1705,
+      "growth": 0.0909,
+      "acceleration": 0.0,
+      "total": 3,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 2
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "预训练模型",
+      "canonical": "预训练模型",
+      "score": 0.1705,
+      "growth": 0.0909,
+      "acceleration": 0.0,
+      "total": 3,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 1
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "人工智能助手",
+      "canonical": "人工智能助手",
+      "score": 0.1637,
+      "growth": 0.7674,
       "acceleration": -1.0,
-      "total": 4,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 2
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 2
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "自动化",
-      "canonical": "自动化",
-      "score": 0.063,
-      "growth": 1.6061,
-      "acceleration": -2.5,
       "total": 7,
-      "recent3_avg": 1.6667,
+      "recent3_avg": 1.0,
       "series": [
         {
           "date": "2026-02-02",
@@ -735,11 +758,11 @@
         },
         {
           "date": "2026-02-03",
-          "count": 2
+          "count": 4
         },
         {
           "date": "2026-02-04",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-02-05",
@@ -748,17 +771,56 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
-      "keyword": "智能助手",
-      "canonical": "智能助手",
-      "score": 0.0306,
-      "growth": 0.8413,
-      "acceleration": -1.5,
+      "keyword": "rag",
+      "canonical": "rag",
+      "score": 0.1411,
+      "growth": 0.0323,
+      "acceleration": 0.0,
       "total": 9,
-      "recent3_avg": 1.6667,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 3
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "聊天机器人",
+      "canonical": "聊天机器人",
+      "score": 0.1375,
+      "growth": 0.3651,
+      "acceleration": -0.5,
+      "total": 8,
+      "recent3_avg": 0.6667,
       "series": [
         {
           "date": "2026-02-02",
@@ -766,69 +828,42 @@
         },
         {
           "date": "2026-02-03",
-          "count": 4
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0
-        },
-        {
-          "date": "2026-02-05",
           "count": 5
         },
         {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "助手",
-      "canonical": "助手",
-      "score": 0.0144,
-      "growth": 1.1587,
-      "acceleration": -2.0,
-      "total": 11,
-      "recent3_avg": 2.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 4
-        },
-        {
           "date": "2026-02-04",
           "count": 1
         },
         {
           "date": "2026-02-05",
-          "count": 6
+          "count": 2
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "奖励模型",
-      "canonical": "奖励模型",
-      "score": -0.023,
-      "growth": 0.3939,
-      "acceleration": -1.0,
-      "total": 3,
+      "keyword": "workflow",
+      "canonical": "workflow",
+      "score": 0.1062,
+      "growth": 0.3023,
+      "acceleration": -0.5,
+      "total": 5,
       "recent3_avg": 0.3333,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-03",
-          "count": 1
+          "count": 3
         },
         {
           "date": "2026-02-04",
@@ -836,41 +871,14 @@
         },
         {
           "date": "2026-02-05",
-          "count": 0
+          "count": 1
         },
         {
           "date": "2026-02-06",
           "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "预训练模型",
-      "canonical": "预训练模型",
-      "score": -0.023,
-      "growth": 0.3939,
-      "acceleration": -1.0,
-      "total": 3,
-      "recent3_avg": 0.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 1
         },
         {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
+          "date": "2026-02-07",
           "count": 0
         }
       ]
@@ -878,8 +886,8 @@
     {
       "keyword": "任务自动化",
       "canonical": "任务自动化",
-      "score": -0.0462,
-      "growth": 0.6875,
+      "score": 0.105,
+      "growth": 1.0,
       "acceleration": -1.5,
       "total": 6,
       "recent3_avg": 1.0,
@@ -903,29 +911,68 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
-      "keyword": "视觉语言模型",
-      "canonical": "视觉语言模型",
-      "score": -0.1887,
-      "growth": 0.0625,
-      "acceleration": -1.0,
-      "total": 3,
+      "keyword": "人机协作",
+      "canonical": "人机协作",
+      "score": 0.0181,
+      "growth": 0.1262,
+      "acceleration": -0.5,
+      "total": 11,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 7
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "diffusion",
+      "canonical": "diffusion",
+      "score": -0.0167,
+      "growth": 0.0566,
+      "acceleration": -0.5,
+      "total": 5,
       "recent3_avg": 0.0,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-03",
-          "count": 2
+          "count": 3
         },
         {
           "date": "2026-02-04",
-          "count": 0
+          "count": 2
         },
         {
           "date": "2026-02-05",
@@ -934,14 +981,228 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
-      "keyword": "工作流",
-      "canonical": "工作流",
-      "score": -0.193,
+      "keyword": "多代理系统",
+      "canonical": "多代理系统",
+      "score": -0.0167,
+      "growth": 0.0566,
+      "acceleration": -0.5,
+      "total": 5,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "context",
+      "canonical": "context",
+      "score": -0.028,
       "growth": 0.3939,
+      "acceleration": -1.0,
+      "total": 4,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 1
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "嵌入",
+      "canonical": "嵌入",
+      "score": -0.028,
+      "growth": 0.3939,
+      "acceleration": -1.0,
+      "total": 4,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 1
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "人机交互",
+      "canonical": "人机交互",
+      "score": -0.0304,
+      "growth": 1.7692,
+      "acceleration": -3.0,
+      "total": 3,
+      "recent3_avg": 0.6667,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 2
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "machine learning",
+      "canonical": "machine learning",
+      "score": -0.0319,
+      "growth": 0.0361,
+      "acceleration": -0.5,
+      "total": 8,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 2
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "transformer",
+      "canonical": "transformer",
+      "score": -0.0319,
+      "growth": 0.0361,
+      "acceleration": -0.5,
+      "total": 8,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 3
+        },
+        {
+          "date": "2026-02-03",
+          "count": 2
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "上下文注入",
+      "canonical": "上下文注入",
+      "score": -0.1124,
+      "growth": 0.5652,
       "acceleration": -1.5,
       "total": 3,
       "recent3_avg": 0.3333,
@@ -952,11 +1213,11 @@
         },
         {
           "date": "2026-02-03",
-          "count": 2
+          "count": 1
         },
         {
           "date": "2026-02-04",
-          "count": 0
+          "count": 1
         },
         {
           "date": "2026-02-05",
@@ -964,6 +1225,115 @@
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "代码插件",
+      "canonical": "代码插件",
+      "score": -0.1124,
+      "growth": 0.5652,
+      "acceleration": -1.5,
+      "total": 3,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "数据分析",
+      "canonical": "数据分析",
+      "score": -0.1124,
+      "growth": 0.5652,
+      "acceleration": -1.5,
+      "total": 3,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "项目管理",
+      "canonical": "项目管理",
+      "score": -0.1124,
+      "growth": 0.5652,
+      "acceleration": -1.5,
+      "total": 3,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
@@ -971,557 +1341,34 @@
     {
       "keyword": "generative",
       "canonical": "generative",
-      "score": -0.2215,
-      "growth": 0.697,
-      "acceleration": -2.0,
-      "total": 4,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 1
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "主动式AI",
-      "canonical": "主动式ai",
-      "score": -0.2761,
-      "growth": 1.2778,
-      "acceleration": -3.0,
-      "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "生成",
-      "canonical": "生成",
-      "score": -0.2761,
-      "growth": 1.2778,
-      "acceleration": -3.0,
-      "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "训练",
-      "canonical": "训练",
-      "score": -0.2761,
-      "growth": 1.2778,
-      "acceleration": -3.0,
-      "total": 3,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "多代理",
-      "canonical": "多代理",
-      "score": -0.2921,
-      "growth": 0.8958,
-      "acceleration": -2.5,
-      "total": 7,
-      "recent3_avg": 1.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 3
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "变换器",
-      "canonical": "变换器",
-      "score": -0.3483,
-      "growth": 1.8333,
-      "acceleration": -4.0,
-      "total": 4,
-      "recent3_avg": 1.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1
-        },
-        {
-          "date": "2026-02-04",
-          "count": 3
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "transformer",
-      "canonical": "transformer",
-      "score": -0.3585,
-      "growth": 0.4231,
-      "acceleration": -2.0,
-      "total": 8,
-      "recent3_avg": 1.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 3
-        },
-        {
-          "date": "2026-02-03",
-          "count": 2
-        },
-        {
-          "date": "2026-02-04",
-          "count": 3
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "人工智能助手",
-      "canonical": "人工智能助手",
-      "score": -0.4781,
-      "growth": 0.5238,
-      "acceleration": -2.5,
-      "total": 7,
-      "recent3_avg": 1.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 4
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 3
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "LLM",
-      "canonical": "llm",
-      "score": -0.4867,
-      "growth": 0.1667,
-      "acceleration": -2.0,
-      "total": 26,
-      "recent3_avg": 1.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 12
-        },
-        {
-          "date": "2026-02-03",
-          "count": 9
-        },
-        {
-          "date": "2026-02-04",
-          "count": 5
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "自动化工作流",
-      "canonical": "自动化工作流",
-      "score": -0.6046,
-      "growth": 0.2708,
-      "acceleration": -2.5,
-      "total": 4,
-      "recent3_avg": 0.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "rag",
-      "canonical": "rag",
-      "score": -0.7426,
-      "growth": 0.3548,
-      "acceleration": -3.0,
-      "total": 9,
-      "recent3_avg": 1.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 3
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 3
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "workflow",
-      "canonical": "workflow",
-      "score": -0.8504,
-      "growth": 0.4792,
-      "acceleration": -3.5,
-      "total": 5,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "上下文理解",
-      "canonical": "上下文理解",
-      "score": -0.8837,
-      "growth": 0.0625,
-      "acceleration": -3.0,
-      "total": 3,
-      "recent3_avg": 0.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "生成式",
-      "canonical": "生成式",
-      "score": -0.94,
-      "growth": 1.0,
-      "acceleration": -4.5,
-      "total": 15,
-      "recent3_avg": 3.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 6
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 7
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "machine learning",
-      "canonical": "machine learning",
-      "score": -1.0585,
-      "growth": 0.4231,
-      "acceleration": -4.0,
-      "total": 8,
-      "recent3_avg": 1.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 2
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 3
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "任务管理",
-      "canonical": "任务管理",
-      "score": -1.1296,
-      "growth": 0.2708,
-      "acceleration": -4.0,
-      "total": 4,
-      "recent3_avg": 0.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "自动化代理",
-      "canonical": "自动化代理",
-      "score": -1.2412,
-      "growth": 0.0476,
-      "acceleration": -4.0,
+      "score": -0.1901,
+      "growth": 0.0698,
+      "acceleration": -1.0,
       "total": 4,
       "recent3_avg": 0.0,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 4
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "智能代理",
-      "canonical": "智能代理",
-      "score": -1.3421,
-      "growth": 0.8958,
-      "acceleration": -5.5,
-      "total": 7,
-      "recent3_avg": 1.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 3
-        },
-        {
-          "date": "2026-02-05",
           "count": 1
         },
         {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
@@ -1529,112 +1376,334 @@
     {
       "keyword": "预测模型",
       "canonical": "预测模型",
-      "score": -1.3581,
-      "growth": 0.5238,
-      "acceleration": -5.0,
+      "score": -0.2045,
+      "growth": 0.0411,
+      "acceleration": -1.0,
+      "total": 7,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 1
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "自然语言处理",
+      "canonical": "自然语言处理",
+      "score": -0.2265,
+      "growth": 0.697,
+      "acceleration": -2.0,
+      "total": 5,
+      "recent3_avg": 0.6667,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 1
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 2
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "自动化助手",
+      "canonical": "自动化助手",
+      "score": -0.245,
+      "growth": 1.0,
+      "acceleration": -2.5,
+      "total": 4,
+      "recent3_avg": 0.6667,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 2
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "多模态",
+      "canonical": "多模态",
+      "score": -0.25,
+      "growth": 1.0,
+      "acceleration": -2.5,
+      "total": 4,
+      "recent3_avg": 0.6667,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 1
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 2
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "智能助手",
+      "canonical": "智能助手",
+      "score": -0.3037,
+      "growth": 1.2326,
+      "acceleration": -3.0,
+      "total": 9,
+      "recent3_avg": 1.6667,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 4
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 5
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "主动式AI",
+      "canonical": "主动式ai",
+      "score": -0.3495,
+      "growth": 0.0909,
+      "acceleration": -1.5,
+      "total": 3,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "生成",
+      "canonical": "生成",
+      "score": -0.3495,
+      "growth": 0.0909,
+      "acceleration": -1.5,
+      "total": 3,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "训练",
+      "canonical": "训练",
+      "score": -0.3495,
+      "growth": 0.0909,
+      "acceleration": -1.5,
+      "total": 3,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "代理",
+      "canonical": "代理",
+      "score": -0.3545,
+      "growth": 0.0909,
+      "acceleration": -1.5,
+      "total": 15,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 2
+        },
+        {
+          "date": "2026-02-03",
+          "count": 7
+        },
+        {
+          "date": "2026-02-04",
+          "count": 5
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "多代理",
+      "canonical": "多代理",
+      "score": -0.3613,
+      "growth": 0.7674,
+      "acceleration": -2.5,
       "total": 7,
       "recent3_avg": 1.0,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 1
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 3
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "diffusion",
-      "canonical": "diffusion",
-      "score": -1.3754,
-      "growth": 0.4792,
-      "acceleration": -5.0,
-      "total": 5,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
           "count": 0
         },
         {
           "date": "2026-02-03",
           "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "多代理系统",
-      "canonical": "多代理系统",
-      "score": -1.3754,
-      "growth": 0.4792,
-      "acceleration": -5.0,
-      "total": 5,
-      "recent3_avg": 0.6667,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3
-        },
-        {
-          "date": "2026-02-04",
-          "count": 2
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "聊天机器人",
-      "canonical": "聊天机器人",
-      "score": -1.4035,
-      "growth": 0.4231,
-      "acceleration": -5.0,
-      "total": 8,
-      "recent3_avg": 1.0,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 5
         },
         {
           "date": "2026-02-04",
@@ -1642,65 +1711,143 @@
         },
         {
           "date": "2026-02-05",
-          "count": 2
+          "count": 3
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "强化学习",
-      "canonical": "强化学习",
-      "score": -1.4642,
-      "growth": 0.3116,
-      "acceleration": -5.0,
-      "total": 13,
+      "keyword": "Claude Code",
+      "canonical": "claude code",
+      "score": -0.548,
+      "growth": 0.3939,
+      "acceleration": -2.5,
+      "total": 4,
+      "recent3_avg": 0.3333,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "代理工作流",
+      "canonical": "代理工作流",
+      "score": -0.6235,
+      "growth": 1.303,
+      "acceleration": -4.0,
+      "total": 7,
       "recent3_avg": 1.3333,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 4
+          "count": 1
         },
         {
           "date": "2026-02-03",
-          "count": 5
+          "count": 1
         },
         {
           "date": "2026-02-04",
-          "count": 4
+          "count": 1
         },
         {
           "date": "2026-02-05",
-          "count": 0
+          "count": 4
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "在线学习",
-      "canonical": "在线学习",
-      "score": -1.5501,
-      "growth": 0.1398,
-      "acceleration": -5.0,
+      "keyword": "智能代理",
+      "canonical": "智能代理",
+      "score": -0.6418,
+      "growth": 0.2063,
+      "acceleration": -2.5,
       "total": 7,
       "recent3_avg": 0.3333,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-03",
-          "count": 5
+          "count": 3
         },
         {
           "date": "2026-02-04",
+          "count": 3
+        },
+        {
+          "date": "2026-02-05",
           "count": 1
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "变换器",
+      "canonical": "变换器",
+      "score": -0.7101,
+      "growth": 0.0698,
+      "acceleration": -2.5,
+      "total": 4,
+      "recent3_avg": 0.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 1
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3
         },
         {
           "date": "2026-02-05",
@@ -1708,6 +1855,115 @@
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "代理基础设施",
+      "canonical": "代理基础设施",
+      "score": -0.765,
+      "growth": 1.0,
+      "acceleration": -4.0,
+      "total": 4,
+      "recent3_avg": 0.6667,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2
+        },
+        {
+          "date": "2026-02-05",
+          "count": 2
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "自动化",
+      "canonical": "自动化",
+      "score": -0.8863,
+      "growth": 0.7674,
+      "acceleration": -4.0,
+      "total": 7,
+      "recent3_avg": 1.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 2
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2
+        },
+        {
+          "date": "2026-02-05",
+          "count": 3
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "keyword": "助手",
+      "canonical": "助手",
+      "score": -1.0257,
+      "growth": 1.1887,
+      "acceleration": -5.0,
+      "total": 11,
+      "recent3_avg": 2.0,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 4
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1
+        },
+        {
+          "date": "2026-02-05",
+          "count": 6
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
@@ -1715,11 +1971,11 @@
     {
       "keyword": "自主代理",
       "canonical": "自主代理",
-      "score": -1.6661,
-      "growth": 0.6078,
-      "acceleration": -6.0,
+      "score": -1.0382,
+      "growth": 0.4737,
+      "acceleration": -4.0,
       "total": 19,
-      "recent3_avg": 3.0,
+      "recent3_avg": 2.0,
       "series": [
         {
           "date": "2026-02-02",
@@ -1740,17 +1996,21 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
       "keyword": "多智能体",
       "canonical": "多智能体",
-      "score": -1.8337,
-      "growth": 1.3125,
-      "acceleration": -7.5,
+      "score": -1.3667,
+      "growth": 0.1566,
+      "acceleration": -4.5,
       "total": 9,
-      "recent3_avg": 2.0,
+      "recent3_avg": 0.3333,
       "series": [
         {
           "date": "2026-02-02",
@@ -1771,67 +2031,79 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
-      "keyword": "代理",
-      "canonical": "代理",
-      "score": -2.9667,
-      "growth": 0.4565,
-      "acceleration": -9.5,
+      "keyword": "生成式",
+      "canonical": "生成式",
+      "score": -1.5302,
+      "growth": 0.8795,
+      "acceleration": -6.0,
       "total": 15,
-      "recent3_avg": 2.0,
+      "recent3_avg": 2.3333,
       "series": [
         {
           "date": "2026-02-02",
+          "count": 0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 6
+        },
+        {
+          "date": "2026-02-04",
           "count": 2
         },
         {
-          "date": "2026-02-03",
+          "date": "2026-02-05",
           "count": 7
         },
         {
-          "date": "2026-02-04",
-          "count": 5
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1
-        },
-        {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
     },
     {
-      "keyword": "人机协作",
-      "canonical": "人机协作",
-      "score": -2.9909,
-      "growth": 0.3981,
-      "acceleration": -9.5,
-      "total": 11,
-      "recent3_avg": 1.3333,
+      "keyword": "生成模型",
+      "canonical": "生成模型",
+      "score": -2.0521,
+      "growth": 0.1957,
+      "acceleration": -6.5,
+      "total": 44,
+      "recent3_avg": 2.3333,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 7
-        },
-        {
-          "date": "2026-02-04",
           "count": 3
         },
         {
+          "date": "2026-02-03",
+          "count": 22
+        },
+        {
+          "date": "2026-02-04",
+          "count": 12
+        },
+        {
           "date": "2026-02-05",
-          "count": 1
+          "count": 7
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
@@ -1839,11 +2111,11 @@
     {
       "keyword": "agent",
       "canonical": "agent",
-      "score": -5.1523,
-      "growth": 0.6354,
-      "acceleration": -16.0,
+      "score": -2.6614,
+      "growth": 0.3773,
+      "acceleration": -8.5,
       "total": 37,
-      "recent3_avg": 6.0,
+      "recent3_avg": 3.3333,
       "series": [
         {
           "date": "2026-02-02",
@@ -1864,17 +2136,21 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
       "keyword": "神经网络",
       "canonical": "神经网络",
-      "score": -5.9903,
-      "growth": 0.7093,
-      "acceleration": -18.5,
+      "score": -3.071,
+      "growth": 0.258,
+      "acceleration": -9.5,
       "total": 35,
-      "recent3_avg": 6.0,
+      "recent3_avg": 2.3333,
       "series": [
         {
           "date": "2026-02-02",
@@ -1895,17 +2171,21 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
       "keyword": "机器学习",
       "canonical": "机器学习",
-      "score": -7.0959,
-      "growth": 0.5981,
-      "acceleration": -21.5,
+      "score": -3.56,
+      "growth": 0.33,
+      "acceleration": -11.0,
       "total": 53,
-      "recent3_avg": 8.3333,
+      "recent3_avg": 4.3333,
       "series": [
         {
           "date": "2026-02-02",
@@ -1926,17 +2206,21 @@
         {
           "date": "2026-02-06",
           "count": 0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0
         }
       ]
     },
     {
       "keyword": "语义搜索",
       "canonical": "语义搜索",
-      "score": -9.1399,
-      "growth": 0.7101,
-      "acceleration": -27.5,
+      "score": -5.9059,
+      "growth": 0.5381,
+      "acceleration": -18.0,
       "total": 66,
-      "recent3_avg": 11.3333,
+      "recent3_avg": 7.6667,
       "series": [
         {
           "date": "2026-02-02",
@@ -1957,36 +2241,9 @@
         {
           "date": "2026-02-06",
           "count": 0
-        }
-      ]
-    },
-    {
-      "keyword": "生成模型",
-      "canonical": "生成模型",
-      "score": -9.2397,
-      "growth": 0.5106,
-      "acceleration": -27.5,
-      "total": 44,
-      "recent3_avg": 6.3333,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 3
         },
         {
-          "date": "2026-02-03",
-          "count": 22
-        },
-        {
-          "date": "2026-02-04",
-          "count": 12
-        },
-        {
-          "date": "2026-02-05",
-          "count": 7
-        },
-        {
-          "date": "2026-02-06",
+          "date": "2026-02-07",
           "count": 0
         }
       ]
@@ -1994,11 +2251,11 @@
     {
       "keyword": "深度学习",
       "canonical": "深度学习",
-      "score": -13.7516,
-      "growth": 0.5867,
-      "acceleration": -40.5,
+      "score": -6.2006,
+      "growth": 0.2987,
+      "acceleration": -18.5,
       "total": 92,
-      "recent3_avg": 14.3333,
+      "recent3_avg": 7.0,
       "series": [
         {
           "date": "2026-02-02",
@@ -2018,6 +2275,10 @@
         },
         {
           "date": "2026-02-06",
+          "count": 0
+        },
+        {
+          "date": "2026-02-07",
           "count": 0
         }
       ]
