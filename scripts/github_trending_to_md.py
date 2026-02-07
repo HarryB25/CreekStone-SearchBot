@@ -442,8 +442,12 @@ def generate_markdown(repos: List[GitHubRepo], date_str: str, language: str = ""
 
 def main():
     """主函数"""
-    today = datetime.now(timezone.utc)
-    date_str = today.strftime('%Y-%m-%d')
+    target_date = os.getenv("GITHUB_TARGET_DATE", "").strip()
+    if target_date:
+        date_str = target_date
+    else:
+        today = datetime.now(timezone.utc)
+        date_str = today.strftime('%Y-%m-%d')
     
     # 从环境变量读取配置
     language = os.getenv('GITHUB_LANGUAGE', '')  # 留空表示所有语言

@@ -274,7 +274,11 @@ class ArxivPaper:
             },
         }
 
-def fetch_arxiv_papers(categories: List[str] = None, max_results: int = 10) -> List[ArxivPaper]:
+def fetch_arxiv_papers(
+    categories: List[str] = None,
+    max_results: int = 10,
+    target_date: str = "",
+) -> List[ArxivPaper]:
     """从arXiv API获取最新论文"""
     if categories is None:
         categories = ['cs.AI', 'cs.LG', 'cs.CL', 'cs.CV']
@@ -285,9 +289,15 @@ def fetch_arxiv_papers(categories: List[str] = None, max_results: int = 10) -> L
     # arXiv API endpoint
     base_url = 'http://export.arxiv.org/api/query'
     
-    # 获取最近7天的论文（增加时间窗口以确保能获取到足够的论文）
-    # arXiv论文通常在美国东部时间晚上发布，用7天窗口更稳定
-    end_date = datetime.now(timezone.utc)
+    # 获取最近7天窗口，可通过 target_date 固定窗口终点
+    if target_date:
+        try:
+            end_date = datetime.strptime(target_date, '%Y-%m-%d').replace(tzinfo=timezone.utc) + timedelta(days=1)
+        except ValueError:
+            print(f"警告: ARXIV_TARGET_DATE={target_date!r} 格式无效，回退到当前日期窗口")
+            end_date = datetime.now(timezone.utc)
+    else:
+        end_date = datetime.now(timezone.utc)
     start_date = end_date - timedelta(days=7)
     
     # 注意：arXiv的submittedDate查询有时不稳定，改用更简单的查询方式
@@ -323,12 +333,14 @@ def fetch_arxiv_papers(categories: List[str] = None, max_results: int = 10) -> L
         
         print(f"API返回 {len(entries)} 篇论文")
         
-        # 过滤最近7天的论文
+        # 过滤最近7天的论文（且不超过目标日期）
         recent_entries = []
         cutoff_date = start_date.strftime('%Y-%m-%d')
+        upper_date = (end_date - timedelta(days=1)).strftime('%Y-%m-%d')
         for entry in entries:
             published = entry.get('published', '')
-            if published >= cutoff_date:
+            published_day = published[:10]
+            if cutoff_date <= published_day <= upper_date:
                 recent_entries.append(entry)
         
         print(f"最近7天的论文: {len(recent_entries)} 篇")
@@ -438,9 +450,13 @@ def generate_markdown(papers: List[ArxivPaper], date_str: str):
 
 def main():
     """主函数"""
-    # 获取昨天的日期
-    yesterday = datetime.now(timezone.utc) - timedelta(days=1)
-    date_str = yesterday.strftime('%Y-%m-%d')
+    # 默认抓取前一天，可通过 ARXIV_TARGET_DATE 覆盖
+    target_date = os.getenv("ARXIV_TARGET_DATE", "").strip()
+    if target_date:
+        date_str = target_date
+    else:
+        yesterday = datetime.now(timezone.utc) - timedelta(days=1)
+        date_str = yesterday.strftime('%Y-%m-%d')
     
     # 从环境变量读取配置
     default_categories = 'cs.AI,cs.LG,cs.CL,cs.CV'
@@ -458,7 +474,7 @@ def main():
     print(f"最大数量: {max_results}")
     
     # 获取论文
-    papers = fetch_arxiv_papers(categories=categories, max_results=max_results)
+    papers = fetch_arxiv_papers(categories=categories, max_results=max_results, target_date=date_str)
     
     # 生成Markdown
     generate_markdown(papers, date_str)

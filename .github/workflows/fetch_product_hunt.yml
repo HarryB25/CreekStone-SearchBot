@@ -1,4 +1,4 @@
-name: Generate Daily Markdown
+name: Fetch Product Hunt
 
 on:
   schedule:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  fetch-product-hunt:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
         pip install openai>=1.0.0 python-dotenv beautifulsoup4 pytz requests
         pip list  # 显示已安装的包及其版本
 
-    - name: Generate Markdown
+    - name: Fetch Product Hunt
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
@@ -45,7 +45,7 @@ jobs:
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add .
-        git commit -m "Generated daily content" || echo "No changes to commit"
+        git commit -m "Generated daily Product Hunt data" || echo "No changes to commit"
 
     - name: Push changes
       run: |

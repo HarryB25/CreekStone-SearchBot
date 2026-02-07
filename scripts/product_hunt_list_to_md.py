@@ -334,11 +334,14 @@ def get_producthunt_token():
         print(f"获取 Product Hunt 访问令牌时出错: {e}")
         raise Exception(f"Failed to get Product Hunt access token: {e}")
 
-def fetch_product_hunt_data():
-    """从Product Hunt获取前一天的Top 30数据"""
+def fetch_product_hunt_data(target_date: str = ""):
+    """从Product Hunt获取指定日期的Top 30数据（默认前一天）"""
     token = get_producthunt_token()
-    yesterday = datetime.now(timezone.utc) - timedelta(days=1)
-    date_str = yesterday.strftime('%Y-%m-%d')
+    if target_date:
+        date_str = target_date
+    else:
+        yesterday = datetime.now(timezone.utc) - timedelta(days=1)
+        date_str = yesterday.strftime('%Y-%m-%d')
     url = "https://api.producthunt.com/v2/api/graphql"
     
     # 添加更多请求头信息
@@ -457,11 +460,7 @@ def fetch_mock_data():
 
 def generate_markdown(products, date_str):
     """生成Markdown内容并保存到data/producthunt目录"""
-    # 获取今天的日期并格式化
-    today = datetime.now(timezone.utc)
-    date_today = today.strftime('%Y-%m-%d')
-
-    markdown_content = f"# PH今日热榜 | {date_today}\n\n"
+    markdown_content = f"# PH今日热榜 | {date_str}\n\n"
     rank = 1
     structured_items = []
     for product in products:
@@ -469,30 +468,34 @@ def generate_markdown(products, date_str):
             print(f"跳过非AI产品: {product.name}")
             continue
         markdown_content += product.to_markdown(rank)
-        structured_items.append(product.to_content_item(rank, date_today))
+        structured_items.append(product.to_content_item(rank, date_str))
         rank += 1
 
     # 确保 data/producthunt 目录存在
     os.makedirs('data/producthunt', exist_ok=True)
 
     # 修改文件保存路径到 data/producthunt 目录
-    file_name = f"data/producthunt/producthunt-daily-{date_today}.md"
+    file_name = f"data/producthunt/producthunt-daily-{date_str}.md"
     
     # 如果文件存在，直接覆盖
     with open(file_name, 'w', encoding='utf-8') as file:
         file.write(markdown_content)
     print(f"文件 {file_name} 生成成功并已覆盖。")
-    save_structured_items(date_today, structured_items)
+    save_structured_items(date_str, structured_items)
 
 
 def main():
-    # 获取昨天的日期并格式化
-    yesterday = datetime.now(timezone.utc) - timedelta(days=1)
-    date_str = yesterday.strftime('%Y-%m-%d')
+    # 默认抓取前一天，可通过 PRODUCTHUNT_TARGET_DATE 覆盖
+    target_date = os.getenv("PRODUCTHUNT_TARGET_DATE", "").strip()
+    if target_date:
+        date_str = target_date
+    else:
+        yesterday = datetime.now(timezone.utc) - timedelta(days=1)
+        date_str = yesterday.strftime('%Y-%m-%d')
 
     try:
         # 尝试获取Product Hunt数据
-        products = fetch_product_hunt_data()
+        products = fetch_product_hunt_data(date_str)
     except Exception as e:
         print(f"获取Product Hunt数据失败: {e}")
         print("使用模拟数据继续...")
