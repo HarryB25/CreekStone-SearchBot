@@ -36,6 +36,8 @@ jobs:
         GITHUB_MAX_RESULTS: ${{ vars.GITHUB_MAX_RESULTS }}
         GITHUB_MODEL_NAME: ${{ vars.GITHUB_MODEL_NAME }}
       run: |
+        export GITHUB_SINCE="${GITHUB_SINCE:-daily}"
+        export GITHUB_MAX_RESULTS="${GITHUB_MAX_RESULTS:-25}"
         python scripts/github_trending_to_md.py
 
     - name: Generate Keyword Trends
@@ -52,5 +54,4 @@ jobs:
     - name: Push changes
       run: |
         git push https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
-
 

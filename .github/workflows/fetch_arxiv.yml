@@ -35,6 +35,8 @@ jobs:
         ARXIV_MAX_RESULTS: ${{ vars.ARXIV_MAX_RESULTS }}
         ARXIV_MODEL_NAME: ${{ vars.ARXIV_MODEL_NAME }}
       run: |
+        export ARXIV_CATEGORIES="${ARXIV_CATEGORIES:-cs.AI,cs.LG,cs.CL,cs.CV}"
+        export ARXIV_MAX_RESULTS="${ARXIV_MAX_RESULTS:-30}"
         python scripts/arxiv_papers_to_md.py
 
     - name: Generate Keyword Trends
@@ -51,5 +53,4 @@ jobs:
     - name: Push changes
       run: |
         git push https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
-
 
