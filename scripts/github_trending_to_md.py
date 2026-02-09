@@ -56,6 +56,17 @@ def _get_int_env(name: str, default: int) -> int:
     return value
 
 
+def _get_request_timeout() -> float:
+    raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
+    try:
+        value = float(raw)
+        if value > 0:
+            return value
+    except Exception:
+        pass
+    return 60.0
+
+
 def _contains_any(text: str, keywords) -> bool:
     if not text:
         return False
@@ -153,6 +164,7 @@ class GitHubRepo:
                 ],
                 max_tokens=200,
                 temperature=0.7,
+                timeout=_get_request_timeout(),
             )
             translated = response.choices[0].message.content.strip()
             print(f"成功翻译")
@@ -193,6 +205,7 @@ class GitHubRepo:
                 ],
                 max_tokens=80,
                 temperature=0.5,
+                timeout=_get_request_timeout(),
             )
             keywords = resp.choices[0].message.content.strip()
             if ',' not in keywords:

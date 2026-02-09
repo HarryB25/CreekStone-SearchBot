@@ -15,9 +15,49 @@ def _append_ndjson(items: List[Dict]):
         return
     os.makedirs(STRUCTURED_DIR, exist_ok=True)
     ndjson_path = os.path.join(STRUCTURED_DIR, "items.ndjson")
-    with open(ndjson_path, "a", encoding="utf-8") as f:
-        for item in items:
-            f.write(json.dumps(item, ensure_ascii=False) + "\n")
+    existing_rows: List[Dict] = []
+    existing_index_by_id = {}
+    if os.path.exists(ndjson_path):
+        with open(ndjson_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                existing_rows.append(row)
+                row_id = row.get("id")
+                if row_id:
+                    existing_index_by_id[str(row_id)] = len(existing_rows) - 1
+
+    inserted = 0
+    updated = 0
+    for item in items:
+        item_id = item.get("id")
+        if item_id:
+            item_key = str(item_id)
+            if item_key in existing_index_by_id:
+                existing_rows[existing_index_by_id[item_key]] = item
+                updated += 1
+            else:
+                existing_index_by_id[item_key] = len(existing_rows)
+                existing_rows.append(item)
+                inserted += 1
+        else:
+            # 无 id 的记录无法稳定去重，保持追加行为
+            existing_rows.append(item)
+            inserted += 1
+
+    if inserted == 0 and updated == 0:
+        print("NDJSON 无新增/更新，已跳过写入。")
+        return
+
+    with open(ndjson_path, "w", encoding="utf-8") as f:
+        for row in existing_rows:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+    print(f"已写入 NDJSON 数据: {ndjson_path} ({inserted} 条新增, {updated} 条更新)")
 
 
 def _write_parquet(date_str: str, items: List[Dict]):

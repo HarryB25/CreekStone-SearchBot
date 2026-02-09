@@ -46,6 +46,17 @@ EXCLUDE_KEYWORDS = [
 ]
 
 
+def _get_request_timeout() -> float:
+    raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
+    try:
+        value = float(raw)
+        if value > 0:
+            return value
+    except Exception:
+        pass
+    return 60.0
+
+
 def _contains_any(text: str, keywords) -> bool:
     if not text:
         return False
@@ -185,6 +196,7 @@ class Product:
                     ],
                     max_tokens=50,
                     temperature=0.7,
+                    timeout=_get_request_timeout(),
                 )
                 keywords = response.choices[0].message.content.strip()
                 if ',' not in keywords:
@@ -228,6 +240,7 @@ class Product:
                     ],
                     max_tokens=500,
                     temperature=0.7,
+                    timeout=_get_request_timeout(),
                 )
                 translated_text = response.choices[0].message.content.strip()
                 print(f"成功翻译 {self.name} 的内容")

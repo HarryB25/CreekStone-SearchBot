@@ -2,6 +2,17 @@ import os
 import json
 
 
+def _get_timeout() -> float:
+    raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
+    try:
+        value = float(raw)
+        if value > 0:
+            return value
+    except Exception:
+        pass
+    return 60.0
+
+
 def score_content(text: str, client, kind: str = "general") -> dict:
     """
     调用大模型对项目进行评分。
@@ -133,6 +144,7 @@ def score_content(text: str, client, kind: str = "general") -> dict:
             max_tokens=300,
             temperature=0.4,
             response_format={"type": "json_object"},
+            timeout=_get_timeout(),
         )
         content = response.choices[0].message.content
         return json.loads(content)

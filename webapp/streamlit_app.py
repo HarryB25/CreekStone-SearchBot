@@ -11,8 +11,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STRUCTURED_DIR = BASE_DIR / "data" / "structured"
 INSIGHTS_DIR = BASE_DIR / "data" / "insights"
 
+def _file_signature(paths: list[Path]) -> str:
+    parts = []
+    for path in paths:
+        if not path.exists():
+            continue
+        stat = path.stat()
+        parts.append(f"{path.name}:{stat.st_mtime_ns}:{stat.st_size}")
+    return "|".join(parts)
+
+
+def _structured_signature() -> str:
+    parquet_files = sorted(STRUCTURED_DIR.glob("*.parquet"))
+    ndjson_file = STRUCTURED_DIR / "items.ndjson"
+    return _file_signature(parquet_files + [ndjson_file])
+
+
+def _insights_signature() -> str:
+    trends_file = INSIGHTS_DIR / "keyword_trends.json"
+    return _file_signature([trends_file])
+
+
 @st.cache_data
-def load_items() -> pd.DataFrame:
+def load_items(_signature: str) -> pd.DataFrame:
     files = sorted(STRUCTURED_DIR.glob("*.parquet"))
     dfs = []
     for f in files:
@@ -50,7 +71,7 @@ def load_items() -> pd.DataFrame:
 
 
 @st.cache_data
-def load_keyword_trends() -> dict:
+def load_keyword_trends(_signature: str) -> dict:
     path = INSIGHTS_DIR / "keyword_trends.json"
     if not path.exists():
         return {"dates": [], "keywords": []}
@@ -77,6 +98,49 @@ def filter_items(df: pd.DataFrame, source: Optional[str], q: Optional[str]):
             return ql in text
         df = df[df.apply(m, axis=1)]
     return df
+
+
+def _to_float(value, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+SORT_FIELD_OPTIONS = {
+    "趋势分": "score",
+    "加权总量": "weighted_total",
+    "TF-IDF": "tfidf",
+    "Z-Score": "z_score",
+    "最近频次": "recent_freq",
+    "总出现量": "total",
+}
+
+
+def sort_keywords_for_display(keywords: list[dict], sort_field: str = "score") -> list[dict]:
+    return sorted(
+        keywords,
+        key=lambda x: (
+            _to_float(x.get(sort_field), 0.0),
+            _to_float(x.get("score"), 0.0),
+            _to_float(x.get("weighted_total"), 0.0),
+            _to_float(x.get("total"), 0.0),
+        ),
+        reverse=True,
+    )
+
+
+def trend_state(item: dict) -> tuple[str, str, float]:
+    z = _to_float(item.get("z_score", item.get("acceleration", 0.0)), 0.0)
+    if z >= 1.0:
+        return "强上升", "#dc2626", z
+    if z >= 0.2:
+        return "上升", "#ea580c", z
+    if z <= -1.0:
+        return "强下降", "#15803d", z
+    if z <= -0.2:
+        return "下降", "#16a34a", z
+    return "平稳", "#64748b", z
 
 
 def card_html(item):
@@ -178,16 +242,23 @@ st.markdown(STYLE, unsafe_allow_html=True)
 
 st.title("Daily AI Feeds")
 
-df = load_items()
+df = load_items(_structured_signature())
 if df.empty:
     st.warning("暂无数据，请先生成 structured 数据。")
     st.stop()
 
+sort_label = st.selectbox("关键词趋势排序", list(SORT_FIELD_OPTIONS.keys()), index=0)
+sort_field = SORT_FIELD_OPTIONS[sort_label]
+
 tab_items, tab_trends = st.tabs(["内容浏览", "关键词趋势"])
 
 with tab_items:
-    trends = load_keyword_trends()
-    t_keywords = trends.get("keywords", []) if trends else []
+    trends = load_keyword_trends(_insights_signature())
+    t_keywords = (
+        sort_keywords_for_display(trends.get("keywords", []), sort_field=sort_field)
+        if trends
+        else []
+    )
 
     left_col, right_col = st.columns([4, 1])
 
@@ -233,23 +304,26 @@ with tab_items:
 
     with right_col:
         if t_keywords:
-            t_scores = [float(k.get("score", 0.0)) for k in t_keywords]
+            t_scores = [_to_float(k.get(sort_field), 0.0) for k in t_keywords]
             t_min = min(t_scores) if t_scores else 0.0
             t_max = max(t_scores) if t_scores else 1.0
             t_span = t_max - t_min if t_max != t_min else 1.0
-            st.markdown("**关键词趋势排行**")
+            st.markdown(f"**关键词趋势排行（按{sort_label}）**")
             top_sidebar = t_keywords[:6]
             for idx, k in enumerate(top_sidebar, start=1):
-                score = float(k.get("score", 0.0))
+                score = _to_float(k.get(sort_field), 0.0)
                 ns = (score - t_min) / t_span
                 color = _score_color(ns)
                 kw = str(k.get("keyword", ""))
+                trend_text, trend_color, trend_z = trend_state(k)
                 st.markdown(
                     f"<div style='display:flex;align-items:center;gap:8px;'>"
                     f"<span style='font-weight:700;color:#0f172a;'>{idx}.</span>"
                     f"<span style='font-weight:600;color:#0f172a;'>{escape(kw)}</span>"
+                    f"<span style='font-size:12px;color:{trend_color};font-weight:600;'>{trend_text}</span>"
                     f"<span style='margin-left:auto;color:{color};font-weight:700;'>"
-                    f"{score:.2f}</span></div>",
+                    f"{score:.2f}</span></div>"
+                    f"<div style='font-size:11px;color:#64748b;margin:2px 0 4px 24px;'>z={trend_z:.2f}</div>",
                     unsafe_allow_html=True,
                 )
                 series_df = pd.DataFrame(k.get("series", []))
@@ -275,8 +349,8 @@ with tab_items:
             st.caption("暂无趋势数据")
 
 with tab_trends:
-    trends = load_keyword_trends()
-    keywords = trends.get("keywords", [])
+    trends = load_keyword_trends(_insights_signature())
+    keywords = sort_keywords_for_display(trends.get("keywords", []), sort_field=sort_field)
     dates = trends.get("dates", [])
     if not keywords:
         st.warning("暂无趋势数据，请先运行：python scripts/keyword_trends.py")
@@ -294,9 +368,11 @@ with tab_trends:
         score_span = score_max - score_min if score_max != score_min else 1.0
 
         for i, item in enumerate(keywords[:top_n], start=1):
+            trend_text, _, _ = trend_state(item)
+            sort_value = _to_float(item.get(sort_field), 0.0)
             st.markdown(
                 f"**{i}. {item['keyword']}**  "
-                f"(趋势分 `{item['score']:.4f}` / growth `{item['growth']:.4f}` / acceleration `{item['acceleration']:.4f}` / total `{item['total']}`)"
+                f"(排序值 `{sort_label}={sort_value:.4f}` / 趋势分 `{item['score']:.4f}` / tfidf `{item.get('tfidf', item['growth']):.4f}` / z-score `{item.get('z_score', item['acceleration']):.4f}` / 趋势 `{trend_text}` / total `{item['total']}`)"
             )
             series_df = pd.DataFrame(item["series"])
             if not series_df.empty:

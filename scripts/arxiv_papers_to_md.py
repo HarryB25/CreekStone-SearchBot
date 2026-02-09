@@ -55,6 +55,17 @@ def _get_int_env(name: str, default: int) -> int:
     return value
 
 
+def _get_request_timeout() -> float:
+    raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
+    try:
+        value = float(raw)
+        if value > 0:
+            return value
+    except Exception:
+        pass
+    return 60.0
+
+
 def _contains_any(text: str, keywords) -> bool:
     if not text:
         return False
@@ -144,6 +155,7 @@ class ArxivPaper:
                 ],
                 max_tokens=80,
                 temperature=0.5,
+                timeout=_get_request_timeout(),
             )
             keywords = resp.choices[0].message.content.strip()
             if ',' not in keywords:
@@ -195,7 +207,8 @@ class ArxivPaper:
                 ],
                 max_tokens=800,
                 temperature=0.7,
-                response_format={"type": "json_object"}
+                response_format={"type": "json_object"},
+                timeout=_get_request_timeout(),
             )
             
             result = json.loads(response.choices[0].message.content)
@@ -453,10 +466,21 @@ def main():
     # 默认抓取前一天，可通过 ARXIV_TARGET_DATE 覆盖
     target_date = os.getenv("ARXIV_TARGET_DATE", "").strip()
     if target_date:
-        date_str = target_date
+        fetch_date_str = target_date
     else:
         yesterday = datetime.now(timezone.utc) - timedelta(days=1)
-        date_str = yesterday.strftime('%Y-%m-%d')
+        fetch_date_str = yesterday.strftime('%Y-%m-%d')
+
+    # 输出日期：可显式覆盖；默认在自动模式下写当天
+    output_date = os.getenv("ARXIV_OUTPUT_DATE", "").strip()
+    if output_date:
+        date_str = output_date
+    elif target_date:
+        # 手动指定抓取日期但未指定输出日期时，保持历史行为
+        date_str = target_date
+    else:
+        today = datetime.now(timezone.utc)
+        date_str = today.strftime('%Y-%m-%d')
     
     # 从环境变量读取配置
     default_categories = 'cs.AI,cs.LG,cs.CL,cs.CV'
@@ -469,12 +493,17 @@ def main():
     max_results = _get_int_env('ARXIV_MAX_RESULTS', 30)
     
     print(f"=== arXiv AI 论文爬取开始 ===")
-    print(f"日期: {date_str}")
+    print(f"抓取日期: {fetch_date_str}")
+    print(f"写入日期: {date_str}")
     print(f"分类: {', '.join(categories)}")
     print(f"最大数量: {max_results}")
     
     # 获取论文
-    papers = fetch_arxiv_papers(categories=categories, max_results=max_results, target_date=date_str)
+    papers = fetch_arxiv_papers(
+        categories=categories,
+        max_results=max_results,
+        target_date=fetch_date_str
+    )
     
     # 生成Markdown
     generate_markdown(papers, date_str)
