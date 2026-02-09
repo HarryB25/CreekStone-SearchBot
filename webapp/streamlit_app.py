@@ -41,14 +41,27 @@ def load_items(_signature: str) -> pd.DataFrame:
             dfs.append(pd.read_parquet(f))
         except Exception:
             pass
-    if dfs:
-        df = pd.concat(dfs, ignore_index=True)
-    else:
-        nd = STRUCTURED_DIR / "items.ndjson"
-        if nd.exists():
-            df = pd.DataFrame([json.loads(l) for l in nd.open()])
+    parquet_df = pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
+
+    nd = STRUCTURED_DIR / "items.ndjson"
+    ndjson_df = pd.DataFrame()
+    if nd.exists():
+        try:
+            ndjson_df = pd.DataFrame([json.loads(l) for l in nd.open()])
+        except Exception:
+            ndjson_df = pd.DataFrame()
+
+    if not parquet_df.empty and not ndjson_df.empty:
+        # Prefer latest ndjson entries and deduplicate by stable item id.
+        df = pd.concat([parquet_df, ndjson_df], ignore_index=True)
+        if "id" in df.columns:
+            df = df.drop_duplicates(subset=["id"], keep="last")
         else:
-            df = pd.DataFrame()
+            df = df.drop_duplicates(keep="last")
+    elif not parquet_df.empty:
+        df = parquet_df
+    else:
+        df = ndjson_df
 
     if not df.empty and "keywords" in df.columns:
         def norm_kw(x):
