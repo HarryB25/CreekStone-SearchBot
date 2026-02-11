@@ -4,858 +4,858 @@
 
 ## 📑 目录
 
-- [cs.CV](#csCV) (8 篇)
-- [cs.LG](#csLG) (13 篇)
-- [cs.AI](#csAI) (6 篇)
+- [cs.LG](#csLG) (12 篇)
+- [cs.CV](#csCV) (12 篇)
 - [cs.CL](#csCL) (3 篇)
+- [cs.AI](#csAI) (3 篇)
 
 ---
 
 ## cs.AI
 
-## [1. GEBench: Benchmarking Image Generation Models as GUI Environments](https://arxiv.org/abs/2602.09007v1)
+## [1. Agent World Model: Infinity Synthetic Environments for Agentic Reinforcement Learning](https://arxiv.org/abs/2602.10090v1)
 
-**作者**：Haodong Li, Jingwei Wu, Quan Sun 等 17 位作者  
-**分类**：cs.AI, cs.CV  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-Recent advancements in image generation models have enabled the prediction of future Graphical User Interface (GUI) states based on user instructions. However, existing benchmarks primarily focus on general domain visual fidelity, leaving the evaluation of state transitions and temporal coherence in GUI-specific contexts underexplored. To address this gap, we introduce GEBench, a comprehensive benchmark for evaluating dynamic interaction and temporal coherence in GUI generation. GEBench comprises 700 carefully curated samples spanning five task categories, covering both single-step interactions and multi-step trajectories across real-world and fictional scenarios, as well as grounding point localization. To support systematic evaluation, we propose GE-Score, a novel five-dimensional metric that assesses Goal Achievement, Interaction Logic, Content Consistency, UI Plausibility, and Visual Quality. Extensive evaluations on current models indicate that while they perform well on single-step transitions, they struggle significantly with maintaining temporal coherence and spatial grounding over longer interaction sequences. Our findings identify icon interpretation, text rendering, and localization precision as critical bottlenecks. This work provides a foundation for systematic assessment and suggests promising directions for future research toward building high-fidelity generative GUI environments. The code is available at: https://github.com/stepfun-ai/GEBench.
-
-### 🤖 AI 总结
-
-**一句话总结**：Recent advancements in image generation models have enabled the prediction of future Graphical User Interface (GUI) states based on user instructions. However, existing benchmarks primarily focus on g...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：existing benchmarks primarily focus on general domain visual fidelity, specific contexts underexplored. To address this gap, they struggle significantly with maintaining temporal coherence and spatial grounding over longer interaction sequences. Our findings identify icon interpretation, fidelity generative GUI environments. The code is available at: https://github.com/stepfun, ai/GEBench.
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09007v1) | [下载PDF](https://arxiv.org/pdf/2602.09007v1.pdf)
-
----
-
-## [2. Data Science and Technology Towards AGI Part I: Tiered Data Management](https://arxiv.org/abs/2602.09003v1)
-
-**作者**：Yudong Wang, Zixuan Fu, Hengyu Zhao 等 17 位作者  
-**分类**：cs.AI, cs.CL  
-**发布时间**：2026-02-09
+**作者**：Zhaoyang Wang, Canwen Xu, Boyi Liu 等 8 位作者  
+**分类**：cs.AI, cs.CL, cs.LG  
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-The development of artificial intelligence can be viewed as an evolution of data-driven learning paradigms, with successive shifts in data organization and utilization continuously driving advances in model capability. Current LLM research is dominated by a paradigm that relies heavily on unidirectional scaling of data size, increasingly encountering bottlenecks in data availability, acquisition cost, and training efficiency. In this work, we argue that the development of AGI is entering a new phase of data-model co-evolution, in which models actively guide data management while high-quality data, in turn, amplifies model capabilities. To implement this vision, we propose a tiered data management framework, designed to support the full LLM training lifecycle across heterogeneous learning objectives and cost constraints. Specifically, we introduce an L0-L4 tiered data management framework, ranging from raw uncurated resources to organized and verifiable knowledge. Importantly, LLMs are fully used in data management processes, such as quality scoring and content editing, to refine data across tiers. Each tier is characterized by distinct data properties, management strategies, and training roles, enabling data to be strategically allocated across LLM training stages, including pre-training, mid-training, and alignment. The framework balances data quality, acquisition cost, and marginal training benefit, providing a systematic approach to scalable and sustainable data management. We validate the effectiveness of the proposed framework through empirical studies, in which tiered datasets are constructed from raw corpora and used across multiple training phases. Experimental results demonstrate that tier-aware data utilization significantly improves training efficiency and model performance. To facilitate further research, we release our tiered datasets and processing tools to the community.
+Recent advances in large language model (LLM) have empowered autonomous agents to perform complex tasks that require multi-turn interactions with tools and environments. However, scaling such agent training is limited by the lack of diverse and reliable environments. In this paper, we propose Agent World Model (AWM), a fully synthetic environment generation pipeline. Using this pipeline, we scale to 1,000 environments covering everyday scenarios, in which agents can interact with rich toolsets (35 tools per environment on average) and obtain high-quality observations. Notably, these environments are code-driven and backed by databases, providing more reliable and consistent state transitions than environments simulated by LLMs. Moreover, they enable more efficient agent interaction compared with collecting trajectories from realistic environments. To demonstrate the effectiveness of this resource, we perform large-scale reinforcement learning for multi-turn tool-use agents. Thanks to the fully executable environments and accessible database states, we can also design reliable reward functions. Experiments on three benchmarks show that training exclusively in synthetic environments, rather than benchmark-specific ones, yields strong out-of-distribution generalization. The code is available at https://github.com/Snowflake-Labs/agent-world-model.
 
 ### 🤖 AI 总结
 
-**一句话总结**：The development of artificial intelligence can be viewed as an evolution of data-driven learning paradigms, with successive shifts in data organization and utilization continuously driving advances in...
+**一句话总结**：本文提出了一种名为Agent World Model的全新合成环境生成管道，以支持自主代理的强化学习，并展示了其在多回合工具使用中的有效性。
 
-**研究动机**：AI服务不可用
+**研究动机**：随着大语言模型的进步，自主代理在复杂任务中表现出色，但缺乏多样化和可靠的环境限制了训练的规模。
 
-**核心方法**：AI服务不可用
+**核心方法**：提出的Agent World Model生成了1,000个合成环境，支持丰富的工具互动，并通过代码驱动和数据库支持实现可靠的状态转移。
 
-**主要结论**：AI服务不可用
+**主要结论**：在合成环境中进行训练的代理在应对超出分布的数据时表现出强大的泛化能力，优于在特定基准环境中训练的代理。
 
-**关键词**：The development of artificial intelligence can be viewed as an evolution of data, with successive shifts in data organization and utilization continuously driving advances in model capability. Current LLM research is dominated by a paradigm that relies heavily on unidirectional scaling of data size, increasingly encountering bottlenecks in data availability, and training efficiency. In this work, designed to support the full LLM training lifecycle across heterogeneous learning objectives and cost constraints. Specifically, LLMs are fully used in data management processes, and training roles, enabling data to be strategically allocated across LLM training stages, training, and marginal training benefit, providing a systematic approach to scalable and sustainable data management. We validate the effectiveness of the proposed framework through empirical studies, in which tiered datasets are constructed from raw corpora and used across multiple training phases. Experimental results demonstrate that tier, aware data utilization significantly improves training efficiency and model performance. To facilitate further research
+**关键词**：强化学习, 代理, 自主代理, 合成环境, 大语言模型, 多轮交互, 工具集, 代码驱动, 奖励函数, 生成环境, llm
 
-**评分**：0
+**评分**：72
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09003v1) | [下载PDF](https://arxiv.org/pdf/2602.09003v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10090v1) | [下载PDF](https://arxiv.org/pdf/2602.10090v1.pdf)
 
 ---
 
-## [3. InternAgent-1.5: A Unified Agentic Framework for Long-Horizon Autonomous Scientific Discovery](https://arxiv.org/abs/2602.08990v1)
+## [2. CODE-SHARP: Continuous Open-ended Discovery and Evolution of Skills as Hierarchical Reward Programs](https://arxiv.org/abs/2602.10085v1)
 
-**作者**：Shiyang Feng, Runmin Ma, Xiangchao Yan 等 57 位作者  
+**作者**：Richard Bornemann, Pierluigi Vito Amadori, Antoine Cully  
 **分类**：cs.AI  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-We introduce InternAgent-1.5, a unified system designed for end-to-end scientific discovery across computational and empirical domains. The system is built on a structured architecture composed of three coordinated subsystems for generation, verification, and evolution. These subsystems are supported by foundational capabilities for deep research, solution optimization, and long horizon memory. The architecture allows InternAgent-1.5 to operate continuously across extended discovery cycles while maintaining coherent and improving behavior. It also enables the system to coordinate computational modeling and laboratory experimentation within a single unified system. We evaluate InternAgent-1.5 on scientific reasoning benchmarks such as GAIA, HLE, GPQA, and FrontierScience, and the system achieves leading performance that demonstrates strong foundational capabilities. Beyond these benchmarks, we further assess two categories of discovery tasks. In algorithm discovery tasks, InternAgent-1.5 autonomously designs competitive methods for core machine learning problems. In empirical discovery tasks, it executes complete computational or wet lab experiments and produces scientific findings in earth, life, biological, and physical domains. Overall, these results show that InternAgent-1.5 provides a general and scalable framework for autonomous scientific discovery.
+Developing agents capable of open-endedly discovering and learning novel skills is a grand challenge in Artificial Intelligence. While reinforcement learning offers a powerful framework for training agents to master complex skills, it typically relies on hand-designed reward functions. This is infeasible for open-ended skill discovery, where the set of meaningful skills is not known a priori. While recent methods have shown promising results towards automating reward function design, they remain limited to refining rewards for pre-defined tasks. To address this limitation, we introduce Continuous Open-ended Discovery and Evolution of Skills as Hierarchical Reward Programs (CODE-SHARP), a novel framework leveraging Foundation Models (FM) to open-endedly expand and refine a hierarchical skill archive, structured as a directed graph of executable reward functions in code. We show that a goal-conditioned agent trained exclusively on the rewards generated by the discovered SHARP skills learns to solve increasingly long-horizon goals in the Craftax environment. When composed by a high-level FM-based planner, the discovered skills enable a single goal-conditioned agent to solve complex, long-horizon tasks, outperforming both pretrained agents and task-specific expert policies by over $134$% on average. We will open-source our code and provide additional videos $\href{https://sites.google.com/view/code-sharp/homepage}{here}$.
 
 ### 🤖 AI 总结
 
-**一句话总结**：We introduce InternAgent-1.5, a unified system designed for end-to-end scientific discovery across computational and empirical domains. The system is built on a structured architecture composed of thr...
+**一句话总结**：CODE-SHARP提出了一种新框架，通过层次化的奖励程序实现开放式技能的发现与演化。
 
-**研究动机**：AI服务不可用
+**研究动机**：当前强化学习依赖于手动设计的奖励函数，这在开放式技能发现中不可行，因此需要一种自动化的奖励设计方法。
 
-**核心方法**：AI服务不可用
+**核心方法**：CODE-SHARP利用基础模型，通过可执行奖励函数的有向图结构，持续扩展和优化技能档案。
 
-**主要结论**：AI服务不可用
+**主要结论**：使用CODE-SHARP发现的技能训练的目标条件代理在Craftax环境中能够有效解决复杂的长期目标，比现有的预训练代理和任务特定专家策略平均提升134%以上。
 
-**关键词**：InternAgent, 1.5: A Unified Agentic Framework for Long, Horizon Autonomous Scientific Discovery, We introduce InternAgent, end scientific discovery across computational and empirical domains. The system is built on a structured architecture composed of three coordinated subsystems for generation, and long horizon memory. The architecture allows InternAgent, 1.5 to operate continuously across extended discovery cycles while maintaining coherent and improving behavior. It also enables the system to coordinate computational modeling and laboratory experimentation within a single unified system. We evaluate InternAgent, 1.5 on scientific reasoning benchmarks such as GAIA, 1.5 autonomously designs competitive methods for core machine learning problems. In empirical discovery tasks, and physical domains. Overall, these results show that InternAgent, 1.5 provides a general and scalable framework for autonomous scientific discovery.
+**关键词**：技能发现, 强化学习, 奖励模型, 代理, 基础模型, 层次化奖励, Craftax环境, 任务规划, 开放式探索, artificial intelligence
 
-**评分**：0
+**评分**：70
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08990v1) | [下载PDF](https://arxiv.org/pdf/2602.08990v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10085v1) | [下载PDF](https://arxiv.org/pdf/2602.10085v1.pdf)
 
 ---
 
-## [4. stable-worldmodel-v1: Reproducible World Modeling Research and Evaluation](https://arxiv.org/abs/2602.08968v1)
+## [3. Chain of Mindset: Reasoning with Adaptive Cognitive Modes](https://arxiv.org/abs/2602.10063v1)
 
-**作者**：Lucas Maes, Quentin Le Lidec, Dan Haramati 等 7 位作者  
+**作者**：Tianyi Jiang, Arctanx An, Hengyi Feng 等 15 位作者  
 **分类**：cs.AI  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-World Models have emerged as a powerful paradigm for learning compact, predictive representations of environment dynamics, enabling agents to reason, plan, and generalize beyond direct experience. Despite recent interest in World Models, most available implementations remain publication-specific, severely limiting their reusability, increasing the risk of bugs, and reducing evaluation standardization. To mitigate these issues, we introduce stable-worldmodel (SWM), a modular, tested, and documented world-model research ecosystem that provides efficient data-collection tools, standardized environments, planning algorithms, and baseline implementations. In addition, each environment in SWM enables controllable factors of variation, including visual and physical properties, to support robustness and continual learning research. Finally, we demonstrate the utility of SWM by using it to study zero-shot robustness in DINO-WM.
+Human problem-solving is never the repetition of a single mindset, by which we mean a distinct mode of cognitive processing. When tackling a specific task, we do not rely on a single mindset; instead, we integrate multiple mindsets within the single solution process. However, existing LLM reasoning methods fall into a common trap: they apply the same fixed mindset across all steps, overlooking that different stages of solving the same problem require fundamentally different mindsets. This single-minded assumption prevents models from reaching the next level of intelligence. To address this limitation, we propose Chain of Mindset (CoM), a training-free agentic framework that enables step-level adaptive mindset orchestration. CoM decomposes reasoning into four functionally heterogeneous mindsets: Spatial, Convergent, Divergent, and Algorithmic. A Meta-Agent dynamically selects the optimal mindset based on the evolving reasoning state, while a bidirectional Context Gate filters cross-module information flow to maintain effectiveness and efficiency. Experiments across six challenging benchmarks spanning mathematics, code generation, scientific QA, and spatial reasoning demonstrate that CoM achieves state-of-the-art performance, outperforming the strongest baseline by 4.96\% and 4.72\% in overall accuracy on Qwen3-VL-32B-Instruct and Gemini-2.0-Flash, while balancing reasoning efficiency. Our code is publicly available at \href{https://github.com/QuantaAlpha/chain-of-mindset}{https://github.com/QuantaAlpha/chain-of-mindset}.
 
 ### 🤖 AI 总结
 
-**一句话总结**：World Models have emerged as a powerful paradigm for learning compact, predictive representations of environment dynamics, enabling agents to reason, plan, and generalize beyond direct experience. Des...
+**一句话总结**：提出了一种新的框架Chain of Mindset，通过适应性思维模式提升推理能力，超越传统的固定思维方式。
 
-**研究动机**：AI服务不可用
+**研究动机**：现有的大语言模型推理方法未能识别不同问题解决阶段所需的多样化思维方式，限制了智能水平的提升。
 
-**核心方法**：AI服务不可用
+**核心方法**：CoM框架将推理分解为四种不同的思维模式，并通过Meta-Agent动态选择最佳模式，同时利用双向上下文门控来优化信息流。
 
-**主要结论**：AI服务不可用
+**主要结论**：CoM在六个基准测试中表现优异，整体准确率超越最强基线，同时保持推理效率，展示了其有效性。
 
-**关键词**：enabling agents to reason, most available implementations remain publication
+**关键词**：自适应认知模式, 代理框架, 多重思维, LLM推理, 任务解决, 交互式信息流, 生成模型, 语境门控, 算法思维
 
-**评分**：0
+**评分**：72
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08968v1) | [下载PDF](https://arxiv.org/pdf/2602.08968v1.pdf)
-
----
-
-## [5. Digital Twin and Agentic AI for Wild Fire Disaster Management: Intelligent Virtual Situation Room](https://arxiv.org/abs/2602.08949v1)
-
-**作者**：Mohammad Morsali, Siavash H. Khajavi  
-**分类**：cs.AI, cs.SE  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-According to the United Nations, wildfire frequency and intensity are projected to increase by approximately 14% by 2030 and 30% by 2050 due to global warming, posing critical threats to life, infrastructure, and ecosystems. Conventional disaster management frameworks rely on static simulations and passive data acquisition, hindering their ability to adapt to arbitrarily evolving wildfire episodes in real-time. To address these limitations, we introduce the Intelligent Virtual Situation Room (IVSR), a bidirectional Digital Twin (DT) platform augmented by autonomous AI agents. The IVSR continuously ingests multisource sensor imagery, weather data, and 3D forest models to create a live virtual replica of the fire environment. A similarity engine powered by AI aligns emerging conditions with a precomputed Disaster Simulation Library, retrieving and calibrating intervention tactics under the watchful eyes of experts. Authorized action-ranging from UAV redeployment to crew reallocation-is cycled back through standardized procedures to the physical layer, completing the loop between response and analysis. We validate IVSR through detailed case-study simulations provided by an industrial partner, demonstrating capabilities in localized incident detection, privacy-preserving playback, collider-based fire-spread projection, and site-specific ML retraining. Our results indicate marked reductions in detection-to-intervention latency and more effective resource coordination versus traditional systems. By uniting real-time bidirectional DTs with agentic AI, IVSR offers a scalable, semi-automated decision-support paradigm for proactive, adaptive wildfire disaster management.
-
-### 🤖 AI 总结
-
-**一句话总结**：According to the United Nations, wildfire frequency and intensity are projected to increase by approximately 14% by 2030 and 30% by 2050 due to global warming, posing critical threats to life, infrast...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：Digital Twin and Agentic AI for Wild Fire Disaster Management: Intelligent Virtual Situation Room, a bidirectional Digital Twin (DT) platform augmented by autonomous AI agents. The IVSR continuously ingests multisource sensor imagery, and 3D forest models to create a live virtual replica of the fire environment. A similarity engine powered by AI aligns emerging conditions with a precomputed Disaster Simulation Library, completing the loop between response and analysis. We validate IVSR through detailed case, specific ML retraining. Our results indicate marked reductions in detection, time bidirectional DTs with agentic AI
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08949v1) | [下载PDF](https://arxiv.org/pdf/2602.08949v1.pdf)
-
----
-
-## [6. CausalT5K: Diagnosing and Informing Refusal for Trustworthy Causal Reasoning of Skepticism, Sycophancy, Detection-Correction, and Rung Collapse](https://arxiv.org/abs/2602.08939v1)
-
-**作者**：Longling Geng, Andy Ouyang, Theodore Wu 等 13 位作者  
-**分类**：cs.AI  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-LLM failures in causal reasoning, including sycophancy, rung collapse, and miscalibrated refusal, are well-documented, yet progress on remediation is slow because no benchmark enables systematic diagnosis. We introduce CausalT5K, a diagnostic benchmark of over 5,000 cases across 10 domains that tests three critical capabilities: (1) detecting rung collapse, where models answer interventional queries with associational evidence; (2) resisting sycophantic drift under adversarial pressure; and (3) generating Wise Refusals that specify missing information when evidence is underdetermined. Unlike synthetic benchmarks, CausalT5K embeds causal traps in realistic narratives and decomposes performance into Utility (sensitivity) and Safety (specificity), revealing failure modes invisible to aggregate accuracy. Developed through a rigorous human-machine collaborative pipeline involving 40 domain experts, iterative cross-validation cycles, and composite verification via rule-based, LLM, and human scoring, CausalT5K implements Pearl's Ladder of Causation as research infrastructure. Preliminary experiments reveal a Four-Quadrant Control Landscape where static audit policies universally fail, a finding that demonstrates CausalT5K's value for advancing trustworthy reasoning systems. Repository: https://github.com/genglongling/CausalT5kBench
-
-### 🤖 AI 总结
-
-**一句话总结**：LLM failures in causal reasoning, including sycophancy, rung collapse, and miscalibrated refusal, are well-documented, yet progress on remediation is slow because no benchmark enables systematic diagn...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：LLM failures in causal reasoning, 000 cases across 10 domains that tests three critical capabilities: (1) detecting rung collapse, revealing failure modes invisible to aggregate accuracy. Developed through a rigorous human, machine collaborative pipeline involving 40 domain experts, LLM, Quadrant Control Landscape where static audit policies universally fail
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08939v1) | [下载PDF](https://arxiv.org/pdf/2602.08939v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10063v1) | [下载PDF](https://arxiv.org/pdf/2602.10063v1.pdf)
 
 ---
 
 ## cs.CL
 
-## [7. When Actions Go Off-Task: Detecting and Correcting Misaligned Actions in Computer-Use Agents](https://arxiv.org/abs/2602.08995v1)
+## [4. Quantum-Audit: Evaluating the Reasoning Limits of LLMs on Quantum Computing](https://arxiv.org/abs/2602.10092v1)
 
-**作者**：Yuting Ning, Jaylen Jones, Zhehao Zhang 等 8 位作者  
+**作者**：Mohamed Afane, Kayla Laufer, Wenqi Wei 等 7 位作者  
 **分类**：cs.CL  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Computer-use agents (CUAs) have made tremendous progress in the past year, yet they still frequently produce misaligned actions that deviate from the user's original intent. Such misaligned actions may arise from external attacks (e.g., indirect prompt injection) or from internal limitations (e.g., erroneous reasoning). They not only expose CUAs to safety risks, but also degrade task efficiency and reliability. This work makes the first effort to define and study misaligned action detection in CUAs, with comprehensive coverage of both externally induced and internally arising misaligned actions. We further identify three common categories in real-world CUA deployment and construct MisActBench, a benchmark of realistic trajectories with human-annotated, action-level alignment labels. Moreover, we propose DeAction, a practical and universal guardrail that detects misaligned actions before execution and iteratively corrects them through structured feedback. DeAction outperforms all existing baselines across offline and online evaluations with moderate latency overhead: (1) On MisActBench, it outperforms baselines by over 15% absolute in F1 score; (2) In online evaluation, it reduces attack success rate by over 90% under adversarial settings while preserving or even improving task success rate in benign environments.
+Language models have become practical tools for quantum computing education and research, from summarizing technical papers to explaining theoretical concepts and answering questions about recent developments in the field. While existing benchmarks evaluate quantum code generation and circuit design, their understanding of quantum computing concepts has not been systematically measured. Quantum-Audit addresses this gap with 2,700 questions covering core quantum computing topics. We evaluate 26 models from leading organizations. Our benchmark comprises 1,000 expert-written questions, 1,000 questions extracted from research papers using LLMs and validated by experts, plus an additional 700 questions including 350 open-ended questions and 350 questions with false premises to test whether models can correct erroneous assumptions. Human participants scored between 23% and 86%, with experts averaging 74%. Top-performing models exceeded the expert average, with Claude Opus 4.5 reaching 84% accuracy, though top models showed an average 12-point accuracy drop on expert-written questions compared to LLM-generated ones. Performance declined further on advanced topics, dropping to 73% on security questions. Additionally, models frequently accepted and reinforced false premises embedded in questions instead of identifying them, with accuracy below 66% on these critical reasoning tasks.
 
 ### 🤖 AI 总结
 
-**一句话总结**：Computer-use agents (CUAs) have made tremendous progress in the past year, yet they still frequently produce misaligned actions that deviate from the user's original intent. Such misaligned actions ma...
+**一句话总结**：Quantum-Audit评估了大型语言模型在量子计算领域的推理能力，发现其在处理复杂问题时存在显著局限。
 
-**研究动机**：AI服务不可用
+**研究动机**：现有基准测试未系统测量语言模型对量子计算概念的理解，急需填补这一空白。
 
-**核心方法**：AI服务不可用
+**核心方法**：研究设计了一个包含2,700个问题的基准，涵盖核心量子计算主题，并评估了26个领先模型的表现。
 
-**主要结论**：AI服务不可用
+**主要结论**：顶级模型在专家编写的问题上表现较差，且在处理错误前提时的准确率低于66%，显示出推理能力的不足。
 
-**关键词**：Use Agents, use agents (CUAs) have made tremendous progress in the past year, with comprehensive coverage of both externally induced and internally arising misaligned actions. We further identify three common categories in real, a practical and universal guardrail that detects misaligned actions before execution and iteratively corrects them through structured feedback. DeAction outperforms all existing baselines across offline and online evaluations with moderate latency overhead: (1) On MisActBench
+**关键词**：量子计算, 语言模型, LLM, 量子审计, 量子编程, 理论概念, 机器学习, 评估模型, 专家验证, 问题生成
 
-**评分**：0
+**评分**：72
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08995v1) | [下载PDF](https://arxiv.org/pdf/2602.08995v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10092v1) | [下载PDF](https://arxiv.org/pdf/2602.10092v1.pdf)
 
 ---
 
-## [8. How Should We Model the Probability of a Language?](https://arxiv.org/abs/2602.08951v1)
+## [5. Anagent For Enhancing Scientific Table & Figure Analysis](https://arxiv.org/abs/2602.10081v1)
 
-**作者**：Rasul Dent, Pedro Ortiz Suarez, Thibault Clérice 等 4 位作者  
-**分类**：cs.CL  
-**发布时间**：2026-02-09
+**作者**：Xuehang Guo, Zhiyong Lu, Tom Hope 等 4 位作者  
+**分类**：cs.CL, cs.AI  
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Of the over 7,000 languages spoken in the world, commercial language identification (LID) systems only reliably identify a few hundred in written form. Research-grade systems extend this coverage under certain circumstances, but for most languages coverage remains patchy or nonexistent. This position paper argues that this situation is largely self-imposed. In particular, it arises from a persistent framing of LID as decontextualized text classification, which obscures the central role of prior probability estimation and is reinforced by institutional incentives that favor global, fixed-prior models. We argue that improving coverage for tail languages requires rethinking LID as a routing problem and developing principled ways to incorporate environmental cues that make languages locally plausible.
+In scientific research, analysis requires accurately interpreting complex multimodal knowledge, integrating evidence from different sources, and drawing inferences grounded in domain-specific knowledge. However, current artificial intelligence (AI) systems struggle to consistently demonstrate such capabilities. The complexity and variability of scientific tables and figures, combined with heterogeneous structures and long-context requirements, pose fundamental obstacles to scientific table \& figure analysis. To quantify these challenges, we introduce AnaBench, a large-scale benchmark featuring $63,178$ instances from nine scientific domains, systematically categorized along seven complexity dimensions. To tackle these challenges, we propose Anagent, a multi-agent framework for enhanced scientific table \& figure analysis through four specialized agents: Planner decomposes tasks into actionable subtasks, Expert retrieves task-specific information through targeted tool execution, Solver synthesizes information to generate coherent analysis, and Critic performs iterative refinement through five-dimensional quality assessment. We further develop modular training strategies that leverage supervised finetuning and specialized reinforcement learning to optimize individual capabilities while maintaining effective collaboration. Comprehensive evaluation across 170 subdomains demonstrates that Anagent achieves substantial improvements, up to $\uparrow 13.43\%$ in training-free settings and $\uparrow 42.12\%$ with finetuning, while revealing that task-oriented reasoning and context-aware problem-solving are essential for high-quality scientific table \& figure analysis. Our project page: https://xhguo7.github.io/Anagent/.
 
 ### 🤖 AI 总结
 
-**一句话总结**：Of the over 7,000 languages spoken in the world, commercial language identification (LID) systems only reliably identify a few hundred in written form. Research-grade systems extend this coverage unde...
+**一句话总结**：本研究提出了Anagent，一个多代理框架，旨在改善科学表格和图形分析的能力。
 
-**研究动机**：AI服务不可用
+**研究动机**：当前的AI系统在解析复杂的科学表格和图形时存在显著困难，亟需提升其多模态知识整合和推理能力。
 
-**核心方法**：AI服务不可用
+**核心方法**：Anagent通过四个专门的代理（规划者、专家、求解者和评论者）和模块化训练策略来优化科学表格和图形分析。
 
-**主要结论**：AI服务不可用
+**主要结论**：评估结果表明，Anagent在多个子领域的表现显著提升，强调了任务导向推理和上下文感知问题解决的重要性。
 
-**关键词**：grade systems extend this coverage under certain circumstances, but for most languages coverage remains patchy or nonexistent. This position paper argues that this situation is largely self, it arises from a persistent framing of LID as decontextualized text classification, prior models. We argue that improving coverage for tail languages requires rethinking LID as a routing problem and developing principled ways to incorporate environmental cues that make languages locally plausible.
+**关键词**：多代理, 科学分析, 任务分解, 信息检索, 生成分析, 上下文感知, 强化学习, AnaBench, 复杂性评估, artificial intelligence
 
-**评分**：0
+**评分**：75
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08951v1) | [下载PDF](https://arxiv.org/pdf/2602.08951v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10081v1) | [下载PDF](https://arxiv.org/pdf/2602.10081v1.pdf)
 
 ---
 
-## [9. GitSearch: Enhancing Community Notes Generation with Gap-Informed Targeted Search](https://arxiv.org/abs/2602.08945v1)
+## [6. SCORE: Specificity, Context Utilization, Robustness, and Relevance for Reference-Free LLM Evaluation](https://arxiv.org/abs/2602.10017v1)
 
-**作者**：Sahajpreet Singh, Kokil Jaidka, Min-Yen Kan  
-**分类**：cs.CL, cs.CY  
-**发布时间**：2026-02-09
+**作者**：Homaira Huda Shomee, Rochana Chaturvedi, Yangxinyu Xie 等 4 位作者  
+**分类**：cs.CL  
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Community-based moderation offers a scalable alternative to centralized fact-checking, yet it faces significant structural challenges, and existing AI-based methods fail in "cold start" scenarios. To tackle these challenges, we introduce GitSearch (Gap-Informed Targeted Search), a framework that treats human-perceived quality gaps, such as missing context, etc., as first-class signals. GitSearch has a three-stage pipeline: identifying information deficits, executing real-time targeted web-retrieval to resolve them, and synthesizing platform-compliant notes. To facilitate evaluation, we present PolBench, a benchmark of 78,698 U.S. political tweets with their associated Community Notes. We find GitSearch achieves 99% coverage, almost doubling coverage over the state-of-the-art. GitSearch surpasses human-authored helpful notes with a 69% win rate and superior helpfulness scores (3.87 vs. 3.36), demonstrating retrieval effectiveness that balanced the trade-off between scale and quality.
+Large language models (LLMs) are increasingly used to support question answering and decision-making in high-stakes, domain-specific settings such as natural hazard response and infrastructure planning, where effective answers must convey fine-grained, decision-critical details. However, existing evaluation frameworks for retrieval-augmented generation (RAG) and open-ended question answering primarily rely on surface-level similarity, factual consistency, or semantic relevance, and often fail to assess whether responses provide the specific information required for domain-sensitive decisions. To address this gap, we propose a multi-dimensional, reference-free evaluation framework that assesses LLM outputs along four complementary dimensions: specificity, robustness to paraphrasing and semantic perturbations, answer relevance, and context utilization. We introduce a curated dataset of 1,412 domain-specific question-answer pairs spanning 40 professional roles and seven natural hazard types to support systematic evaluation. We further conduct human evaluation to assess inter-annotator agreement and alignment between model outputs and human judgments, which highlights the inherent subjectivity of open-ended, domain-specific evaluation. Our results show that no single metric sufficiently captures answer quality in isolation and demonstrate the need for structured, multi-metric evaluation frameworks when deploying LLMs in high-stakes applications.
 
 ### 🤖 AI 总结
 
-**一句话总结**：Community-based moderation offers a scalable alternative to centralized fact-checking, yet it faces significant structural challenges, and existing AI-based methods fail in "cold start" scenarios. To ...
+**一句话总结**：本研究提出了一种多维度的无参考评估框架，用于评估大型语言模型在高风险领域特定任务中的输出质量。
 
-**研究动机**：AI服务不可用
+**研究动机**：现有评估框架主要依赖表面相似性和事实一致性，无法有效评估领域特定决策所需的具体信息。
 
-**核心方法**：AI服务不可用
+**核心方法**：提出了一个评估框架，结合四个维度（特异性、鲁棒性、答案相关性和上下文利用）以及一个包含1412对问题答案的数据集。
 
-**主要结论**：AI服务不可用
+**主要结论**：研究表明，单一指标不足以全面捕捉答案质量，强调了在高风险应用中采用结构化的多指标评估框架的必要性。
 
-**关键词**：and existing AI, based methods fail in "cold start" scenarios. To tackle these challenges, such as missing context, retrieval to resolve them, 698 U.S. political tweets with their associated Community Notes. We find GitSearch achieves 99% coverage, almost doubling coverage over the state, demonstrating retrieval effectiveness that balanced the trade
+**关键词**：关键词：大语言模型, 评估框架, 检索增强生成, 语义相关性, 多维评估, 上下文利用, 专业角色, 自然灾害响应, human-in-the-loop, 领域敏感决策
 
-**评分**：0
+**评分**：68
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08945v1) | [下载PDF](https://arxiv.org/pdf/2602.08945v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10017v1) | [下载PDF](https://arxiv.org/pdf/2602.10017v1.pdf)
 
 ---
 
 ## cs.CV
 
-## [10. WorldCompass: Reinforcement Learning for Long-Horizon World Models](https://arxiv.org/abs/2602.09022v1)
+## [7. SAGE: Scalable Agentic 3D Scene Generation for Embodied AI](https://arxiv.org/abs/2602.10116v1)
 
-**作者**：Zehan Wang, Tengfei Wang, Haiyu Zhang 等 12 位作者  
-**分类**：cs.CV  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-This work presents WorldCompass, a novel Reinforcement Learning (RL) post-training framework for the long-horizon, interactive video-based world models, enabling them to explore the world more accurately and consistently based on interaction signals. To effectively "steer" the world model's exploration, we introduce three core innovations tailored to the autoregressive video generation paradigm: 1) Clip-level rollout Strategy: We generate and evaluate multiple samples at a single target clip, which significantly boosts rollout efficiency and provides fine-grained reward signals. 2) Complementary Reward Functions: We design reward functions for both interaction-following accuracy and visual quality, which provide direct supervision and effectively suppress reward-hacking behaviors. 3) Efficient RL Algorithm: We employ the negative-aware fine-tuning strategy coupled with various efficiency optimizations to efficiently and effectively enhance model capacity. Evaluations on the SoTA open-source world model, WorldPlay, demonstrate that WorldCompass significantly improves interaction accuracy and visual fidelity across various scenarios.
-
-### 🤖 AI 总结
-
-**一句话总结**：This work presents WorldCompass, a novel Reinforcement Learning (RL) post-training framework for the long-horizon, interactive video-based world models, enabling them to explore the world more accurat...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：training framework for the long, we introduce three core innovations tailored to the autoregressive video generation paradigm: 1) Clip, grained reward signals. 2) Complementary Reward Functions: We design reward functions for both interaction
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09022v1) | [下载PDF](https://arxiv.org/pdf/2602.09022v1.pdf)
-
----
-
-## [11. Raster2Seq: Polygon Sequence Generation for Floorplan Reconstruction](https://arxiv.org/abs/2602.09016v1)
-
-**作者**：Hao Phung, Hadar Averbuch-Elor  
-**分类**：cs.CV  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-Reconstructing a structured vector-graphics representation from a rasterized floorplan image is typically an important prerequisite for computational tasks involving floorplans such as automated understanding or CAD workflows. However, existing techniques struggle in faithfully generating the structure and semantics conveyed by complex floorplans that depict large indoor spaces with many rooms and a varying numbers of polygon corners. To this end, we propose Raster2Seq, framing floorplan reconstruction as a sequence-to-sequence task in which floorplan elements--such as rooms, windows, and doors--are represented as labeled polygon sequences that jointly encode geometry and semantics. Our approach introduces an autoregressive decoder that learns to predict the next corner conditioned on image features and previously generated corners using guidance from learnable anchors. These anchors represent spatial coordinates in image space, hence allowing for effectively directing the attention mechanism to focus on informative image regions. By embracing the autoregressive mechanism, our method offers flexibility in the output format, enabling for efficiently handling complex floorplans with numerous rooms and diverse polygon structures. Our method achieves state-of-the-art performance on standard benchmarks such as Structure3D, CubiCasa5K, and Raster2Graph, while also demonstrating strong generalization to more challenging datasets like WAFFLE, which contain diverse room structures and complex geometric variations.
-
-### 🤖 AI 总结
-
-**一句话总结**：Reconstructing a structured vector-graphics representation from a rasterized floorplan image is typically an important prerequisite for computational tasks involving floorplans such as automated under...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：Reconstructing a structured vector, graphics representation from a rasterized floorplan image is typically an important prerequisite for computational tasks involving floorplans such as automated understanding or CAD workflows. However, existing techniques struggle in faithfully generating the structure and semantics conveyed by complex floorplans that depict large indoor spaces with many rooms and a varying numbers of polygon corners. To this end, which contain diverse room structures and complex geometric variations.
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09016v1) | [下载PDF](https://arxiv.org/pdf/2602.09016v1.pdf)
-
----
-
-## [12. ArcFlow: Unleashing 2-Step Text-to-Image Generation via High-Precision Non-Linear Flow Distillation](https://arxiv.org/abs/2602.09014v1)
-
-**作者**：Zihan Yang, Shuyuan Tu, Licheng Zhang 等 6 位作者  
-**分类**：cs.CV, cs.AI  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-Diffusion models have achieved remarkable generation quality, but they suffer from significant inference cost due to their reliance on multiple sequential denoising steps, motivating recent efforts to distill this inference process into a few-step regime. However, existing distillation methods typically approximate the teacher trajectory by using linear shortcuts, which makes it difficult to match its constantly changing tangent directions as velocities evolve across timesteps, thereby leading to quality degradation. To address this limitation, we propose ArcFlow, a few-step distillation framework that explicitly employs non-linear flow trajectories to approximate pre-trained teacher trajectories. Concretely, ArcFlow parameterizes the velocity field underlying the inference trajectory as a mixture of continuous momentum processes. This enables ArcFlow to capture velocity evolution and extrapolate coherent velocities to form a continuous non-linear trajectory within each denoising step. Importantly, this parameterization admits an analytical integration of this non-linear trajectory, which circumvents numerical discretization errors and results in high-precision approximation of the teacher trajectory. To train this parameterization into a few-step generator, we implement ArcFlow via trajectory distillation on pre-trained teacher models using lightweight adapters. This strategy ensures fast, stable convergence while preserving generative diversity and quality. Built on large-scale models (Qwen-Image-20B and FLUX.1-dev), ArcFlow only fine-tunes on less than 5% of original parameters and achieves a 40x speedup with 2 NFEs over the original multi-step teachers without significant quality degradation. Experiments on benchmarks show the effectiveness of ArcFlow both qualitatively and quantitatively.
-
-### 🤖 AI 总结
-
-**一句话总结**：Diffusion models have achieved remarkable generation quality, but they suffer from significant inference cost due to their reliance on multiple sequential denoising steps, motivating recent efforts to...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：Diffusion models have achieved remarkable generation quality, trained teacher trajectories. Concretely, precision approximation of the teacher trajectory. To train this parameterization into a few, trained teacher models using lightweight adapters. This strategy ensures fast, stable convergence while preserving generative diversity and quality. Built on large
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09014v1) | [下载PDF](https://arxiv.org/pdf/2602.09014v1.pdf)
-
----
-
-## [13. Generalizing Sports Feedback Generation by Watching Competitions and Reading Books: A Rock Climbing Case Study](https://arxiv.org/abs/2602.08996v1)
-
-**作者**：Arushi Rai, Adriana Kovashka  
-**分类**：cs.CV  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-While there is rapid progress in video-LLMs with advanced reasoning capabilities, prior work shows that these models struggle on the challenging task of sports feedback generation and require expensive and difficult-to-collect finetuning feedback data for each sport. This limitation is evident from the poor generalization to sports unseen during finetuning. Furthermore, traditional text generation evaluation metrics (e.g., BLEU-4, METEOR, ROUGE-L, BERTScore), originally developed for machine translation and summarization, fail to capture the unique aspects of sports feedback quality. To address the first problem, using rock climbing as our case study, we propose using auxiliary freely-available web data from the target domain, such as competition videos and coaching manuals, in addition to existing sports feedback from a disjoint, source domain to improve sports feedback generation performance on the target domain. To improve evaluation, we propose two evaluation metrics: (1) specificity and (2) actionability. Together, our approach enables more meaningful and practical generation of sports feedback under limited annotations.
-
-### 🤖 AI 总结
-
-**一句话总结**：While there is rapid progress in video-LLMs with advanced reasoning capabilities, prior work shows that these models struggle on the challenging task of sports feedback generation and require expensiv...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：LLMs with advanced reasoning capabilities, fail to capture the unique aspects of sports feedback quality. To address the first problem, available web data from the target domain, source domain to improve sports feedback generation performance on the target domain. To improve evaluation
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08996v1) | [下载PDF](https://arxiv.org/pdf/2602.08996v1.pdf)
-
----
-
-## [14. WorldArena: A Unified Benchmark for Evaluating Perception and Functional Utility of Embodied World Models](https://arxiv.org/abs/2602.08971v1)
-
-**作者**：Yu Shang, Zhuohang Li, Yiding Ma 等 19 位作者  
+**作者**：Hongchi Xia, Xuan Li, Zhaoshuo Li 等 12 位作者  
 **分类**：cs.CV, cs.RO  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-While world models have emerged as a cornerstone of embodied intelligence by enabling agents to reason about environmental dynamics through action-conditioned prediction, their evaluation remains fragmented. Current evaluation of embodied world models has largely focused on perceptual fidelity (e.g., video generation quality), overlooking the functional utility of these models in downstream decision-making tasks. In this work, we introduce WorldArena, a unified benchmark designed to systematically evaluate embodied world models across both perceptual and functional dimensions. WorldArena assesses models through three dimensions: video perception quality, measured with 16 metrics across six sub-dimensions; embodied task functionality, which evaluates world models as data engines, policy evaluators, and action planners integrating with subjective human evaluation. Furthermore, we propose EWMScore, a holistic metric integrating multi-dimensional performance into a single interpretable index. Through extensive experiments on 14 representative models, we reveal a significant perception-functionality gap, showing that high visual quality does not necessarily translate into strong embodied task capability. WorldArena benchmark with the public leaderboard is released at https://worldarena.ai, providing a framework for tracking progress toward truly functional world models in embodied AI.
+Real-world data collection for embodied agents remains costly and unsafe, calling for scalable, realistic, and simulator-ready 3D environments. However, existing scene-generation systems often rely on rule-based or task-specific pipelines, yielding artifacts and physically invalid scenes. We present SAGE, an agentic framework that, given a user-specified embodied task (e.g., "pick up a bowl and place it on the table"), understands the intent and automatically generates simulation-ready environments at scale. The agent couples multiple generators for layout and object composition with critics that evaluate semantic plausibility, visual realism, and physical stability. Through iterative reasoning and adaptive tool selection, it self-refines the scenes until meeting user intent and physical validity. The resulting environments are realistic, diverse, and directly deployable in modern simulators for policy training. Policies trained purely on this data exhibit clear scaling trends and generalize to unseen objects and layouts, demonstrating the promise of simulation-driven scaling for embodied AI. Code, demos, and the SAGE-10k dataset can be found on the project page here: https://nvlabs.github.io/sage.
 
 ### 🤖 AI 总结
 
-**一句话总结**：While world models have emerged as a cornerstone of embodied intelligence by enabling agents to reason about environmental dynamics through action-conditioned prediction, their evaluation remains frag...
+**一句话总结**：SAGE是一个能够自动生成模拟环境的框架，旨在提高为体现智能体收集数据的效率和安全性。
 
-**研究动机**：AI服务不可用
+**研究动机**：现实世界数据收集成本高且不安全，因此需要可扩展、真实且适合模拟的3D环境。
 
-**核心方法**：AI服务不可用
+**核心方法**：SAGE结合多种生成器与评估工具，通过迭代推理和自适应工具选择，自动生成符合用户意图的场景。
 
-**主要结论**：AI服务不可用
+**主要结论**：通过这种方法生成的环境在现代模拟器中可直接使用，训练出的策略表现出良好的扩展性和对未知对象的泛化能力。
 
-**关键词**：While world models have emerged as a cornerstone of embodied intelligence by enabling agents to reason about environmental dynamics through action, their evaluation remains fragmented. Current evaluation of embodied world models has largely focused on perceptual fidelity (e.g., showing that high visual quality does not necessarily translate into strong embodied task capability. WorldArena benchmark with the public leaderboard is released at https://worldarena.ai, providing a framework for tracking progress toward truly functional world models in embodied AI.
+**关键词**：场景生成, 代理框架, 3D环境, 语义可行性, 物理稳定性, embodied AI, 自适应工具选择, 多生成器, 模拟器训练
 
-**评分**：0
+**评分**：76
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08971v1) | [下载PDF](https://arxiv.org/pdf/2602.08971v1.pdf)
-
----
-
-## [15. Modeling 3D Pedestrian-Vehicle Interactions for Vehicle-Conditioned Pose Forecasting](https://arxiv.org/abs/2602.08962v1)
-
-**作者**：Guangxun Zhu, Xuan Liu, Nicolas Pugeault 等 5 位作者  
-**分类**：cs.CV, cs.RO  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-Accurately predicting pedestrian motion is crucial for safe and reliable autonomous driving in complex urban environments. In this work, we present a 3D vehicle-conditioned pedestrian pose forecasting framework that explicitly incorporates surrounding vehicle information. To support this, we enhance the Waymo-3DSkelMo dataset with aligned 3D vehicle bounding boxes, enabling realistic modeling of multi-agent pedestrian-vehicle interactions. We introduce a sampling scheme to categorize scenes by pedestrian and vehicle count, facilitating training across varying interaction complexities. Our proposed network adapts the TBIFormer architecture with a dedicated vehicle encoder and pedestrian-vehicle interaction cross-attention module to fuse pedestrian and vehicle features, allowing predictions to be conditioned on both historical pedestrian motion and surrounding vehicles. Extensive experiments demonstrate substantial improvements in forecasting accuracy and validate different approaches for modeling pedestrian-vehicle interactions, highlighting the importance of vehicle-aware 3D pose prediction for autonomous driving. Code is available at: https://github.com/GuangxunZhu/VehCondPose3D
-
-### 🤖 AI 总结
-
-**一句话总结**：Accurately predicting pedestrian motion is crucial for safe and reliable autonomous driving in complex urban environments. In this work, we present a 3D vehicle-conditioned pedestrian pose forecasting...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：Accurately predicting pedestrian motion is crucial for safe and reliable autonomous driving in complex urban environments. In this work, agent pedestrian, facilitating training across varying interaction complexities. Our proposed network adapts the TBIFormer architecture with a dedicated vehicle encoder and pedestrian, aware 3D pose prediction for autonomous driving. Code is available at: https://github.com/GuangxunZhu/VehCondPose3D
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08962v1) | [下载PDF](https://arxiv.org/pdf/2602.08962v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10116v1) | [下载PDF](https://arxiv.org/pdf/2602.10116v1.pdf)
 
 ---
 
-## [16. MotionCrafter: Dense Geometry and Motion Reconstruction with a 4D VAE](https://arxiv.org/abs/2602.08961v1)
+## [8. Quantum Multiple Rotation Averaging](https://arxiv.org/abs/2602.10115v1)
 
-**作者**：Ruijie Zhu, Jiahao Lu, Wenbo Hu 等 7 位作者  
-**分类**：cs.CV, cs.AI, cs.CG, cs.LG  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-We introduce MotionCrafter, a video diffusion-based framework that jointly reconstructs 4D geometry and estimates dense motion from a monocular video. The core of our method is a novel joint representation of dense 3D point maps and 3D scene flows in a shared coordinate system, and a novel 4D VAE to effectively learn this representation. Unlike prior work that forces the 3D value and latents to align strictly with RGB VAE latents-despite their fundamentally different distributions-we show that such alignment is unnecessary and leads to suboptimal performance. Instead, we introduce a new data normalization and VAE training strategy that better transfers diffusion priors and greatly improves reconstruction quality. Extensive experiments across multiple datasets demonstrate that MotionCrafter achieves state-of-the-art performance in both geometry reconstruction and dense scene flow estimation, delivering 38.64% and 25.0% improvements in geometry and motion reconstruction, respectively, all without any post-optimization. Project page: https://ruijiezhu94.github.io/MotionCrafter_Page
-
-### 🤖 AI 总结
-
-**一句话总结**：We introduce MotionCrafter, a video diffusion-based framework that jointly reconstructs 4D geometry and estimates dense motion from a monocular video. The core of our method is a novel joint represent...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：a video diffusion, we introduce a new data normalization and VAE training strategy that better transfers diffusion priors and greatly improves reconstruction quality. Extensive experiments across multiple datasets demonstrate that MotionCrafter achieves state
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08961v1) | [下载PDF](https://arxiv.org/pdf/2602.08961v1.pdf)
-
----
-
-## [17. Grow with the Flow: 4D Reconstruction of Growing Plants with Gaussian Flow Fields](https://arxiv.org/abs/2602.08958v1)
-
-**作者**：Weihan Luo, Lily Goli, Sherwin Bahmani 等 6 位作者  
+**作者**：Shuteng Wang, Natacha Kuete Meli, Michael Möller 等 4 位作者  
 **分类**：cs.CV  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Modeling the time-varying 3D appearance of plants during their growth poses unique challenges: unlike many dynamic scenes, plants generate new geometry over time as they expand, branch, and differentiate. Recent motion modeling techniques are ill-suited to this problem setting. For example, deformation fields cannot introduce new geometry, and 4D Gaussian splatting constrains motion to a linear trajectory in space and time and cannot track the same set of Gaussians over time. Here, we introduce a 3D Gaussian flow field representation that models plant growth as a time-varying derivative over Gaussian parameters -- position, scale, orientation, color, and opacity -- enabling nonlinear and continuous-time growth dynamics. To initialize a sufficient set of Gaussian primitives, we reconstruct the mature plant and learn a process of reverse growth, effectively simulating the plant's developmental history in reverse. Our approach achieves superior image quality and geometric accuracy compared to prior methods on multi-view timelapse datasets of plant growth, providing a new approach for appearance modeling of growing 3D structures.
+Multiple rotation averaging (MRA) is a fundamental optimization problem in 3D vision and robotics that aims to recover globally consistent absolute rotations from noisy relative measurements. Established classical methods, such as L1-IRLS and Shonan, face limitations including local minima susceptibility and reliance on convex relaxations that fail to preserve the exact manifold geometry, leading to reduced accuracy in high-noise scenarios. We introduce IQARS (Iterative Quantum Annealing for Rotation Synchronization), the first algorithm that reformulates MRA as a sequence of local quadratic non-convex sub-problems executable on quantum annealers after binarization, to leverage inherent hardware advantages. IQARS removes convex relaxation dependence and better preserves non-Euclidean rotation manifold geometry while leveraging quantum tunneling and parallelism for efficient solution space exploration. We evaluate IQARS's performance on synthetic and real-world datasets. While current annealers remain in their nascent phase and only support solving problems of limited scale with constrained performance, we observed that IQARS on D-Wave annealers can already achieve ca. 12% higher accuracy than Shonan, i.e., the best-performing classical method evaluated empirically.
 
 ### 🤖 AI 总结
 
-**一句话总结**：Modeling the time-varying 3D appearance of plants during their growth poses unique challenges: unlike many dynamic scenes, plants generate new geometry over time as they expand, branch, and differenti...
+**一句话总结**：IQARS是一种新算法，通过量子退火技术解决多重旋转平均问题，超越了传统方法的局限性。
 
-**研究动机**：AI服务不可用
+**研究动机**：多重旋转平均（MRA）在3D视觉和机器人领域至关重要，但现有经典方法存在局限性，尤其在高噪声情况下的准确性不足。
 
-**核心方法**：AI服务不可用
+**核心方法**：IQARS算法将MRA重构为一系列可在量子退火器上执行的局部二次非凸子问题，去除了对凸松弛的依赖，并更好地保持了非欧几里得旋转流形的几何特性。
 
-**主要结论**：AI服务不可用
+**主要结论**：尽管当前的量子退火器仍处于初级阶段，IQARS在D-Wave退火器上已实现比Shonan高出约12%的准确率，显示出量子算法的潜力。
 
-**关键词**：and 4D Gaussian splatting constrains motion to a linear trajectory in space and time and cannot track the same set of Gaussians over time. Here
+**关键词**：量子, 多重旋转平均, 优化, 3D视觉, 机器人, IQARS, 量子退火, 非欧几里得, 旋转同步, 解决方案空间探索, rag
 
-**评分**：0
+**评分**：62
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08958v1) | [下载PDF](https://arxiv.org/pdf/2602.08958v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10115v1) | [下载PDF](https://arxiv.org/pdf/2602.10115v1.pdf)
+
+---
+
+## [9. ConsID-Gen: View-Consistent and Identity-Preserving Image-to-Video Generation](https://arxiv.org/abs/2602.10113v1)
+
+**作者**：Mingyang Wu, Ashirbad Mishra, Soumik Dey 等 8 位作者  
+**分类**：cs.CV  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Image-to-Video generation (I2V) animates a static image into a temporally coherent video sequence following textual instructions, yet preserving fine-grained object identity under changing viewpoints remains a persistent challenge. Unlike text-to-video models, existing I2V pipelines often suffer from appearance drift and geometric distortion, artifacts we attribute to the sparsity of single-view 2D observations and weak cross-modal alignment. Here we address this problem from both data and model perspectives. First, we curate ConsIDVid, a large-scale object-centric dataset built with a scalable pipeline for high-quality, temporally aligned videos, and establish ConsIDVid-Bench, where we present a novel benchmarking and evaluation framework for multi-view consistency using metrics sensitive to subtle geometric and appearance deviations. We further propose ConsID-Gen, a view-assisted I2V generation framework that augments the first frame with unposed auxiliary views and fuses semantic and structural cues via a dual-stream visual-geometric encoder as well as a text-visual connector, yielding unified conditioning for a Diffusion Transformer backbone. Experiments across ConsIDVid-Bench demonstrate that ConsID-Gen consistently outperforms in multiple metrics, with the best overall performance surpassing leading video generation models like Wan2.1 and HunyuanVideo, delivering superior identity fidelity and temporal coherence under challenging real-world scenarios. We will release our model and dataset at https://myangwu.github.io/ConsID-Gen.
+
+### 🤖 AI 总结
+
+**一句话总结**：ConsID-Gen是一个改进的图像到视频生成框架，通过引入辅助视角和双流编码器，克服了对象身份保持和视角一致性的问题。
+
+**研究动机**：当前的图像到视频生成模型在保持细粒度对象身份和处理视角变化方面面临挑战，尤其是在缺乏多视角数据时，容易出现外观漂移和几何失真。
+
+**核心方法**：该研究提出了ConsID-Gen框架，利用辅助视角增强首帧，并通过双流视觉-几何编码器和文本-视觉连接器融合语义与结构线索，从而实现一致的Diffusion Transformer生成。
+
+**主要结论**：ConsID-Gen在多个指标上优于现有视频生成模型，展现了在真实场景中优越的身份保留和时间一致性，预计将推动该领域的进一步发展。
+
+**关键词**：图像生成, 视频生成, 深度学习, 生成模型, 语义搜索, ConsIDVid, Diffusion Transformer, 多视角一致性, 视觉编码器, 结构线索
+
+**评分**：66
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10113v1) | [下载PDF](https://arxiv.org/pdf/2602.10113v1.pdf)
+
+---
+
+## [10. Olaf-World: Orienting Latent Actions for Video World Modeling](https://arxiv.org/abs/2602.10104v1)
+
+**作者**：Yuxin Jiang, Yuchao Gu, Ivor W. Tsang 等 4 位作者  
+**分类**：cs.CV, cs.AI, cs.LG  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Scaling action-controllable world models is limited by the scarcity of action labels. While latent action learning promises to extract control interfaces from unlabeled video, learned latents often fail to transfer across contexts: they entangle scene-specific cues and lack a shared coordinate system. This occurs because standard objectives operate only within each clip, providing no mechanism to align action semantics across contexts. Our key insight is that although actions are unobserved, their semantic effects are observable and can serve as a shared reference. We introduce Seq$Δ$-REPA, a sequence-level control-effect alignment objective that anchors integrated latent action to temporal feature differences from a frozen, self-supervised video encoder. Building on this, we present Olaf-World, a pipeline that pretrains action-conditioned video world models from large-scale passive video. Extensive experiments demonstrate that our method learns a more structured latent action space, leading to stronger zero-shot action transfer and more data-efficient adaptation to new control interfaces than state-of-the-art baselines.
+
+### 🤖 AI 总结
+
+**一句话总结**：Olaf-World通过Seq$Δ$-REPA方法改进了视频世界模型中的潜在动作学习，增强了不同上下文间的动作迁移能力。
+
+**研究动机**：现有的动作可控世界模型受限于动作标签的稀缺，潜在动作学习在不同背景下的转移能力不足。
+
+**核心方法**：提出Seq$Δ$-REPA作为序列级控制效果对齐目标，利用自监督视频编码器的时间特征差异，预训练动作条件的视频世界模型。
+
+**主要结论**：该方法学习了更结构化的潜在动作空间，显著提升了零-shot动作迁移和新控制接口的适应效率。
+
+**关键词**：视频建模, 行动控制, 潜在动作学习, 自监督, 结构化潜在空间, 零-shot迁移, 数据高效适应, Seq$Δ$-REPA, 语义效果, context
+
+**评分**：70
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10104v1) | [下载PDF](https://arxiv.org/pdf/2602.10104v1.pdf)
+
+---
+
+## [11. VideoWorld 2: Learning Transferable Knowledge from Real-world Videos](https://arxiv.org/abs/2602.10102v1)
+
+**作者**：Zhongwei Ren, Yunchao Wei, Xiao Yu 等 8 位作者  
+**分类**：cs.CV  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Learning transferable knowledge from unlabeled video data and applying it in new environments is a fundamental capability of intelligent agents. This work presents VideoWorld 2, which extends VideoWorld and offers the first investigation into learning transferable knowledge directly from raw real-world videos. At its core, VideoWorld 2 introduces a dynamic-enhanced Latent Dynamics Model (dLDM) that decouples action dynamics from visual appearance: a pretrained video diffusion model handles visual appearance modeling, enabling the dLDM to learn latent codes that focus on compact and meaningful task-related dynamics. These latent codes are then modeled autoregressively to learn task policies and support long-horizon reasoning. We evaluate VideoWorld 2 on challenging real-world handcraft making tasks, where prior video generation and latent-dynamics models struggle to operate reliably. Remarkably, VideoWorld 2 achieves up to 70% improvement in task success rate and produces coherent long execution videos. In robotics, we show that VideoWorld 2 can acquire effective manipulation knowledge from the Open-X dataset, which substantially improves task performance on CALVIN. This study reveals the potential of learning transferable world knowledge directly from raw videos, with all code, data, and models to be open-sourced for further research.
+
+### 🤖 AI 总结
+
+**一句话总结**：VideoWorld 2通过动态增强的潜在动态模型从真实视频中学习可转移知识，显著提高任务成功率。
+
+**研究动机**：智能代理需要从未标记的视频数据中学习可转移的知识，以便在新环境中应用这些知识。
+
+**核心方法**：VideoWorld 2引入了动态增强的潜在动态模型，解耦动作动态与视觉外观，使用预训练的视频扩散模型处理视觉建模，从而学习任务相关的潜在动态编码。
+
+**主要结论**：VideoWorld 2在真实手工制作任务中表现出色，任务成功率提高了70%，并且能够有效从Open-X数据集中获取操作知识，推动了机器人任务性能的提升。
+
+**关键词**：视频, 知识转移, 智能代理, 动态增强, 潜在动力模型, 任务策略, 长期推理, 机器人技术, Open-X, 视频生成, agent
+
+**评分**：70
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10102v1) | [下载PDF](https://arxiv.org/pdf/2602.10102v1.pdf)
+
+---
+
+## [12. Causality in Video Diffusers is Separable from Denoising](https://arxiv.org/abs/2602.10095v1)
+
+**作者**：Xingjian Bai, Guande He, Zhengqi Li 等 6 位作者  
+**分类**：cs.CV, cs.AI, cs.LG  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Causality -- referring to temporal, uni-directional cause-effect relationships between components -- underlies many complex generative processes, including videos, language, and robot trajectories. Current causal diffusion models entangle temporal reasoning with iterative denoising, applying causal attention across all layers, at every denoising step, and over the entire context. In this paper, we show that the causal reasoning in these models is separable from the multi-step denoising process. Through systematic probing of autoregressive video diffusers, we uncover two key regularities: (1) early layers produce highly similar features across denoising steps, indicating redundant computation along the diffusion trajectory; and (2) deeper layers exhibit sparse cross-frame attention and primarily perform intra-frame rendering. Motivated by these findings, we introduce Separable Causal Diffusion (SCD), a new architecture that explicitly decouples once-per-frame temporal reasoning, via a causal transformer encoder, from multi-step frame-wise rendering, via a lightweight diffusion decoder. Extensive experiments on both pretraining and post-training tasks across synthetic and real benchmarks show that SCD significantly improves throughput and per-frame latency while matching or surpassing the generation quality of strong causal diffusion baselines.
+
+### 🤖 AI 总结
+
+**一句话总结**：该论文提出了一种新的可分离因果扩散模型，显著提高了视频生成的效率和质量。
+
+**研究动机**：当前的因果扩散模型将时间推理与迭代去噪混合在一起，导致计算冗余，影响生成效率。
+
+**核心方法**：提出可分离因果扩散（SCD）架构，将每帧的时间推理与多步帧渲染显式解耦，采用因果变换器编码器和轻量级扩散解码器。
+
+**主要结论**：大量实验表明，SCD在生成质量上匹配或超过现有强基线，同时显著提高了处理速度和每帧延迟。
+
+**关键词**：因果性, 视频扩散, 生成过程, 深度学习, 变换器, 自回归, 模型架构, 多步骤去噪, 特征提取, causal transformer
+
+**评分**：66
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10095v1) | [下载PDF](https://arxiv.org/pdf/2602.10095v1.pdf)
+
+---
+
+## [13. 4RC: 4D Reconstruction via Conditional Querying Anytime and Anywhere](https://arxiv.org/abs/2602.10094v1)
+
+**作者**：Yihang Luo, Shangchen Zhou, Yushi Lan 等 5 位作者  
+**分类**：cs.CV  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+We present 4RC, a unified feed-forward framework for 4D reconstruction from monocular videos. Unlike existing approaches that typically decouple motion from geometry or produce limited 4D attributes such as sparse trajectories or two-view scene flow, 4RC learns a holistic 4D representation that jointly captures dense scene geometry and motion dynamics. At its core, 4RC introduces a novel encode-once, query-anywhere and anytime paradigm: a transformer backbone encodes the entire video into a compact spatio-temporal latent space, from which a conditional decoder can efficiently query 3D geometry and motion for any query frame at any target timestamp. To facilitate learning, we represent per-view 4D attributes in a minimally factorized form by decomposing them into base geometry and time-dependent relative motion. Extensive experiments demonstrate that 4RC outperforms prior and concurrent methods across a wide range of 4D reconstruction tasks.
+
+### 🤖 AI 总结
+
+**一句话总结**：4RC是一种统一的前馈框架，通过单目视频实现4D重建，能够同时捕捉场景几何和运动动态。
+
+**研究动机**：现有方法通常将运动与几何解耦，或仅生成有限的4D属性，4RC旨在学习一种整体的4D表示。
+
+**核心方法**：4RC采用一种新的编码一次、随时随地查询的范式，利用变压器骨干网络将整个视频编码为紧凑的时空潜在空间，从中高效查询任意帧的3D几何和运动。
+
+**主要结论**：大量实验表明，4RC在多种4D重建任务中超越了先前和同时期的方法。
+
+**关键词**：4D重建, 单目视频, transformer, 编码, 运动动态, 场景几何, spatio-temporal, 条件解码器, 关键帧查询
+
+**评分**：70
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10094v1) | [下载PDF](https://arxiv.org/pdf/2602.10094v1.pdf)
+
+---
+
+## [14. Can Image Splicing and Copy-Move Forgery Be Detected by the Same Model? Forensim: An Attention-Based State-Space Approach](https://arxiv.org/abs/2602.10079v1)
+
+**作者**：Soumyaroop Nandi, Prem Natarajan  
+**分类**：cs.CV  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+We introduce Forensim, an attention-based state-space framework for image forgery detection that jointly localizes both manipulated (target) and source regions. Unlike traditional approaches that rely solely on artifact cues to detect spliced or forged areas, Forensim is designed to capture duplication patterns crucial for understanding context. In scenarios such as protest imagery, detecting only the forged region, for example a duplicated act of violence inserted into a peaceful crowd, can mislead interpretation, highlighting the need for joint source-target localization. Forensim outputs three-class masks (pristine, source, target) and supports detection of both splicing and copy-move forgeries within a unified architecture. We propose a visual state-space model that leverages normalized attention maps to identify internal similarities, paired with a region-based block attention module to distinguish manipulated regions. This design enables end-to-end training and precise localization. Forensim achieves state-of-the-art performance on standard benchmarks. We also release CMFD-Anything, a new dataset addressing limitations of existing copy-move forgery datasets.
+
+### 🤖 AI 总结
+
+**一句话总结**：Forensim是一种基于注意力的状态空间框架，能够在同一模型中同时检测图像拼接和复制移动伪造。
+
+**研究动机**：现有方法通常只关注伪造区域，未能有效捕捉上下文，导致误解，尤其是在特定场景如抗议图像中。
+
+**核心方法**：Forensim使用标准化的注意力图和基于区域的块注意力模块，实现了对源区域和目标区域的联合定位和区分。
+
+**主要结论**：Forensim在标准基准上表现出色，并发布了CMFD-Anything数据集，以解决现有复制移动伪造数据集的局限性。
+
+**关键词**：图像伪造, 复制移动伪造, 目标区域, 源区域, Forensim, 注意力机制, 状态空间, 深度学习, 语义搜索, rag
+
+**评分**：70
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10079v1) | [下载PDF](https://arxiv.org/pdf/2602.10079v1.pdf)
+
+---
+
+## [15. Spatio-Temporal Attention for Consistent Video Semantic Segmentation in Automated Driving](https://arxiv.org/abs/2602.10052v1)
+
+**作者**：Serin Varghese, Kevin Ross, Fabian Hueger 等 4 位作者  
+**分类**：cs.CV  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Deep neural networks, especially transformer-based architectures, have achieved remarkable success in semantic segmentation for environmental perception. However, existing models process video frames independently, thus failing to leverage temporal consistency, which could significantly improve both accuracy and stability in dynamic scenes. In this work, we propose a Spatio-Temporal Attention (STA) mechanism that extends transformer attention blocks to incorporate multi-frame context, enabling robust temporal feature representations for video semantic segmentation. Our approach modifies standard self-attention to process spatio-temporal feature sequences while maintaining computational efficiency and requiring minimal changes to existing architectures. STA demonstrates broad applicability across diverse transformer architectures and remains effective across both lightweight and larger-scale models. A comprehensive evaluation on the Cityscapes and BDD100k datasets shows substantial improvements of 9.20 percentage points in temporal consistency metrics and up to 1.76 percentage points in mean intersection over union compared to single-frame baselines. These results demonstrate STA as an effective architectural enhancement for video-based semantic segmentation applications.
+
+### 🤖 AI 总结
+
+**一句话总结**：提出了一种时空注意力机制来增强视频语义分割中的时间一致性。
+
+**研究动机**：现有模型独立处理视频帧，未能利用时间一致性，从而影响动态场景下的准确性和稳定性。
+
+**核心方法**：提出时空注意力机制（STA），扩展了变换器注意力块，将多帧上下文整合进自注意力处理中。
+
+**主要结论**：在Cityscapes和BDD100k数据集上的评估表明，STA显著提高了时间一致性指标和平均交并比，证明其在视频语义分割中的有效性。
+
+**关键词**：深度学习, 神经网络, transformer, 语义分割, 时空注意力, 自动驾驶, 视频处理, 多帧上下文, 计算效率, 动态场景
+
+**评分**：62
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10052v1) | [下载PDF](https://arxiv.org/pdf/2602.10052v1.pdf)
+
+---
+
+## [16. Conformal Prediction Sets for Instance Segmentation](https://arxiv.org/abs/2602.10045v1)
+
+**作者**：Kerri Lu, Dan M. Kluger, Stephen Bates 等 4 位作者  
+**分类**：cs.CV, cs.LG, stat.ME, stat.ML  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Current instance segmentation models achieve high performance on average predictions, but lack principled uncertainty quantification: their outputs are not calibrated, and there is no guarantee that a predicted mask is close to the ground truth. To address this limitation, we introduce a conformal prediction algorithm to generate adaptive confidence sets for instance segmentation. Given an image and a pixel coordinate query, our algorithm generates a confidence set of instance predictions for that pixel, with a provable guarantee for the probability that at least one of the predictions has high Intersection-Over-Union (IoU) with the true object instance mask. We apply our algorithm to instance segmentation examples in agricultural field delineation, cell segmentation, and vehicle detection. Empirically, we find that our prediction sets vary in size based on query difficulty and attain the target coverage, outperforming existing baselines such as Learn Then Test, Conformal Risk Control, and morphological dilation-based methods. We provide versions of the algorithm with asymptotic and finite sample guarantees.
+
+### 🤖 AI 总结
+
+**一句话总结**：本文提出了一种适应性置信集的算法，用于实例分割中的不确定性量化。
+
+**研究动机**：当前实例分割模型虽然在平均预测上表现良好，但缺乏系统的、不确定性的量化，导致输出未经过校准且与真实掩膜的相似度无保证。
+
+**核心方法**：我们引入了一种符合预测算法，为每个像素坐标生成实例预测的置信集，并提供至少一个预测与真实物体实例掩膜具有高IoU的概率保障。
+
+**主要结论**：通过在农业、细胞分割和车辆检测等实例分割案例上的应用，我们的算法在查询难度变化下能够达到目标覆盖率，且在性能上超越了现有的基线方法。
+
+**关键词**：实例分割, 不确定性量化, 置信集, 适应性算法, 农业图像分析, 细胞分割, 车辆检测, 交并比, 预测模型, rag
+
+**评分**：70
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10045v1) | [下载PDF](https://arxiv.org/pdf/2602.10045v1.pdf)
+
+---
+
+## [17. Simple Image Processing and Similarity Measures Can Link Data Samples across Databases through Brain MRI](https://arxiv.org/abs/2602.10043v1)
+
+**作者**：Gaurang Sharma, Harri Polonen, Juha Pajula 等 5 位作者  
+**分类**：cs.CV  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Head Magnetic Resonance Imaging (MRI) is routinely collected and shared for research under strict regulatory frameworks. These frameworks require removing potential identifiers before sharing. But, even after skull stripping, the brain parenchyma contains unique signatures that can match other MRIs from the same participants across databases, posing a privacy risk if additional data features are available. Current regulatory frameworks often mandate evaluating such risks based on the assessment of a certain level of reasonableness. Prior studies have already suggested that a brain MRI could enable participant linkage, but they have relied on training-based or computationally intensive methods.   Here, we demonstrate that linking an individual's skull-stripped T1-weighted MRI, which may lead to re-identification if other identifiers are available, is possible using standard preprocessing followed by image similarity computation. Nearly perfect linkage accuracy was achieved in matching data samples across various time intervals, scanner types, spatial resolutions, and acquisition protocols, despite potential cognitive decline, simulating MRI matching across databases. These results aim to contribute meaningfully to the development of thoughtful, forward-looking policies in medical data sharing.
+
+### 🤖 AI 总结
+
+**一句话总结**：本文展示了通过简单的图像处理和相似性度量，能够在数据库间链接脑MRI数据样本的可能性，尽管存在隐私风险。
+
+**研究动机**：当前的医学数据共享面临隐私风险，尤其是在去标识化后仍然可能识别参与者，因此需要有效的方法来评估这些风险。
+
+**核心方法**：研究采用标准预处理和图像相似性计算的方法，成功实现了在不同时间、扫描仪类型和协议下的脑MRI数据样本的链接。
+
+**主要结论**：研究结果表明，脑MRI可以在多种条件下实现高准确率的参与者链接，为医疗数据共享政策的制定提供了有意义的参考。
+
+**关键词**：脑部MRI, 图像处理, 相似性计算, 数据链接, 隐私风险, 机器学习, 深度学习, 神经网络, 语义搜索, agent
+
+**评分**：62
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10043v1) | [下载PDF](https://arxiv.org/pdf/2602.10043v1.pdf)
+
+---
+
+## [18. Perception with Guarantees: Certified Pose Estimation via Reachability Analysis](https://arxiv.org/abs/2602.10032v1)
+
+**作者**：Tobias Ladner, Yasser Shoukry, Matthias Althoff  
+**分类**：cs.CV, cs.RO  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Agents in cyber-physical systems are increasingly entrusted with safety-critical tasks. Ensuring safety of these agents often requires localizing the pose for subsequent actions. Pose estimates can, e.g., be obtained from various combinations of lidar sensors, cameras, and external services such as GPS. Crucially, in safety-critical domains, a rough estimate is insufficient to formally determine safety, i.e., guaranteeing safety even in the worst-case scenario, and external services might additionally not be trustworthy. We address this problem by presenting a certified pose estimation in 3D solely from a camera image and a well-known target geometry. This is realized by formally bounding the pose, which is computed by leveraging recent results from reachability analysis and formal neural network verification. Our experiments demonstrate that our approach efficiently and accurately localizes agents in both synthetic and real-world experiments.
+
+### 🤖 AI 总结
+
+**一句话总结**：该论文提出了一种基于相机图像和已知目标几何形状的3D认证姿态估计方法，旨在提高安全关键系统中代理的安全性。
+
+**研究动机**：在安全关键的网络物理系统中，代理需要准确的姿态定位以确保安全，而现有的估计方法无法提供足够的安全保证。
+
+**核心方法**：通过结合可达性分析和形式神经网络验证的最新成果，提出了一种正式界定姿态的方法，从而实现了基于相机图像的认证姿态估计。
+
+**主要结论**：实验结果表明，该方法在合成和真实世界的实验中都能有效且准确地定位代理，确保了安全性。
+
+**关键词**：姿态估计, 机器人, 代理, 安全, 3D, reachability analysis, formal verification, neural network, 计算机视觉
+
+**评分**：70
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10032v1) | [下载PDF](https://arxiv.org/pdf/2602.10032v1.pdf)
 
 ---
 
 ## cs.LG
 
-## [18. Next-Gen CAPTCHAs: Leveraging the Cognitive Gap for Scalable and Diverse GUI-Agent Defense](https://arxiv.org/abs/2602.09012v1)
+## [19. Biases in the Blind Spot: Detecting What LLMs Fail to Mention](https://arxiv.org/abs/2602.10117v1)
 
-**作者**：Jiacheng Liu, Yaxin Luo, Jiacheng Cui 等 6 位作者  
-**分类**：cs.LG, cs.AI, cs.CL  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-The rapid evolution of GUI-enabled agents has rendered traditional CAPTCHAs obsolete. While previous benchmarks like OpenCaptchaWorld established a baseline for evaluating multimodal agents, recent advancements in reasoning-heavy models, such as Gemini3-Pro-High and GPT-5.2-Xhigh have effectively collapsed this security barrier, achieving pass rates as high as 90% on complex logic puzzles like "Bingo". In response, we introduce Next-Gen CAPTCHAs, a scalable defense framework designed to secure the next-generation web against the advanced agents. Unlike static datasets, our benchmark is built upon a robust data generation pipeline, allowing for large-scale and easily scalable evaluations, notably, for backend-supported types, our system is capable of generating effectively unbounded CAPTCHA instances. We exploit the persistent human-agent "Cognitive Gap" in interactive perception, memory, decision-making, and action. By engineering dynamic tasks that require adaptive intuition rather than granular planning, we re-establish a robust distinction between biological users and artificial agents, offering a scalable and diverse defense mechanism for the agentic era.
-
-### 🤖 AI 总结
-
-**一句话总结**：The rapid evolution of GUI-enabled agents has rendered traditional CAPTCHAs obsolete. While previous benchmarks like OpenCaptchaWorld established a baseline for evaluating multimodal agents, recent ad...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：Gen CAPTCHAs: Leveraging the Cognitive Gap for Scalable and Diverse GUI, Agent Defense, enabled agents has rendered traditional CAPTCHAs obsolete. While previous benchmarks like OpenCaptchaWorld established a baseline for evaluating multimodal agents, High and GPT, generation web against the advanced agents. Unlike static datasets, agent "Cognitive Gap" in interactive perception, establish a robust distinction between biological users and artificial agents, offering a scalable and diverse defense mechanism for the agentic era.
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09012v1) | [下载PDF](https://arxiv.org/pdf/2602.09012v1.pdf)
-
----
-
-## [19. ANCRe: Adaptive Neural Connection Reassignment for Efficient Depth Scaling](https://arxiv.org/abs/2602.09009v1)
-
-**作者**：Yilang Zhang, Bingcong Li, Niao He 等 4 位作者  
+**作者**：Iván Arcuschin, David Chanin, Adrià Garriga-Alonso 等 4 位作者  
 **分类**：cs.LG, cs.AI  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Scaling network depth has been a central driver behind the success of modern foundation models, yet recent investigations suggest that deep layers are often underutilized. This paper revisits the default mechanism for deepening neural networks, namely residual connections, from an optimization perspective. Rigorous analysis proves that the layout of residual connections can fundamentally shape convergence behavior, and even induces an exponential gap in convergence rates. Prompted by this insight, we introduce adaptive neural connection reassignment (ANCRe), a principled and lightweight framework that parameterizes and learns residual connectivities from the data. ANCRe adaptively reassigns residual connections with negligible computational and memory overhead ($<1\%$), while enabling more effective utilization of network depth. Extensive numerical tests across pre-training of large language models, diffusion models, and deep ResNets demonstrate consistently accelerated convergence, boosted performance, and enhanced depth efficiency over conventional residual connections.
+Large Language Models (LLMs) often provide chain-of-thought (CoT) reasoning traces that appear plausible, but may hide internal biases. We call these *unverbalized biases*. Monitoring models via their stated reasoning is therefore unreliable, and existing bias evaluations typically require predefined categories and hand-crafted datasets. In this work, we introduce a fully automated, black-box pipeline for detecting task-specific unverbalized biases. Given a task dataset, the pipeline uses LLM autoraters to generate candidate bias concepts. It then tests each concept on progressively larger input samples by generating positive and negative variations, and applies statistical techniques for multiple testing and early stopping. A concept is flagged as an unverbalized bias if it yields statistically significant performance differences while not being cited as justification in the model's CoTs. We evaluate our pipeline across six LLMs on three decision tasks (hiring, loan approval, and university admissions). Our technique automatically discovers previously unknown biases in these models (e.g., Spanish fluency, English proficiency, writing formality). In the same run, the pipeline also validates biases that were manually identified by prior work (gender, race, religion, ethnicity). More broadly, our proposed approach provides a practical, scalable path to automatic task-specific bias discovery.
 
 ### 🤖 AI 总结
 
-**一句话总结**：Scaling network depth has been a central driver behind the success of modern foundation models, yet recent investigations suggest that deep layers are often underutilized. This paper revisits the defa...
+**一句话总结**：本研究提出了一种自动化的管道，用于检测大型语言模型中未言明的偏见，提供了一种可扩展的任务特定偏见发现方法。
 
-**研究动机**：AI服务不可用
+**研究动机**：大型语言模型常隐藏内部偏见，传统的偏见评估依赖于预定义类别和手工数据集，因此需要一种新的方法来自动检测这些偏见。
 
-**核心方法**：AI服务不可用
+**核心方法**：本文提出的黑箱管道通过生成候选偏见概念并在逐渐增大的输入样本上进行测试，利用统计技术来自动检测任务特定的未言明偏见。
 
-**主要结论**：AI服务不可用
+**主要结论**：该方法成功发现了多种新偏见，并验证了已有研究识别的偏见，为自动化的偏见发现提供了可行的路径。
 
-**关键词**：yet recent investigations suggest that deep layers are often underutilized. This paper revisits the default mechanism for deepening neural networks, training of large language models, diffusion models
+**关键词**：偏见, 大语言模型, LLM, 自动化, 任务特定, 统计技术, 生成偏见概念, 监控模型, 自动评分器, 性别偏见, 种族偏见
 
-**评分**：0
+**评分**：66
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09009v1) | [下载PDF](https://arxiv.org/pdf/2602.09009v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10117v1) | [下载PDF](https://arxiv.org/pdf/2602.10117v1.pdf)
 
 ---
 
-## [20. ShapeCond: Fast Shapelet-Guided Dataset Condensation for Time Series Classification](https://arxiv.org/abs/2602.09008v1)
+## [20. Towards Explainable Federated Learning: Understanding the Impact of Differential Privacy](https://arxiv.org/abs/2602.10100v1)
 
-**作者**：Sijia Peng, Yun Xiong, Xi Chen 等 8 位作者  
-**分类**：cs.LG  
-**发布时间**：2026-02-09
+**作者**：Júlio Oliveira, Rodrigo Ferreira, André Riker 等 5 位作者  
+**分类**：cs.LG, cs.CR  
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Time series data supports many domains (e.g., finance and climate science), but its rapid growth strains storage and computation. Dataset condensation can alleviate this by synthesizing a compact training set that preserves key information. Yet most condensation methods are image-centric and often fail on time series because they miss time-series-specific temporal structure, especially local discriminative motifs such as shapelets. In this work, we propose ShapeCond, a novel and efficient condensation framework for time series classification that leverages shapelet-based dataset knowledge via a shapelet-guided optimization strategy. Our shapelet-assisted synthesis cost is independent of sequence length: longer series yield larger speedups in synthesis (e.g., 29$\times$ faster over prior state-of-the-art method CondTSC for time-series condensation, and up to 10,000$\times$ over naively using shapelets on the Sleep dataset with 3,000 timesteps). By explicitly preserving critical local patterns, ShapeCond improves downstream accuracy and consistently outperforms all prior state-of-the-art time series dataset condensation methods across extensive experiments. Code is available at https://github.com/lunaaa95/ShapeCond.
+Data privacy and eXplainable Artificial Intelligence (XAI) are two important aspects for modern Machine Learning systems. To enhance data privacy, recent machine learning models have been designed as a Federated Learning (FL) system. On top of that, additional privacy layers can be added, via Differential Privacy (DP). On the other hand, to improve explainability, ML must consider more interpretable approaches with reduced number of features and less complex internal architecture. In this context, this paper aims to achieve a machine learning (ML) model that combines enhanced data privacy with explainability. So, we propose a FL solution, called Federated EXplainable Trees with Differential Privacy (FEXT-DP), that: (i) is based on Decision Trees, since they are lightweight and have superior explainability than neural networks-based FL systems; (ii) provides additional layer of data privacy protection applying Differential Privacy (DP) to the Tree-Based model. However, there is a side effect adding DP: it harms the explainability of the system. So, this paper also presents the impact of DP protection on the explainability of the ML model. The carried out performance assessment shows improvements of FEXT-DP in terms of a faster training, i.e., numbers of rounds, Mean Squared Error and explainability.
 
 ### 🤖 AI 总结
 
-**一句话总结**：Time series data supports many domains (e.g., finance and climate science), but its rapid growth strains storage and computation. Dataset condensation can alleviate this by synthesizing a compact trai...
+**一句话总结**：本文提出了一种结合差分隐私和可解释性的新型联邦学习模型FEXT-DP，以改善数据隐私和模型可解释性。
 
-**研究动机**：AI服务不可用
+**研究动机**：随着数据隐私和可解释性在现代机器学习系统中的重要性日益增加，本研究旨在通过联邦学习和差分隐私方法提升这两个方面。
 
-**核心方法**：AI服务不可用
+**核心方法**：提出了一种基于决策树的联邦可解释树模型FEXT-DP，采用差分隐私技术以增强数据隐私，同时分析差分隐私对模型可解释性的影响。
 
-**主要结论**：AI服务不可用
+**主要结论**：性能评估结果显示，FEXT-DP在训练速度、均方误差和可解释性方面均有所提升，尽管差分隐私可能会对可解释性产生负面影响。
 
-**关键词**：Time series data supports many domains (e.g., but its rapid growth strains storage and computation. Dataset condensation can alleviate this by synthesizing a compact training set that preserves key information. Yet most condensation methods are image, centric and often fail on time series because they miss time, a novel and efficient condensation framework for time series classification that leverages shapelet, 000$\times$ over naively using shapelets on the Sleep dataset with 3, art time series dataset condensation methods across extensive experiments. Code is available at https://github.com/lunaaa95/ShapeCond.
+**关键词**：联邦学习, 差分隐私, 可解释性, 机器学习, 决策树, 模型评估, 数据隐私, 解释性模型, federated learning, explainable AI
 
-**评分**：0
+**评分**：64
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09008v1) | [下载PDF](https://arxiv.org/pdf/2602.09008v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10100v1) | [下载PDF](https://arxiv.org/pdf/2602.10100v1.pdf)
 
 ---
 
-## [21. ARO: A New Lens On Matrix Optimization For Large Models](https://arxiv.org/abs/2602.09006v1)
+## [21. Learning on the Manifold: Unlocking Standard Diffusion Transformers with Representation Encoders](https://arxiv.org/abs/2602.10099v1)
 
-**作者**：Wenbo Gong, Javier Zazo, Qijun Luo 等 6 位作者  
-**分类**：cs.LG, cs.AI, math.OC  
-**发布时间**：2026-02-09
+**作者**：Amandeep Kumar, Vishal M. Patel  
+**分类**：cs.LG, cs.CV  
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Matrix-based optimizers have attracted growing interest for improving LLM training efficiency, with significant progress centered on orthogonalization/whitening based methods. While yielding substantial performance gains, a fundamental question arises: can we develop new paradigms beyond orthogonalization, pushing the efficiency frontier further? We present \textbf{Adaptively Rotated Optimization (ARO}, a new matrix optimization framework that treats gradient rotation as a first class design principle. ARO accelerates LLM training by performing normed steepest descent in a rotated coordinate system, where the rotation is determined by a novel norm-informed policy. This perspective yields update rules that go beyond existing orthogonalization and whitening optimizers, improving sample efficiency in practice. To make comparisons reliable, we propose a rigorously controlled benchmarking protocol that reduces confounding and bias. Under this protocol, ARO consistently outperforms AdamW (by 1.3 $\sim$1.35$\times$) and orthogonalization methods (by 1.1$\sim$1.15$\times$) in LLM pretraining at up to 8B activated parameters, and up to $8\times$ overtrain budget, without evidence of diminishing returns. Finally, we discuss how ARO can be reformulated as a symmetry-aware optimizer grounded in rotational symmetries of residual streams, motivating advanced designs that enable computationally efficient exploitation of cross-layer/cross module couplings.
+Leveraging representation encoders for generative modeling offers a path for efficient, high-fidelity synthesis. However, standard diffusion transformers fail to converge on these representations directly. While recent work attributes this to a capacity bottleneck proposing computationally expensive width scaling of diffusion transformers we demonstrate that the failure is fundamentally geometric. We identify Geometric Interference as the root cause: standard Euclidean flow matching forces probability paths through the low-density interior of the hyperspherical feature space of representation encoders, rather than following the manifold surface. To resolve this, we propose Riemannian Flow Matching with Jacobi Regularization (RJF). By constraining the generative process to the manifold geodesics and correcting for curvature-induced error propagation, RJF enables standard Diffusion Transformer architectures to converge without width scaling. Our method RJF enables the standard DiT-B architecture (131M parameters) to converge effectively, achieving an FID of 3.37 where prior methods fail to converge. Code: https://github.com/amandpkr/RJF
 
 ### 🤖 AI 总结
 
-**一句话总结**：Matrix-based optimizers have attracted growing interest for improving LLM training efficiency, with significant progress centered on orthogonalization/whitening based methods. While yielding substanti...
+**一句话总结**：提出了一种新的流匹配方法RJF，解决了标准扩散变换器在表示编码器上的收敛问题。
 
-**研究动机**：AI服务不可用
+**研究动机**：标准扩散变换器在处理表示编码器时存在收敛困难，传统方法往往依赖于计算开销大的宽度扩展。
 
-**核心方法**：AI服务不可用
+**核心方法**：提出Riemannian Flow Matching with Jacobi Regularization (RJF)，通过约束生成过程在流形测地线上并修正误差传播以提高收敛性。
 
-**主要结论**：AI服务不可用
+**主要结论**：RJF方法使标准DiT-B架构有效收敛，达到FID值3.37，优于之前无法收敛的方法。
 
-**关键词**：based optimizers have attracted growing interest for improving LLM training efficiency, with significant progress centered on orthogonalization/whitening based methods. While yielding substantial performance gains, a new matrix optimization framework that treats gradient rotation as a first class design principle. ARO accelerates LLM training by performing normed steepest descent in a rotated coordinate system, ARO consistently outperforms AdamW (by 1.3 $\sim$1.35$\times$) and orthogonalization methods (by 1.1$\sim$1.15$\times$) in LLM pretraining at up to 8B activated parameters, and up to $8\times$ overtrain budget
+**关键词**：生成模型, 表示编码器, 扩散变换器, 几何干扰, 流匹配, Riemannian Flow Matching, Jacobi Regularization, 高保真合成, 生成过程, 低密度特征空间, generative
 
-**评分**：0
+**评分**：68
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09006v1) | [下载PDF](https://arxiv.org/pdf/2602.09006v1.pdf)
-
----
-
-## [22. DirMoE: Dirichlet-routed Mixture of Experts](https://arxiv.org/abs/2602.09001v1)
-
-**作者**：Amirhossein Vahidi, Hesam Asadollahzadeh, Navid Akhavan Attar 等 7 位作者  
-**分类**：cs.LG  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-Mixture-of-Experts (MoE) models have demonstrated exceptional performance in large-scale language models. Existing routers typically rely on non-differentiable Top-$k$+Softmax, limiting their performance and scalability. We argue that two distinct decisions, which experts to activate and how to distribute expert contributions among them, are conflated in standard Top-$k$+Softmax. We introduce Dirichlet-Routed MoE (DirMoE), a novel end-to-end differentiable routing mechanism built on a Dirichlet variational autoencoder framework. This design fundamentally disentangles the core routing problems: expert selection, modeled by a Bernoulli component, and expert contribution among chosen experts, handled by a Dirichlet component. The entire forward pass remains fully differentiable through the use of Gumbel-Sigmoid relaxation for the expert selection and implicit reparameterization for the Dirichlet distribution. Our training objective, a variational ELBO, includes a direct sparsity penalty that precisely controls the number of active experts in expectation, alongside a schedule for key hyperparameters that guides the model from an exploratory to a definitive routing state. Moreover, our DirMoE router matches or exceeds other methods while improving expert specialization.
-
-### 🤖 AI 总结
-
-**一句话总结**：Mixture-of-Experts (MoE) models have demonstrated exceptional performance in large-scale language models. Existing routers typically rely on non-differentiable Top-$k$+Softmax, limiting their performa...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：handled by a Dirichlet component. The entire forward pass remains fully differentiable through the use of Gumbel, Sigmoid relaxation for the expert selection and implicit reparameterization for the Dirichlet distribution. Our training objective
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.09001v1) | [下载PDF](https://arxiv.org/pdf/2602.09001v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10099v1) | [下载PDF](https://arxiv.org/pdf/2602.10099v1.pdf)
 
 ---
 
-## [23. Improving Detection of Rare Nodes in Hierarchical Multi-Label Learning](https://arxiv.org/abs/2602.08986v1)
+## [22. Step-resolved data attribution for looped transformers](https://arxiv.org/abs/2602.10097v1)
 
-**作者**：Isaac Xu, Martin Gillis, Ayushi Sharma 等 6 位作者  
+**作者**：Georgios Kaissis, David Mildenberger, Juan Felipe Gomez 等 5 位作者  
 **分类**：cs.LG, cs.AI  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-In hierarchical multi-label classification, a persistent challenge is enabling model predictions to reach deeper levels of the hierarchy for more detailed or fine-grained classifications. This difficulty partly arises from the natural rarity of certain classes (or hierarchical nodes) and the hierarchical constraint that ensures child nodes are almost always less frequent than their parents. To address this, we propose a weighted loss objective for neural networks that combines node-wise imbalance weighting with focal weighting components, the latter leveraging modern quantification of ensemble uncertainties. By emphasizing rare nodes rather than rare observations (data points), and focusing on uncertain nodes for each model output distribution during training, we observe improvements in recall by up to a factor of five on benchmark datasets, along with statistically significant gains in $F_{1}$ score. We also show our approach aids convolutional networks on challenging tasks, as in situations with suboptimal encoders or limited data.
+We study how individual training examples shape the internal computation of looped transformers, where a shared block is applied for $τ$ recurrent iterations to enable latent reasoning. Existing training-data influence estimators such as TracIn yield a single scalar score that aggregates over all loop iterations, obscuring when during the recurrent computation a training example matters. We introduce \textit{Step-Decomposed Influence (SDI)}, which decomposes TracIn into a length-$τ$ influence trajectory by unrolling the recurrent computation graph and attributing influence to specific loop iterations. To make SDI practical at transformer scale, we propose a TensorSketch implementation that never materialises per-example gradients. Experiments on looped GPT-style models and algorithmic reasoning tasks show that SDI scales excellently, matches full-gradient baselines with low error and supports a broad range of data attribution and interpretability tasks with per-step insights into the latent reasoning process.
 
 ### 🤖 AI 总结
 
-**一句话总结**：In hierarchical multi-label classification, a persistent challenge is enabling model predictions to reach deeper levels of the hierarchy for more detailed or fine-grained classifications. This difficu...
+**一句话总结**：提出了一种新的数据归因方法SDI，能够揭示循环变换器中训练样本对内部计算的逐步影响。
 
-**研究动机**：AI服务不可用
+**研究动机**：现有的数据影响评估方法无法有效区分训练样本在循环计算中的具体作用时机，因此需要一种新的方法来分析训练数据对模型的影响。
 
-**核心方法**：AI服务不可用
+**核心方法**：SDI通过展开循环计算图，将影响分解为长度为τ的影响轨迹，并提出了一种不需要生成每个样本梯度的TensorSketch实现，以适应变换器的规模。
 
-**主要结论**：AI服务不可用
+**主要结论**：实验表明，SDI在循环GPT模型和算法推理任务中表现优秀，能够提供逐步的解释性见解，与完整梯度基准相匹配且误差较低。
 
-**关键词**：a persistent challenge is enabling model predictions to reach deeper levels of the hierarchy for more detailed or fine, grained classifications. This difficulty partly arises from the natural rarity of certain classes (or hierarchical nodes) and the hierarchical constraint that ensures child nodes are almost always less frequent than their parents. To address this, we propose a weighted loss objective for neural networks that combines node, the latter leveraging modern quantification of ensemble uncertainties. By emphasizing rare nodes rather than rare observations (data points), and focusing on uncertain nodes for each model output distribution during training, along with statistically significant gains in $F_{1}$ score. We also show our approach aids convolutional networks on challenging tasks
+**关键词**：循环变换器, 数据归因, 训练示例, 影响轨迹, 生成模型, 算法推理, TensorSketch, 深度学习, 神经网络, gpt
 
-**评分**：0
+**评分**：61
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08986v1) | [下载PDF](https://arxiv.org/pdf/2602.08986v1.pdf)
-
----
-
-## [24. StretchTime: Adaptive Time Series Forecasting via Symplectic Attention](https://arxiv.org/abs/2602.08983v1)
-
-**作者**：Yubin Kim, Viresh Pati, Jevon Twitty 等 6 位作者  
-**分类**：cs.LG, cs.AI  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-Transformer architectures have established strong baselines in time series forecasting, yet they typically rely on positional encodings that assume uniform, index-based temporal progression. However, real-world systems, from shifting financial cycles to elastic biological rhythms, frequently exhibit "time-warped" dynamics where the effective flow of time decouples from the sampling index. In this work, we first formalize this misalignment and prove that rotary position embedding (RoPE) is mathematically incapable of representing non-affine temporal warping. To address this, we propose Symplectic Positional Embeddings (SyPE), a learnable encoding framework derived from Hamiltonian mechanics. SyPE strictly generalizes RoPE by extending the rotation group $\mathrm{SO}(2)$ to the symplectic group $\mathrm{Sp}(2,\mathbb{R})$, modulated by a novel input-dependent adaptive warp module. By allowing the attention mechanism to adaptively dilate or contract temporal coordinates end-to-end, our approach captures locally varying periodicities without requiring pre-defined warping functions. We implement this mechanism in StretchTime, a multivariate forecasting architecture that achieves state-of-the-art performance on standard benchmarks, demonstrating superior robustness on datasets exhibiting non-stationary temporal dynamics.
-
-### 🤖 AI 总结
-
-**一句话总结**：Transformer architectures have established strong baselines in time series forecasting, yet they typically rely on positional encodings that assume uniform, index-based temporal progression. However, ...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：Transformer architectures have established strong baselines in time series forecasting, we first formalize this misalignment and prove that rotary position embedding (RoPE) is mathematically incapable of representing non, we propose Symplectic Positional Embeddings (SyPE)
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08983v1) | [下载PDF](https://arxiv.org/pdf/2602.08983v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10097v1) | [下载PDF](https://arxiv.org/pdf/2602.10097v1.pdf)
 
 ---
 
-## [25. Distributionally Robust Optimization via Generative Ambiguity Modeling](https://arxiv.org/abs/2602.08976v1)
+## [23. Features as Rewards: Scalable Supervision for Open-Ended Tasks via Interpretability](https://arxiv.org/abs/2602.10067v1)
 
-**作者**：Jiaqi Wen, Jianyi Yang  
+**作者**：Aaditya Vikram Prasad, Connor Watts, Jack Merullo 等 7 位作者  
 **分类**：cs.LG  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-This paper studies Distributionally Robust Optimization (DRO), a fundamental framework for enhancing the robustness and generalization of statistical learning and optimization. An effective ambiguity set for DRO must involve distributions that remain consistent to the nominal distribution while being diverse enough to account for a variety of potential scenarios. Moreover, it should lead to tractable DRO solutions. To this end, we propose generative model-based ambiguity sets that capture various adversarial distributions beyond the nominal support space while maintaining consistency with the nominal distribution. Building on this generative ambiguity modeling, we propose DRO with Generative Ambiguity Set (GAS-DRO), a tractable DRO algorithm that solves the inner maximization over the parameterized generative model space. We formally establish the stationary convergence performance of GAS-DRO. We implement GAS-DRO with a diffusion model and empirically demonstrate its superior Out-of-Distribution (OOD) generalization performance in ML tasks.
+Language models trained on large-scale datasets have been shown to learn features that encode abstract concepts such as factuality or intent. Such features are traditionally used for test-time monitoring or steering. We present an alternative affordance: features as scalable supervision for open-ended tasks. We consider the case of hallucination-reduction as a desirable, yet open-ended behavior and design a reinforcement learning (RL) pipeline, titled RLFR (Reinforcement Learning from Feature Rewards), that uses features as reward functions. Grounded in a novel probing framework that identifies candidate hallucinated claims, our pipeline teaches a model to intervene and correct its completions when it is uncertain of their factuality. Furthermore, the pipeline enables scalable test-time compute, guided once more by our reward features. This end-to-end process operationalized on Gemma-3-12B-IT results in a policy that is 58% less likely to hallucinate compared to the original model, while preserving performance on standard benchmarks. Taken together, by grounding supervision in the language of features, this paper introduces a novel paradigm in the use of interpretability for learning open-ended tasks.
 
 ### 🤖 AI 总结
 
-**一句话总结**：This paper studies Distributionally Robust Optimization (DRO), a fundamental framework for enhancing the robustness and generalization of statistical learning and optimization. An effective ambiguity ...
+**一句话总结**：本文提出了一种使用特征作为奖励的强化学习管道，以减少语言模型的幻觉现象并提升开放式任务的监督能力。
 
-**研究动机**：AI服务不可用
+**研究动机**：传统上，特征用于测试时监控，而本文探索将特征作为开放式任务的可扩展监督工具，特别关注幻觉现象的减少。
 
-**核心方法**：AI服务不可用
+**核心方法**：提出了一种名为RLFR的强化学习管道，通过特征作为奖励函数，引导模型在不确定性下进行干预和修正。
 
-**主要结论**：AI服务不可用
+**主要结论**：经过实验证明，该管道使得模型幻觉发生率减少58%，同时在标准基准上保持性能，从而引入了基于特征的监督学习新范式。
 
-**关键词**：Distributionally Robust Optimization via Generative Ambiguity Modeling, a fundamental framework for enhancing the robustness and generalization of statistical learning and optimization. An effective ambiguity set for DRO must involve distributions that remain consistent to the nominal distribution while being diverse enough to account for a variety of potential scenarios. Moreover, we propose generative model, based ambiguity sets that capture various adversarial distributions beyond the nominal support space while maintaining consistency with the nominal distribution. Building on this generative ambiguity modeling, we propose DRO with Generative Ambiguity Set (GAS, a tractable DRO algorithm that solves the inner maximization over the parameterized generative model space. We formally establish the stationary convergence performance of GAS, DRO with a diffusion model and empirically demonstrate its superior Out, Distribution (OOD) generalization performance in ML tasks.
+**关键词**：特征, 奖励, 可扩展监督, 开放式任务, 语言模型, 强化学习, RLFR, 事实性, 干预, 纠正, 可解释性, 任务学习, agent
 
-**评分**：0
+**评分**：74
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08976v1) | [下载PDF](https://arxiv.org/pdf/2602.08976v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10067v1) | [下载PDF](https://arxiv.org/pdf/2602.10067v1.pdf)
 
 ---
 
-## [26. A Behavioural and Representational Evaluation of Goal-Directedness in Language Model Agents](https://arxiv.org/abs/2602.08964v1)
+## [24. Vendi Novelty Scores for Out-of-Distribution Detection](https://arxiv.org/abs/2602.10062v1)
 
-**作者**：Raghu Arghal, Fade Chen, Niall Dalton 等 9 位作者  
-**分类**：cs.LG, cs.AI, cs.CL, cs.CY  
-**发布时间**：2026-02-09
+**作者**：Amey P. Pasarkar, Adji Bousso Dieng  
+**分类**：cs.LG, cs.CV  
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Understanding an agent's goals helps explain and predict its behaviour, yet there is no established methodology for reliably attributing goals to agentic systems. We propose a framework for evaluating goal-directedness that integrates behavioural evaluation with interpretability-based analyses of models' internal representations. As a case study, we examine an LLM agent navigating a 2D grid world toward a goal state. Behaviourally, we evaluate the agent against an optimal policy across varying grid sizes, obstacle densities, and goal structures, finding that performance scales with task difficulty while remaining robust to difficulty-preserving transformations and complex goal structures. We then use probing methods to decode the agent's internal representations of the environment state and its multi-step action plans. We find that the LLM agent non-linearly encodes a coarse spatial map of the environment, preserving approximate task-relevant cues about its position and the goal location; that its actions are broadly consistent with these internal representations; and that reasoning reorganises them, shifting from broader environment structural cues toward information supporting immediate action selection. Our findings support the view that introspective examination is required beyond behavioural evaluations to characterise how agents represent and pursue their objectives.
+Out-of-distribution (OOD) detection is critical for the safe deployment of machine learning systems. Existing post-hoc detectors typically rely on model confidence scores or likelihood estimates in feature space, often under restrictive distributional assumptions. In this work, we introduce a third paradigm and formulate OOD detection from a diversity perspective. We propose the Vendi Novelty Score (VNS), an OOD detector based on the Vendi Scores (VS), a family of similarity-based diversity metrics. VNS quantifies how much a test sample increases the VS of the in-distribution feature set, providing a principled notion of novelty that does not require density modeling. VNS is linear-time, non-parametric, and naturally combines class-conditional (local) and dataset-level (global) novelty signals. Across multiple image classification benchmarks and network architectures, VNS achieves state-of-the-art OOD detection performance. Remarkably, VNS retains this performance when computed using only 1% of the training data, enabling deployment in memory- or access-constrained settings.
 
 ### 🤖 AI 总结
 
-**一句话总结**：Understanding an agent's goals helps explain and predict its behaviour, yet there is no established methodology for reliably attributing goals to agentic systems. We propose a framework for evaluating...
+**一句话总结**：提出了一种基于多样性视角的新颖性评分方法，用于检测分布外样本，称为Vendi新颖性得分（VNS）。
 
-**研究动机**：AI服务不可用
+**研究动机**：分布外（OOD）检测对机器学习系统的安全部署至关重要，但现有方法往往依赖于模型置信度或特征空间的似然估计，存在限制性假设。
 
-**核心方法**：AI服务不可用
+**核心方法**：VNS基于Vendi得分，通过量化测试样本对内部特征集的多样性影响，提供了一种不需要密度建模的新颖性度量。
 
-**主要结论**：AI服务不可用
+**主要结论**：VNS在多个图像分类基准和网络架构上实现了最先进的OOD检测性能，并在仅使用1%训练数据时仍保持这一性能，适合内存或访问受限的环境。
 
-**关键词**：Directedness in Language Model Agents, Understanding an agent's goals helps explain and predict its behaviour, yet there is no established methodology for reliably attributing goals to agentic systems. We propose a framework for evaluating goal, we examine an LLM agent navigating a 2D grid world toward a goal state. Behaviourally, we evaluate the agent against an optimal policy across varying grid sizes, finding that performance scales with task difficulty while remaining robust to difficulty, preserving transformations and complex goal structures. We then use probing methods to decode the agent's internal representations of the environment state and its multi, step action plans. We find that the LLM agent non, shifting from broader environment structural cues toward information supporting immediate action selection. Our findings support the view that introspective examination is required beyond behavioural evaluations to characterise how agents represent and pursue their objectives.
+**关键词**：机器学习, 深度学习, 生成模型, OOD检测, Vendi Novelty Score, 多样性度量, 图像分类, 非参数方法, 线性时间算法, machine learning
 
-**评分**：0
+**评分**：66
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08964v1) | [下载PDF](https://arxiv.org/pdf/2602.08964v1.pdf)
-
----
-
-## [27. StealthRL: Reinforcement Learning Paraphrase Attacks for Multi-Detector Evasion of AI-Text Detectors](https://arxiv.org/abs/2602.08934v1)
-
-**作者**：Suraj Ranganath, Atharv Ramesh  
-**分类**：cs.LG, cs.AI, cs.CR  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-AI-text detectors face a critical robustness challenge: adversarial paraphrasing attacks that preserve semantics while evading detection. We introduce StealthRL, a reinforcement learning framework that stress-tests detector robustness under realistic adversarial conditions. StealthRL trains a paraphrase policy against a multi-detector ensemble using Group Relative Policy Optimization (GRPO) with LoRA adapters on Qwen3-4B, optimizing a composite reward that balances detector evasion with semantic preservation. We evaluate six attack settings (M0-M5) against three detector families (RoBERTa, FastDetectGPT, and Binoculars) at the security-relevant 1% false positive rate operating point. StealthRL achieves near-zero detection (0.001 mean TPR@1%FPR), reduces mean AUROC from 0.74 to 0.27, and attains a 99.9% attack success rate. Critically, attacks transfer to a held-out detector family not seen during training, revealing shared architectural vulnerabilities rather than detector-specific brittleness. We additionally conduct LLM-based quality evaluation via Likert scoring, analyze detector score distributions to explain why evasion succeeds, and provide per-detector AUROC with bootstrap confidence intervals. Our results expose significant robustness gaps in current AI-text detection and establish StealthRL as a principled adversarial evaluation protocol. Code and evaluation pipeline are publicly available at https://github.com/suraj-ranganath/StealthRL.
-
-### 🤖 AI 总结
-
-**一句话总结**：AI-text detectors face a critical robustness challenge: adversarial paraphrasing attacks that preserve semantics while evading detection. We introduce StealthRL, a reinforcement learning framework tha...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：Detector Evasion of AI, tests detector robustness under realistic adversarial conditions. StealthRL trains a paraphrase policy against a multi, M5) against three detector families (RoBERTa, FastDetectGPT, and attains a 99.9% attack success rate. Critically, out detector family not seen during training, specific brittleness. We additionally conduct LLM, analyze detector score distributions to explain why evasion succeeds, detector AUROC with bootstrap confidence intervals. Our results expose significant robustness gaps in current AI, text detection and establish StealthRL as a principled adversarial evaluation protocol. Code and evaluation pipeline are publicly available at https://github.com/suraj
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08934v1) | [下载PDF](https://arxiv.org/pdf/2602.08934v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10062v1) | [下载PDF](https://arxiv.org/pdf/2602.10062v1.pdf)
 
 ---
 
-## [28. DynamiQ: Accelerating Gradient Synchronization using Compressed Multi-hop All-reduce](https://arxiv.org/abs/2602.08923v1)
+## [25. WildCat: Near-Linear Attention in Theory and Practice](https://arxiv.org/abs/2602.10056v1)
 
-**作者**：Wenchen Han, Shay Vargaftik, Michael Mitzenmacher 等 4 位作者  
-**分类**：cs.LG, cs.DC, cs.NI  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-Multi-hop all-reduce is the de facto backbone of large model training. As the training scale increases, the network often becomes a bottleneck, motivating reducing the volume of transmitted data. Accordingly, recent systems demonstrated significant acceleration of the training process using gradient quantization. However, these systems are not optimized for multi-hop aggregation, where entries are partially summed multiple times along their aggregation topology.   This paper presents DynamiQ, a quantization framework that bridges the gap between quantization best practices and multi-hop aggregation. DynamiQ introduces novel techniques to better represent partial sums, co-designed with a decompress-accumulate-recompress fused kernel to facilitate fast execution.   We extended PyTorch DDP to support DynamiQ over NCCL P2P, and across different LLMs, tasks, and scales, we demonstrate consistent improvement of up to 34.2% over the best among state-of-the-art methods such as Omni-Reduce, THC, and emerging standards such as MXFP4, MXFP6, and MXFP8. Further, DynamiQ is the only evaluated method that consistently reaches near-baseline accuracy (e.g., 99.9% of the BF16 baseline) and does so while significantly accelerating the training.
-
-### 🤖 AI 总结
-
-**一句话总结**：Multi-hop all-reduce is the de facto backbone of large model training. As the training scale increases, the network often becomes a bottleneck, motivating reducing the volume of transmitted data. Acco...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：reduce is the de facto backbone of large model training. As the training scale increases, recent systems demonstrated significant acceleration of the training process using gradient quantization. However, and across different LLMs, 99.9% of the BF16 baseline) and does so while significantly accelerating the training.
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08923v1) | [下载PDF](https://arxiv.org/pdf/2602.08923v1.pdf)
-
----
-
-## [29. Diffusion-Inspired Reconfiguration of Transformers for Uncertainty Calibration](https://arxiv.org/abs/2602.08920v1)
-
-**作者**：Manh Cuong Dao, Quang Hung Pham, Phi Le Nguyen 等 6 位作者  
-**分类**：cs.LG  
-**发布时间**：2026-02-09
-
-### 📄 论文摘要
-
-Uncertainty calibration in pre-trained transformers is critical for their reliable deployment in risk-sensitive applications. Yet, most existing pre-trained transformers do not have a principled mechanism for uncertainty propagation through their feature transformation stack. In this work, we propose a diffusion-inspired reconfiguration of transformers in which each feature transformation block is modeled as a probabilistic mapping. Composing these probabilistic mappings reveals a probability path that mimics the structure of a diffusion process, transporting data mass from the input distribution to the pre-trained feature distribution. This probability path can then be recompiled on a diffusion process with a unified transition model to enable principled propagation of representation uncertainty throughout the pre-trained model's architecture while maintaining its original predictive performance. Empirical results across a variety of vision and language benchmarks demonstrate that our method achieves superior calibration and predictive accuracy compared to existing uncertainty-aware transformers.
-
-### 🤖 AI 总结
-
-**一句话总结**：Uncertainty calibration in pre-trained transformers is critical for their reliable deployment in risk-sensitive applications. Yet, most existing pre-trained transformers do not have a principled mecha...
-
-**研究动机**：AI服务不可用
-
-**核心方法**：AI服务不可用
-
-**主要结论**：AI服务不可用
-
-**关键词**：Diffusion, Inspired Reconfiguration of Transformers for Uncertainty Calibration, Uncertainty calibration in pre, trained transformers is critical for their reliable deployment in risk, trained transformers do not have a principled mechanism for uncertainty propagation through their feature transformation stack. In this work, we propose a diffusion, inspired reconfiguration of transformers in which each feature transformation block is modeled as a probabilistic mapping. Composing these probabilistic mappings reveals a probability path that mimics the structure of a diffusion process, trained feature distribution. This probability path can then be recompiled on a diffusion process with a unified transition model to enable principled propagation of representation uncertainty throughout the pre, trained model's architecture while maintaining its original predictive performance. Empirical results across a variety of vision and language benchmarks demonstrate that our method achieves superior calibration and predictive accuracy compared to existing uncertainty, aware transformers.
-
-**评分**：0
-
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08920v1) | [下载PDF](https://arxiv.org/pdf/2602.08920v1.pdf)
-
----
-
-## [30. GEMSS: A Variational Bayesian Method for Discovering Multiple Sparse Solutions in Classification and Regression Problems](https://arxiv.org/abs/2602.08913v1)
-
-**作者**：Kateřina Henclová, Václav Šmídl  
+**作者**：Tobias Schröder, Lester Mackey  
 **分类**：cs.LG, stat.ML  
-**发布时间**：2026-02-09
+**发布时间**：2026-02-10
 
 ### 📄 论文摘要
 
-Selecting interpretable feature sets in underdetermined ($n \ll p$) and highly correlated regimes constitutes a fundamental challenge in data science, particularly when analyzing physical measurements. In such settings, multiple distinct sparse subsets may explain the response equally well. Identifying these alternatives is crucial for generating domain-specific insights into the underlying mechanisms, yet conventional methods typically isolate a single solution, obscuring the full spectrum of plausible explanations.   We present GEMSS (Gaussian Ensemble for Multiple Sparse Solutions), a variational Bayesian framework specifically designed to simultaneously discover multiple, diverse sparse feature combinations. The method employs a structured spike-and-slab prior for sparsity, a mixture of Gaussians to approximate the intractable multimodal posterior, and a Jaccard-based penalty to further control solution diversity. Unlike sequential greedy approaches, GEMSS optimizes the entire ensemble of solutions within a single objective function via stochastic gradient descent.   The method is validated on a comprehensive benchmark comprising 128 synthetic experiments across classification and regression tasks. Results demonstrate that GEMSS scales effectively to high-dimensional settings ($p=5000$) with sample size as small as $n = 50$, generalizes seamlessly to continuous targets, handles missing data natively, and exhibits remarkable robustness to class imbalance and Gaussian noise.   GEMSS is available as a Python package 'gemss' at PyPI. The full GitHub repository at https://github.com/kat-er-ina/gemss/ also includes a free, easy-to-use application suitable for non-coders.
+We introduce WildCat, a high-accuracy, low-cost approach to compressing the attention mechanism in neural networks. While attention is a staple of modern network architectures, it is also notoriously expensive to deploy due to resource requirements that scale quadratically with the input sequence length $n$. WildCat avoids these quadratic costs by only attending over a small weighted coreset. Crucially, we select the coreset using a fast but spectrally-accurate subsampling algorithm -- randomly pivoted Cholesky -- and weight the elements optimally to minimise reconstruction error. Remarkably, given bounded inputs, WildCat approximates exact attention with super-polynomial $O(n^{-\sqrt{\log(\log(n))}})$ error decay while running in near-linear $O(n^{1+o(1)})$ time. In contrast, prior practical approximations either lack error guarantees or require quadratic runtime to guarantee such high fidelity. We couple this advance with a GPU-optimized PyTorch implementation and a suite of benchmark experiments demonstrating the benefits of WildCat for image generation, image classification, and language model KV cache compression.
 
 ### 🤖 AI 总结
 
-**一句话总结**：Selecting interpretable feature sets in underdetermined ($n \ll p$) and highly correlated regimes constitutes a fundamental challenge in data science, particularly when analyzing physical measurements...
+**一句话总结**：WildCat是一种高精度、低成本的神经网络注意力机制压缩方法，能够在近线性时间内实现准确的注意力计算。
 
-**研究动机**：AI服务不可用
+**研究动机**：虽然注意力机制在现代网络架构中广泛应用，但其资源消耗随输入序列长度呈平方级增长，因此需要寻找更高效的替代方案。
 
-**核心方法**：AI服务不可用
+**核心方法**：WildCat通过快速且光谱准确的子采样算法选择小的加权核心集，从而避免了平方成本，并在近线性时间内实现了注意力的近似。
 
-**主要结论**：AI服务不可用
+**主要结论**：WildCat在图像生成、图像分类和语言模型KV缓存压缩等任务中表现出色，提供了显著的性能优势和错误保证。
 
-**关键词**：multiple distinct sparse subsets may explain the response equally well. Identifying these alternatives is crucial for generating domain, generalizes seamlessly to continuous targets, and exhibits remarkable robustness to class imbalance and Gaussian noise.   GEMSS is available as a Python package 'gemss' at PyPI. The full GitHub repository at https://github.com/kat
+**关键词**：注意力机制, 神经网络, 深度学习, WildCat, 近线性时间, 图像生成, 语言模型, PyTorch, 近似计算, ml
 
-**评分**：0
+**评分**：62
 
-**论文链接**：[查看原文](https://arxiv.org/abs/2602.08913v1) | [下载PDF](https://arxiv.org/pdf/2602.08913v1.pdf)
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10056v1) | [下载PDF](https://arxiv.org/pdf/2602.10056v1.pdf)
+
+---
+
+## [26. Long Chain-of-Thought Compression via Fine-Grained Group Policy Optimization](https://arxiv.org/abs/2602.10048v1)
+
+**作者**：Xinchen Han, Hossam Afifi, Michel Marot 等 5 位作者  
+**分类**：cs.LG, cs.AI  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Large Language Models (LLMs) often generate unnecessarily verbose Chain-of-Thought (CoT) reasoning that increases computational costs and latency without proportional performance gains. In this paper, we propose \textbf{F}ine-grained \textbf{G}roup policy \textbf{O}ptimization (\textbf{FGO}), a Reinforcement Learning (RL) algorithm that refines group responses by subdividing them and assigning appropriate weights based on length and entropy, thereby enabling effective CoT compression. Meanwhile, as an enhanced variant of Group Relative Policy Optimization (GRPO), FGO successfully addresses two major limitations of the GRPO: inefficient data utilization and entropy collapse. We evaluate FGO on multiple reasoning LLMs and benchmarks, including MATH500, AIME24, AMC23, and Minerva. Experimental results show that FGO achieves efficient CoT compression without degrading performance, and simultaneously resolves the key limitations of GRPO.
+
+### 🤖 AI 总结
+
+**一句话总结**：本研究提出了一种名为FGO的强化学习算法，通过细粒度的组策略优化实现链式思维的有效压缩，降低了计算成本而不影响性能。
+
+**研究动机**：大语言模型常常生成冗长的链式思维推理，这导致计算成本和延迟增加而性能提升有限，因此需要一种更高效的推理方法。
+
+**核心方法**：FGO通过细分组响应并根据长度和熵分配权重，优化了组策略，并克服了GRPO的两大局限性：数据利用不充分和熵崩溃。
+
+**主要结论**：实验结果表明，FGO在多个推理基准上实现了有效的链式思维压缩，同时没有降低性能，成功解决了GRPO的关键问题。
+
+**关键词**：深度学习, 强化学习, 大语言模型, CoT压缩, FGO, 组策略优化, 数据利用, 熵崩溃, 语义搜索, llm
+
+**评分**：68
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10048v1) | [下载PDF](https://arxiv.org/pdf/2602.10048v1.pdf)
+
+---
+
+## [27. Optimistic World Models: Efficient Exploration in Model-Based Deep Reinforcement Learning](https://arxiv.org/abs/2602.10044v1)
+
+**作者**：Akshay Mete, Shahid Aamir Sheikh, Tzu-Hsiang Lin 等 5 位作者  
+**分类**：cs.LG, cs.AI, eess.SY  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Efficient exploration remains a central challenge in reinforcement learning (RL), particularly in sparse-reward environments. We introduce Optimistic World Models (OWMs), a principled and scalable framework for optimistic exploration that brings classical reward-biased maximum likelihood estimation (RBMLE) from adaptive control into deep RL. In contrast to upper confidence bound (UCB)-style exploration methods, OWMs incorporate optimism directly into model learning by augmentation with an optimistic dynamics loss that biases imagined transitions toward higher-reward outcomes. This fully gradient-based loss requires neither uncertainty estimates nor constrained optimization. Our approach is plug-and-play with existing world model frameworks, preserving scalability while requiring only minimal modifications to standard training procedures. We instantiate OWMs within two state-of-the-art world model architectures, leading to Optimistic DreamerV3 and Optimistic STORM, which demonstrate significant improvements in sample efficiency and cumulative return compared to their baseline counterparts.
+
+### 🤖 AI 总结
+
+**一句话总结**：本文提出了一种乐观世界模型（OWMs），通过积极的动态损失促进深度强化学习中的高效探索。
+
+**研究动机**：在稀疏奖励环境中，高效探索是强化学习面临的主要挑战，因此需要新的方法来提高样本效率和累积回报。
+
+**核心方法**：OWMs通过引入乐观动态损失直接将乐观性融入模型学习，无需不确定性估计，实现了一种可扩展的优化探索框架。
+
+**主要结论**：通过在两种先进的世界模型架构中应用OWMs，实验结果表明其在样本效率和累积回报上显著优于基线模型。
+
+**关键词**：模型, 深度强化学习, 探索, 奖励模型, 生成模型, Optimistic World Models, 采样效率, 状态模型, 训练优化, 代理工作流, ml
+
+**评分**：66
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10044v1) | [下载PDF](https://arxiv.org/pdf/2602.10044v1.pdf)
+
+---
+
+## [28. Effectiveness of Binary Autoencoders for QUBO-Based Optimization Problems](https://arxiv.org/abs/2602.10037v1)
+
+**作者**：Tetsuro Abe, Masashi Yamashita, Shu Tanaka  
+**分类**：cs.LG, cond-mat.stat-mech, quant-ph  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+In black-box combinatorial optimization, objective evaluations are often expensive, so high quality solutions must be found under a limited budget. Factorization machine with quantum annealing (FMQA) builds a quadratic surrogate model from evaluated samples and optimizes it on an Ising machine. However, FMQA requires binary decision variables, and for nonbinary structures such as integer permutations, the choice of binary encoding strongly affects search efficiency. If the encoding fails to reflect the original neighborhood structure, small Hamming moves may not correspond to meaningful modifications in the original solution space, and constrained problems can yield many infeasible candidates that waste evaluations. Recent work combines FMQA with a binary autoencoder (bAE) that learns a compact binary latent code from feasible solutions, yet the mechanism behind its performance gains is unclear. Using a small traveling salesman problem as an interpretable testbed, we show that the bAE reconstructs feasible tours accurately and, compared with manually designed encodings at similar compression, better aligns tour distances with latent Hamming distances, yields smoother neighborhoods under small bit flips, and produces fewer local optima. These geometric properties explain why bAE+FMQA improves the approximation ratio faster while maintaining feasibility throughout optimization, and they provide guidance for designing latent representations for black-box optimization.
+
+### 🤖 AI 总结
+
+**一句话总结**：研究表明，二进制自编码器（bAE）在QUBO优化问题中通过改进编码方式，提高了搜索效率和解的可行性。
+
+**研究动机**：在黑箱组合优化中，评估目标的成本高昂，因此需要在有限预算内找到高质量的解决方案，尤其是在使用量子退火时。
+
+**核心方法**：本文采用小型旅行商问题作为测试平台，验证bAE在重构可行路径方面的有效性，并与手动设计的编码进行比较。
+
+**主要结论**：bAE结合FMQA优化提高了近似比率，同时保持了解的可行性，提供了设计潜在表示的新思路。
+
+**关键词**：二进制自编码器, 组合优化, 量子退火, 近似比, 旅行推销员问题, 模型优化, 语义搜索, 深度学习, 神经网络, agent
+
+**评分**：62
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10037v1) | [下载PDF](https://arxiv.org/pdf/2602.10037v1.pdf)
+
+---
+
+## [29. Position: Message-passing and spectral GNNs are two sides of the same coin](https://arxiv.org/abs/2602.10031v1)
+
+**作者**：Antonis Vasileiou, Juan Cervino, Pascal Frossard 等 10 位作者  
+**分类**：cs.LG  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Graph neural networks (GNNs) are commonly divided into message-passing neural networks (MPNNs) and spectral graph neural networks, reflecting two largely separate research traditions in machine learning and signal processing. This paper argues that this divide is mostly artificial, hindering progress in the field. We propose a viewpoint in which both MPNNs and spectral GNNs are understood as different parametrizations of permutation-equivariant operators acting on graph signals. From this perspective, many popular architectures are equivalent in expressive power, while genuine gaps arise only in specific regimes. We further argue that MPNNs and spectral GNNs offer complementary strengths. That is, MPNNs provide a natural language for discrete structure and expressivity analysis using tools from logic and graph isomorphism research, while the spectral perspective provides principled tools for understanding smoothing, bottlenecks, stability, and community structure. Overall, we posit that progress in graph learning will be accelerated by clearly understanding the key similarities and differences between these two types of GNNs, and by working towards unifying these perspectives within a common theoretical and conceptual framework rather than treating them as competing paradigms.
+
+### 🤖 AI 总结
+
+**一句话总结**：本文提出将消息传递神经网络和谱图神经网络视为图信号上作用的不同参数化，从而促进图学习领域的统一与进步。
+
+**研究动机**：作者认为当前将消息传递神经网络和谱图神经网络分开研究的做法是人为的，阻碍了该领域的发展。
+
+**核心方法**：通过将两种神经网络视为等效的排列不变算子的不同参数化，探讨它们在表达能力和补充优势上的关系。
+
+**主要结论**：理解这两种GNN的相似性与差异性，将有助于加速图学习的进展，并推动理论和概念框架的统一。
+
+**关键词**：图神经网络, 消息传递, 光谱图神经网络, 机器学习, 深度学习, 图信号, 结构分析, 社区结构, 表达能力, 理论框架, machine learning
+
+**评分**：55
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10031v1) | [下载PDF](https://arxiv.org/pdf/2602.10031v1.pdf)
+
+---
+
+## [30. ADORA: Training Reasoning Models with Dynamic Advantage Estimation on Reinforcement Learning](https://arxiv.org/abs/2602.10019v1)
+
+**作者**：Qingnan Ren, Shiting Huang, Zhen Fang 等 7 位作者  
+**分类**：cs.LG, cs.AI  
+**发布时间**：2026-02-10
+
+### 📄 论文摘要
+
+Reinforcement learning has become a cornerstone technique for developing reasoning models in complex tasks, ranging from mathematical problem-solving to imaginary reasoning. The optimization of these models typically relies on policy gradient methods, whose efficacy hinges on the accurate estimation of an advantage function. However, prevailing methods typically employ static advantage estimation, a practice that leads to inefficient credit assignment by neglecting the dynamic utility of training samples over time. This limitation results in suboptimal policy updates, which in turn manifest as slower convergence rates and increased learning instability, as models fail to adapt to evolving sample utilities effectively. To address this problem, we introduce \textbf{ADORA} (\textbf{A}dvantage \textbf{D}ynamics via \textbf{O}nline \textbf{R}ollout \textbf{A}daptation), a novel framework for policy optimization. ADORA dynamically adjusts the advantage function's weighting by adaptively categorizing training data into temporarily advantageous and disadvantageous samples, based on their evolving utility during online model rollouts. This tailored data differentiation strategy allows ADORA to be seamlessly integrated into existing policy optimization algorithms without significant architectural modifications, enabling the policy to prioritize learning from more informative experiences and thereby achieve more efficient policy updates. Extensive evaluations across diverse model families and varying data scales demonstrate that ADORA is a robust and efficient framework. It significantly enhances long reasoning in both geometric and mathematical tasks, consistently achieving notable performance gains without requiring sensitive hyperparameter tuning.
+
+### 🤖 AI 总结
+
+**一句话总结**：ADORA是一种新的政策优化框架，通过动态调整优势函数的权重，改善强化学习模型的收敛速度和学习稳定性。
+
+**研究动机**：传统的静态优势估计方法导致信贷分配效率低下，从而影响模型在复杂任务中的表现。
+
+**核心方法**：ADORA通过在线回滚适应，动态分类训练数据为暂时有利和不利样本，从而优化优势函数的估计。
+
+**主要结论**：ADORA显著提高了几何和数学任务中的推理能力，且在不需敏感超参数调整的情况下，一致地实现了性能提升。
+
+**关键词**：强化学习, 代理, 优势估计, 策略优化, ADORA, 在线学习, 动态调整, 数据差异化, 收益模型, ml
+
+**评分**：70
+
+**论文链接**：[查看原文](https://arxiv.org/abs/2602.10019v1) | [下载PDF](https://arxiv.org/pdf/2602.10019v1.pdf)
 
 ---
 

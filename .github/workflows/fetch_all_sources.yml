@@ -33,6 +33,20 @@ jobs:
         pip install -r requirements.txt
         pip list
 
+    - name: Validate required secrets
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        PRODUCTHUNT_DEVELOPER_TOKEN: ${{ secrets.PRODUCTHUNT_DEVELOPER_TOKEN }}
+      run: |
+        if [ -z "${OPENAI_API_KEY}" ]; then
+          echo "OPENAI_API_KEY is required for translation/scoring quality."
+          exit 1
+        fi
+        if [ -z "${PRODUCTHUNT_DEVELOPER_TOKEN}" ]; then
+          echo "PRODUCTHUNT_DEVELOPER_TOKEN is required for Product Hunt fetch."
+          exit 1
+        fi
+
     - name: Pre-check existing data by source and date
       id: precheck
       env:
@@ -52,9 +66,15 @@ jobs:
         structured_dir = Path("data/structured")
         targets = {
             "producthunt": {"fetch_date": yesterday, "output_date": yesterday},
-            "arxiv": {"fetch_date": yesterday, "output_date": today},
+            # arXiv 采用当日窗口抓取并写当日，避免“抓昨天”导致空结果。
+            "arxiv": {"fetch_date": today, "output_date": today},
             "github": {"fetch_date": today, "output_date": today},
         }
+
+        def score_total(value):
+            if isinstance(value, dict):
+                return int(value.get("total", 0) or 0)
+            return 0
 
         outputs = {}
         for source, cfg in targets.items():
@@ -68,11 +88,14 @@ jobs:
                 skip = False
             elif parquet_path.exists():
                 try:
-                    df = pd.read_parquet(parquet_path, columns=["source"])
-                    present_sources = set(
-                        df["source"].dropna().astype(str).str.lower().tolist()
-                    )
-                    skip = source in present_sources
+                    df = pd.read_parquet(parquet_path)
+                    if "source" in df.columns:
+                        src_df = df[df["source"].astype(str).str.lower() == source]
+                        if not src_df.empty and "score" in src_df.columns:
+                            quality_ok = src_df["score"].apply(score_total).gt(0).any()
+                            skip = bool(quality_ok)
+                        else:
+                            skip = False
                 except Exception as exc:
                     print(f"[WARN] 读取 {parquet_path} 失败，改为执行抓取: {exc}")
                     skip = False
@@ -126,6 +149,56 @@ jobs:
         export GITHUB_SINCE="${GITHUB_SINCE:-daily}"
         export GITHUB_MAX_RESULTS="${GITHUB_MAX_RESULTS:-25}"
         python scripts/github_trending_to_md.py
+
+    - name: Post-check source completeness and quality
+      run: |
+        python - <<'PY'
+        from pathlib import Path
+        import pandas as pd
+
+        targets = {
+            "producthunt": "${{ steps.precheck.outputs.producthunt_output_date }}",
+            "arxiv": "${{ steps.precheck.outputs.arxiv_output_date }}",
+            "github": "${{ steps.precheck.outputs.github_output_date }}",
+        }
+
+        def score_total(value):
+            if isinstance(value, dict):
+                return int(value.get("total", 0) or 0)
+            return 0
+
+        errors = []
+        for source, date_str in targets.items():
+            parquet_path = Path("data/structured") / f"{date_str}.parquet"
+            if not parquet_path.exists():
+                errors.append(f"{source} {date_str}: parquet missing")
+                continue
+            try:
+                df = pd.read_parquet(parquet_path)
+            except Exception as exc:
+                errors.append(f"{source} {date_str}: read parquet failed ({exc})")
+                continue
+            if "source" not in df.columns:
+                errors.append(f"{source} {date_str}: source column missing")
+                continue
+            src_df = df[df["source"].astype(str).str.lower() == source]
+            if src_df.empty:
+                errors.append(f"{source} {date_str}: no rows")
+                continue
+            if "score" not in src_df.columns:
+                errors.append(f"{source} {date_str}: score column missing")
+                continue
+            if not src_df["score"].apply(score_total).gt(0).any():
+                errors.append(f"{source} {date_str}: all scores are 0")
+
+        if errors:
+            print("Post-check failed:")
+            for err in errors:
+                print(" -", err)
+            raise SystemExit(1)
+
+        print("Post-check passed for all sources.")
+        PY
 
     - name: Generate Keyword Trends
       run: |

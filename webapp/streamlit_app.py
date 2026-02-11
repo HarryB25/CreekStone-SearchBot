@@ -122,10 +122,10 @@ def _to_float(value, default: float = 0.0) -> float:
 
 SORT_FIELD_OPTIONS = {
     "趋势分": "score",
-    "加权总量": "weighted_total",
-    "TF-IDF": "tfidf",
+    "占比总量（历史）": "weighted_total",
+    "基础占比": "tfidf",
     "Z-Score": "z_score",
-    "最近频次": "recent_freq",
+    "最近占比": "recent_freq",
     "总出现量": "total",
 }
 
@@ -154,6 +154,12 @@ def trend_state(item: dict) -> tuple[str, str, float]:
     if z <= -0.2:
         return "下降", "#16a34a", z
     return "平稳", "#64748b", z
+
+
+def _trend_series_y_field(series_df: pd.DataFrame) -> str:
+    if "share" in series_df.columns:
+        return "share"
+    return "count"
 
 
 def card_html(item):
@@ -344,9 +350,10 @@ with tab_items:
                     series_df["norm_score"] = max(0.0, min(1.0, ns))
                     series_df["date"] = pd.to_datetime(series_df["date"])
                     series_df = series_df.sort_values("date").tail(7)
+                    y_field = _trend_series_y_field(series_df)
                     mini_base = alt.Chart(series_df).encode(
                         x=alt.X("date:T", axis=alt.Axis(labels=False, ticks=False, title=None)),
-                        y=alt.Y("count:Q", axis=alt.Axis(labels=False, ticks=False, title=None)),
+                        y=alt.Y(f"{y_field}:Q", axis=alt.Axis(labels=False, ticks=False, title=None)),
                         color=alt.Color(
                             "norm_score:Q",
                             scale=alt.Scale(domain=[0, 1], range=["#0f9d58", "#ef4444"]),
@@ -385,7 +392,7 @@ with tab_trends:
             sort_value = _to_float(item.get(sort_field), 0.0)
             st.markdown(
                 f"**{i}. {item['keyword']}**  "
-                f"(排序值 `{sort_label}={sort_value:.4f}` / 趋势分 `{item['score']:.4f}` / tfidf `{item.get('tfidf', item['growth']):.4f}` / z-score `{item.get('z_score', item['acceleration']):.4f}` / 趋势 `{trend_text}` / total `{item['total']}`)"
+                f"(排序值 `{sort_label}={sort_value:.4f}` / 趋势分 `{item['score']:.4f}` / 基础占比 `{item.get('tfidf', item['growth']):.4f}` / z-score `{item.get('z_score', item['acceleration']):.4f}` / 趋势 `{trend_text}` / total `{item['total']}`)"
             )
             series_df = pd.DataFrame(item["series"])
             if not series_df.empty:
@@ -395,9 +402,10 @@ with tab_trends:
                 series_df["score"] = item["score"]
                 series_df["date"] = pd.to_datetime(series_df["date"])
                 series_df = series_df.sort_values("date").tail(7)
+                y_field = _trend_series_y_field(series_df)
                 base = alt.Chart(series_df).encode(
                     x=alt.X("date:T", title="", axis=alt.Axis(labelAngle=0, format="%m-%d")),
-                    y=alt.Y("count:Q", title=""),
+                    y=alt.Y(f"{y_field}:Q", title=""),
                     color=alt.Color(
                         "norm_score:Q",
                         scale=alt.Scale(domain=[0, 1], range=["#0f9d58", "#ef4444"]),

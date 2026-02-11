@@ -40,6 +40,9 @@ EXCLUDE_KEYWORDS = [
     'adult', 'dating', 'porn'
 ]
 
+def _allow_mock_data() -> bool:
+    return os.getenv("ALLOW_MOCK_DATA", "").strip().lower() == "true"
+
 def _get_int_env(name: str, default: int) -> int:
     raw = os.getenv(name)
     if raw is None or raw.strip() == "":
@@ -341,8 +344,10 @@ def fetch_arxiv_papers(
             entries = [entries]
         
         if not entries:
-            print("未找到论文，使用模拟数据...")
-            return fetch_mock_papers()
+            if _allow_mock_data():
+                print("未找到论文，ALLOW_MOCK_DATA=true，使用模拟数据...")
+                return fetch_mock_papers()
+            raise RuntimeError("未找到论文，且未启用 ALLOW_MOCK_DATA")
         
         print(f"API返回 {len(entries)} 篇论文")
         
@@ -392,16 +397,20 @@ def fetch_arxiv_papers(
                 continue
         
         if not filtered_papers:
-            print(f"筛选后没有符合条件的AI论文，使用模拟数据")
-            return fetch_mock_papers()
+            if _allow_mock_data():
+                print("筛选后没有符合条件的AI论文，ALLOW_MOCK_DATA=true，使用模拟数据")
+                return fetch_mock_papers()
+            raise RuntimeError("筛选后没有符合条件的AI论文，且未启用 ALLOW_MOCK_DATA")
         
         print(f"✅ 筛选出主分类为AI相关的论文: {len(filtered_papers)} 篇")
         return filtered_papers
         
     except Exception as e:
         print(f"获取arXiv论文失败: {e}")
-        print("使用模拟数据...")
-        return fetch_mock_papers()
+        if _allow_mock_data():
+            print("ALLOW_MOCK_DATA=true，使用模拟数据...")
+            return fetch_mock_papers()
+        raise
 
 def fetch_mock_papers() -> List[ArxivPaper]:
     """返回模拟论文数据用于测试"""

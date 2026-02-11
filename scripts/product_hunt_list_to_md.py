@@ -45,6 +45,9 @@ EXCLUDE_KEYWORDS = [
     'adult', 'dating', 'porn'
 ]
 
+def _allow_mock_data() -> bool:
+    return os.getenv("ALLOW_MOCK_DATA", "").strip().lower() == "true"
+
 
 def _get_request_timeout() -> float:
     raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
@@ -511,8 +514,11 @@ def main():
         products = fetch_product_hunt_data(date_str)
     except Exception as e:
         print(f"获取Product Hunt数据失败: {e}")
-        print("使用模拟数据继续...")
-        products = fetch_mock_data()
+        if _allow_mock_data():
+            print("ALLOW_MOCK_DATA=true，使用模拟数据继续...")
+            products = fetch_mock_data()
+        else:
+            raise
 
     # 生成Markdown文件
     generate_markdown(products, date_str)
