@@ -60,6 +60,20 @@ def _get_request_timeout() -> float:
     return 60.0
 
 
+def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
+    raw = os.getenv("OPENAI_BASE_URL")
+    if raw is None or raw.strip() == "":
+        return default
+    return raw.strip()
+
+
+def _get_model_name(default: str = "gpt-5.1-2025-11-13") -> str:
+    raw = os.getenv("PRODUCTHUNT_MODEL_NAME")
+    if raw is None or raw.strip() == "":
+        return default
+    return raw.strip()
+
+
 def _contains_any(text: str, keywords) -> bool:
     if not text:
         return False
@@ -78,7 +92,7 @@ def is_ai_related(*fields: str) -> bool:
 
 # 创建 OpenAI 客户端实例
 api_key = os.getenv('OPENAI_API_KEY')
-base_url = os.getenv('OPENAI_BASE_URL', 'https://api.openai.com/v1')  # 默认使用官方API地址
+base_url = _get_base_url()  # 默认使用官方API地址
 if not api_key:
     print("警告: 未设置 OPENAI_API_KEY 环境变量，将无法使用 OpenAI 服务")
     client = None
@@ -175,7 +189,7 @@ class Product:
             try:
                 print(f"正在为 {self.name} 生成关键词...")
                 response = client.chat.completions.create(
-                    model="gpt-4o-mini",
+                    model=_get_model_name(),
                     messages=[
                         {
                             "role": "system",
@@ -184,8 +198,8 @@ class Product:
                                 "任务：生成仅限 AI 相关的中文关键词，英文逗号分隔，且满足：\n"
                                 "- 至少包含列表 AI_KEYWORDS 中的 1 个（可用同义或缩写），但不要输出单独的 'AI' 或 '人工智能'。\n"
                                 "- 不得包含 EXCLUDE_KEYWORDS 中任一项。\n"
-                                "- 在保证上述规则后，再补充 2-4 个基于产品名称/技术/功能的 AI 相关短关键词，中文为主，专有名词可保留英文。\n"
-                                "- 去重、去空格，保持 6-10 个词，总长不超过 80 字符。"
+                                "- 在保证上述规则后，再补充 4-8 个基于产品名称/技术/功能的 AI 相关短关键词，中文为主，专有名词可保留英文。\n"
+                                "- 去重、去空格，保持 7-12 个词，总长不超过 80 字符。"
                             ),
                         },
                         {
@@ -236,7 +250,7 @@ class Product:
             try:
                 print(f"正在翻译 {self.name} 的内容...")
                 response = client.chat.completions.create(
-                    model="gpt-4o-mini",
+                    model=_get_model_name(),
                     messages=[
                         {"role": "system", "content": "你是世界上最专业的翻译工具，擅长英文和中文互译。你是一位精通英文和中文的专业翻译，尤其擅长将IT公司黑话和专业词汇翻译成简洁易懂的地道表达。你的任务是将以下内容翻译成地道的中文，风格与科普杂志或日常对话相似。"},
                         {"role": "user", "content": text},

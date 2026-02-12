@@ -69,6 +69,20 @@ def _get_request_timeout() -> float:
     return 60.0
 
 
+def _get_model_name(default: str = "gpt-5.1-2025-11-13") -> str:
+    raw = os.getenv("ARXIV_MODEL_NAME")
+    if raw is None or raw.strip() == "":
+        return default
+    return raw.strip()
+
+
+def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
+    raw = os.getenv("OPENAI_BASE_URL")
+    if raw is None or raw.strip() == "":
+        return default
+    return raw.strip()
+
+
 def _contains_any(text: str, keywords) -> bool:
     if not text:
         return False
@@ -86,7 +100,7 @@ def is_ai_related(*fields: str) -> bool:
 
 # 创建 OpenAI 客户端实例
 api_key = os.getenv('OPENAI_API_KEY')
-base_url = os.getenv('OPENAI_BASE_URL', 'https://api.openai.com/v1')
+base_url = _get_base_url()
 if not api_key:
     print("警告: 未设置 OPENAI_API_KEY 环境变量")
     client = None
@@ -144,14 +158,14 @@ class ArxivPaper:
                 "请生成仅限 AI 相关的中文关键词，英文逗号分隔，要求：\n"
                 "- 至少含 1 个 AI_KEYWORDS 列表中的词或同义词，但不要输出单独的“AI”或“人工智能”。\n"
                 "- 不包含 EXCLUDE_KEYWORDS 中任一项。\n"
-                "- 在满足规则后，再补充 2-3 个基于论文方法/场景/技术的短关键词，中文为主，专有名词可保留英文。\n"
-                "- 总数 5-10 个，去重、去空格。\n"
+                "- 在满足规则后，再补充 4-6 个基于论文方法/场景/技术的短关键词，中文为主，专有名词可保留英文。\n"
+                "- 总数 7-12 个，去重、去空格。\n"
                 f"AI_KEYWORDS: {', '.join(AI_KEYWORDS)}\n"
                 f"EXCLUDE_KEYWORDS: {', '.join(EXCLUDE_KEYWORDS)}\n"
                 f"{base_text}"
             )
             resp = client.chat.completions.create(
-                model=os.getenv('ARXIV_MODEL_NAME', 'gpt-4o-mini'),
+                model=_get_model_name(),
                 messages=[
                     {"role": "system", "content": "用中文输出关键词，满足给定约束。"},
                     {"role": "user", "content": prompt},
@@ -203,7 +217,7 @@ class ArxivPaper:
         try:
             print(f"正在为论文 {self.title[:50]}... 生成AI摘要")
             response = client.chat.completions.create(
-                model=os.getenv('ARXIV_MODEL_NAME', 'gpt-4o-mini'),
+                model=_get_model_name(),
                 messages=[
                     {"role": "system", "content": "你是一位专业的AI研究论文分析专家，擅长用简洁的中文总结论文要点。"},
                     {"role": "user", "content": prompt + "\nAI_KEYWORDS: " + ", ".join(AI_KEYWORDS) + "\nEXCLUDE_KEYWORDS: " + ", ".join(EXCLUDE_KEYWORDS)}

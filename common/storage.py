@@ -10,7 +10,7 @@ def build_item_id(prefix: str, date_str: str, rank: int, extra: str = "") -> str
     return f"{prefix}-{date_str}-{rank}{extra_part}"
 
 
-def _append_ndjson(items: List[Dict]):
+def _append_ndjson(items: List[Dict], replace_source: str = "", replace_date: str = ""):
     if not items:
         return
     os.makedirs(STRUCTURED_DIR, exist_ok=True)
@@ -31,6 +31,21 @@ def _append_ndjson(items: List[Dict]):
                 row_id = row.get("id")
                 if row_id:
                     existing_index_by_id[str(row_id)] = len(existing_rows) - 1
+
+    if replace_source and replace_date:
+        existing_rows = [
+            row
+            for row in existing_rows
+            if not (
+                str(row.get("source", "")).lower() == replace_source
+                and str(row.get("date", "")) == replace_date
+            )
+        ]
+        existing_index_by_id = {}
+        for idx, row in enumerate(existing_rows):
+            row_id = row.get("id")
+            if row_id:
+                existing_index_by_id[str(row_id)] = idx
 
     inserted = 0
     updated = 0
@@ -60,7 +75,7 @@ def _append_ndjson(items: List[Dict]):
     print(f"已写入 NDJSON 数据: {ndjson_path} ({inserted} 条新增, {updated} 条更新)")
 
 
-def _write_parquet(date_str: str, items: List[Dict]):
+def _write_parquet(date_str: str, items: List[Dict], replace_source: str = "", replace_date: str = ""):
     """Append items into per-day parquet; requires pandas+pyarrow."""
     if not items:
         return
@@ -87,8 +102,15 @@ def _write_parquet(date_str: str, items: List[Dict]):
     if os.path.exists(path):
         try:
             df_old = pd.read_parquet(path)
+            if replace_source and replace_date and {"source", "date"}.issubset(df_old.columns):
+                mask = (
+                    df_old["source"].astype(str).str.lower().eq(replace_source)
+                    & df_old["date"].astype(str).eq(replace_date)
+                )
+                df_old = df_old[~mask]
             df = pd.concat([df_old, df_new], ignore_index=True)
-            df.drop_duplicates(subset=["id"], keep="last", inplace=True)
+            if "id" in df.columns:
+                df.drop_duplicates(subset=["id"], keep="last", inplace=True)
         except Exception as e:  # 读取失败则覆盖
             print(f"读取现有 parquet 失败，将覆盖写入: {e}")
             df = df_new
@@ -104,5 +126,12 @@ def save_structured_items(date_str: str, items: List[Dict]):
     if not items:
         print("无结构化数据可写入，已跳过。")
         return
-    _append_ndjson(items)
-    _write_parquet(date_str, items)
+    source_set = {str(item.get("source", "")).lower() for item in items if item.get("source")}
+    date_set = {str(item.get("date", "")) for item in items if item.get("date")}
+    replace_source = next(iter(source_set), "")
+    replace_date = next(iter(date_set), "")
+    if len(source_set) != 1 or len(date_set) != 1:
+        replace_source = ""
+        replace_date = ""
+    _append_ndjson(items, replace_source=replace_source, replace_date=replace_date)
+    _write_parquet(date_str, items, replace_source=replace_source, replace_date=replace_date)

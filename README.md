@@ -61,7 +61,7 @@ pip install -r requirements.txt
 - `OPENAI_API_KEY`
 - `OPENAI_BASE_URL`（可选）
 - `PRODUCTHUNT_DEVELOPER_TOKEN`
-- `SCORING_MODEL_NAME`（可选，默认 `gpt-4o-mini`）
+- `SCORING_MODEL_NAME`（可选，默认 `gpt-5.1-2025-11-13`）
 
 ### 3) 运行抓取
 

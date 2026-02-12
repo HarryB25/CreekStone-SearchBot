@@ -13,6 +13,13 @@ def _get_timeout() -> float:
     return 60.0
 
 
+def _get_model_name(default: str = "gpt-5.1-2025-11-13") -> str:
+    raw = os.getenv("SCORING_MODEL_NAME")
+    if raw is None or raw.strip() == "":
+        return default
+    return raw.strip()
+
+
 def score_content(text: str, client, kind: str = "general") -> dict:
     """
     调用大模型对项目进行评分。
@@ -136,7 +143,7 @@ def score_content(text: str, client, kind: str = "general") -> dict:
 
     try:
         response = client.chat.completions.create(
-            model=os.getenv("SCORING_MODEL_NAME", "gpt-4o-mini"),
+            model=_get_model_name(),
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},

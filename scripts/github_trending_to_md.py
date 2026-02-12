@@ -67,6 +67,20 @@ def _get_request_timeout() -> float:
     return 60.0
 
 
+def _get_model_name(default: str = "gpt-5.1-2025-11-13") -> str:
+    raw = os.getenv("GITHUB_MODEL_NAME")
+    if raw is None or raw.strip() == "":
+        return default
+    return raw.strip()
+
+
+def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
+    raw = os.getenv("OPENAI_BASE_URL")
+    if raw is None or raw.strip() == "":
+        return default
+    return raw.strip()
+
+
 def _contains_any(text: str, keywords) -> bool:
     if not text:
         return False
@@ -84,7 +98,7 @@ def is_ai_related(*fields: str) -> bool:
 
 # 创建 OpenAI 客户端实例（用于翻译）
 api_key = os.getenv('OPENAI_API_KEY')
-base_url = os.getenv('OPENAI_BASE_URL', 'https://api.openai.com/v1')
+base_url = _get_base_url()
 if api_key:
     try:
         client = openai.Client(api_key=api_key, base_url=base_url)
@@ -153,7 +167,7 @@ class GitHubRepo:
         try:
             print(f"正在翻译 {self.author}/{self.name} 的描述...")
             response = client.chat.completions.create(
-                model=os.getenv('GITHUB_MODEL_NAME', 'gpt-4o-mini'),
+                model=_get_model_name(),
                 messages=[
                     {"role": "system", "content": "你是技术产品说明书撰写者。"},
                     {"role": "user", "content": (
@@ -191,14 +205,14 @@ class GitHubRepo:
                 "生成仅限 AI 相关的中文关键词（专有名词可保留英文），英文逗号分隔：\n"
                 "- 至少含 1 个 AI_KEYWORDS 的词或同义词，但不要输出单独“AI/人工智能”。\n"
                 "- 不含 EXCLUDE_KEYWORDS。\n"
-                "- 补充 2-3 个基于项目名称/技术/功能/架构的短关键词。\n"
-                "- 总数 5-10 个，去重、去空格。\n"
+                "- 补充 4-6 个基于项目名称/技术/功能/架构的短关键词。\n"
+                "- 总数 7-12 个，去重、去空格。\n"
                 f"AI_KEYWORDS: {', '.join(AI_KEYWORDS)}\n"
                 f"EXCLUDE_KEYWORDS: {', '.join(EXCLUDE_KEYWORDS)}\n"
                 f"{base_text}"
             )
             resp = client.chat.completions.create(
-                model=os.getenv('GITHUB_MODEL_NAME', 'gpt-4o-mini'),
+                model=_get_model_name(),
                 messages=[
                     {"role": "system", "content": "用中文输出关键词，满足给定约束。"},
                     {"role": "user", "content": prompt},
