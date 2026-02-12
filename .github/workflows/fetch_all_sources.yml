@@ -14,6 +14,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: fetch-all-sources-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   fetch-all-sources:
     runs-on: ubuntu-latest
@@ -98,8 +102,18 @@ jobs:
                 f.write(f"{key}={value}\n")
         PY
 
+    - name: Debug precheck outputs
+      run: |
+        echo "producthunt_fetch_date=${{ steps.precheck.outputs.producthunt_fetch_date }}"
+        echo "producthunt_output_date=${{ steps.precheck.outputs.producthunt_output_date }}"
+        echo "skip_producthunt=${{ steps.precheck.outputs.skip_producthunt }}"
+        echo "arxiv_fetch_date=${{ steps.precheck.outputs.arxiv_fetch_date }}"
+        echo "arxiv_output_date=${{ steps.precheck.outputs.arxiv_output_date }}"
+        echo "skip_arxiv=${{ steps.precheck.outputs.skip_arxiv }}"
+        echo "github_output_date=${{ steps.precheck.outputs.github_output_date }}"
+        echo "skip_github=${{ steps.precheck.outputs.skip_github }}"
+
     - name: Fetch Product Hunt
-      if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.force_run == 'true') || steps.precheck.outputs.skip_producthunt != 'true' }}
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
         OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL || vars.OPENAI_BASE_URL }}
