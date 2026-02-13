@@ -77,7 +77,8 @@ jobs:
         yesterday = (now - timedelta(days=1)).strftime("%Y-%m-%d")
         force_run = os.getenv("FORCE_RUN", "false").lower() == "true"
         targets = {
-            "producthunt": {"fetch_date": yesterday, "output_date": yesterday},
+            # Product Hunt 数据窗口取昨天，但写入按今天聚合，确保当日页三源齐全。
+            "producthunt": {"fetch_date": yesterday, "output_date": today},
             # arXiv 采用当日窗口抓取并写当日，避免“抓昨天”导致空结果。
             "arxiv": {"fetch_date": today, "output_date": today},
             "github": {"fetch_date": today, "output_date": today},
@@ -119,7 +120,8 @@ jobs:
         OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL || vars.OPENAI_BASE_URL }}
         PRODUCTHUNT_DEVELOPER_TOKEN: ${{ secrets.PRODUCTHUNT_DEVELOPER_TOKEN || vars.PRODUCTHUNT_DEVELOPER_TOKEN }}
         PRODUCTHUNT_MODEL_NAME: ${{ vars.PRODUCTHUNT_MODEL_NAME }}
-        PRODUCTHUNT_TARGET_DATE: ${{ steps.precheck.outputs.producthunt_output_date }}
+        PRODUCTHUNT_FETCH_DATE: ${{ steps.precheck.outputs.producthunt_fetch_date }}
+        PRODUCTHUNT_OUTPUT_DATE: ${{ steps.precheck.outputs.producthunt_output_date }}
       run: |
         export PRODUCTHUNT_MODEL_NAME="${PRODUCTHUNT_MODEL_NAME:-gpt-5.1-2025-11-13}"
         python scripts/product_hunt_list_to_md.py

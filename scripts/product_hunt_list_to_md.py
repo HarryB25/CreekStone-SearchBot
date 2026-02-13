@@ -74,6 +74,17 @@ def _get_model_name(default: str = "gpt-5.1-2025-11-13") -> str:
     return raw.strip()
 
 
+def _get_http_timeout(default: float = 45.0) -> float:
+    raw = os.getenv("PRODUCTHUNT_HTTP_TIMEOUT", "").strip()
+    if not raw:
+        return default
+    try:
+        value = float(raw)
+    except ValueError:
+        return default
+    return value if value > 0 else default
+
+
 def _contains_any(text: str, keywords) -> bool:
     if not text:
         return False
@@ -356,7 +367,7 @@ def get_producthunt_token():
     }
     
     try:
-        response = requests.post(token_url, json=payload)
+        response = requests.post(token_url, json=payload, timeout=_get_http_timeout())
         response.raise_for_status()
         token_data = response.json()
         return token_data.get("access_token")
@@ -429,7 +440,12 @@ def fetch_product_hunt_data(target_date: str = ""):
     while has_next_page and len(all_posts) < 30:
         query = base_query % (date_str, date_str, cursor)
         try:
-            response = session.post(url, headers=headers, json={"query": query})
+            response = session.post(
+                url,
+                headers=headers,
+                json={"query": query},
+                timeout=_get_http_timeout(),
+            )
             response.raise_for_status()  # 抛出非200状态码的异常
         except requests.exceptions.RequestException as e:
             print(f"请求失败: {e}")
@@ -515,17 +531,31 @@ def generate_markdown(products, date_str):
 
 
 def main():
-    # 默认抓取前一天，可通过 PRODUCTHUNT_TARGET_DATE 覆盖
-    target_date = os.getenv("PRODUCTHUNT_TARGET_DATE", "").strip()
-    if target_date:
-        date_str = target_date
+    # 支持抓取日期和输出日期分离：
+    # - PRODUCTHUNT_TARGET_DATE/PRODUCTHUNT_FETCH_DATE: 实际抓取窗口
+    # - PRODUCTHUNT_OUTPUT_DATE: 写入结构化数据与文件日期
+    fetch_date = (
+        os.getenv("PRODUCTHUNT_FETCH_DATE", "").strip()
+        or os.getenv("PRODUCTHUNT_TARGET_DATE", "").strip()
+    )
+    output_date = os.getenv("PRODUCTHUNT_OUTPUT_DATE", "").strip()
+
+    if fetch_date:
+        target_date = fetch_date
     else:
         yesterday = datetime.now(timezone.utc) - timedelta(days=1)
-        date_str = yesterday.strftime('%Y-%m-%d')
+        target_date = yesterday.strftime('%Y-%m-%d')
+
+    if output_date:
+        date_str = output_date
+    else:
+        date_str = target_date
+
+    print(f"Product Hunt 抓取日期: {target_date}, 写入日期: {date_str}")
 
     try:
         # 尝试获取Product Hunt数据
-        products = fetch_product_hunt_data(date_str)
+        products = fetch_product_hunt_data(target_date)
     except Exception as e:
         print(f"获取Product Hunt数据失败: {e}")
         if _allow_mock_data():
