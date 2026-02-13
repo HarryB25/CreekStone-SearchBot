@@ -10,6 +10,11 @@ on:
         required: false
         default: false
         type: boolean
+      allow_main_dispatch:
+        description: "允许在 main 分支手动执行（默认 false，仅紧急时打开）"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -43,6 +48,13 @@ jobs:
         echo "repository=${{ github.repository }}"
         echo "ref_name=${{ github.ref_name }}"
         echo "actor=${{ github.actor }}"
+
+    - name: Protect main from manual test runs
+      if: ${{ github.event_name == 'workflow_dispatch' && github.ref_name == 'main' && github.event.inputs.allow_main_dispatch != 'true' }}
+      run: |
+        echo "Manual dispatch on main is blocked by default."
+        echo "Please run this workflow on dev/test branch, or set allow_main_dispatch=true only for emergencies."
+        exit 1
 
     - name: Validate required secrets
       id: secrets
