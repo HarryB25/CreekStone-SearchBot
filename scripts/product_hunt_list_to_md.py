@@ -23,6 +23,11 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from common.storage import save_structured_items, build_item_id
 from common.scoring import score_content
+from common.keyword_utils import (
+    investor_keyword_prompt,
+    extract_keywords_from_response,
+    finalize_keywords,
+)
 
 # AI 相关筛选与关键词控制
 AI_KEYWORDS = [
@@ -40,9 +45,7 @@ AI_KEYWORDS = [
 ]
 
 EXCLUDE_KEYWORDS = [
-    'crypto', 'nft', 'blockchain', 'web3', 'token',
-    'game', 'gaming', 'casino', 'betting',
-    'adult', 'dating', 'porn'
+    'crypto', 'nft', 'blockchain', 'web3', 'porn'
 ]
 
 def _allow_mock_data() -> bool:
@@ -68,7 +71,12 @@ def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
 
 
 def _get_model_name() -> str:
-    return "gpt-5.1-2025-11-13"
+    raw = os.getenv("OPENAI_MODEL", "").strip()
+    return raw or "gpt-5-2025-08-07"
+
+
+def _is_gpt5_model(model_name: str) -> bool:
+    return model_name.startswith("gpt-5")
 
 
 def _get_http_timeout(default: float = 45.0) -> float:
@@ -172,80 +180,48 @@ class Product:
             return ""
 
     def generate_keywords(self) -> str:
-        """生成产品的关键词，显示在一行，用逗号分隔。
-
-        规则：
-        1) 必须包含 >=1 个 AI_KEYWORDS 里的词（但不要输出单独的“AI/人工智能”）；
-        2) 不能包含 EXCLUDE_KEYWORDS；
-        3) 在规则内补充 2-4 个基于产品名称/技术/功能的 AI 相关短词；
-        4) 关键词统一中文为主，专有名词可保留英文；
-        5) 返回英文逗号分隔，去重、去空格。
-        """
+        """生成中性关键词：贴合内容，术语统一，减少英文噪音。"""
         try:
+            context = f"{self.name}\n{self.tagline}\n{self.description}"
+
             # 如果 OpenAI 客户端不可用，直接使用备用方法
             if client is None:
                 print(f"OpenAI 客户端不可用，使用备用关键词生成方法: {self.name}")
-                words = set((self.name + ", " + self.tagline).replace("&", ",").replace("|", ",").replace("-", ",").split(","))
-                # 兜底仍要做 AI 过滤
-                filtered = [w.strip() for w in words if w.strip()]
-                filtered = [w for w in filtered if is_ai_related(w)]
-                filtered = [w for w in filtered if w.lower() != 'ai' and w != '人工智能']
-                return ", ".join(filtered)
-
-            prompt = f"根据以下内容生成适合的中文关键词，用英文逗号分隔开：\n\n产品名称：{self.name}\n\n标语：{self.tagline}\n\n描述：{self.description}"
+                words = (self.name + ", " + self.tagline + ", " + self.description).replace("&", ",").replace("|", ",").replace("-", ",").split(",")
+                rough = [w.strip() for w in words if w.strip()]
+                normalized = finalize_keywords(rough, context, source="producthunt")
+                return ", ".join(normalized)
 
             try:
                 print(f"正在为 {self.name} 生成关键词...")
                 response = client.chat.completions.create(
                     model=_get_model_name(),
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": (
-                                "你是一名信息抽取助手。\n"
-                                "任务：生成仅限 AI 相关的中文关键词，英文逗号分隔，且满足：\n"
-                                "- 至少包含列表 AI_KEYWORDS 中的 1 个（可用同义或缩写），但不要输出单独的 'AI' 或 '人工智能'。\n"
-                                "- 不得包含 EXCLUDE_KEYWORDS 中任一项。\n"
-                                "- 在保证上述规则后，再补充 4-8 个基于产品名称/技术/功能的 AI 相关短关键词，中文为主，专有名词可保留英文。\n"
-                                "- 去重、去空格，保持 7-12 个词，总长不超过 80 字符。"
-                            ),
-                        },
-                        {
-                            "role": "user",
-                            "content": (
-                                f"AI_KEYWORDS: {', '.join(AI_KEYWORDS)}\n"
-                                f"EXCLUDE_KEYWORDS: {', '.join(EXCLUDE_KEYWORDS)}\n"
-                                f"产品名称: {self.name}\n标语: {self.tagline}\n描述: {self.description}"
-                            ),
-                        },
-                    ],
-                    max_tokens=50,
-                    temperature=0.7,
+                    messages=investor_keyword_prompt(
+                        subject="Product",
+                        title=self.name,
+                        subtitle=self.tagline,
+                        description=self.description,
+                    ),
+                    max_tokens=1200 if _is_gpt5_model(_get_model_name()) else 220,
+                    temperature=0.3,
+                    response_format={"type": "json_object"},
                     timeout=_get_request_timeout(),
                 )
-                keywords = response.choices[0].message.content.strip()
-                if ',' not in keywords:
-                    keywords = ', '.join(keywords.split())
-                # 生成后再次本地过滤，确保规则
-                keywords_list = [k.strip() for k in keywords.split(',') if k.strip()]
-                keywords_list = [k for k in keywords_list if k.lower() != 'ai' and k != '人工智能']
-                keywords_list = [k for k in keywords_list if not _contains_any(k, EXCLUDE_KEYWORDS)]
-                if not any(_contains_any(k, AI_KEYWORDS) for k in keywords_list):
-                    # 如果模型未包含AI关键词，强行补上产品名中的可能AI词或默认使用 'agent'
-                    fallback_ai = next((kw for kw in AI_KEYWORDS if kw != 'ai' and kw in (self.name + ' ' + self.tagline + ' ' + self.description).lower()), 'agent')
-                    keywords_list.append(fallback_ai)
-                keywords = ', '.join(dict.fromkeys(keywords_list))  # 去重并保持顺序
+                raw = response.choices[0].message.content.strip()
+                keywords_list = extract_keywords_from_response(raw)
+                keywords_list = finalize_keywords(keywords_list, context, source="producthunt")
+                keywords = ", ".join(keywords_list)
                 print(f"成功为 {self.name} 生成关键词")
                 return keywords
             except Exception as e:
                 print(f"OpenAI API 调用失败，使用备用关键词生成方法: {e}")
                 # 备用方法：从标题和标语中提取关键词
-                words = set((self.name + ", " + self.tagline).replace("&", ",").replace("|", ",").replace("-", ",").split(","))
-                filtered = [w.strip() for w in words if w.strip() and is_ai_related(w)]
+                words = (self.name + ", " + self.tagline + ", " + self.description).replace("&", ",").replace("|", ",").replace("-", ",").split(",")
+                filtered = finalize_keywords([w.strip() for w in words if w.strip()], context, source="producthunt")
                 return ", ".join(filtered)
         except Exception as e:
             print(f"关键词生成失败: {e}")
-            return self.name  # 至少返回产品名称作为关键词
+            return ", ".join(finalize_keywords([self.name, self.tagline], f"{self.name}\n{self.tagline}", source="producthunt"))
 
     def translate_text(self, text: str) -> str:
         """使用OpenAI翻译文本内容"""
@@ -263,7 +239,7 @@ class Product:
                         {"role": "system", "content": "你是世界上最专业的翻译工具，擅长英文和中文互译。你是一位精通英文和中文的专业翻译，尤其擅长将IT公司黑话和专业词汇翻译成简洁易懂的地道表达。你的任务是将以下内容翻译成地道的中文，风格与科普杂志或日常对话相似。"},
                         {"role": "user", "content": text},
                     ],
-                    max_tokens=500,
+                    max_tokens=1000 if _is_gpt5_model(_get_model_name()) else 500,
                     temperature=0.7,
                     timeout=_get_request_timeout(),
                 )

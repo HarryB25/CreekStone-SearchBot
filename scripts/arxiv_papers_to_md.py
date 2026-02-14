@@ -19,6 +19,11 @@ import json
 from typing import List, Dict
 from common.storage import save_structured_items, build_item_id
 from common.scoring import score_content
+from common.keyword_utils import (
+    investor_keyword_prompt,
+    extract_keywords_from_response,
+    finalize_keywords,
+)
 
 # AI 过滤关键词（用于后处理保护，一般已由分类过滤）
 AI_KEYWORDS = [
@@ -70,7 +75,12 @@ def _get_request_timeout() -> float:
 
 
 def _get_model_name() -> str:
-    return "gpt-5.1-2025-11-13"
+    raw = os.getenv("OPENAI_MODEL", "").strip()
+    return raw or "gpt-5-2025-08-07"
+
+
+def _is_gpt5_model(model_name: str) -> bool:
+    return model_name.startswith("gpt-5")
 
 
 def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
@@ -137,53 +147,35 @@ class ArxivPaper:
         )
 
     def generate_keywords(self) -> str:
-        """
-        为论文生成关键词（中文为主，专有名词可保留英文），不输出单独的 AI/人工智能。
-        规则：去除排除词，保持 5-10 个，英文逗号分隔。
-        """
+        """为论文生成中性关键词：贴合内容，术语统一，减少英文噪音。"""
         try:
             base_text = f"标题: {self.title}\n摘要: {self.summary}"
             if client is None:
                 words = (self.title + ", " + self.summary).replace("&", ",").replace("|", ",").replace("-", ",").split(",")
-                filtered = [w.strip() for w in words if w.strip()]
-                filtered = [w for w in filtered if is_ai_related(w)]
-                filtered = [w for w in filtered if w.lower() != 'ai' and w != '人工智能']
-                return ", ".join(dict.fromkeys(filtered))
-            
-            prompt = (
-                "你是一名论文信息抽取助手。\n"
-                "请生成仅限 AI 相关的中文关键词，英文逗号分隔，要求：\n"
-                "- 至少含 1 个 AI_KEYWORDS 列表中的词或同义词，但不要输出单独的“AI”或“人工智能”。\n"
-                "- 不包含 EXCLUDE_KEYWORDS 中任一项。\n"
-                "- 在满足规则后，再补充 4-6 个基于论文方法/场景/技术的短关键词，中文为主，专有名词可保留英文。\n"
-                "- 总数 7-12 个，去重、去空格。\n"
-                f"AI_KEYWORDS: {', '.join(AI_KEYWORDS)}\n"
-                f"EXCLUDE_KEYWORDS: {', '.join(EXCLUDE_KEYWORDS)}\n"
-                f"{base_text}"
-            )
+                filtered = finalize_keywords([w.strip() for w in words if w.strip()], base_text, source="arxiv")
+                return ", ".join(filtered)
+
             resp = client.chat.completions.create(
                 model=_get_model_name(),
-                messages=[
-                    {"role": "system", "content": "用中文输出关键词，满足给定约束。"},
-                    {"role": "user", "content": prompt},
-                ],
-                max_tokens=80,
-                temperature=0.5,
+                messages=investor_keyword_prompt(
+                    subject="Research Paper",
+                    title=self.title,
+                    subtitle=", ".join(self.categories[:3]),
+                    description=self.summary,
+                ),
+                max_tokens=1200 if _is_gpt5_model(_get_model_name()) else 220,
+                temperature=0.3,
+                response_format={"type": "json_object"},
                 timeout=_get_request_timeout(),
             )
-            keywords = resp.choices[0].message.content.strip()
-            if ',' not in keywords:
-                keywords = ', '.join(keywords.split())
-            items = [k.strip() for k in keywords.split(',') if k.strip()]
-            items = [k for k in items if k.lower() not in ('ai',) and k != '人工智能']
-            items = [k for k in items if not _contains_any(k, EXCLUDE_KEYWORDS)]
-            if not any(_contains_any(k, AI_KEYWORDS) for k in items):
-                fallback = next((kw for kw in AI_KEYWORDS if kw != 'ai' and kw in (self.title + ' ' + self.summary).lower()), 'agent')
-                items.append(fallback)
+            raw = resp.choices[0].message.content.strip()
+            items = extract_keywords_from_response(raw)
+            items = finalize_keywords(items, base_text, source="arxiv")
             return ", ".join(dict.fromkeys(items))
         except Exception as e:
             print(f"关键词生成失败: {e}")
-            return ""
+            fallback = finalize_keywords([self.title, self.summary], f"{self.title}\n{self.summary}", source="arxiv")
+            return ", ".join(fallback)
     
     def generate_ai_summary(self) -> Dict[str, str]:
         """使用AI生成结构化摘要"""
@@ -219,7 +211,7 @@ class ArxivPaper:
                     {"role": "system", "content": "你是一位专业的AI研究论文分析专家，擅长用简洁的中文总结论文要点。"},
                     {"role": "user", "content": prompt + "\nAI_KEYWORDS: " + ", ".join(AI_KEYWORDS) + "\nEXCLUDE_KEYWORDS: " + ", ".join(EXCLUDE_KEYWORDS)}
                 ],
-                max_tokens=800,
+                max_tokens=1800 if _is_gpt5_model(_get_model_name()) else 800,
                 temperature=0.7,
                 response_format={"type": "json_object"},
                 timeout=_get_request_timeout(),

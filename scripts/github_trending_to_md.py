@@ -20,6 +20,11 @@ from typing import List, Dict
 import time
 from common.storage import save_structured_items, build_item_id
 from common.scoring import score_content
+from common.keyword_utils import (
+    investor_keyword_prompt,
+    extract_keywords_from_response,
+    finalize_keywords,
+)
 
 # AI 过滤关键字
 AI_KEYWORDS = [
@@ -68,7 +73,12 @@ def _get_request_timeout() -> float:
 
 
 def _get_model_name() -> str:
-    return "gpt-5.1-2025-11-13"
+    raw = os.getenv("OPENAI_MODEL", "").strip()
+    return raw or "gpt-5-2025-08-07"
+
+
+def _is_gpt5_model(model_name: str) -> bool:
+    return model_name.startswith("gpt-5")
 
 
 def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
@@ -173,7 +183,7 @@ class GitHubRepo:
                         f"{self.description}"
                     )}
                 ],
-                max_tokens=200,
+                max_tokens=700 if _is_gpt5_model(_get_model_name()) else 200,
                 temperature=0.7,
                 timeout=_get_request_timeout(),
             )
@@ -185,52 +195,35 @@ class GitHubRepo:
             return self.description
 
     def generate_keywords(self) -> str:
-        """
-        生成中文为主的 AI 相关关键词，英文逗号分隔。
-        不输出单独“AI/人工智能”，过滤排除词，5-10 个。
-        """
+        """生成中性关键词：贴合内容，术语统一，减少英文噪音。"""
         try:
             base_text = f"仓库: {self.author}/{self.name}\n描述: {self.description}"
             if client is None:
                 words = (self.name + ", " + self.description).replace("&", ",").replace("|", ",").replace("-", ",").split(",")
-                filtered = [w.strip() for w in words if w.strip()]
-                filtered = [w for w in filtered if is_ai_related(w)]
-                filtered = [w for w in filtered if w.lower() != 'ai' and w != '人工智能']
-                return ", ".join(dict.fromkeys(filtered))
+                filtered = finalize_keywords([w.strip() for w in words if w.strip()], base_text, source="github")
+                return ", ".join(filtered)
 
-            prompt = (
-                "生成仅限 AI 相关的中文关键词（专有名词可保留英文），英文逗号分隔：\n"
-                "- 至少含 1 个 AI_KEYWORDS 的词或同义词，但不要输出单独“AI/人工智能”。\n"
-                "- 不含 EXCLUDE_KEYWORDS。\n"
-                "- 补充 4-6 个基于项目名称/技术/功能/架构的短关键词。\n"
-                "- 总数 7-12 个，去重、去空格。\n"
-                f"AI_KEYWORDS: {', '.join(AI_KEYWORDS)}\n"
-                f"EXCLUDE_KEYWORDS: {', '.join(EXCLUDE_KEYWORDS)}\n"
-                f"{base_text}"
-            )
             resp = client.chat.completions.create(
                 model=_get_model_name(),
-                messages=[
-                    {"role": "system", "content": "用中文输出关键词，满足给定约束。"},
-                    {"role": "user", "content": prompt},
-                ],
-                max_tokens=80,
-                temperature=0.5,
+                messages=investor_keyword_prompt(
+                    subject="Open Source Repository",
+                    title=f"{self.author}/{self.name}",
+                    subtitle=f"Language: {self.language}",
+                    description=self.description,
+                ),
+                max_tokens=1200 if _is_gpt5_model(_get_model_name()) else 220,
+                temperature=0.3,
+                response_format={"type": "json_object"},
                 timeout=_get_request_timeout(),
             )
-            keywords = resp.choices[0].message.content.strip()
-            if ',' not in keywords:
-                keywords = ', '.join(keywords.split())
-            items = [k.strip() for k in keywords.split(',') if k.strip()]
-            items = [k for k in items if k.lower() not in ('ai',) and k != '人工智能']
-            items = [k for k in items if not _contains_any(k, EXCLUDE_KEYWORDS)]
-            if not any(_contains_any(k, AI_KEYWORDS) for k in items):
-                fallback = next((kw for kw in AI_KEYWORDS if kw != 'ai' and kw in (self.name + ' ' + self.description).lower()), 'agent')
-                items.append(fallback)
+            raw = resp.choices[0].message.content.strip()
+            items = extract_keywords_from_response(raw)
+            items = finalize_keywords(items, base_text, source="github")
             return ", ".join(dict.fromkeys(items))
         except Exception as e:
             print(f"关键词生成失败: {e}")
-            return ""
+            fallback = finalize_keywords([self.name, self.description], f"{self.name}\n{self.description}", source="github")
+            return ", ".join(fallback)
     
     def to_markdown(self, rank: int) -> str:
         """转换为Markdown格式"""

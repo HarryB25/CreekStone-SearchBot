@@ -1,5 +1,6 @@
 import os
 import json
+from typing import Any, Dict
 
 
 def _get_timeout() -> float:
@@ -14,7 +15,26 @@ def _get_timeout() -> float:
 
 
 def _get_model_name() -> str:
-    return "gpt-5.1-2025-11-13"
+    raw = os.getenv("OPENAI_MODEL", "").strip()
+    return raw or "gpt-5-2025-08-07"
+
+
+def _is_gpt5_model(model_name: str) -> bool:
+    return model_name.startswith("gpt-5")
+
+
+def _extract_json_object(raw: str) -> Dict[str, Any]:
+    text = (raw or "").strip()
+    if not text:
+        raise ValueError("empty response")
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        start = text.find("{")
+        end = text.rfind("}")
+        if start >= 0 and end > start:
+            return json.loads(text[start : end + 1])
+        raise
 
 
 def score_content(text: str, client, kind: str = "general") -> dict:
@@ -139,19 +159,39 @@ def score_content(text: str, client, kind: str = "general") -> dict:
     )
 
     try:
-        response = client.chat.completions.create(
-            model=_get_model_name(),
-            messages=[
+        model_name = _get_model_name()
+        kwargs = {
+            "model": model_name,
+            "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
-            max_tokens=300,
-            temperature=0.4,
-            response_format={"type": "json_object"},
-            timeout=_get_timeout(),
-        )
+            "max_tokens": 900 if _is_gpt5_model(model_name) else 300,
+            "temperature": 0.2 if _is_gpt5_model(model_name) else 0.4,
+            "response_format": {"type": "json_object"},
+            "timeout": _get_timeout(),
+        }
+        if _is_gpt5_model(model_name):
+            kwargs["reasoning_effort"] = "low"
+
+        try:
+            response = client.chat.completions.create(**kwargs)
+        except TypeError:
+            # 兼容不支持 reasoning_effort 的网关
+            kwargs.pop("reasoning_effort", None)
+            response = client.chat.completions.create(**kwargs)
+
         content = response.choices[0].message.content
-        return json.loads(content)
+        if content and str(content).strip():
+            return _extract_json_object(content)
+
+        # 首次返回为空时再重试一次，放宽为纯文本 JSON 提取。
+        retry_kwargs = dict(kwargs)
+        retry_kwargs["max_tokens"] = 1400 if _is_gpt5_model(model_name) else 500
+        retry_kwargs.pop("response_format", None)
+        response = client.chat.completions.create(**retry_kwargs)
+        content = response.choices[0].message.content
+        return _extract_json_object(content)
     except Exception as e:
         print(f"评分失败: {e}")
         return {
