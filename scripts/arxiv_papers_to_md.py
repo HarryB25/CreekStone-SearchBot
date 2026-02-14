@@ -69,11 +69,8 @@ def _get_request_timeout() -> float:
     return 60.0
 
 
-def _get_model_name(default: str = "gpt-5.1-2025-11-13") -> str:
-    raw = os.getenv("ARXIV_MODEL_NAME")
-    if raw is None or raw.strip() == "":
-        return default
-    return raw.strip()
+def _get_model_name() -> str:
+    return "gpt-5.1-2025-11-13"
 
 
 def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
