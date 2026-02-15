@@ -25,8 +25,11 @@ from common.storage import save_structured_items, build_item_id
 from common.scoring import score_content
 from common.keyword_utils import (
     investor_keyword_prompt,
+    investor_keyword_repair_prompt,
     extract_keywords_from_response,
     finalize_keywords,
+    keyword_quality_check,
+    synthesize_keywords_from_context,
 )
 
 # AI 相关筛选与关键词控制
@@ -77,6 +80,41 @@ def _get_model_name() -> str:
 
 def _is_gpt5_model(model_name: str) -> bool:
     return model_name.startswith("gpt-5")
+
+
+def _looks_mostly_ascii(text: str) -> bool:
+    if not text:
+        return True
+    ascii_chars = sum(1 for ch in text if ch.isascii())
+    return ascii_chars / max(1, len(text)) > 0.85
+
+
+def _chat_json_content(messages, max_tokens: int, temperature: float) -> str:
+    """兼容部分网关对 response_format 的不完整支持。"""
+    model_name = _get_model_name()
+    kwargs = {
+        "model": model_name,
+        "messages": messages,
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+        "response_format": {"type": "json_object"},
+        "timeout": _get_request_timeout(),
+    }
+    if _is_gpt5_model(model_name):
+        kwargs["reasoning_effort"] = "low"
+    try:
+        resp = client.chat.completions.create(**kwargs)
+    except TypeError:
+        kwargs.pop("reasoning_effort", None)
+        resp = client.chat.completions.create(**kwargs)
+    content = (resp.choices[0].message.content or "").strip()
+    if content:
+        return content
+    retry_kwargs = dict(kwargs)
+    retry_kwargs.pop("response_format", None)
+    retry_kwargs["max_tokens"] = max(max_tokens, 1200 if _is_gpt5_model(model_name) else 300)
+    resp = client.chat.completions.create(**retry_kwargs)
+    return (resp.choices[0].message.content or "").strip()
 
 
 def _get_http_timeout(default: float = 45.0) -> float:
@@ -132,9 +170,10 @@ class Product:
         self.website = website
         self.url = url
         self.og_image_url = self.get_image_url_from_media(media)
-        self.keyword = self.generate_keywords()
+        # 先翻译，再抽关键词，减少英文碎词污染
         self.translated_tagline = self.translate_text(self.tagline)
         self.translated_description = self.translate_text(self.description)
+        self.keyword = self.generate_keywords()
 
     def get_image_url_from_media(self, media):
         """从API返回的media字段中获取图片URL"""
@@ -182,7 +221,12 @@ class Product:
     def generate_keywords(self) -> str:
         """生成中性关键词：贴合内容，术语统一，减少英文噪音。"""
         try:
-            context = f"{self.name}\n{self.tagline}\n{self.description}"
+            zh_tagline = (self.translated_tagline or "").strip()
+            zh_desc = (self.translated_description or "").strip()
+            context = f"{self.name}\n{zh_tagline or self.tagline}\n{zh_desc or self.description}"
+            prompt_desc = self.description
+            if zh_desc:
+                prompt_desc = f"{self.description}\n中文参考: {zh_desc}"
 
             # 如果 OpenAI 客户端不可用，直接使用备用方法
             if client is None:
@@ -190,26 +234,48 @@ class Product:
                 words = (self.name + ", " + self.tagline + ", " + self.description).replace("&", ",").replace("|", ",").replace("-", ",").split(",")
                 rough = [w.strip() for w in words if w.strip()]
                 normalized = finalize_keywords(rough, context, source="producthunt")
+                ok, _ = keyword_quality_check(normalized, context, source="producthunt")
+                if not ok:
+                    normalized = synthesize_keywords_from_context(context, source="producthunt", max_items=10)
                 return ", ".join(normalized)
 
             try:
                 print(f"正在为 {self.name} 生成关键词...")
-                response = client.chat.completions.create(
-                    model=_get_model_name(),
+                raw = _chat_json_content(
                     messages=investor_keyword_prompt(
                         subject="Product",
                         title=self.name,
-                        subtitle=self.tagline,
-                        description=self.description,
+                        subtitle=zh_tagline or self.tagline,
+                        description=prompt_desc,
                     ),
                     max_tokens=1200 if _is_gpt5_model(_get_model_name()) else 220,
                     temperature=0.3,
-                    response_format={"type": "json_object"},
-                    timeout=_get_request_timeout(),
                 )
-                raw = response.choices[0].message.content.strip()
                 keywords_list = extract_keywords_from_response(raw)
                 keywords_list = finalize_keywords(keywords_list, context, source="producthunt")
+                ok, reason = keyword_quality_check(keywords_list, context, source="producthunt")
+                if not ok:
+                    repaired_raw = _chat_json_content(
+                        messages=investor_keyword_repair_prompt(
+                            subject="Product",
+                            title=self.name,
+                            subtitle=zh_tagline or self.tagline,
+                            description=prompt_desc,
+                            bad_keywords=keywords_list,
+                            reason=reason,
+                        ),
+                        max_tokens=1000 if _is_gpt5_model(_get_model_name()) else 220,
+                        temperature=0.2,
+                    )
+                    repaired = extract_keywords_from_response(repaired_raw)
+                    repaired = finalize_keywords(repaired, context, source="producthunt")
+                    repaired_ok, _ = keyword_quality_check(repaired, context, source="producthunt")
+                    if repaired_ok:
+                        keywords_list = repaired
+                    else:
+                        keywords_list = synthesize_keywords_from_context(context, source="producthunt", max_items=10)
+                if not keywords_list:
+                    keywords_list = synthesize_keywords_from_context(context, source="producthunt", max_items=10)
                 keywords = ", ".join(keywords_list)
                 print(f"成功为 {self.name} 生成关键词")
                 return keywords
@@ -218,14 +284,24 @@ class Product:
                 # 备用方法：从标题和标语中提取关键词
                 words = (self.name + ", " + self.tagline + ", " + self.description).replace("&", ",").replace("|", ",").replace("-", ",").split(",")
                 filtered = finalize_keywords([w.strip() for w in words if w.strip()], context, source="producthunt")
+                ok, _ = keyword_quality_check(filtered, context, source="producthunt")
+                if not ok:
+                    filtered = synthesize_keywords_from_context(context, source="producthunt", max_items=10)
                 return ", ".join(filtered)
         except Exception as e:
             print(f"关键词生成失败: {e}")
-            return ", ".join(finalize_keywords([self.name, self.tagline], f"{self.name}\n{self.tagline}", source="producthunt"))
+            fallback_context = f"{self.name}\n{self.tagline}\n{self.description}"
+            fallback = finalize_keywords([self.name, self.tagline], fallback_context, source="producthunt")
+            ok, _ = keyword_quality_check(fallback, fallback_context, source="producthunt")
+            if not ok:
+                fallback = synthesize_keywords_from_context(fallback_context, source="producthunt", max_items=10)
+            return ", ".join(fallback)
 
     def translate_text(self, text: str) -> str:
         """使用OpenAI翻译文本内容"""
         try:
+            if not text or not text.strip():
+                return text
             # 如果 OpenAI 客户端不可用，直接返回原文
             if client is None:
                 print(f"OpenAI 客户端不可用，无法翻译: {self.name}")
@@ -233,19 +309,33 @@ class Product:
                 
             try:
                 print(f"正在翻译 {self.name} 的内容...")
-                response = client.chat.completions.create(
-                    model=_get_model_name(),
-                    messages=[
-                        {"role": "system", "content": "你是世界上最专业的翻译工具，擅长英文和中文互译。你是一位精通英文和中文的专业翻译，尤其擅长将IT公司黑话和专业词汇翻译成简洁易懂的地道表达。你的任务是将以下内容翻译成地道的中文，风格与科普杂志或日常对话相似。"},
-                        {"role": "user", "content": text},
-                    ],
-                    max_tokens=1000 if _is_gpt5_model(_get_model_name()) else 500,
-                    temperature=0.7,
-                    timeout=_get_request_timeout(),
-                )
-                translated_text = response.choices[0].message.content.strip()
-                print(f"成功翻译 {self.name} 的内容")
-                return translated_text
+                for _ in range(3):
+                    kwargs = {
+                        "model": _get_model_name(),
+                        "messages": [
+                            {"role": "system", "content": "你是专业中英翻译。请将输入准确翻译成地道中文，保留必要技术术语。只输出翻译结果。"},
+                            {"role": "user", "content": text},
+                        ],
+                        "max_tokens": 1200 if _is_gpt5_model(_get_model_name()) else 500,
+                        "temperature": 0.2,
+                        "timeout": _get_request_timeout(),
+                    }
+                    if _is_gpt5_model(_get_model_name()):
+                        kwargs["reasoning_effort"] = "low"
+                    try:
+                        response = client.chat.completions.create(**kwargs)
+                    except TypeError:
+                        kwargs.pop("reasoning_effort", None)
+                        response = client.chat.completions.create(**kwargs)
+                    translated_text = (response.choices[0].message.content or "").strip()
+                    if translated_text and len(translated_text) >= 4:
+                        # 若几乎全英文，继续重试一次
+                        if _looks_mostly_ascii(translated_text):
+                            continue
+                        print(f"成功翻译 {self.name} 的内容")
+                        return translated_text
+                print(f"翻译结果为空或质量不足，回退原文: {self.name}")
+                return text
             except Exception as e:
                 print(f"OpenAI API 翻译失败: {e}")
                 # 如果 API 调用失败，返回原文

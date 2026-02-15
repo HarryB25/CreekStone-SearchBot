@@ -21,8 +21,11 @@ from common.storage import save_structured_items, build_item_id
 from common.scoring import score_content
 from common.keyword_utils import (
     investor_keyword_prompt,
+    investor_keyword_repair_prompt,
     extract_keywords_from_response,
     finalize_keywords,
+    keyword_quality_check,
+    synthesize_keywords_from_context,
 )
 
 # AI 过滤关键词（用于后处理保护，一般已由分类过滤）
@@ -81,6 +84,33 @@ def _get_model_name() -> str:
 
 def _is_gpt5_model(model_name: str) -> bool:
     return model_name.startswith("gpt-5")
+
+
+def _chat_json_content(messages, max_tokens: int, temperature: float) -> str:
+    model_name = _get_model_name()
+    kwargs = {
+        "model": model_name,
+        "messages": messages,
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+        "response_format": {"type": "json_object"},
+        "timeout": _get_request_timeout(),
+    }
+    if _is_gpt5_model(model_name):
+        kwargs["reasoning_effort"] = "low"
+    try:
+        resp = client.chat.completions.create(**kwargs)
+    except TypeError:
+        kwargs.pop("reasoning_effort", None)
+        resp = client.chat.completions.create(**kwargs)
+    content = (resp.choices[0].message.content or "").strip()
+    if content:
+        return content
+    retry_kwargs = dict(kwargs)
+    retry_kwargs.pop("response_format", None)
+    retry_kwargs["max_tokens"] = max(max_tokens, 1200 if _is_gpt5_model(model_name) else 300)
+    resp = client.chat.completions.create(**retry_kwargs)
+    return (resp.choices[0].message.content or "").strip()
 
 
 def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
@@ -153,10 +183,12 @@ class ArxivPaper:
             if client is None:
                 words = (self.title + ", " + self.summary).replace("&", ",").replace("|", ",").replace("-", ",").split(",")
                 filtered = finalize_keywords([w.strip() for w in words if w.strip()], base_text, source="arxiv")
+                ok, _ = keyword_quality_check(filtered, base_text, source="arxiv")
+                if not ok:
+                    filtered = synthesize_keywords_from_context(base_text, source="arxiv", max_items=10)
                 return ", ".join(filtered)
 
-            resp = client.chat.completions.create(
-                model=_get_model_name(),
+            raw = _chat_json_content(
                 messages=investor_keyword_prompt(
                     subject="Research Paper",
                     title=self.title,
@@ -165,16 +197,39 @@ class ArxivPaper:
                 ),
                 max_tokens=1200 if _is_gpt5_model(_get_model_name()) else 220,
                 temperature=0.3,
-                response_format={"type": "json_object"},
-                timeout=_get_request_timeout(),
             )
-            raw = resp.choices[0].message.content.strip()
             items = extract_keywords_from_response(raw)
             items = finalize_keywords(items, base_text, source="arxiv")
+            ok, reason = keyword_quality_check(items, base_text, source="arxiv")
+            if not ok:
+                repaired_raw = _chat_json_content(
+                    messages=investor_keyword_repair_prompt(
+                        subject="Research Paper",
+                        title=self.title,
+                        subtitle=", ".join(self.categories[:3]),
+                        description=self.summary,
+                        bad_keywords=items,
+                        reason=reason,
+                    ),
+                    max_tokens=1000 if _is_gpt5_model(_get_model_name()) else 220,
+                    temperature=0.2,
+                )
+                repaired = extract_keywords_from_response(repaired_raw)
+                repaired = finalize_keywords(repaired, base_text, source="arxiv")
+                repaired_ok, _ = keyword_quality_check(repaired, base_text, source="arxiv")
+                if repaired_ok:
+                    items = repaired
+                else:
+                    items = synthesize_keywords_from_context(base_text, source="arxiv", max_items=10)
+            if not items:
+                items = synthesize_keywords_from_context(base_text, source="arxiv", max_items=10)
             return ", ".join(dict.fromkeys(items))
         except Exception as e:
             print(f"关键词生成失败: {e}")
             fallback = finalize_keywords([self.title, self.summary], f"{self.title}\n{self.summary}", source="arxiv")
+            ok, _ = keyword_quality_check(fallback, base_text, source="arxiv")
+            if not ok:
+                fallback = synthesize_keywords_from_context(base_text, source="arxiv", max_items=10)
             return ", ".join(fallback)
     
     def generate_ai_summary(self) -> Dict[str, str]:
@@ -205,19 +260,16 @@ class ArxivPaper:
         
         try:
             print(f"正在为论文 {self.title[:50]}... 生成AI摘要")
-            response = client.chat.completions.create(
-                model=_get_model_name(),
+            content = _chat_json_content(
                 messages=[
                     {"role": "system", "content": "你是一位专业的AI研究论文分析专家，擅长用简洁的中文总结论文要点。"},
                     {"role": "user", "content": prompt + "\nAI_KEYWORDS: " + ", ".join(AI_KEYWORDS) + "\nEXCLUDE_KEYWORDS: " + ", ".join(EXCLUDE_KEYWORDS)}
                 ],
                 max_tokens=1800 if _is_gpt5_model(_get_model_name()) else 800,
                 temperature=0.7,
-                response_format={"type": "json_object"},
-                timeout=_get_request_timeout(),
             )
-            
-            result = json.loads(response.choices[0].message.content)
+
+            result = json.loads(content)
             print(f"成功生成AI摘要")
             return result
             

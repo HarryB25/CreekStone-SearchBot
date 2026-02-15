@@ -1,4 +1,6 @@
 import json
+import math
+import os
 from html import escape
 from pathlib import Path
 from typing import Optional
@@ -94,6 +96,113 @@ def load_keyword_trends(_signature: str) -> dict:
         return {"dates": [], "keywords": []}
 
 
+def _load_ndjson_rows() -> list[dict]:
+    nd = STRUCTURED_DIR / "items.ndjson"
+    if not nd.exists():
+        return []
+    rows: list[dict] = []
+    try:
+        for line in nd.open("r", encoding="utf-8"):
+            line = line.strip()
+            if not line:
+                continue
+            rows.append(json.loads(line))
+    except Exception:
+        return []
+    return rows
+
+
+def _write_ndjson_rows(rows: list[dict]) -> None:
+    nd = STRUCTURED_DIR / "items.ndjson"
+    nd.parent.mkdir(parents=True, exist_ok=True)
+    with nd.open("w", encoding="utf-8") as f:
+        for row in rows:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def _rewrite_date_parquet(date_str: str, rows: list[dict]) -> None:
+    path = STRUCTURED_DIR / f"{date_str}.parquet"
+    date_rows = [r for r in rows if str(r.get("date", "")) == str(date_str)]
+    if not date_rows:
+        if path.exists():
+            path.unlink()
+        return
+    fixed_rows = []
+    for item in date_rows:
+        fixed = {}
+        for k, v in item.items():
+            if isinstance(v, dict) and not v:
+                fixed[k] = None
+            else:
+                fixed[k] = v
+        fixed_rows.append(fixed)
+    df = pd.DataFrame(fixed_rows)
+    df.to_parquet(path, index=False)
+
+
+def _parse_keyword_input(raw: str) -> list[str]:
+    text = (raw or "").replace("，", ",")
+    parts = []
+    for chunk in text.splitlines():
+        parts.extend(chunk.split(","))
+    out: list[str] = []
+    seen = set()
+    for p in parts:
+        s = str(p).strip()
+        if not s:
+            continue
+        if s.startswith("关键词：") or s.startswith("关键字："):
+            s = s.split("：", 1)[1].strip()
+        if not s:
+            continue
+        key = s.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(s)
+    return out
+
+
+def _update_item_keywords(item_id: str, keywords: list[str]) -> tuple[bool, str]:
+    rows = _load_ndjson_rows()
+    if not rows:
+        return False, "items.ndjson 为空或读取失败"
+    found = False
+    target_date = None
+    for row in rows:
+        if str(row.get("id", "")) == str(item_id):
+            row["keywords"] = keywords
+            found = True
+            target_date = str(row.get("date", ""))
+            break
+    if not found:
+        return False, f"未找到 id={item_id}"
+    _write_ndjson_rows(rows)
+    if target_date:
+        _rewrite_date_parquet(target_date, rows)
+    return True, f"已更新 {item_id} 的关键词（{len(keywords)} 个）"
+
+
+def _delete_item_by_id(item_id: str) -> tuple[bool, str]:
+    rows = _load_ndjson_rows()
+    if not rows:
+        return False, "items.ndjson 为空或读取失败"
+    target_row = None
+    kept = []
+    for row in rows:
+        if str(row.get("id", "")) == str(item_id):
+            target_row = row
+            continue
+        kept.append(row)
+    if target_row is None:
+        return False, f"未找到 id={item_id}"
+    _write_ndjson_rows(kept)
+    target_date = str(target_row.get("date", ""))
+    if target_date:
+        _rewrite_date_parquet(target_date, kept)
+    return True, f"已删除 {item_id}"
+
+
 def filter_items(df: pd.DataFrame, source: Optional[str], q: Optional[str]):
     if df.empty:
         return df
@@ -181,6 +290,12 @@ def card_html(item):
         chips_html = f"<div class='chips'>{chips_html}</div>"
 
     score = (item.get("score") or {}).get("total")
+    reason = (item.get("score") or {}).get("reason") if isinstance(item.get("score"), dict) else None
+    reason_html = (
+        f"<div class='reason'>{escape(str(reason))}</div>"
+        if isinstance(reason, str) and reason.strip()
+        else ""
+    )
     score_class = "s1" if score is not None and score < 74 else "s2" if score is not None and score < 78 else "s3"
     score_html = f"<span class='score {score_class}'>{score}</span>" if score is not None else ""
 
@@ -213,6 +328,7 @@ def card_html(item):
         score_html,
         "</div>",
         f"<div class='desc'>{desc}</div>",
+        reason_html,
         chips_html,
         f"<div class='meta'>{meta}</div>",
         "</div>",
@@ -221,6 +337,114 @@ def card_html(item):
         "</div>",
     ]
     return "\n".join([l for l in lines if l])
+
+
+def _score_radar_axes(item):
+    score_obj = item.get("score") if isinstance(item, dict) else None
+    if not isinstance(score_obj, dict):
+        return None
+    breakdown = score_obj.get("breakdown")
+    if not isinstance(breakdown, dict):
+        return None
+
+    # Normalize each axis to [0, 1] so different sub-score ranges are comparable.
+    dims = [
+        ("AI Native", "ai_native", 30.0, False),
+        ("Tech Niche", "tech_niche", 25.0, False),
+        ("Business", "business", 20.0, False),
+        ("Team", "team", 15.0, False),
+        ("Bonus", "bonus", 10.0, False),
+        ("Penalty(inv)", "penalty", 10.0, True),
+    ]
+    labels = []
+    values = []
+    raws = []
+    for label, key, cap, invert in dims:
+        raw = _to_float(breakdown.get(key), 0.0)
+        value = raw / cap if cap > 0 else 0.0
+        if invert:
+            value = 1.0 - value
+        value = max(0.0, min(1.0, value))
+        labels.append(label)
+        values.append(value)
+        raws.append(raw)
+    return labels, values, raws
+
+
+def build_score_radar_svg(item) -> Optional[str]:
+    axes = _score_radar_axes(item)
+    if axes is None:
+        return None
+    labels, values, raws = axes
+    n = len(labels)
+    if n == 0:
+        return None
+
+    cx = 120.0
+    cy = 120.0
+    rmax = 78.0
+    size = 240
+
+    axis_rows = []
+    for idx, label in enumerate(labels):
+        angle = (2 * math.pi * idx / n) - (math.pi / 2)
+        v = values[idx]
+        axis_rows.append(
+            {
+                "dimension": label,
+                "value": v,
+                "raw": raws[idx],
+                "x": cx + (rmax * v * math.cos(angle)),
+                "y": cy + (rmax * v * math.sin(angle)),
+                "axis_x": cx + (rmax * math.cos(angle)),
+                "axis_y": cy + (rmax * math.sin(angle)),
+                "label_x": cx + (rmax * 1.22 * math.cos(angle)),
+                "label_y": cy + (rmax * 1.22 * math.sin(angle)),
+            }
+        )
+
+    rings = []
+    for frac in [0.25, 0.5, 0.75, 1.0]:
+        rings.append(
+            f"<circle cx='{cx}' cy='{cy}' r='{rmax * frac:.2f}' fill='none' stroke='#e5e7eb' stroke-width='1' />"
+        )
+
+    spokes = []
+    for p in axis_rows:
+        spokes.append(
+            f"<line x1='{cx}' y1='{cy}' x2='{p['axis_x']:.2f}' y2='{p['axis_y']:.2f}' stroke='#d1d5db' stroke-width='1' />"
+        )
+
+    poly_points = " ".join([f"{p['x']:.2f},{p['y']:.2f}" for p in axis_rows])
+    poly_fill = f"<polygon points='{poly_points}' fill='#2563eb' fill-opacity='0.16' stroke='none' />"
+    poly_line = f"<polygon points='{poly_points}' fill='none' stroke='#1d4ed8' stroke-width='2' />"
+
+    dots = []
+    labels_svg = []
+    for p in axis_rows:
+        dots.append(f"<circle cx='{p['x']:.2f}' cy='{p['y']:.2f}' r='2.8' fill='#1d4ed8' />")
+        lx = p["label_x"]
+        anchor = "middle"
+        if lx < cx - 8:
+            anchor = "end"
+        elif lx > cx + 8:
+            anchor = "start"
+        labels_svg.append(
+            f"<text x='{lx:.2f}' y='{p['label_y']:.2f}' font-size='9' fill='#475569' text-anchor='{anchor}' dominant-baseline='middle'>{escape(str(p['dimension']))}</text>"
+        )
+
+    svg = (
+        f"<svg viewBox='0 0 {size} {size}' width='100%' height='220' xmlns='http://www.w3.org/2000/svg'>"
+        + "".join(rings)
+        + "".join(spokes)
+        + poly_fill
+        + poly_line
+        + "".join(dots)
+        + "".join(labels_svg)
+        + "</svg>"
+    )
+    return svg
+
 
 def _score_color(norm_score: float) -> str:
     norm = max(0.0, min(1.0, norm_score))
@@ -249,10 +473,11 @@ STYLE = """
 .score.s3 { background: linear-gradient(135deg,#2563eb,#38bdf8); -webkit-background-clip:text; color:transparent; }
 .meta { color:#6b7280; font-size:12px; margin-top:6px; }
 .desc { color:#1f2937; font-size:14px; line-height:1.5; margin:6px 0 8px 0; }
+.reason { color:#334155; font-size:12px; line-height:1.45; margin:2px 0 8px 0; }
 .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
-.chip { padding:6px 10px; border-radius:10px; background:#eef2ff; border:1px solid #c7d2fe; color:#0f172a; font-size:12px; font-weight:600; }
-.thumb { width:100%; max-height:180px; object-fit:cover; border-radius:12px; border:1px solid #e5e7eb; box-shadow:0 6px 14px rgba(0,0,0,0.05); }
-.title-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .chip { padding:6px 10px; border-radius:10px; background:#eef2ff; border:1px solid #c7d2fe; color:#0f172a; font-size:12px; font-weight:600; }
+    .thumb { width:100%; max-height:180px; object-fit:cover; border-radius:12px; border:1px solid #e5e7eb; box-shadow:0 6px 14px rgba(0,0,0,0.05); }
+    .title-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
 </style>
 """
 
@@ -265,6 +490,7 @@ df = load_items(_structured_signature())
 if df.empty:
     st.warning("暂无数据，请先生成 structured 数据。")
     st.stop()
+df_all = df.copy()
 
 sort_label = st.selectbox("关键词趋势排序", list(SORT_FIELD_OPTIONS.keys()), index=0)
 sort_field = SORT_FIELD_OPTIONS[sort_label]
@@ -282,7 +508,7 @@ with tab_items:
     left_col, right_col = st.columns([4, 1])
 
     date_values = (
-        df["date"]
+        df_all["date"]
         .dropna()
         .astype(str)
         .sort_values(ascending=False)
@@ -291,7 +517,7 @@ with tab_items:
     )
 
     with left_col:
-        col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
+        col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 1])
         with col1:
             q = st.text_input("搜索标题 / 关键词 / 描述", "")
         with col2:
@@ -301,11 +527,25 @@ with tab_items:
             limit = st.slider("显示条数", 10, 200, 50, 10)
         with col4:
             date_choice = st.selectbox("日期", date_values)
+        with col5:
+            manage_mode = st.toggle("管理模式", value=False, key="items_manage_mode")
 
+        inline_authed = True
+        if manage_mode:
+            admin_password = os.getenv("ADMIN_PASSWORD", "").strip()
+            if admin_password:
+                inline_pwd = st.text_input("管理员密码", type="password", key="items_admin_password")
+                inline_authed = (inline_pwd == admin_password)
+                if not inline_authed:
+                    st.warning("管理模式已开启，请输入正确管理员密码后操作。")
+            else:
+                st.caption("未设置 ADMIN_PASSWORD，当前环境默认允许管理操作。")
+
+        df_items = df_all
         if date_choice:
-            df = df[df["date"].astype(str) == date_choice]
+            df_items = df_items[df_items["date"].astype(str) == date_choice]
 
-        df_f = filter_items(df, source or None, q or None)
+        df_f = filter_items(df_items, source or None, q or None)
         if not df_f.empty and "score" in df_f.columns:
             df_f = df_f.copy()
             df_f["score_total"] = df_f["score"].apply(
@@ -319,7 +559,52 @@ with tab_items:
         st.caption(f"共 {len(df_f)} 条，显示前 {min(limit, len(df_f))} 条")
 
         for _, row in df_f.head(limit).iterrows():
-            st.markdown(card_html(row), unsafe_allow_html=True)
+            row_dict = row.to_dict() if hasattr(row, "to_dict") else dict(row)
+            item_col, radar_col = st.columns([5, 2], gap="small")
+            with item_col:
+                st.markdown(card_html(row_dict), unsafe_allow_html=True)
+                if manage_mode:
+                    item_id = str(row_dict.get("id", ""))
+                    st.caption(f"管理ID: `{item_id}`")
+                    with st.expander("编辑关键词 / 删除项目", expanded=False):
+                        current_kw = row_dict.get("keywords", []) if isinstance(row_dict.get("keywords"), list) else []
+                        kw_text = st.text_area(
+                            "关键词（每行一个，或逗号分隔）",
+                            value="\n".join(current_kw),
+                            height=120,
+                            key=f"inline_kw_{item_id}",
+                            disabled=not inline_authed,
+                        )
+                        parsed_kw = _parse_keyword_input(kw_text)
+                        st.caption(f"解析后关键词数: {len(parsed_kw)}")
+                        a1, a2, a3 = st.columns([1, 1, 2])
+                        with a1:
+                            if st.button("保存关键词", key=f"inline_save_kw_{item_id}", type="primary", disabled=not inline_authed):
+                                ok, msg = _update_item_keywords(item_id, parsed_kw)
+                                if ok:
+                                    st.success(msg)
+                                    st.cache_data.clear()
+                                    st.rerun()
+                                else:
+                                    st.error(msg)
+                        with a2:
+                            confirm_delete = st.checkbox("确认删除", key=f"inline_confirm_delete_{item_id}", disabled=not inline_authed)
+                            if st.button("删除项目", key=f"inline_delete_item_{item_id}", disabled=not inline_authed):
+                                if not confirm_delete:
+                                    st.warning("请先勾选“确认删除”。")
+                                else:
+                                    ok, msg = _delete_item_by_id(item_id)
+                                    if ok:
+                                        st.success(msg)
+                                        st.cache_data.clear()
+                                        st.rerun()
+                                    else:
+                                        st.error(msg)
+            with radar_col:
+                st.caption("评分维度")
+                radar_svg = build_score_radar_svg(row_dict)
+                if radar_svg is not None:
+                    st.markdown(radar_svg, unsafe_allow_html=True)
 
     with right_col:
         if t_keywords:

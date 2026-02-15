@@ -90,6 +90,12 @@ streamlit run app.py
 - 按来源筛选
 - 关键词/描述搜索
 - 项目卡片展示评分、关键词、图片（有图才占右侧区域）
+- 内容浏览页内置“管理模式”：可直接编辑关键词、删除项目
+
+管理员密码配置（可选）：
+- 本地：在 `.env` 设置 `ADMIN_PASSWORD=...`
+- Streamlit Community Cloud：在 App 的 `Settings -> Secrets` 添加：
+  - `ADMIN_PASSWORD = "your-strong-password"`
 
 ## GitHub Actions 自动化
 
