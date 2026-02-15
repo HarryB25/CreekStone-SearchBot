@@ -1,5 +1,4 @@
 import json
-import math
 import os
 from html import escape
 from pathlib import Path
@@ -289,7 +288,33 @@ def _trend_series_y_field(series_df: pd.DataFrame) -> str:
     return "count"
 
 
-def card_html(item):
+def _format_reason_html(score_obj: Optional[dict]) -> str:
+    score = score_obj if isinstance(score_obj, dict) else {}
+    reason = score.get("reason")
+    text = str(reason).strip() if isinstance(reason, str) else ""
+    reason_struct = score.get("reason_struct") if isinstance(score.get("reason_struct"), dict) else {}
+
+    if reason_struct:
+        summary = str(reason_struct.get("summary", "")).strip()
+        plus = [str(x).strip() for x in reason_struct.get("plus", []) if str(x).strip()]
+        minus = [str(x).strip() for x in reason_struct.get("minus", []) if str(x).strip()]
+
+        if plus or minus:
+            parts = []
+            if summary:
+                parts.append(f"<span class='reason-neutral'>{escape(summary)}</span>")
+            for p in plus:
+                parts.append(f"<span class='reason-plus'>加分：{escape(p)}</span>")
+            for m in minus:
+                parts.append(f"<span class='reason-minus'>减分：{escape(m)}</span>")
+            return f"<div class='reason'>{' '.join(parts)}</div>"
+
+    if not text:
+        return ""
+    return f"<div class='reason'><span class='reason-neutral'>{escape(text)}</span></div>"
+
+
+def card_html(item, radar_svg: Optional[str] = None):
     title = escape(item.get("title", ""))
     url = item.get("url", "#")
     desc = escape(item.get("description_zh") or item.get("description_en") or "")
@@ -308,12 +333,7 @@ def card_html(item):
         chips_html = f"<div class='chips'>{chips_html}</div>"
 
     score = (item.get("score") or {}).get("total")
-    reason = (item.get("score") or {}).get("reason") if isinstance(item.get("score"), dict) else None
-    reason_html = (
-        f"<div class='reason'>{escape(str(reason))}</div>"
-        if isinstance(reason, str) and reason.strip()
-        else ""
-    )
+    reason_html = _format_reason_html(item.get("score"))
     score_class = "s1" if score is not None and score < 74 else "s2" if score is not None and score < 78 else "s3"
     score_html = f"<span class='score {score_class}'>{score}</span>" if score is not None else ""
 
@@ -333,14 +353,16 @@ def card_html(item):
 
     media = item.get("media") or {}
     img = media.get("image")
-    has_img = bool(img)
-    img_html = f"<img class='thumb' src='{img}'/>" if has_img else ""
-    row_class = "row" if has_img else "row no-media"
+    img_html = f"<img class='thumb' src='{img}'/>" if img else ""
+    radar_html = f"<div class='radar-box'>{radar_svg}</div>" if radar_svg else ""
+    side_parts = [p for p in [img_html, radar_html] if p]
+    side_html = f"<div class='side-col'>{''.join(side_parts)}</div>" if side_parts else ""
+    row_class = "content-row has-side" if side_html else "content-row no-side"
 
     lines = [
         "<div class='card'>",
         f"<div class='{row_class}'>",
-        "<div>",
+        "<div class='main-col'>",
         "<div class='title-row'>",
         f"<a class='title' href='{url}' target='_blank' rel='noopener'>{title}</a>",
         score_html,
@@ -350,14 +372,14 @@ def card_html(item):
         chips_html,
         f"<div class='meta'>{meta}</div>",
         "</div>",
-        img_html,
+        side_html,
         "</div>",
         "</div>",
     ]
     return "\n".join([l for l in lines if l])
 
 
-def _score_radar_axes(item):
+def _score_breakdown_rows(item):
     score_obj = item.get("score") if isinstance(item, dict) else None
     if not isinstance(score_obj, dict):
         return None
@@ -365,102 +387,81 @@ def _score_radar_axes(item):
     if not isinstance(breakdown, dict):
         return None
 
-    # Normalize each axis to [0, 1] so different sub-score ranges are comparable.
     dims = [
-        ("AI Native", "ai_native", 30.0, False),
-        ("Tech Niche", "tech_niche", 25.0, False),
-        ("Business", "business", 20.0, False),
-        ("Team", "team", 15.0, False),
-        ("Bonus", "bonus", 10.0, False),
-        ("Penalty(inv)", "penalty", 10.0, True),
+        ("AI原生", "ai_native", 30.0, False, "#2563eb"),
+        ("技术壁垒", "tech_niche", 25.0, False, "#0ea5e9"),
+        ("商业价值", "business", 20.0, False, "#10b981"),
+        ("团队能力", "team", 15.0, False, "#f59e0b"),
+        ("加分项", "bonus", 10.0, False, "#8b5cf6"),
+        ("减分项", "penalty", 10.0, True, "#ef4444"),
     ]
-    labels = []
-    values = []
-    raws = []
-    for label, key, cap, invert in dims:
+
+    rows = []
+    for label, key, cap, is_penalty, color in dims:
         raw = _to_float(breakdown.get(key), 0.0)
-        value = raw / cap if cap > 0 else 0.0
-        if invert:
-            value = 1.0 - value
-        value = max(0.0, min(1.0, value))
-        labels.append(label)
-        values.append(value)
-        raws.append(raw)
-    return labels, values, raws
+        ratio = raw / cap if cap > 0 else 0.0
+        rows.append(
+            {
+                "label": label,
+                "raw": max(0.0, raw),
+                "cap": cap,
+                "ratio": max(0.0, min(1.0, ratio)),
+                "is_penalty": is_penalty,
+                "color": color,
+            }
+        )
+    return rows
 
 
 def build_score_radar_svg(item) -> Optional[str]:
-    axes = _score_radar_axes(item)
-    if axes is None:
+    rows = _score_breakdown_rows(item)
+    if rows is None:
         return None
-    labels, values, raws = axes
-    n = len(labels)
-    if n == 0:
+    if not rows:
         return None
 
-    cx = 120.0
-    cy = 120.0
-    rmax = 78.0
-    size = 240
+    width = 360
+    height = 210
+    top = 16
+    row_h = 30
+    label_x = 12
+    bar_x = 106
+    bar_w = 168
+    bar_h = 12
+    value_x = bar_x + bar_w + 12
 
-    axis_rows = []
-    for idx, label in enumerate(labels):
-        angle = (2 * math.pi * idx / n) - (math.pi / 2)
-        v = values[idx]
-        axis_rows.append(
-            {
-                "dimension": label,
-                "value": v,
-                "raw": raws[idx],
-                "x": cx + (rmax * v * math.cos(angle)),
-                "y": cy + (rmax * v * math.sin(angle)),
-                "axis_x": cx + (rmax * math.cos(angle)),
-                "axis_y": cy + (rmax * math.sin(angle)),
-                "label_x": cx + (rmax * 1.22 * math.cos(angle)),
-                "label_y": cy + (rmax * 1.22 * math.sin(angle)),
-            }
+    def _fmt_num(val: float) -> str:
+        if abs(val - round(val)) < 1e-6:
+            return str(int(round(val)))
+        return f"{val:.1f}"
+
+    parts = [
+        f"<svg viewBox='0 0 {width} {height}' width='100%' height='210' xmlns='http://www.w3.org/2000/svg'>"
+    ]
+
+    for i, row in enumerate(rows):
+        y = top + i * row_h
+        by = y + 10
+        fill_w = row["ratio"] * bar_w
+        value_text = _fmt_num(row["raw"])
+        if row["is_penalty"] and row["raw"] > 0:
+            value_text = f"-{value_text}"
+
+        parts.append(
+            f"<text x='{label_x}' y='{y + 16}' font-size='11' fill='#334155' dominant-baseline='middle'>{escape(str(row['label']))}</text>"
+        )
+        parts.append(
+            f"<rect x='{bar_x}' y='{by}' width='{bar_w}' height='{bar_h}' rx='6' fill='#e2e8f0' />"
+        )
+        parts.append(
+            f"<rect x='{bar_x}' y='{by}' width='{fill_w:.2f}' height='{bar_h}' rx='6' fill='{row['color']}' />"
+        )
+        parts.append(
+            f"<text x='{value_x}' y='{y + 16}' font-size='11' fill='#0f172a' dominant-baseline='middle'>{escape(value_text)}</text>"
         )
 
-    rings = []
-    for frac in [0.25, 0.5, 0.75, 1.0]:
-        rings.append(
-            f"<circle cx='{cx}' cy='{cy}' r='{rmax * frac:.2f}' fill='none' stroke='#e5e7eb' stroke-width='1' />"
-        )
-
-    spokes = []
-    for p in axis_rows:
-        spokes.append(
-            f"<line x1='{cx}' y1='{cy}' x2='{p['axis_x']:.2f}' y2='{p['axis_y']:.2f}' stroke='#d1d5db' stroke-width='1' />"
-        )
-
-    poly_points = " ".join([f"{p['x']:.2f},{p['y']:.2f}" for p in axis_rows])
-    poly_fill = f"<polygon points='{poly_points}' fill='#2563eb' fill-opacity='0.16' stroke='none' />"
-    poly_line = f"<polygon points='{poly_points}' fill='none' stroke='#1d4ed8' stroke-width='2' />"
-
-    dots = []
-    labels_svg = []
-    for p in axis_rows:
-        dots.append(f"<circle cx='{p['x']:.2f}' cy='{p['y']:.2f}' r='2.8' fill='#1d4ed8' />")
-        lx = p["label_x"]
-        anchor = "middle"
-        if lx < cx - 8:
-            anchor = "end"
-        elif lx > cx + 8:
-            anchor = "start"
-        labels_svg.append(
-            f"<text x='{lx:.2f}' y='{p['label_y']:.2f}' font-size='9' fill='#475569' text-anchor='{anchor}' dominant-baseline='middle'>{escape(str(p['dimension']))}</text>"
-        )
-
-    svg = (
-        f"<svg viewBox='0 0 {size} {size}' width='100%' height='220' xmlns='http://www.w3.org/2000/svg'>"
-        + "".join(rings)
-        + "".join(spokes)
-        + poly_fill
-        + poly_line
-        + "".join(dots)
-        + "".join(labels_svg)
-        + "</svg>"
-    )
+    parts.append("</svg>")
+    svg = "".join(parts)
     return svg
 
 
@@ -478,11 +479,14 @@ def _score_color(norm_score: float) -> str:
 
 STYLE = """
 <style>
-.block-container { padding-top: 1.5rem; max-width: 1300px; }
+.block-container { padding-top: 1.5rem; max-width: 1520px; }
 .card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:16px 18px; margin-bottom:14px; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
-.row { display:grid; grid-template-columns:1fr 230px; gap:14px; align-items:start; }
-.row.no-media { grid-template-columns:1fr; }
-@media (max-width:900px){ .row { grid-template-columns:1fr; } }
+.content-row { display:grid; gap:16px; align-items:start; }
+.content-row.has-side { grid-template-columns:minmax(0,1fr) 300px; }
+.content-row.no-side { grid-template-columns:minmax(0,1fr); }
+@media (max-width:1000px){ .content-row.has-side { grid-template-columns:1fr; } }
+.main-col { min-width:0; }
+.side-col { width:100%; display:flex; flex-direction:column; gap:12px; }
 .title { font-size:22px; font-weight:750; color:#0f172a; text-decoration:none; line-height:1.3; }
 .title:hover { color:#007aff; }
 .score { font-size:24px; font-weight:800; }
@@ -491,10 +495,15 @@ STYLE = """
 .score.s3 { background: linear-gradient(135deg,#2563eb,#38bdf8); -webkit-background-clip:text; color:transparent; }
 .meta { color:#6b7280; font-size:12px; margin-top:6px; }
 .desc { color:#1f2937; font-size:14px; line-height:1.5; margin:6px 0 8px 0; }
-.reason { color:#334155; font-size:12px; line-height:1.45; margin:2px 0 8px 0; }
+.reason { font-size:12px; line-height:1.45; margin:2px 0 8px 0; }
+.reason-neutral { color:#334155; }
+.reason-plus { color:#15803d; font-weight:600; }
+.reason-minus { color:#dc2626; font-weight:600; }
 .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
     .chip { padding:6px 10px; border-radius:10px; background:#eef2ff; border:1px solid #c7d2fe; color:#0f172a; font-size:12px; font-weight:600; }
-    .thumb { width:100%; max-height:180px; object-fit:cover; border-radius:12px; border:1px solid #e5e7eb; box-shadow:0 6px 14px rgba(0,0,0,0.05); }
+    .thumb { width:100%; height:180px; object-fit:cover; border-radius:12px; border:1px solid #e5e7eb; box-shadow:0 6px 14px rgba(0,0,0,0.05); background:#fff; }
+    .radar-box { width:100%; border-radius:12px; border:1px solid #e5e7eb; background:#fff; box-shadow:0 6px 14px rgba(0,0,0,0.05); padding:8px; }
+    .radar-box svg { width:100% !important; height:210px !important; display:block; }
     .title-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
 </style>
 """
@@ -523,7 +532,7 @@ with tab_items:
         else []
     )
 
-    left_col, right_col = st.columns([4, 1])
+    left_col, right_col = st.columns([5, 1])
 
     date_values = (
         df_all["date"]
@@ -578,51 +587,45 @@ with tab_items:
 
         for _, row in df_f.head(limit).iterrows():
             row_dict = row.to_dict() if hasattr(row, "to_dict") else dict(row)
-            item_col, radar_col = st.columns([5, 2], gap="small")
-            with item_col:
-                st.markdown(card_html(row_dict), unsafe_allow_html=True)
-                if manage_mode:
-                    item_id = str(row_dict.get("id", ""))
-                    st.caption(f"管理ID: `{item_id}`")
-                    with st.expander("编辑关键词 / 删除项目", expanded=False):
-                        current_kw = row_dict.get("keywords", []) if isinstance(row_dict.get("keywords"), list) else []
-                        kw_text = st.text_area(
-                            "关键词（每行一个，或逗号分隔）",
-                            value="\n".join(current_kw),
-                            height=120,
-                            key=f"inline_kw_{item_id}",
-                            disabled=not inline_authed,
-                        )
-                        parsed_kw = _parse_keyword_input(kw_text)
-                        st.caption(f"解析后关键词数: {len(parsed_kw)}")
-                        a1, a2, a3 = st.columns([1, 1, 2])
-                        with a1:
-                            if st.button("保存关键词", key=f"inline_save_kw_{item_id}", type="primary", disabled=not inline_authed):
-                                ok, msg = _update_item_keywords(item_id, parsed_kw)
+            radar_svg = build_score_radar_svg(row_dict)
+            st.markdown(card_html(row_dict, radar_svg=radar_svg), unsafe_allow_html=True)
+            if manage_mode:
+                item_id = str(row_dict.get("id", ""))
+                st.caption(f"管理ID: `{item_id}`")
+                with st.expander("编辑关键词 / 删除项目", expanded=False):
+                    current_kw = row_dict.get("keywords", []) if isinstance(row_dict.get("keywords"), list) else []
+                    kw_text = st.text_area(
+                        "关键词（每行一个，或逗号分隔）",
+                        value="\n".join(current_kw),
+                        height=120,
+                        key=f"inline_kw_{item_id}",
+                        disabled=not inline_authed,
+                    )
+                    parsed_kw = _parse_keyword_input(kw_text)
+                    st.caption(f"解析后关键词数: {len(parsed_kw)}")
+                    a1, a2, a3 = st.columns([1, 1, 2])
+                    with a1:
+                        if st.button("保存关键词", key=f"inline_save_kw_{item_id}", type="primary", disabled=not inline_authed):
+                            ok, msg = _update_item_keywords(item_id, parsed_kw)
+                            if ok:
+                                st.success(msg)
+                                st.cache_data.clear()
+                                st.rerun()
+                            else:
+                                st.error(msg)
+                    with a2:
+                        confirm_delete = st.checkbox("确认删除", key=f"inline_confirm_delete_{item_id}", disabled=not inline_authed)
+                        if st.button("删除项目", key=f"inline_delete_item_{item_id}", disabled=not inline_authed):
+                            if not confirm_delete:
+                                st.warning("请先勾选“确认删除”。")
+                            else:
+                                ok, msg = _delete_item_by_id(item_id)
                                 if ok:
                                     st.success(msg)
                                     st.cache_data.clear()
                                     st.rerun()
                                 else:
                                     st.error(msg)
-                        with a2:
-                            confirm_delete = st.checkbox("确认删除", key=f"inline_confirm_delete_{item_id}", disabled=not inline_authed)
-                            if st.button("删除项目", key=f"inline_delete_item_{item_id}", disabled=not inline_authed):
-                                if not confirm_delete:
-                                    st.warning("请先勾选“确认删除”。")
-                                else:
-                                    ok, msg = _delete_item_by_id(item_id)
-                                    if ok:
-                                        st.success(msg)
-                                        st.cache_data.clear()
-                                        st.rerun()
-                                    else:
-                                        st.error(msg)
-            with radar_col:
-                st.caption("评分维度")
-                radar_svg = build_score_radar_svg(row_dict)
-                if radar_svg is not None:
-                    st.markdown(radar_svg, unsafe_allow_html=True)
 
     with right_col:
         if t_keywords:

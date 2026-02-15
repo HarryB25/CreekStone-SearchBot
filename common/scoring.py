@@ -37,6 +37,79 @@ def _extract_json_object(raw: str) -> Dict[str, Any]:
         raise
 
 
+def _to_int(value: Any, default: int = 0) -> int:
+    try:
+        return int(round(float(value)))
+    except Exception:
+        return default
+
+
+def _normalize_reason_struct(payload: Any, reason_fallback: str = "") -> Dict[str, Any]:
+    data = payload if isinstance(payload, dict) else {}
+    summary = str(data.get("summary", "")).strip()
+
+    def _list_of_str(v: Any) -> list[str]:
+        if not isinstance(v, list):
+            return []
+        out = []
+        for item in v:
+            s = str(item).strip()
+            if s:
+                out.append(s)
+        return out
+
+    plus = _list_of_str(
+        data.get("plus")
+        if data.get("plus") is not None
+        else data.get("pros", data.get("positive_points"))
+    )
+    minus = _list_of_str(
+        data.get("minus")
+        if data.get("minus") is not None
+        else data.get("cons", data.get("negative_points"))
+    )
+
+    if not summary and reason_fallback:
+        summary = reason_fallback
+
+    return {"summary": summary, "plus": plus, "minus": minus}
+
+
+def _normalize_score_payload(raw: Any) -> Dict[str, Any]:
+    data = raw if isinstance(raw, dict) else {}
+    b = data.get("breakdown") if isinstance(data.get("breakdown"), dict) else {}
+    breakdown = {
+        "ai_native": max(0, _to_int(b.get("ai_native"), 0)),
+        "tech_niche": max(0, _to_int(b.get("tech_niche"), 0)),
+        "business": max(0, _to_int(b.get("business"), 0)),
+        "team": max(0, _to_int(b.get("team"), 0)),
+        "bonus": max(0, _to_int(b.get("bonus"), 0)),
+        "penalty": max(0, _to_int(b.get("penalty"), 0)),
+    }
+
+    computed_total = (
+        breakdown["ai_native"]
+        + breakdown["tech_niche"]
+        + breakdown["business"]
+        + breakdown["team"]
+        + breakdown["bonus"]
+        - breakdown["penalty"]
+    )
+    total = _to_int(data.get("total"), computed_total)
+    if total == 0 and computed_total != 0:
+        total = computed_total
+
+    reason = str(data.get("reason", "")).strip()
+    reason_struct = _normalize_reason_struct(data.get("reason_struct"), reason_fallback=reason)
+
+    return {
+        "total": total,
+        "breakdown": breakdown,
+        "reason": reason,
+        "reason_struct": reason_struct,
+    }
+
+
 def score_content(text: str, client, kind: str = "general") -> dict:
     """
     调用大模型对项目进行评分。
@@ -51,11 +124,16 @@ def score_content(text: str, client, kind: str = "general") -> dict:
          "bonus": int,
          "penalty": int
       },
-      "reason": "short rationale"
+      "reason": "short rationale",
+      "reason_struct": {
+         "summary": "摘要",
+         "plus": ["加分点1", "..."],
+         "minus": ["减分点1", "..."]
+      }
     }
     """
     if client is None:
-        return {
+        return _normalize_score_payload({
             "total": 0,
             "breakdown": {
                 "ai_native": 0,
@@ -66,7 +144,8 @@ def score_content(text: str, client, kind: str = "general") -> dict:
                 "penalty": 0,
             },
             "reason": "No model available",
-        }
+            "reason_struct": {"summary": "No model available", "plus": [], "minus": []},
+        })
 
     system_prompt = (
         "你是投资评审助手，请严格按给定评分标准打分。"
@@ -153,8 +232,14 @@ def score_content(text: str, client, kind: str = "general") -> dict:
         '    "bonus": 6,\n'
         '    "penalty": 0\n'
         "  },\n"
-        '  "reason": "..." \n'
+        '  "reason": "...",\n'
+        '  "reason_struct": {\n'
+        '    "summary": "...",\n'
+        '    "plus": ["..."],\n'
+        '    "minus": ["..."]\n'
+        "  }\n"
         "}\n"
+        "要求：reason_struct 必须返回；如果无明显加减分点，plus/minus 返回空数组。"
         "只返回 JSON，不要额外说明。"
     )
 
@@ -183,7 +268,7 @@ def score_content(text: str, client, kind: str = "general") -> dict:
 
         content = response.choices[0].message.content
         if content and str(content).strip():
-            return _extract_json_object(content)
+            return _normalize_score_payload(_extract_json_object(content))
 
         # 首次返回为空时再重试一次，放宽为纯文本 JSON 提取。
         retry_kwargs = dict(kwargs)
@@ -191,10 +276,10 @@ def score_content(text: str, client, kind: str = "general") -> dict:
         retry_kwargs.pop("response_format", None)
         response = client.chat.completions.create(**retry_kwargs)
         content = response.choices[0].message.content
-        return _extract_json_object(content)
+        return _normalize_score_payload(_extract_json_object(content))
     except Exception as e:
         print(f"评分失败: {e}")
-        return {
+        return _normalize_score_payload({
             "total": 0,
             "breakdown": {
                 "ai_native": 0,
@@ -205,4 +290,5 @@ def score_content(text: str, client, kind: str = "general") -> dict:
                 "penalty": 0,
             },
             "reason": f"scoring failed: {e}",
-        }
+            "reason_struct": {"summary": f"scoring failed: {e}", "plus": [], "minus": []},
+        })
