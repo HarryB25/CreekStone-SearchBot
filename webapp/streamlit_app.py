@@ -8,6 +8,11 @@ from typing import Optional
 import pandas as pd
 import streamlit as st
 import altair as alt
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception:
+    pass
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 STRUCTURED_DIR = BASE_DIR / "data" / "structured"
@@ -161,6 +166,19 @@ def _parse_keyword_input(raw: str) -> list[str]:
         seen.add(key)
         out.append(s)
     return out
+
+
+def _get_admin_password() -> str:
+    pwd = os.getenv("ADMIN_PASSWORD", "").strip()
+    if pwd:
+        return pwd
+    try:
+        secret_pwd = str(st.secrets.get("ADMIN_PASSWORD", "")).strip()
+        if secret_pwd:
+            return secret_pwd
+    except Exception:
+        pass
+    return ""
 
 
 def _update_item_keywords(item_id: str, keywords: list[str]) -> tuple[bool, str]:
@@ -532,14 +550,14 @@ with tab_items:
 
         inline_authed = True
         if manage_mode:
-            admin_password = os.getenv("ADMIN_PASSWORD", "").strip()
+            admin_password = _get_admin_password()
             if admin_password:
                 inline_pwd = st.text_input("管理员密码", type="password", key="items_admin_password")
                 inline_authed = (inline_pwd == admin_password)
                 if not inline_authed:
                     st.warning("管理模式已开启，请输入正确管理员密码后操作。")
             else:
-                st.caption("未设置 ADMIN_PASSWORD，当前环境默认允许管理操作。")
+                st.caption("未设置 ADMIN_PASSWORD（.env 或 st.secrets），当前环境默认允许管理操作。")
 
         df_items = df_all
         if date_choice:
