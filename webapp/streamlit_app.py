@@ -279,7 +279,7 @@ def trend_state(item: dict) -> tuple[str, str, float]:
         return "强下降", "#15803d", z
     if z <= -0.2:
         return "下降", "#16a34a", z
-    return "平稳", "#64748b", z
+    return "平稳", "#a6a3a0", z
 
 
 def _trend_series_y_field(series_df: pd.DataFrame) -> str:
@@ -388,11 +388,11 @@ def _score_breakdown_rows(item):
         return None
 
     dims = [
-        ("AI原生", "ai_native", 30.0, False, "#2563eb"),
-        ("技术壁垒", "tech_niche", 25.0, False, "#0ea5e9"),
-        ("商业价值", "business", 20.0, False, "#10b981"),
-        ("团队能力", "team", 15.0, False, "#f59e0b"),
-        ("加分项", "bonus", 10.0, False, "#8b5cf6"),
+        ("AI原生", "ai_native", 30.0, False, "#bb9e55"),
+        ("技术壁垒", "tech_niche", 25.0, False, "#c7ac66"),
+        ("商业价值", "business", 20.0, False, "#d1b776"),
+        ("团队能力", "team", 15.0, False, "#dec78e"),
+        ("加分项", "bonus", 10.0, False, "#ead7a6"),
         ("减分项", "penalty", 10.0, True, "#ef4444"),
     ]
 
@@ -420,14 +420,14 @@ def build_score_radar_svg(item) -> Optional[str]:
     if not rows:
         return None
 
-    width = 360
-    height = 210
-    top = 16
-    row_h = 30
-    label_x = 12
-    bar_x = 106
-    bar_w = 168
-    bar_h = 12
+    width = 320
+    height = 232
+    top = 10
+    row_h = 34
+    label_x = 10
+    bar_x = 90
+    bar_w = 150
+    bar_h = 13
     value_x = bar_x + bar_w + 12
 
     def _fmt_num(val: float) -> str:
@@ -435,29 +435,60 @@ def build_score_radar_svg(item) -> Optional[str]:
             return str(int(round(val)))
         return f"{val:.1f}"
 
+    def _hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
+        c = hex_color.strip().lstrip("#")
+        if len(c) != 6:
+            return (187, 158, 85)
+        return (int(c[0:2], 16), int(c[2:4], 16), int(c[4:6], 16))
+
+    defs = ["<defs>"]
+    for i, row in enumerate(rows):
+        r, g, b = _hex_to_rgb(str(row["color"]))
+        defs.append(
+            f"<linearGradient id='bargrad-{i}' x1='0%' y1='0%' x2='100%' y2='0%'>"
+            f"<stop offset='0%' stop-color='rgba({r},{g},{b},0.92)'/>"
+            f"<stop offset='100%' stop-color='rgba({r},{g},{b},0.72)'/>"
+            f"</linearGradient>"
+        )
+    defs.append("</defs>")
+
     parts = [
-        f"<svg viewBox='0 0 {width} {height}' width='100%' height='210' xmlns='http://www.w3.org/2000/svg'>"
+        f"<svg viewBox='0 0 {width} {height}' width='100%' height='220' xmlns='http://www.w3.org/2000/svg'>",
+        "".join(defs),
     ]
 
     for i, row in enumerate(rows):
         y = top + i * row_h
-        by = y + 10
+        by = y + 11
         fill_w = row["ratio"] * bar_w
         value_text = _fmt_num(row["raw"])
+        cap_text = _fmt_num(row["cap"])
         if row["is_penalty"] and row["raw"] > 0:
             value_text = f"-{value_text}"
+        metric_text = f"{value_text}/{cap_text}"
+        text_w = max(40, len(metric_text) * 6 + 12)
+        badge_x = value_x
+        badge_y = y + 10
 
         parts.append(
-            f"<text x='{label_x}' y='{y + 16}' font-size='11' fill='#334155' dominant-baseline='middle'>{escape(str(row['label']))}</text>"
+            f"<text x='{label_x}' y='{y + 18}' font-size='12' fill='#5f5a50' dominant-baseline='middle'>{escape(str(row['label']))}</text>"
         )
         parts.append(
-            f"<rect x='{bar_x}' y='{by}' width='{bar_w}' height='{bar_h}' rx='6' fill='#e2e8f0' />"
+            f"<rect x='{bar_x}' y='{by}' width='{bar_w}' height='{bar_h}' rx='6' fill='#e7e1d4' />"
+        )
+        if fill_w > 0:
+            parts.append(
+                f"<rect x='{bar_x}' y='{by}' width='{fill_w:.2f}' height='{bar_h}' rx='6' fill='url(#bargrad-{i})' />"
+            )
+            cap_x = bar_x + fill_w
+            parts.append(
+                f"<circle cx='{cap_x:.2f}' cy='{by + bar_h / 2:.2f}' r='3.3' fill='#fffdf8' stroke='{row['color']}' stroke-width='1.5' />"
+            )
+        parts.append(
+            f"<rect x='{badge_x}' y='{badge_y}' width='{text_w}' height='16' rx='8' fill='rgba(187,158,85,0.10)' />"
         )
         parts.append(
-            f"<rect x='{bar_x}' y='{by}' width='{fill_w:.2f}' height='{bar_h}' rx='6' fill='{row['color']}' />"
-        )
-        parts.append(
-            f"<text x='{value_x}' y='{y + 16}' font-size='11' fill='#0f172a' dominant-baseline='middle'>{escape(value_text)}</text>"
+            f"<text x='{badge_x + text_w / 2:.2f}' y='{y + 18}' text-anchor='middle' font-size='11.5' fill='#2b2823' dominant-baseline='middle'>{escape(metric_text)}</text>"
         )
 
     parts.append("</svg>")
@@ -479,39 +510,258 @@ def _score_color(norm_score: float) -> str:
 
 STYLE = """
 <style>
-.block-container { padding-top: 1.5rem; max-width: 1520px; }
-.card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:16px 18px; margin-bottom:14px; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@600;700;800&display=swap');
+html, body, [data-testid="stApp"] {
+  background: #f4f1e8;
+  font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+}
+:root { --primary-color: #bb9e55 !important; --primaryColor: #bb9e55 !important; }
+.stApp {
+  --bg: #f4f1e8;
+  --panel: #ffffff;
+  --panel-2: #fcfaf5;
+  --text: #26231f;
+  --muted: #6e6658;
+  --accent: #bb9e55;
+  --accent-hi: #d5bb78;
+  --accent-line: rgba(187, 158, 85, 0.35);
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+}
+[data-testid="stAppViewContainer"] { background: transparent; }
+[data-testid="stMain"] { background: transparent; }
+[data-testid="stHeader"] {
+  background: transparent;
+  border-bottom: none;
+}
+[data-testid="stToolbar"] { color: var(--muted); }
+[data-testid="stStatusWidget"] { color: var(--muted); }
+[data-testid="stDecoration"] { display: none; }
+.block-container { padding-top: 0.2rem; max-width: 1520px; }
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", serif;
+}
+p, li, label, .stMarkdown, .stCaption { color: var(--muted); }
+code, .stMarkdown code, .stCode code {
+  background: rgba(187,158,85,0.14) !important;
+  color: #2b2823 !important;
+  border: 1px solid var(--accent-line);
+  border-radius: 7px;
+  padding: 1px 6px;
+}
+pre code, .stCodeBlock code {
+  background: transparent !important;
+  border: none !important;
+}
+div[data-baseweb="select"] > div,
+.stTextInput input,
+.stTextArea textarea,
+.stNumberInput input {
+  background: #ffffff !important;
+  color: #26231f !important;
+  border: 1px solid rgba(70,58,39,0.20) !important;
+}
+.stTextInput input:focus,
+.stTextArea textarea:focus,
+div[data-baseweb="select"] > div:focus-within {
+  border-color: var(--accent-line) !important;
+  box-shadow: 0 0 0 1px var(--accent-line) inset !important;
+}
+.stButton > button {
+  background: #ffffff;
+  color: #26231f;
+  border: 1px solid rgba(70,58,39,0.18);
+}
+.stButton > button:hover {
+  border-color: var(--accent-line);
+  color: var(--accent-hi);
+  transform: translateY(-1px);
+}
+[data-baseweb="tab-list"] {
+  gap: 8px;
+}
+[data-baseweb="tab-highlight"] {
+  background: var(--accent) !important;
+}
+[data-baseweb="tab"] {
+  background: #ffffff;
+  color: #6e6658;
+  border-radius: 8px;
+  border: 1px solid rgba(70,58,39,0.18);
+}
+[aria-selected="true"][data-baseweb="tab"] {
+  color: #8e7534;
+  border-color: var(--accent-line);
+}
+.card {
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid rgba(70,58,39,0.16);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 12px 26px rgba(42,35,25,0.08), 0 0 0 1px rgba(187,158,85,0.15) inset;
+}
 .content-row { display:grid; gap:16px; align-items:start; }
-.content-row.has-side { grid-template-columns:minmax(0,1fr) 300px; }
+.content-row.has-side { grid-template-columns:minmax(0,1fr) 280px; }
 .content-row.no-side { grid-template-columns:minmax(0,1fr); }
 @media (max-width:1000px){ .content-row.has-side { grid-template-columns:1fr; } }
 .main-col { min-width:0; }
 .side-col { width:100%; display:flex; flex-direction:column; gap:12px; }
-.title { font-size:22px; font-weight:750; color:#0f172a; text-decoration:none; line-height:1.3; }
-.title:hover { color:#007aff; }
-.score { font-size:24px; font-weight:800; }
-.score.s1 { background: linear-gradient(135deg,#f97316,#facc15); -webkit-background-clip:text; color:transparent; }
-.score.s2 { background: linear-gradient(135deg,#22c55e,#a3e635); -webkit-background-clip:text; color:transparent; }
-.score.s3 { background: linear-gradient(135deg,#2563eb,#38bdf8); -webkit-background-clip:text; color:transparent; }
-.meta { color:#6b7280; font-size:12px; margin-top:6px; }
-.desc { color:#1f2937; font-size:14px; line-height:1.5; margin:6px 0 8px 0; }
-.reason { font-size:12px; line-height:1.45; margin:2px 0 8px 0; }
-.reason-neutral { color:#334155; }
+.card a.title, .card a.title:visited { display:inline-block; font-size:30px; font-weight:800; color:var(--accent) !important; text-decoration:none; line-height:1.3; font-family:"Noto Serif SC", "Source Han Serif SC", "STSong", serif; }
+.card a.title:hover { color:var(--accent-hi) !important; text-decoration:underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.stMarkdown a { color: var(--accent); }
+.score { font-size:34px; font-weight:800; line-height:1; }
+.score.s1 { background: linear-gradient(135deg,#bb9e55,#d5bb78); -webkit-background-clip:text; color:transparent; }
+.score.s2 { background: linear-gradient(135deg,#d0b575,#e5cf9e); -webkit-background-clip:text; color:transparent; }
+.score.s3 { background: linear-gradient(135deg,#ead7a6,#f3e5be); -webkit-background-clip:text; color:transparent; }
+.meta { color:var(--muted); font-size:15px; margin-top:8px; line-height:1.5; }
+.desc { color:var(--text); font-size:17px; line-height:1.65; margin:8px 0 8px 0; }
+.reason { font-size:16px; line-height:1.72; margin:4px 0 10px 0; }
+.reason-neutral { color:var(--muted); }
 .reason-plus { color:#15803d; font-weight:600; }
 .reason-minus { color:#dc2626; font-weight:600; }
 .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
-    .chip { padding:6px 10px; border-radius:10px; background:#eef2ff; border:1px solid #c7d2fe; color:#0f172a; font-size:12px; font-weight:600; }
-    .thumb { width:100%; height:180px; object-fit:cover; border-radius:12px; border:1px solid #e5e7eb; box-shadow:0 6px 14px rgba(0,0,0,0.05); background:#fff; }
-    .radar-box { width:100%; border-radius:12px; border:1px solid #e5e7eb; background:#fff; box-shadow:0 6px 14px rgba(0,0,0,0.05); padding:8px; }
-    .radar-box svg { width:100% !important; height:210px !important; display:block; }
-    .title-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .chip { padding:7px 11px; border-radius:10px; background:rgba(187,158,85,0.12); border:1px solid var(--accent-line); color:var(--text); font-size:13px; font-weight:600; }
+    .thumb { width:100%; height:150px; object-fit:cover; border-radius:12px; border:1px solid rgba(70,58,39,0.18); box-shadow:0 8px 16px rgba(42,35,25,0.10); background:#f9f6ef; }
+    .radar-box { width:100%; border-radius:12px; border:1px solid rgba(70,58,39,0.18); background:#fffdf8; box-shadow:0 8px 16px rgba(42,35,25,0.08); padding:8px; }
+    .radar-box svg { width:100% !important; height:220px !important; display:block; }
+    .title-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:8px 0 14px 0; }
+    .stSlider [data-baseweb="slider"] { color:#bb9e55 !important; }
+    .stSlider [data-baseweb="slider"] * { accent-color:#bb9e55 !important; }
+    input[type="checkbox"], input[type="radio"] { accent-color:#bb9e55; }
+/* Masthead inspired by newsroom sites */
+.masthead-wrap {
+  margin: 0 0 16px 0;
+  border: 1px solid rgba(70,58,39,0.18);
+}
+.masthead-top {
+  background: #f3ead5;
+  color: #5a513f;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 16px;
+}
+.masthead-top .mini {
+  font-size: 12px;
+  letter-spacing: 0.2px;
+}
+.masthead-top .badge {
+  background: #bb9e55;
+  color: #fffdf8;
+  border-radius: 18px;
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.masthead-main {
+  background: linear-gradient(180deg, #efe2c2, #e8d7ae);
+  color: #2b2823;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: end;
+  padding: 18px 16px 12px 16px;
+}
+.masthead-brand {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 56px;
+  line-height: 0.95;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+.masthead-nav {
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.masthead-nav a {
+  color: #5c5344;
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  padding-bottom: 8px;
+  text-decoration: none;
+}
+.masthead-nav a.active {
+  border-bottom-color: #bb9e55;
+  color: #2b2823;
+}
+.masthead-sub {
+  background: #f8f1df;
+  color: #5c5344;
+  border-top: 1px solid rgba(70,58,39,0.16);
+  padding: 8px 16px;
+  font-size: 14px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.masthead-sub a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.masthead-sub a:hover {
+  border-bottom-color: #bb9e55;
+}
+@media (max-width: 900px) {
+  .masthead-main { grid-template-columns: 1fr; }
+  .masthead-brand { font-size: 40px; }
+}
 </style>
+"""
+
+def _active_class(cond: bool) -> str:
+    return "active" if cond else ""
+
+
+def _qp_get_str(key: str, default: str = "") -> str:
+    try:
+        v = st.query_params.get(key, default)
+    except Exception:
+        return default
+    if isinstance(v, list):
+        return str(v[0]) if v else default
+    return str(v)
+
+
+def build_masthead_html(active_view: str = "items", active_source: str = "") -> str:
+    return f"""
+<div class="masthead-wrap">
+  <div class="masthead-top">
+    <div class="mini">Signal-driven curation for AI products, repos and research</div>
+    <div class="badge">Daily Brief</div>
+  </div>
+  <div class="masthead-main">
+    <div class="masthead-nav">
+      <a href="?view=items" class="{_active_class(active_view == 'items')}">Feeds</a>
+      <a href="?view=trends" class="{_active_class(active_view == 'trends')}">Trends</a>
+      <a href="?view=items&sort=%E8%B6%8B%E5%8A%BF%E5%88%86" class="{_active_class(active_view == 'items')}">Scores</a>
+      <a href="?view=items&source=producthunt" class="{_active_class(active_view == 'items' and active_source == 'producthunt')}">Watchlist</a>
+    </div>
+    <div class="masthead-brand">Daily AI Feeds</div>
+  </div>
+  <div class="masthead-sub">
+    <a href="?view=items&source=producthunt">Product Hunt</a>
+    <a href="?view=items&source=github">GitHub</a>
+    <a href="?view=items&source=arxiv">arXiv</a>
+    <a href="?view=trends">Keyword Trend Intelligence</a>
+  </div>
+</div>
 """
 
 st.set_page_config(page_title="Daily AI Feeds", layout="wide")
 st.markdown(STYLE, unsafe_allow_html=True)
-
-st.title("Daily AI Feeds")
+view_param = _qp_get_str("view", "items").lower().strip()
+if view_param not in {"items", "trends"}:
+    view_param = "items"
+source_param = _qp_get_str("source", "").strip()
+sort_param = _qp_get_str("sort", "").strip()
+st.markdown(build_masthead_html(active_view=view_param, active_source=source_param), unsafe_allow_html=True)
 
 df = load_items(_structured_signature())
 if df.empty:
@@ -519,10 +769,16 @@ if df.empty:
     st.stop()
 df_all = df.copy()
 
-sort_label = st.selectbox("关键词趋势排序", list(SORT_FIELD_OPTIONS.keys()), index=0)
+sort_labels = list(SORT_FIELD_OPTIONS.keys())
+sort_default = sort_param if sort_param in sort_labels else "趋势分"
+sort_index = sort_labels.index(sort_default) if sort_default in sort_labels else 0
+sort_label = st.selectbox("关键词趋势排序", sort_labels, index=sort_index)
 sort_field = SORT_FIELD_OPTIONS[sort_label]
 
-tab_items, tab_trends = st.tabs(["内容浏览", "关键词趋势"])
+if view_param == "trends":
+    tab_trends, tab_items = st.tabs(["关键词趋势", "内容浏览"])
+else:
+    tab_items, tab_trends = st.tabs(["内容浏览", "关键词趋势"])
 
 with tab_items:
     trends = load_keyword_trends(_insights_signature())
@@ -544,17 +800,16 @@ with tab_items:
     )
 
     with left_col:
-        col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 1])
+        col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
         with col1:
             q = st.text_input("搜索标题 / 关键词 / 描述", "")
         with col2:
             sources = [""] + sorted(df["source"].dropna().unique().tolist())
-            source = st.selectbox("来源", sources, format_func=lambda x: "全部" if x == "" else x)
+            source_index = sources.index(source_param) if source_param in sources else 0
+            source = st.selectbox("来源", sources, index=source_index, format_func=lambda x: "全部" if x == "" else x)
         with col3:
-            limit = st.slider("显示条数", 10, 200, 50, 10)
-        with col4:
             date_choice = st.selectbox("日期", date_values)
-        with col5:
+        with col4:
             manage_mode = st.toggle("管理模式", value=False, key="items_manage_mode")
 
         inline_authed = True
@@ -583,9 +838,9 @@ with tab_items:
                 ascending=[False, True],
                 na_position="last",
             )
-        st.caption(f"共 {len(df_f)} 条，显示前 {min(limit, len(df_f))} 条")
+        st.caption(f"共 {len(df_f)} 条")
 
-        for _, row in df_f.head(limit).iterrows():
+        for _, row in df_f.iterrows():
             row_dict = row.to_dict() if hasattr(row, "to_dict") else dict(row)
             radar_svg = build_score_radar_svg(row_dict)
             st.markdown(card_html(row_dict, radar_svg=radar_svg), unsafe_allow_html=True)
@@ -643,12 +898,12 @@ with tab_items:
                 trend_text, trend_color, trend_z = trend_state(k)
                 st.markdown(
                     f"<div style='display:flex;align-items:center;gap:8px;'>"
-                    f"<span style='font-weight:700;color:#0f172a;'>{idx}.</span>"
-                    f"<span style='font-weight:600;color:#0f172a;'>{escape(kw)}</span>"
+                    f"<span style='font-weight:700;color:#2b2823;'>{idx}.</span>"
+                    f"<span style='font-weight:600;color:#2b2823;'>{escape(kw)}</span>"
                     f"<span style='font-size:12px;color:{trend_color};font-weight:600;'>{trend_text}</span>"
                     f"<span style='margin-left:auto;color:{color};font-weight:700;'>"
                     f"{score:.2f}</span></div>"
-                    f"<div style='font-size:11px;color:#64748b;margin:2px 0 4px 24px;'>z={trend_z:.2f}</div>",
+                    f"<div style='font-size:11px;color:#6e6658;margin:2px 0 4px 24px;'>z={trend_z:.2f}</div>",
                     unsafe_allow_html=True,
                 )
                 series_df = pd.DataFrame(k.get("series", []))
@@ -669,7 +924,12 @@ with tab_items:
                     mini_area = mini_base.mark_area(interpolate="monotone", opacity=0.2)
                     mini_line = mini_base.mark_line(interpolate="monotone")
                     mini_points = mini_base.mark_point(filled=False, size=40, strokeWidth=1.5)
-                    mini_chart = alt.layer(mini_area, mini_line, mini_points).properties(height=70)
+                    mini_chart = (
+                        alt.layer(mini_area, mini_line, mini_points)
+                        .properties(height=70)
+                        .configure(background="transparent")
+                        .configure_view(fill="#fffdf8", stroke="rgba(70,58,39,0.18)")
+                    )
                     st.altair_chart(mini_chart, use_container_width=True)
         else:
             st.caption("暂无趋势数据")
@@ -721,5 +981,17 @@ with tab_trends:
                 area = base.mark_area(interpolate="monotone", opacity=0.18)
                 line = base.mark_line(interpolate="monotone")
                 points = base.mark_point(filled=False, size=70, strokeWidth=2)
-                chart = alt.layer(area, line, points).properties(height=160)
+                chart = (
+                    alt.layer(area, line, points)
+                    .properties(height=160)
+                    .configure(background="transparent")
+                    .configure_view(fill="#fffdf8", stroke="rgba(70,58,39,0.18)")
+                    .configure_axis(
+                        labelColor="#6e6658",
+                        titleColor="#6e6658",
+                        domainColor="rgba(70,58,39,0.28)",
+                        gridColor="rgba(70,58,39,0.12)",
+                        tickColor="rgba(70,58,39,0.28)",
+                    )
+                )
                 st.altair_chart(chart, use_container_width=True)

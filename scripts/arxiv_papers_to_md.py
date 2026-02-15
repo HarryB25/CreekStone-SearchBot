@@ -1,4 +1,5 @@
 import os
+import signal
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -86,30 +87,50 @@ def _is_gpt5_model(model_name: str) -> bool:
     return model_name.startswith("gpt-5")
 
 
+def _call_with_hard_timeout(fn, timeout_sec: float):
+    if timeout_sec <= 0:
+        return fn()
+    if not hasattr(signal, "setitimer") or not hasattr(signal, "SIGALRM"):
+        return fn()
+
+    def _handler(_signum, _frame):
+        raise TimeoutError(f"request timed out after {timeout_sec}s")
+
+    old = signal.getsignal(signal.SIGALRM)
+    signal.signal(signal.SIGALRM, _handler)
+    signal.setitimer(signal.ITIMER_REAL, timeout_sec)
+    try:
+        return fn()
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, old)
+
+
 def _chat_json_content(messages, max_tokens: int, temperature: float) -> str:
     model_name = _get_model_name()
+    timeout = _get_request_timeout()
     kwargs = {
         "model": model_name,
         "messages": messages,
         "max_tokens": max_tokens,
         "temperature": temperature,
         "response_format": {"type": "json_object"},
-        "timeout": _get_request_timeout(),
+        "timeout": timeout,
     }
     if _is_gpt5_model(model_name):
         kwargs["reasoning_effort"] = "low"
     try:
-        resp = client.chat.completions.create(**kwargs)
+        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
     except TypeError:
         kwargs.pop("reasoning_effort", None)
-        resp = client.chat.completions.create(**kwargs)
+        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
     content = (resp.choices[0].message.content or "").strip()
     if content:
         return content
     retry_kwargs = dict(kwargs)
     retry_kwargs.pop("response_format", None)
     retry_kwargs["max_tokens"] = max(max_tokens, 1200 if _is_gpt5_model(model_name) else 300)
-    resp = client.chat.completions.create(**retry_kwargs)
+    resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**retry_kwargs), timeout + 2)
     return (resp.choices[0].message.content or "").strip()
 
 

@@ -1,4 +1,5 @@
 import os
+import signal
 try:
     from dotenv import load_dotenv
     # 加载 .env 文件
@@ -82,6 +83,25 @@ def _is_gpt5_model(model_name: str) -> bool:
     return model_name.startswith("gpt-5")
 
 
+def _call_with_hard_timeout(fn, timeout_sec: float):
+    if timeout_sec <= 0:
+        return fn()
+    if not hasattr(signal, "setitimer") or not hasattr(signal, "SIGALRM"):
+        return fn()
+
+    def _handler(_signum, _frame):
+        raise TimeoutError(f"request timed out after {timeout_sec}s")
+
+    old = signal.getsignal(signal.SIGALRM)
+    signal.signal(signal.SIGALRM, _handler)
+    signal.setitimer(signal.ITIMER_REAL, timeout_sec)
+    try:
+        return fn()
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, old)
+
+
 def _looks_mostly_ascii(text: str) -> bool:
     if not text:
         return True
@@ -92,28 +112,29 @@ def _looks_mostly_ascii(text: str) -> bool:
 def _chat_json_content(messages, max_tokens: int, temperature: float) -> str:
     """兼容部分网关对 response_format 的不完整支持。"""
     model_name = _get_model_name()
+    timeout = _get_request_timeout()
     kwargs = {
         "model": model_name,
         "messages": messages,
         "max_tokens": max_tokens,
         "temperature": temperature,
         "response_format": {"type": "json_object"},
-        "timeout": _get_request_timeout(),
+        "timeout": timeout,
     }
     if _is_gpt5_model(model_name):
         kwargs["reasoning_effort"] = "low"
     try:
-        resp = client.chat.completions.create(**kwargs)
+        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
     except TypeError:
         kwargs.pop("reasoning_effort", None)
-        resp = client.chat.completions.create(**kwargs)
+        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
     content = (resp.choices[0].message.content or "").strip()
     if content:
         return content
     retry_kwargs = dict(kwargs)
     retry_kwargs.pop("response_format", None)
     retry_kwargs["max_tokens"] = max(max_tokens, 1200 if _is_gpt5_model(model_name) else 300)
-    resp = client.chat.completions.create(**retry_kwargs)
+    resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**retry_kwargs), timeout + 2)
     return (resp.choices[0].message.content or "").strip()
 
 
@@ -126,6 +147,17 @@ def _get_http_timeout(default: float = 45.0) -> float:
     except ValueError:
         return default
     return value if value > 0 else default
+
+
+def _get_max_posts(default: int = 30) -> int:
+    raw = os.getenv("PRODUCTHUNT_MAX_POSTS", "").strip()
+    if not raw:
+        return default
+    try:
+        value = int(raw)
+    except Exception:
+        return default
+    return max(1, min(100, value))
 
 
 def _contains_any(text: str, keywords) -> bool:
@@ -496,11 +528,12 @@ def fetch_product_hunt_data(target_date: str = ""):
     }
     """
 
+    max_posts = _get_max_posts(30)
     all_posts = []
     has_next_page = True
     cursor = ""
 
-    while has_next_page and len(all_posts) < 30:
+    while has_next_page and len(all_posts) < max_posts:
         query = base_query % (date_str, date_str, cursor)
         try:
             response = session.post(
@@ -521,8 +554,8 @@ def fetch_product_hunt_data(target_date: str = ""):
         has_next_page = data['pageInfo']['hasNextPage']
         cursor = data['pageInfo']['endCursor']
 
-    # 只保留前30个产品
-    return [Product(**post) for post in sorted(all_posts, key=lambda x: x['votesCount'], reverse=True)[:30]]
+    # 保留前 N 个产品（默认 30）
+    return [Product(**post) for post in sorted(all_posts, key=lambda x: x['votesCount'], reverse=True)[:max_posts]]
 
 def fetch_mock_data():
     """生成模拟数据用于测试"""

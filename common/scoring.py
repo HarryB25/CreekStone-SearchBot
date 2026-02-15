@@ -1,5 +1,6 @@
 import os
 import json
+import signal
 from typing import Any, Dict
 
 
@@ -21,6 +22,27 @@ def _get_model_name() -> str:
 
 def _is_gpt5_model(model_name: str) -> bool:
     return model_name.startswith("gpt-5")
+
+
+def _call_with_hard_timeout(fn, timeout_sec: float):
+    """Hard timeout guard for blocking network calls."""
+    if timeout_sec <= 0:
+        return fn()
+
+    if not hasattr(signal, "setitimer") or not hasattr(signal, "SIGALRM"):
+        return fn()
+
+    def _handler(_signum, _frame):
+        raise TimeoutError(f"request timed out after {timeout_sec}s")
+
+    old_handler = signal.getsignal(signal.SIGALRM)
+    signal.signal(signal.SIGALRM, _handler)
+    signal.setitimer(signal.ITIMER_REAL, timeout_sec)
+    try:
+        return fn()
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, old_handler)
 
 
 def _extract_json_object(raw: str) -> Dict[str, Any]:
@@ -260,11 +282,17 @@ def score_content(text: str, client, kind: str = "general") -> dict:
             kwargs["reasoning_effort"] = "low"
 
         try:
-            response = client.chat.completions.create(**kwargs)
+            response = _call_with_hard_timeout(
+                lambda: client.chat.completions.create(**kwargs),
+                _get_timeout() + 2,
+            )
         except TypeError:
             # 兼容不支持 reasoning_effort 的网关
             kwargs.pop("reasoning_effort", None)
-            response = client.chat.completions.create(**kwargs)
+            response = _call_with_hard_timeout(
+                lambda: client.chat.completions.create(**kwargs),
+                _get_timeout() + 2,
+            )
 
         content = response.choices[0].message.content
         if content and str(content).strip():
@@ -274,7 +302,10 @@ def score_content(text: str, client, kind: str = "general") -> dict:
         retry_kwargs = dict(kwargs)
         retry_kwargs["max_tokens"] = 1400 if _is_gpt5_model(model_name) else 500
         retry_kwargs.pop("response_format", None)
-        response = client.chat.completions.create(**retry_kwargs)
+        response = _call_with_hard_timeout(
+            lambda: client.chat.completions.create(**retry_kwargs),
+            _get_timeout() + 2,
+        )
         content = response.choices[0].message.content
         return _normalize_score_payload(_extract_json_object(content))
     except Exception as e:
