@@ -13,24 +13,25 @@
     "2026-02-12",
     "2026-02-13",
     "2026-02-18",
-    "2026-02-19"
+    "2026-02-19",
+    "2026-02-23"
   ],
   "keywords": [
     {
       "keyword": "agent",
       "canonical": "agent",
-      "score": 0.1787,
-      "growth": 0.0439,
-      "acceleration": 3.0716,
-      "tfidf": 0.0439,
-      "z_score": 3.0716,
+      "score": 0.2013,
+      "growth": 0.0474,
+      "acceleration": 3.2498,
+      "tfidf": 0.0474,
+      "z_score": 3.2498,
       "idf": 1.0,
-      "recent_freq": 0.0439,
-      "recent_share": 0.0439,
-      "total": 204,
-      "weighted_total": 0.4008,
-      "weighted_total_raw": 204.0,
-      "active_days": 14,
+      "recent_freq": 0.0474,
+      "recent_share": 0.0474,
+      "total": 224,
+      "weighted_total": 0.4467,
+      "weighted_total_raw": 224.0,
+      "active_days": 15,
       "recent_days": 3,
       "series": [
         {
@@ -116,642 +117,30 @@
           "count": 18,
           "weighted_count": 18.0,
           "share": 0.039911
-        }
-      ]
-    },
-    {
-      "keyword": "agentic workflow",
-      "canonical": "agentic workflow",
-      "score": 0.1468,
-      "growth": 0.0126,
-      "acceleration": 10.691,
-      "tfidf": 0.0126,
-      "z_score": 10.691,
-      "idf": 1.0,
-      "recent_freq": 0.0126,
-      "recent_share": 0.0126,
-      "total": 19,
-      "weighted_total": 0.0416,
-      "weighted_total_raw": 19.0,
-      "active_days": 4,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-07",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-08",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-09",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-10",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-11",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003968
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.0125
-        },
-        {
-          "date": "2026-02-18",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.014085
-        },
-        {
-          "date": "2026-02-19",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.011086
-        }
-      ]
-    },
-    {
-      "keyword": "扩散模型",
-      "canonical": "扩散模型",
-      "score": 0.1123,
-      "growth": 0.0094,
-      "acceleration": 10.9177,
-      "tfidf": 0.0094,
-      "z_score": 10.9177,
-      "idf": 1.0,
-      "recent_freq": 0.0094,
-      "recent_share": 0.0094,
-      "total": 17,
-      "weighted_total": 0.035,
-      "weighted_total_raw": 17.0,
-      "active_days": 7,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001592
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001572
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-07",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-08",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001855
-        },
-        {
-          "date": "2026-02-09",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001672
-        },
-        {
-          "date": "2026-02-10",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-11",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 7,
-          "weighted_count": 7.0,
-          "share": 0.014583
-        },
-        {
-          "date": "2026-02-18",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.007042
-        },
-        {
-          "date": "2026-02-19",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.006652
-        }
-      ]
-    },
-    {
-      "keyword": "autonomous agents",
-      "canonical": "autonomous agents",
-      "score": 0.0745,
-      "growth": 0.0058,
-      "acceleration": 11.7948,
-      "tfidf": 0.0058,
-      "z_score": 11.7948,
-      "idf": 1.0,
-      "recent_freq": 0.0058,
-      "recent_share": 0.0058,
-      "total": 9,
-      "weighted_total": 0.0191,
-      "weighted_total_raw": 9.0,
-      "active_days": 4,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-07",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-08",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-09",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001672
-        },
-        {
-          "date": "2026-02-10",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-11",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.00625
-        },
-        {
-          "date": "2026-02-18",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.002347
-        },
-        {
-          "date": "2026-02-19",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.008869
-        }
-      ]
-    },
-    {
-      "keyword": "rag",
-      "canonical": "rag",
-      "score": 0.0684,
-      "growth": 0.0132,
-      "acceleration": 4.198,
-      "tfidf": 0.0132,
-      "z_score": 4.198,
-      "idf": 1.0,
-      "recent_freq": 0.0132,
-      "recent_share": 0.0132,
-      "total": 50,
-      "weighted_total": 0.101,
-      "weighted_total_raw": 50.0,
-      "active_days": 14,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.009615
-        },
-        {
-          "date": "2026-02-03",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.004777
-        },
-        {
-          "date": "2026-02-04",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.004717
-        },
-        {
-          "date": "2026-02-05",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005008
-        },
-        {
-          "date": "2026-02-06",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005236
-        },
-        {
-          "date": "2026-02-07",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003704
-        },
-        {
-          "date": "2026-02-08",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005566
-        },
-        {
-          "date": "2026-02-09",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005017
-        },
-        {
-          "date": "2026-02-10",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.006932
-        },
-        {
-          "date": "2026-02-11",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.007937
-        },
-        {
-          "date": "2026-02-12",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.003049
-        },
-        {
-          "date": "2026-02-13",
-          "count": 8,
-          "weighted_count": 8.0,
-          "share": 0.016667
-        },
-        {
-          "date": "2026-02-18",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.011737
-        },
-        {
-          "date": "2026-02-19",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.011086
-        }
-      ]
-    },
-    {
-      "keyword": "大语言模型",
-      "canonical": "大语言模型",
-      "score": 0.0474,
-      "growth": 0.0164,
-      "acceleration": 1.8872,
-      "tfidf": 0.0164,
-      "z_score": 1.8872,
-      "idf": 1.0,
-      "recent_freq": 0.0164,
-      "recent_share": 0.0164,
-      "total": 53,
-      "weighted_total": 0.1128,
-      "weighted_total_raw": 53.0,
-      "active_days": 13,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 7,
-          "weighted_count": 7.0,
-          "share": 0.022436
-        },
-        {
-          "date": "2026-02-03",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003185
-        },
-        {
-          "date": "2026-02-04",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.006289
-        },
-        {
-          "date": "2026-02-05",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005008
-        },
-        {
-          "date": "2026-02-06",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005236
-        },
-        {
-          "date": "2026-02-07",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001852
-        },
-        {
-          "date": "2026-02-08",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005566
-        },
-        {
-          "date": "2026-02-09",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005017
-        },
-        {
-          "date": "2026-02-10",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.006932
-        },
-        {
-          "date": "2026-02-11",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001984
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.0125
-        },
-        {
-          "date": "2026-02-18",
-          "count": 10,
-          "weighted_count": 10.0,
-          "share": 0.023474
-        },
-        {
-          "date": "2026-02-19",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.013304
-        }
-      ]
-    },
-    {
-      "keyword": "深度学习",
-      "canonical": "深度学习",
-      "score": 0.0394,
-      "growth": 0.0394,
-      "acceleration": -1.585,
-      "tfidf": 0.0394,
-      "z_score": -1.585,
-      "idf": 1.0,
-      "recent_freq": 0.0394,
-      "recent_share": 0.0394,
-      "total": 385,
-      "weighted_total": 0.7313,
-      "weighted_total_raw": 385.0,
-      "active_days": 14,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 10,
-          "weighted_count": 10.0,
-          "share": 0.032051
-        },
-        {
-          "date": "2026-02-03",
-          "count": 39,
-          "weighted_count": 39.0,
-          "share": 0.062102
-        },
-        {
-          "date": "2026-02-04",
-          "count": 41,
-          "weighted_count": 41.0,
-          "share": 0.064465
-        },
-        {
-          "date": "2026-02-05",
-          "count": 38,
-          "weighted_count": 38.0,
-          "share": 0.063439
-        },
-        {
-          "date": "2026-02-06",
-          "count": 32,
-          "weighted_count": 32.0,
-          "share": 0.055846
-        },
-        {
-          "date": "2026-02-07",
-          "count": 26,
-          "weighted_count": 26.0,
-          "share": 0.048148
-        },
-        {
-          "date": "2026-02-08",
-          "count": 36,
-          "weighted_count": 36.0,
-          "share": 0.06679
-        },
-        {
-          "date": "2026-02-09",
-          "count": 38,
-          "weighted_count": 38.0,
-          "share": 0.063545
-        },
-        {
-          "date": "2026-02-10",
-          "count": 30,
-          "weighted_count": 30.0,
-          "share": 0.051993
-        },
-        {
-          "date": "2026-02-11",
-          "count": 22,
-          "weighted_count": 22.0,
-          "share": 0.043651
         },
         {
-          "date": "2026-02-12",
+          "date": "2026-02-23",
           "count": 20,
           "weighted_count": 20.0,
-          "share": 0.060976
-        },
-        {
-          "date": "2026-02-13",
-          "count": 14,
-          "weighted_count": 14.0,
-          "share": 0.029167
-        },
-        {
-          "date": "2026-02-18",
-          "count": 20,
-          "weighted_count": 20.0,
-          "share": 0.046948
-        },
-        {
-          "date": "2026-02-19",
-          "count": 19,
-          "weighted_count": 19.0,
-          "share": 0.042129
+          "share": 0.045872
         }
       ]
     },
     {
       "keyword": "神经网络",
       "canonical": "神经网络",
-      "score": 0.0392,
-      "growth": 0.0261,
-      "acceleration": 0.502,
-      "tfidf": 0.0261,
-      "z_score": 0.502,
+      "score": 0.0704,
+      "growth": 0.0305,
+      "acceleration": 1.3121,
+      "tfidf": 0.0305,
+      "z_score": 1.3121,
       "idf": 1.0,
-      "recent_freq": 0.0261,
-      "recent_share": 0.0261,
-      "total": 173,
-      "weighted_total": 0.3316,
-      "weighted_total_raw": 173.0,
-      "active_days": 14,
+      "recent_freq": 0.0305,
+      "recent_share": 0.0305,
+      "total": 186,
+      "weighted_total": 0.3614,
+      "weighted_total_raw": 186.0,
+      "active_days": 15,
       "recent_days": 3,
       "series": [
         {
@@ -837,24 +226,248 @@
           "count": 14,
           "weighted_count": 14.0,
           "share": 0.031042
+        },
+        {
+          "date": "2026-02-23",
+          "count": 13,
+          "weighted_count": 13.0,
+          "share": 0.029817
         }
       ]
     },
     {
-      "keyword": "生成式模型",
-      "canonical": "生成式模型",
-      "score": 0.0386,
-      "growth": 0.0066,
-      "acceleration": 4.7985,
-      "tfidf": 0.0066,
-      "z_score": 4.7985,
+      "keyword": "大语言模型",
+      "canonical": "大语言模型",
+      "score": 0.0478,
+      "growth": 0.0168,
+      "acceleration": 1.8394,
+      "tfidf": 0.0168,
+      "z_score": 1.8394,
       "idf": 1.0,
-      "recent_freq": 0.0066,
-      "recent_share": 0.0066,
-      "total": 17,
-      "weighted_total": 0.034,
-      "weighted_total_raw": 17.0,
-      "active_days": 10,
+      "recent_freq": 0.0168,
+      "recent_share": 0.0168,
+      "total": 59,
+      "weighted_total": 0.1265,
+      "weighted_total_raw": 59.0,
+      "active_days": 14,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 7,
+          "weighted_count": 7.0,
+          "share": 0.022436
+        },
+        {
+          "date": "2026-02-03",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003185
+        },
+        {
+          "date": "2026-02-04",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.006289
+        },
+        {
+          "date": "2026-02-05",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005008
+        },
+        {
+          "date": "2026-02-06",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005236
+        },
+        {
+          "date": "2026-02-07",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001852
+        },
+        {
+          "date": "2026-02-08",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005566
+        },
+        {
+          "date": "2026-02-09",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005017
+        },
+        {
+          "date": "2026-02-10",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.006932
+        },
+        {
+          "date": "2026-02-11",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001984
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.0125
+        },
+        {
+          "date": "2026-02-18",
+          "count": 10,
+          "weighted_count": 10.0,
+          "share": 0.023474
+        },
+        {
+          "date": "2026-02-19",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.013304
+        },
+        {
+          "date": "2026-02-23",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.013761
+        }
+      ]
+    },
+    {
+      "keyword": "深度学习",
+      "canonical": "深度学习",
+      "score": 0.0442,
+      "growth": 0.0442,
+      "acceleration": -0.7565,
+      "tfidf": 0.0442,
+      "z_score": -0.7565,
+      "idf": 1.0,
+      "recent_freq": 0.0442,
+      "recent_share": 0.0442,
+      "total": 404,
+      "weighted_total": 0.7748,
+      "weighted_total_raw": 404.0,
+      "active_days": 15,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 10,
+          "weighted_count": 10.0,
+          "share": 0.032051
+        },
+        {
+          "date": "2026-02-03",
+          "count": 39,
+          "weighted_count": 39.0,
+          "share": 0.062102
+        },
+        {
+          "date": "2026-02-04",
+          "count": 41,
+          "weighted_count": 41.0,
+          "share": 0.064465
+        },
+        {
+          "date": "2026-02-05",
+          "count": 38,
+          "weighted_count": 38.0,
+          "share": 0.063439
+        },
+        {
+          "date": "2026-02-06",
+          "count": 32,
+          "weighted_count": 32.0,
+          "share": 0.055846
+        },
+        {
+          "date": "2026-02-07",
+          "count": 26,
+          "weighted_count": 26.0,
+          "share": 0.048148
+        },
+        {
+          "date": "2026-02-08",
+          "count": 36,
+          "weighted_count": 36.0,
+          "share": 0.06679
+        },
+        {
+          "date": "2026-02-09",
+          "count": 38,
+          "weighted_count": 38.0,
+          "share": 0.063545
+        },
+        {
+          "date": "2026-02-10",
+          "count": 30,
+          "weighted_count": 30.0,
+          "share": 0.051993
+        },
+        {
+          "date": "2026-02-11",
+          "count": 22,
+          "weighted_count": 22.0,
+          "share": 0.043651
+        },
+        {
+          "date": "2026-02-12",
+          "count": 20,
+          "weighted_count": 20.0,
+          "share": 0.060976
+        },
+        {
+          "date": "2026-02-13",
+          "count": 14,
+          "weighted_count": 14.0,
+          "share": 0.029167
+        },
+        {
+          "date": "2026-02-18",
+          "count": 20,
+          "weighted_count": 20.0,
+          "share": 0.046948
+        },
+        {
+          "date": "2026-02-19",
+          "count": 19,
+          "weighted_count": 19.0,
+          "share": 0.042129
+        },
+        {
+          "date": "2026-02-23",
+          "count": 19,
+          "weighted_count": 19.0,
+          "share": 0.043578
+        }
+      ]
+    },
+    {
+      "keyword": "agentic workflow",
+      "canonical": "agentic workflow",
+      "score": 0.0339,
+      "growth": 0.0099,
+      "acceleration": 2.4223,
+      "tfidf": 0.0099,
+      "z_score": 2.4223,
+      "idf": 1.0,
+      "recent_freq": 0.0099,
+      "recent_share": 0.0099,
+      "total": 21,
+      "weighted_total": 0.0462,
+      "weighted_total_raw": 21.0,
+      "active_days": 5,
       "recent_days": 3,
       "series": [
         {
@@ -871,21 +484,21 @@
         },
         {
           "date": "2026-02-04",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001572
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-05",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001669
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-06",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001745
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-07",
@@ -895,27 +508,27 @@
         },
         {
           "date": "2026-02-08",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003711
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-09",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001672
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-10",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001733
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-11",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001984
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003968
         },
         {
           "date": "2026-02-12",
@@ -925,39 +538,45 @@
         },
         {
           "date": "2026-02-13",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004167
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.0125
         },
         {
           "date": "2026-02-18",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004695
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.014085
         },
         {
           "date": "2026-02-19",
           "count": 5,
           "weighted_count": 5.0,
           "share": 0.011086
+        },
+        {
+          "date": "2026-02-23",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004587
         }
       ]
     },
     {
       "keyword": "语义检索",
       "canonical": "语义检索",
-      "score": 0.0307,
-      "growth": 0.0045,
-      "acceleration": 5.854,
-      "tfidf": 0.0045,
-      "z_score": 5.854,
+      "score": 0.033,
+      "growth": 0.0061,
+      "acceleration": 4.3667,
+      "tfidf": 0.0061,
+      "z_score": 4.3667,
       "idf": 1.0,
-      "recent_freq": 0.0045,
-      "recent_share": 0.0045,
-      "total": 8,
-      "weighted_total": 0.0171,
-      "weighted_total_raw": 8.0,
-      "active_days": 5,
+      "recent_freq": 0.0061,
+      "recent_share": 0.0061,
+      "total": 12,
+      "weighted_total": 0.0263,
+      "weighted_total_raw": 12.0,
+      "active_days": 6,
       "recent_days": 3,
       "series": [
         {
@@ -1043,24 +662,30 @@
           "count": 1,
           "weighted_count": 1.0,
           "share": 0.002217
+        },
+        {
+          "date": "2026-02-23",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.009174
         }
       ]
     },
     {
-      "keyword": "内容生成",
-      "canonical": "内容生成",
-      "score": 0.0255,
-      "growth": 0.0051,
-      "acceleration": 4.0081,
-      "tfidf": 0.0051,
-      "z_score": 4.0081,
+      "keyword": "扩散模型",
+      "canonical": "扩散模型",
+      "score": 0.0263,
+      "growth": 0.0092,
+      "acceleration": 1.8732,
+      "tfidf": 0.0092,
+      "z_score": 1.8732,
       "idf": 1.0,
-      "recent_freq": 0.0051,
-      "recent_share": 0.0051,
-      "total": 11,
-      "weighted_total": 0.0221,
-      "weighted_total_raw": 11.0,
-      "active_days": 6,
+      "recent_freq": 0.0092,
+      "recent_share": 0.0092,
+      "total": 23,
+      "weighted_total": 0.0487,
+      "weighted_total_raw": 23.0,
+      "active_days": 8,
       "recent_days": 3,
       "series": [
         {
@@ -1071,9 +696,9 @@
         },
         {
           "date": "2026-02-03",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001592
         },
         {
           "date": "2026-02-04",
@@ -1095,112 +720,9 @@
         },
         {
           "date": "2026-02-07",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001852
-        },
-        {
-          "date": "2026-02-08",
           "count": 0,
           "weighted_count": 0.0,
           "share": 0.0
-        },
-        {
-          "date": "2026-02-09",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-10",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003466
-        },
-        {
-          "date": "2026-02-11",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.00625
-        },
-        {
-          "date": "2026-02-18",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.002347
-        },
-        {
-          "date": "2026-02-19",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.006652
-        }
-      ]
-    },
-    {
-      "keyword": "表示学习",
-      "canonical": "表示学习",
-      "score": 0.0228,
-      "growth": 0.0044,
-      "acceleration": 4.1397,
-      "tfidf": 0.0044,
-      "z_score": 4.1397,
-      "idf": 1.0,
-      "recent_freq": 0.0044,
-      "recent_share": 0.0044,
-      "total": 11,
-      "weighted_total": 0.0221,
-      "weighted_total_raw": 11.0,
-      "active_days": 8,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001669
-        },
-        {
-          "date": "2026-02-06",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001745
-        },
-        {
-          "date": "2026-02-07",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001852
         },
         {
           "date": "2026-02-08",
@@ -1234,6 +756,115 @@
         },
         {
           "date": "2026-02-13",
+          "count": 7,
+          "weighted_count": 7.0,
+          "share": 0.014583
+        },
+        {
+          "date": "2026-02-18",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.007042
+        },
+        {
+          "date": "2026-02-19",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.006652
+        },
+        {
+          "date": "2026-02-23",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.013761
+        }
+      ]
+    },
+    {
+      "keyword": "生成式模型",
+      "canonical": "生成式模型",
+      "score": 0.0263,
+      "growth": 0.006,
+      "acceleration": 3.3722,
+      "tfidf": 0.006,
+      "z_score": 3.3722,
+      "idf": 1.0,
+      "recent_freq": 0.006,
+      "recent_share": 0.006,
+      "total": 18,
+      "weighted_total": 0.0363,
+      "weighted_total_raw": 18.0,
+      "active_days": 11,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001572
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001669
+        },
+        {
+          "date": "2026-02-06",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001745
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-08",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003711
+        },
+        {
+          "date": "2026-02-09",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001672
+        },
+        {
+          "date": "2026-02-10",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001733
+        },
+        {
+          "date": "2026-02-11",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001984
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
           "count": 2,
           "weighted_count": 2.0,
           "share": 0.004167
@@ -1246,27 +877,142 @@
         },
         {
           "date": "2026-02-19",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.011086
+        },
+        {
+          "date": "2026-02-23",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002294
+        }
+      ]
+    },
+    {
+      "keyword": "rag",
+      "canonical": "rag",
+      "score": 0.0233,
+      "growth": 0.0107,
+      "acceleration": 1.1806,
+      "tfidf": 0.0107,
+      "z_score": 1.1806,
+      "idf": 1.0,
+      "recent_freq": 0.0107,
+      "recent_share": 0.0107,
+      "total": 54,
+      "weighted_total": 0.1102,
+      "weighted_total_raw": 54.0,
+      "active_days": 15,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.009615
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.004777
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.004717
+        },
+        {
+          "date": "2026-02-05",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005008
+        },
+        {
+          "date": "2026-02-06",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005236
+        },
+        {
+          "date": "2026-02-07",
           "count": 2,
           "weighted_count": 2.0,
-          "share": 0.004435
+          "share": 0.003704
+        },
+        {
+          "date": "2026-02-08",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005566
+        },
+        {
+          "date": "2026-02-09",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005017
+        },
+        {
+          "date": "2026-02-10",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.006932
+        },
+        {
+          "date": "2026-02-11",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.007937
+        },
+        {
+          "date": "2026-02-12",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.003049
+        },
+        {
+          "date": "2026-02-13",
+          "count": 8,
+          "weighted_count": 8.0,
+          "share": 0.016667
+        },
+        {
+          "date": "2026-02-18",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.011737
+        },
+        {
+          "date": "2026-02-19",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.011086
+        },
+        {
+          "date": "2026-02-23",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.009174
         }
       ]
     },
     {
       "keyword": "embedding",
       "canonical": "embedding",
-      "score": 0.0223,
-      "growth": 0.006,
-      "acceleration": 2.6962,
-      "tfidf": 0.006,
-      "z_score": 2.6962,
+      "score": 0.023,
+      "growth": 0.0061,
+      "acceleration": 2.7709,
+      "tfidf": 0.0061,
+      "z_score": 2.7709,
       "idf": 1.0,
-      "recent_freq": 0.006,
-      "recent_share": 0.006,
-      "total": 13,
-      "weighted_total": 0.0296,
-      "weighted_total_raw": 13.0,
-      "active_days": 7,
+      "recent_freq": 0.0061,
+      "recent_share": 0.0061,
+      "total": 14,
+      "weighted_total": 0.0319,
+      "weighted_total_raw": 14.0,
+      "active_days": 8,
       "recent_days": 3,
       "series": [
         {
@@ -1352,23 +1098,29 @@
           "count": 3,
           "weighted_count": 3.0,
           "share": 0.006652
+        },
+        {
+          "date": "2026-02-23",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002294
         }
       ]
     },
     {
-      "keyword": "semantic search",
-      "canonical": "semantic search",
-      "score": 0.0221,
-      "growth": 0.0044,
-      "acceleration": 4.0281,
-      "tfidf": 0.0044,
-      "z_score": 4.0281,
+      "keyword": "autonomous agents",
+      "canonical": "autonomous agents",
+      "score": 0.0192,
+      "growth": 0.0053,
+      "acceleration": 2.6373,
+      "tfidf": 0.0053,
+      "z_score": 2.6373,
       "idf": 1.0,
-      "recent_freq": 0.0044,
-      "recent_share": 0.0044,
-      "total": 8,
-      "weighted_total": 0.0181,
-      "weighted_total_raw": 8.0,
+      "recent_freq": 0.0053,
+      "recent_share": 0.0053,
+      "total": 11,
+      "weighted_total": 0.0237,
+      "weighted_total_raw": 11.0,
       "active_days": 5,
       "recent_days": 3,
       "series": [
@@ -1404,9 +1156,9 @@
         },
         {
           "date": "2026-02-07",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001852
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-08",
@@ -1416,9 +1168,9 @@
         },
         {
           "date": "2026-02-09",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001672
         },
         {
           "date": "2026-02-10",
@@ -1434,524 +1186,9 @@
         },
         {
           "date": "2026-02-12",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.003049
-        },
-        {
-          "date": "2026-02-13",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004167
-        },
-        {
-          "date": "2026-02-18",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.002347
-        },
-        {
-          "date": "2026-02-19",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.006652
-        }
-      ]
-    },
-    {
-      "keyword": "transformer",
-      "canonical": "transformer",
-      "score": 0.0177,
-      "growth": 0.007,
-      "acceleration": 1.5208,
-      "tfidf": 0.007,
-      "z_score": 1.5208,
-      "idf": 1.0,
-      "recent_freq": 0.007,
-      "recent_share": 0.007,
-      "total": 31,
-      "weighted_total": 0.0617,
-      "weighted_total_raw": 31.0,
-      "active_days": 12,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.009615
-        },
-        {
-          "date": "2026-02-03",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003185
-        },
-        {
-          "date": "2026-02-04",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.004717
-        },
-        {
-          "date": "2026-02-05",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003339
-        },
-        {
-          "date": "2026-02-06",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.00349
-        },
-        {
-          "date": "2026-02-07",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003704
-        },
-        {
-          "date": "2026-02-08",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003711
-        },
-        {
-          "date": "2026-02-09",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003344
-        },
-        {
-          "date": "2026-02-10",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003466
-        },
-        {
-          "date": "2026-02-11",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001984
-        },
-        {
-          "date": "2026-02-12",
           "count": 0,
           "weighted_count": 0.0,
           "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 8,
-          "weighted_count": 8.0,
-          "share": 0.016667
-        },
-        {
-          "date": "2026-02-18",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-19",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004435
-        }
-      ]
-    },
-    {
-      "keyword": "图神经网络",
-      "canonical": "图神经网络",
-      "score": 0.0156,
-      "growth": 0.0045,
-      "acceleration": 2.4585,
-      "tfidf": 0.0045,
-      "z_score": 2.4585,
-      "idf": 1.0,
-      "recent_freq": 0.0045,
-      "recent_share": 0.0045,
-      "total": 14,
-      "weighted_total": 0.0275,
-      "weighted_total_raw": 14.0,
-      "active_days": 8,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001592
-        },
-        {
-          "date": "2026-02-04",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001572
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-07",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-08",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003711
-        },
-        {
-          "date": "2026-02-09",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003344
-        },
-        {
-          "date": "2026-02-10",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001733
-        },
-        {
-          "date": "2026-02-11",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001984
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004167
-        },
-        {
-          "date": "2026-02-18",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.00939
-        },
-        {
-          "date": "2026-02-19",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        }
-      ]
-    },
-    {
-      "keyword": "开发者工具",
-      "canonical": "开发者工具",
-      "score": 0.0149,
-      "growth": 0.0036,
-      "acceleration": 3.1818,
-      "tfidf": 0.0036,
-      "z_score": 3.1818,
-      "idf": 1.0,
-      "recent_freq": 0.0036,
-      "recent_share": 0.0036,
-      "total": 7,
-      "weighted_total": 0.0156,
-      "weighted_total_raw": 7.0,
-      "active_days": 4,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-04",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-05",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-07",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001852
-        },
-        {
-          "date": "2026-02-08",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-09",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-10",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-11",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-12",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.003049
-        },
-        {
-          "date": "2026-02-13",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.008333
-        },
-        {
-          "date": "2026-02-18",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.002347
-        },
-        {
-          "date": "2026-02-19",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        }
-      ]
-    },
-    {
-      "keyword": "LLM",
-      "canonical": "llm",
-      "score": 0.0134,
-      "growth": 0.013,
-      "acceleration": 0.028,
-      "tfidf": 0.013,
-      "z_score": 0.028,
-      "idf": 1.0,
-      "recent_freq": 0.013,
-      "recent_share": 0.013,
-      "total": 88,
-      "weighted_total": 0.1793,
-      "weighted_total_raw": 88.0,
-      "active_days": 13,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 12,
-          "weighted_count": 12.0,
-          "share": 0.038462
-        },
-        {
-          "date": "2026-02-03",
-          "count": 9,
-          "weighted_count": 9.0,
-          "share": 0.014331
-        },
-        {
-          "date": "2026-02-04",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.007862
-        },
-        {
-          "date": "2026-02-05",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.010017
-        },
-        {
-          "date": "2026-02-06",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.010471
-        },
-        {
-          "date": "2026-02-07",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001852
-        },
-        {
-          "date": "2026-02-08",
-          "count": 7,
-          "weighted_count": 7.0,
-          "share": 0.012987
-        },
-        {
-          "date": "2026-02-09",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.010033
-        },
-        {
-          "date": "2026-02-10",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.010399
-        },
-        {
-          "date": "2026-02-11",
-          "count": 12,
-          "weighted_count": 12.0,
-          "share": 0.02381
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 11,
-          "weighted_count": 11.0,
-          "share": 0.022917
-        },
-        {
-          "date": "2026-02-18",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.011737
-        },
-        {
-          "date": "2026-02-19",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004435
-        }
-      ]
-    },
-    {
-      "keyword": "机器学习",
-      "canonical": "机器学习",
-      "score": 0.0134,
-      "growth": 0.0134,
-      "acceleration": -2.3342,
-      "tfidf": 0.0134,
-      "z_score": -2.3342,
-      "idf": 1.0,
-      "recent_freq": 0.0134,
-      "recent_share": 0.0134,
-      "total": 224,
-      "weighted_total": 0.4251,
-      "weighted_total_raw": 224.0,
-      "active_days": 14,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.019231
-        },
-        {
-          "date": "2026-02-03",
-          "count": 22,
-          "weighted_count": 22.0,
-          "share": 0.035032
-        },
-        {
-          "date": "2026-02-04",
-          "count": 27,
-          "weighted_count": 27.0,
-          "share": 0.042453
-        },
-        {
-          "date": "2026-02-05",
-          "count": 17,
-          "weighted_count": 17.0,
-          "share": 0.028381
-        },
-        {
-          "date": "2026-02-06",
-          "count": 16,
-          "weighted_count": 16.0,
-          "share": 0.027923
-        },
-        {
-          "date": "2026-02-07",
-          "count": 15,
-          "weighted_count": 15.0,
-          "share": 0.027778
-        },
-        {
-          "date": "2026-02-08",
-          "count": 24,
-          "weighted_count": 24.0,
-          "share": 0.044527
-        },
-        {
-          "date": "2026-02-09",
-          "count": 27,
-          "weighted_count": 27.0,
-          "share": 0.045151
-        },
-        {
-          "date": "2026-02-10",
-          "count": 23,
-          "weighted_count": 23.0,
-          "share": 0.039861
-        },
-        {
-          "date": "2026-02-11",
-          "count": 13,
-          "weighted_count": 13.0,
-          "share": 0.025794
-        },
-        {
-          "date": "2026-02-12",
-          "count": 16,
-          "weighted_count": 16.0,
-          "share": 0.04878
         },
         {
           "date": "2026-02-13",
@@ -1961,33 +1198,148 @@
         },
         {
           "date": "2026-02-18",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.011737
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002347
         },
         {
           "date": "2026-02-19",
-          "count": 10,
-          "weighted_count": 10.0,
-          "share": 0.022173
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.008869
+        },
+        {
+          "date": "2026-02-23",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004587
+        }
+      ]
+    },
+    {
+      "keyword": "agent infra",
+      "canonical": "agent infra",
+      "score": 0.0178,
+      "growth": 0.003,
+      "acceleration": 4.9212,
+      "tfidf": 0.003,
+      "z_score": 4.9212,
+      "idf": 1.0,
+      "recent_freq": 0.003,
+      "recent_share": 0.003,
+      "total": 5,
+      "weighted_total": 0.0111,
+      "weighted_total_raw": 5.0,
+      "active_days": 3,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-08",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-09",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-10",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-11",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002083
+        },
+        {
+          "date": "2026-02-18",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-19",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004587
         }
       ]
     },
     {
       "keyword": "claude",
       "canonical": "claude",
-      "score": 0.0126,
-      "growth": 0.0046,
-      "acceleration": 1.7294,
-      "tfidf": 0.0046,
-      "z_score": 1.7294,
+      "score": 0.0175,
+      "growth": 0.0054,
+      "acceleration": 2.2639,
+      "tfidf": 0.0054,
+      "z_score": 2.2639,
       "idf": 1.0,
-      "recent_freq": 0.0046,
-      "recent_share": 0.0046,
-      "total": 16,
-      "weighted_total": 0.031,
-      "weighted_total_raw": 16.0,
-      "active_days": 8,
+      "recent_freq": 0.0054,
+      "recent_share": 0.0054,
+      "total": 17,
+      "weighted_total": 0.0333,
+      "weighted_total_raw": 17.0,
+      "active_days": 9,
       "recent_days": 3,
       "series": [
         {
@@ -2073,24 +1425,139 @@
           "count": 2,
           "weighted_count": 2.0,
           "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002294
         }
       ]
     },
     {
-      "keyword": "assistant",
-      "canonical": "assistant",
-      "score": 0.0116,
-      "growth": 0.0044,
-      "acceleration": 1.6361,
-      "tfidf": 0.0044,
-      "z_score": 1.6361,
+      "keyword": "机器学习",
+      "canonical": "机器学习",
+      "score": 0.0174,
+      "growth": 0.0174,
+      "acceleration": -1.2753,
+      "tfidf": 0.0174,
+      "z_score": -1.2753,
       "idf": 1.0,
-      "recent_freq": 0.0044,
-      "recent_share": 0.0044,
-      "total": 13,
-      "weighted_total": 0.0271,
-      "weighted_total_raw": 13.0,
-      "active_days": 7,
+      "recent_freq": 0.0174,
+      "recent_share": 0.0174,
+      "total": 232,
+      "weighted_total": 0.4434,
+      "weighted_total_raw": 232.0,
+      "active_days": 15,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.019231
+        },
+        {
+          "date": "2026-02-03",
+          "count": 22,
+          "weighted_count": 22.0,
+          "share": 0.035032
+        },
+        {
+          "date": "2026-02-04",
+          "count": 27,
+          "weighted_count": 27.0,
+          "share": 0.042453
+        },
+        {
+          "date": "2026-02-05",
+          "count": 17,
+          "weighted_count": 17.0,
+          "share": 0.028381
+        },
+        {
+          "date": "2026-02-06",
+          "count": 16,
+          "weighted_count": 16.0,
+          "share": 0.027923
+        },
+        {
+          "date": "2026-02-07",
+          "count": 15,
+          "weighted_count": 15.0,
+          "share": 0.027778
+        },
+        {
+          "date": "2026-02-08",
+          "count": 24,
+          "weighted_count": 24.0,
+          "share": 0.044527
+        },
+        {
+          "date": "2026-02-09",
+          "count": 27,
+          "weighted_count": 27.0,
+          "share": 0.045151
+        },
+        {
+          "date": "2026-02-10",
+          "count": 23,
+          "weighted_count": 23.0,
+          "share": 0.039861
+        },
+        {
+          "date": "2026-02-11",
+          "count": 13,
+          "weighted_count": 13.0,
+          "share": 0.025794
+        },
+        {
+          "date": "2026-02-12",
+          "count": 16,
+          "weighted_count": 16.0,
+          "share": 0.04878
+        },
+        {
+          "date": "2026-02-13",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.00625
+        },
+        {
+          "date": "2026-02-18",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.011737
+        },
+        {
+          "date": "2026-02-19",
+          "count": 10,
+          "weighted_count": 10.0,
+          "share": 0.022173
+        },
+        {
+          "date": "2026-02-23",
+          "count": 8,
+          "weighted_count": 8.0,
+          "share": 0.018349
+        }
+      ]
+    },
+    {
+      "keyword": "copilot",
+      "canonical": "copilot",
+      "score": 0.014,
+      "growth": 0.003,
+      "acceleration": 3.6463,
+      "tfidf": 0.003,
+      "z_score": 3.6463,
+      "idf": 1.0,
+      "recent_freq": 0.003,
+      "recent_share": 0.003,
+      "total": 6,
+      "weighted_total": 0.013,
+      "weighted_total_raw": 6.0,
+      "active_days": 4,
       "recent_days": 3,
       "series": [
         {
@@ -2107,9 +1574,9 @@
         },
         {
           "date": "2026-02-04",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003145
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-05",
@@ -2119,15 +1586,15 @@
         },
         {
           "date": "2026-02-06",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001745
-        },
-        {
-          "date": "2026-02-07",
           "count": 0,
           "weighted_count": 0.0,
           "share": 0.0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001852
         },
         {
           "date": "2026-02-08",
@@ -2149,51 +1616,57 @@
         },
         {
           "date": "2026-02-11",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005952
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-12",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.003049
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-13",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.00625
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002083
         },
         {
           "date": "2026-02-18",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004695
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-19",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.002217
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004587
         }
       ]
     },
     {
       "keyword": "向量检索",
       "canonical": "向量检索",
-      "score": 0.0095,
-      "growth": 0.0037,
-      "acceleration": 1.5605,
-      "tfidf": 0.0037,
-      "z_score": 1.5605,
+      "score": 0.0136,
+      "growth": 0.0045,
+      "acceleration": 2.0042,
+      "tfidf": 0.0045,
+      "z_score": 2.0042,
       "idf": 1.0,
-      "recent_freq": 0.0037,
-      "recent_share": 0.0037,
-      "total": 9,
-      "weighted_total": 0.0201,
-      "weighted_total_raw": 9.0,
-      "active_days": 5,
+      "recent_freq": 0.0045,
+      "recent_share": 0.0045,
+      "total": 11,
+      "weighted_total": 0.0247,
+      "weighted_total_raw": 11.0,
+      "active_days": 6,
       "recent_days": 3,
       "series": [
         {
@@ -2279,127 +1752,30 @@
           "count": 3,
           "weighted_count": 3.0,
           "share": 0.006652
-        }
-      ]
-    },
-    {
-      "keyword": "workflow",
-      "canonical": "workflow",
-      "score": 0.0086,
-      "growth": 0.0035,
-      "acceleration": 1.4312,
-      "tfidf": 0.0035,
-      "z_score": 1.4312,
-      "idf": 1.0,
-      "recent_freq": 0.0035,
-      "recent_share": 0.0035,
-      "total": 14,
-      "weighted_total": 0.0256,
-      "weighted_total_raw": 14.0,
-      "active_days": 8,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
         },
         {
-          "date": "2026-02-03",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.004777
-        },
-        {
-          "date": "2026-02-04",
+          "date": "2026-02-23",
           "count": 2,
           "weighted_count": 2.0,
-          "share": 0.003145
-        },
-        {
-          "date": "2026-02-05",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001669
-        },
-        {
-          "date": "2026-02-06",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-07",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001852
-        },
-        {
-          "date": "2026-02-08",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001855
-        },
-        {
-          "date": "2026-02-09",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-10",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001733
-        },
-        {
-          "date": "2026-02-11",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.008333
-        },
-        {
-          "date": "2026-02-18",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-19",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.002217
+          "share": 0.004587
         }
       ]
     },
     {
       "keyword": "diffusion",
       "canonical": "diffusion",
-      "score": 0.0079,
-      "growth": 0.0036,
-      "acceleration": 1.1741,
-      "tfidf": 0.0036,
-      "z_score": 1.1741,
+      "score": 0.0114,
+      "growth": 0.0046,
+      "acceleration": 1.4975,
+      "tfidf": 0.0046,
+      "z_score": 1.4975,
       "idf": 1.0,
-      "recent_freq": 0.0036,
-      "recent_share": 0.0036,
-      "total": 15,
-      "weighted_total": 0.0279,
-      "weighted_total_raw": 15.0,
-      "active_days": 8,
+      "recent_freq": 0.0046,
+      "recent_share": 0.0046,
+      "total": 18,
+      "weighted_total": 0.0348,
+      "weighted_total_raw": 18.0,
+      "active_days": 9,
       "recent_days": 3,
       "series": [
         {
@@ -2485,31 +1861,37 @@
           "count": 2,
           "weighted_count": 2.0,
           "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.006881
         }
       ]
     },
     {
-      "keyword": "generative",
-      "canonical": "generative",
-      "score": 0.0073,
-      "growth": 0.0044,
-      "acceleration": 0.6636,
-      "tfidf": 0.0044,
-      "z_score": 0.6636,
+      "keyword": "图神经网络",
+      "canonical": "图神经网络",
+      "score": 0.0101,
+      "growth": 0.0039,
+      "acceleration": 1.592,
+      "tfidf": 0.0039,
+      "z_score": 1.592,
       "idf": 1.0,
-      "recent_freq": 0.0044,
-      "recent_share": 0.0044,
-      "total": 23,
-      "weighted_total": 0.0454,
-      "weighted_total_raw": 23.0,
-      "active_days": 12,
+      "recent_freq": 0.0039,
+      "recent_share": 0.0039,
+      "total": 15,
+      "weighted_total": 0.0298,
+      "weighted_total_raw": 15.0,
+      "active_days": 9,
       "recent_days": 3,
       "series": [
         {
           "date": "2026-02-02",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.003205
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-03",
@@ -2519,21 +1901,21 @@
         },
         {
           "date": "2026-02-04",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003145
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001572
         },
         {
           "date": "2026-02-05",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.006678
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-06",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.006981
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-07",
@@ -2543,15 +1925,15 @@
         },
         {
           "date": "2026-02-08",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.001855
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003711
         },
         {
           "date": "2026-02-09",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003344
         },
         {
           "date": "2026-02-10",
@@ -2561,15 +1943,451 @@
         },
         {
           "date": "2026-02-11",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003968
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001984
         },
         {
           "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004167
+        },
+        {
+          "date": "2026-02-18",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.00939
+        },
+        {
+          "date": "2026-02-19",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-23",
           "count": 1,
           "weighted_count": 1.0,
-          "share": 0.003049
+          "share": 0.002294
+        }
+      ]
+    },
+    {
+      "keyword": "deep learning",
+      "canonical": "deep learning",
+      "score": 0.0095,
+      "growth": 0.003,
+      "acceleration": 2.1654,
+      "tfidf": 0.003,
+      "z_score": 2.1654,
+      "idf": 1.0,
+      "recent_freq": 0.003,
+      "recent_share": 0.003,
+      "total": 9,
+      "weighted_total": 0.0175,
+      "weighted_total_raw": 9.0,
+      "active_days": 6,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003145
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001852
+        },
+        {
+          "date": "2026-02-08",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001855
+        },
+        {
+          "date": "2026-02-09",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001672
+        },
+        {
+          "date": "2026-02-10",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-11",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-18",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-19",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004587
+        }
+      ]
+    },
+    {
+      "keyword": "LLM",
+      "canonical": "llm",
+      "score": 0.0092,
+      "growth": 0.0092,
+      "acceleration": -0.4361,
+      "tfidf": 0.0092,
+      "z_score": -0.4361,
+      "idf": 1.0,
+      "recent_freq": 0.0092,
+      "recent_share": 0.0092,
+      "total": 93,
+      "weighted_total": 0.1908,
+      "weighted_total_raw": 93.0,
+      "active_days": 14,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 12,
+          "weighted_count": 12.0,
+          "share": 0.038462
+        },
+        {
+          "date": "2026-02-03",
+          "count": 9,
+          "weighted_count": 9.0,
+          "share": 0.014331
+        },
+        {
+          "date": "2026-02-04",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.007862
+        },
+        {
+          "date": "2026-02-05",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.010017
+        },
+        {
+          "date": "2026-02-06",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.010471
+        },
+        {
+          "date": "2026-02-07",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001852
+        },
+        {
+          "date": "2026-02-08",
+          "count": 7,
+          "weighted_count": 7.0,
+          "share": 0.012987
+        },
+        {
+          "date": "2026-02-09",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.010033
+        },
+        {
+          "date": "2026-02-10",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.010399
+        },
+        {
+          "date": "2026-02-11",
+          "count": 12,
+          "weighted_count": 12.0,
+          "share": 0.02381
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
+          "count": 11,
+          "weighted_count": 11.0,
+          "share": 0.022917
+        },
+        {
+          "date": "2026-02-18",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.011737
+        },
+        {
+          "date": "2026-02-19",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.011468
+        }
+      ]
+    },
+    {
+      "keyword": "表示学习",
+      "canonical": "表示学习",
+      "score": 0.0078,
+      "growth": 0.003,
+      "acceleration": 1.5657,
+      "tfidf": 0.003,
+      "z_score": 1.5657,
+      "idf": 1.0,
+      "recent_freq": 0.003,
+      "recent_share": 0.003,
+      "total": 11,
+      "weighted_total": 0.0221,
+      "weighted_total_raw": 11.0,
+      "active_days": 8,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001669
+        },
+        {
+          "date": "2026-02-06",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001745
+        },
+        {
+          "date": "2026-02-07",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001852
+        },
+        {
+          "date": "2026-02-08",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001855
+        },
+        {
+          "date": "2026-02-09",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001672
+        },
+        {
+          "date": "2026-02-10",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-11",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004167
+        },
+        {
+          "date": "2026-02-18",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004695
+        },
+        {
+          "date": "2026-02-19",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        }
+      ]
+    },
+    {
+      "keyword": "多模态大模型",
+      "canonical": "多模态大模型",
+      "score": 0.0075,
+      "growth": 0.003,
+      "acceleration": 1.4602,
+      "tfidf": 0.003,
+      "z_score": 1.4602,
+      "idf": 1.0,
+      "recent_freq": 0.003,
+      "recent_share": 0.003,
+      "total": 7,
+      "weighted_total": 0.0154,
+      "weighted_total_raw": 7.0,
+      "active_days": 3,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-08",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-09",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-10",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-11",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-13",
@@ -2585,20 +2403,26 @@
         },
         {
           "date": "2026-02-19",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.002217
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         }
       ]
     },
     {
       "keyword": "gpt",
       "canonical": "gpt",
-      "score": 0.0061,
+      "score": 0.0063,
       "growth": 0.0031,
-      "acceleration": 0.9611,
+      "acceleration": 1.0353,
       "tfidf": 0.0031,
-      "z_score": 0.9611,
+      "z_score": 1.0353,
       "idf": 1.0,
       "recent_freq": 0.0031,
       "recent_share": 0.0031,
@@ -2691,24 +2515,30 @@
           "count": 1,
           "weighted_count": 1.0,
           "share": 0.002217
+        },
+        {
+          "date": "2026-02-23",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         }
       ]
     },
     {
-      "keyword": "多模态大模型",
-      "canonical": "多模态大模型",
-      "score": 0.0051,
-      "growth": 0.0051,
-      "acceleration": 0.0,
-      "tfidf": 0.0051,
-      "z_score": 0.0,
+      "keyword": "neural network",
+      "canonical": "neural network",
+      "score": 0.0052,
+      "growth": 0.0031,
+      "acceleration": 0.6923,
+      "tfidf": 0.0031,
+      "z_score": 0.6923,
       "idf": 1.0,
-      "recent_freq": 0.0051,
-      "recent_share": 0.0051,
-      "total": 7,
-      "weighted_total": 0.0154,
-      "weighted_total_raw": 7.0,
-      "active_days": 3,
+      "recent_freq": 0.0031,
+      "recent_share": 0.0031,
+      "total": 18,
+      "weighted_total": 0.034,
+      "weighted_total_raw": 18.0,
+      "active_days": 12,
       "recent_days": 3,
       "series": [
         {
@@ -2719,136 +2549,33 @@
         },
         {
           "date": "2026-02-03",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001592
         },
         {
           "date": "2026-02-04",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001572
         },
         {
           "date": "2026-02-05",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003339
         },
         {
           "date": "2026-02-06",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.00349
         },
         {
           "date": "2026-02-07",
           "count": 0,
           "weighted_count": 0.0,
           "share": 0.0
-        },
-        {
-          "date": "2026-02-08",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-09",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-10",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-11",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.00625
-        },
-        {
-          "date": "2026-02-18",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004695
-        },
-        {
-          "date": "2026-02-19",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.004435
-        }
-      ]
-    },
-    {
-      "keyword": "智能助手",
-      "canonical": "智能助手",
-      "score": 0.0051,
-      "growth": 0.0051,
-      "acceleration": -0.3906,
-      "tfidf": 0.0051,
-      "z_score": -0.3906,
-      "idf": 1.0,
-      "recent_freq": 0.0051,
-      "recent_share": 0.0051,
-      "total": 45,
-      "weighted_total": 0.0859,
-      "weighted_total_raw": 45.0,
-      "active_days": 13,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-03",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.006369
-        },
-        {
-          "date": "2026-02-04",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.009434
-        },
-        {
-          "date": "2026-02-05",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.008347
-        },
-        {
-          "date": "2026-02-06",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.010471
-        },
-        {
-          "date": "2026-02-07",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.007407
         },
         {
           "date": "2026-02-08",
@@ -2864,27 +2591,27 @@
         },
         {
           "date": "2026-02-10",
-          "count": 2,
-          "weighted_count": 2.0,
-          "share": 0.003466
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001733
         },
         {
           "date": "2026-02-11",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005952
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003968
         },
         {
           "date": "2026-02-12",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.012195
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-13",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.008333
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002083
         },
         {
           "date": "2026-02-18",
@@ -2897,127 +2624,30 @@
           "count": 1,
           "weighted_count": 1.0,
           "share": 0.002217
+        },
+        {
+          "date": "2026-02-23",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002294
         }
       ]
     },
     {
-      "keyword": "强化学习",
-      "canonical": "强化学习",
-      "score": 0.005,
-      "growth": 0.005,
-      "acceleration": -0.9237,
-      "tfidf": 0.005,
-      "z_score": -0.9237,
+      "keyword": "assistant",
+      "canonical": "assistant",
+      "score": 0.0049,
+      "growth": 0.0031,
+      "acceleration": 0.6071,
+      "tfidf": 0.0031,
+      "z_score": 0.6071,
       "idf": 1.0,
-      "recent_freq": 0.005,
-      "recent_share": 0.005,
-      "total": 56,
-      "weighted_total": 0.1066,
-      "weighted_total_raw": 56.0,
-      "active_days": 12,
-      "recent_days": 3,
-      "series": [
-        {
-          "date": "2026-02-02",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.012821
-        },
-        {
-          "date": "2026-02-03",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.007962
-        },
-        {
-          "date": "2026-02-04",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.006289
-        },
-        {
-          "date": "2026-02-05",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.010017
-        },
-        {
-          "date": "2026-02-06",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.008726
-        },
-        {
-          "date": "2026-02-07",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005556
-        },
-        {
-          "date": "2026-02-08",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.009276
-        },
-        {
-          "date": "2026-02-09",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.006689
-        },
-        {
-          "date": "2026-02-10",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.010399
-        },
-        {
-          "date": "2026-02-11",
-          "count": 7,
-          "weighted_count": 7.0,
-          "share": 0.013889
-        },
-        {
-          "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-13",
-          "count": 4,
-          "weighted_count": 4.0,
-          "share": 0.008333
-        },
-        {
-          "date": "2026-02-18",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
-        },
-        {
-          "date": "2026-02-19",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.006652
-        }
-      ]
-    },
-    {
-      "keyword": "多智能体",
-      "canonical": "多智能体",
-      "score": 0.0038,
-      "growth": 0.0038,
-      "acceleration": -0.2429,
-      "tfidf": 0.0038,
-      "z_score": -0.2429,
-      "idf": 1.0,
-      "recent_freq": 0.0038,
-      "recent_share": 0.0038,
-      "total": 34,
-      "weighted_total": 0.0624,
-      "weighted_total_raw": 34.0,
-      "active_days": 12,
+      "recent_freq": 0.0031,
+      "recent_share": 0.0031,
+      "total": 14,
+      "weighted_total": 0.0293,
+      "weighted_total_raw": 14.0,
+      "active_days": 8,
       "recent_days": 3,
       "series": [
         {
@@ -3028,21 +2658,21 @@
         },
         {
           "date": "2026-02-03",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.004777
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-04",
-          "count": 5,
-          "weighted_count": 5.0,
-          "share": 0.007862
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003145
         },
         {
           "date": "2026-02-05",
-          "count": 3,
-          "weighted_count": 3.0,
-          "share": 0.005008
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-06",
@@ -3058,15 +2688,124 @@
         },
         {
           "date": "2026-02-08",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.011132
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-09",
-          "count": 6,
-          "weighted_count": 6.0,
-          "share": 0.010033
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-10",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-11",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005952
+        },
+        {
+          "date": "2026-02-12",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.003049
+        },
+        {
+          "date": "2026-02-13",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.00625
+        },
+        {
+          "date": "2026-02-18",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004695
+        },
+        {
+          "date": "2026-02-19",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002217
+        },
+        {
+          "date": "2026-02-23",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002294
+        }
+      ]
+    },
+    {
+      "keyword": "machine learning",
+      "canonical": "machine learning",
+      "score": 0.0049,
+      "growth": 0.0038,
+      "acceleration": 0.2926,
+      "tfidf": 0.0038,
+      "z_score": 0.2926,
+      "idf": 1.0,
+      "recent_freq": 0.0038,
+      "recent_share": 0.0038,
+      "total": 24,
+      "weighted_total": 0.0483,
+      "weighted_total_raw": 24.0,
+      "active_days": 11,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.00641
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.004777
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.004717
+        },
+        {
+          "date": "2026-02-05",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-08",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005566
+        },
+        {
+          "date": "2026-02-09",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005017
         },
         {
           "date": "2026-02-10",
@@ -3088,21 +2827,136 @@
         },
         {
           "date": "2026-02-13",
-          "count": 1,
-          "weighted_count": 1.0,
-          "share": 0.002083
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-18",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002347
+        },
+        {
+          "date": "2026-02-19",
           "count": 3,
           "weighted_count": 3.0,
-          "share": 0.007042
+          "share": 0.006652
+        },
+        {
+          "date": "2026-02-23",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002294
+        }
+      ]
+    },
+    {
+      "keyword": "workflow",
+      "canonical": "workflow",
+      "score": 0.0044,
+      "growth": 0.003,
+      "acceleration": 0.4517,
+      "tfidf": 0.003,
+      "z_score": 0.4517,
+      "idf": 1.0,
+      "recent_freq": 0.003,
+      "recent_share": 0.003,
+      "total": 17,
+      "weighted_total": 0.0325,
+      "weighted_total_raw": 17.0,
+      "active_days": 9,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.004777
+        },
+        {
+          "date": "2026-02-04",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003145
+        },
+        {
+          "date": "2026-02-05",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001669
+        },
+        {
+          "date": "2026-02-06",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-07",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001852
+        },
+        {
+          "date": "2026-02-08",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001855
+        },
+        {
+          "date": "2026-02-09",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-10",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001733
+        },
+        {
+          "date": "2026-02-11",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.008333
+        },
+        {
+          "date": "2026-02-18",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         },
         {
           "date": "2026-02-19",
           "count": 1,
           "weighted_count": 1.0,
           "share": 0.002217
+        },
+        {
+          "date": "2026-02-23",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.006881
         }
       ]
     },
@@ -3111,9 +2965,9 @@
       "canonical": "语义搜索",
       "score": 0.0037,
       "growth": 0.0037,
-      "acceleration": -2.3419,
+      "acceleration": -1.7792,
       "tfidf": 0.0037,
-      "z_score": -2.3419,
+      "z_score": -1.7792,
       "idf": 1.0,
       "recent_freq": 0.0037,
       "recent_share": 0.0037,
@@ -3206,24 +3060,139 @@
           "count": 4,
           "weighted_count": 4.0,
           "share": 0.008869
+        },
+        {
+          "date": "2026-02-23",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
         }
       ]
     },
     {
-      "keyword": "agenticworkflow",
-      "canonical": "agenticworkflow",
-      "score": 0.0036,
-      "growth": 0.0036,
-      "acceleration": 0.0,
-      "tfidf": 0.0036,
-      "z_score": 0.0,
+      "keyword": "ml",
+      "canonical": "ml",
+      "score": 0.0031,
+      "growth": 0.0031,
+      "acceleration": -0.5862,
+      "tfidf": 0.0031,
+      "z_score": -0.5862,
       "idf": 1.0,
-      "recent_freq": 0.0036,
-      "recent_share": 0.0036,
-      "total": 5,
-      "weighted_total": 0.0107,
-      "weighted_total_raw": 5.0,
-      "active_days": 2,
+      "recent_freq": 0.0031,
+      "recent_share": 0.0031,
+      "total": 34,
+      "weighted_total": 0.069,
+      "weighted_total_raw": 34.0,
+      "active_days": 12,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.009615
+        },
+        {
+          "date": "2026-02-03",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003185
+        },
+        {
+          "date": "2026-02-04",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-05",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.008347
+        },
+        {
+          "date": "2026-02-06",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.006981
+        },
+        {
+          "date": "2026-02-07",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-08",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.007421
+        },
+        {
+          "date": "2026-02-09",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005017
+        },
+        {
+          "date": "2026-02-10",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005199
+        },
+        {
+          "date": "2026-02-11",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.007937
+        },
+        {
+          "date": "2026-02-12",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.006098
+        },
+        {
+          "date": "2026-02-13",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-18",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002347
+        },
+        {
+          "date": "2026-02-19",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002217
+        },
+        {
+          "date": "2026-02-23",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004587
+        }
+      ]
+    },
+    {
+      "keyword": "多智能体",
+      "canonical": "多智能体",
+      "score": 0.0031,
+      "growth": 0.0031,
+      "acceleration": -0.3876,
+      "tfidf": 0.0031,
+      "z_score": -0.3876,
+      "idf": 1.0,
+      "recent_freq": 0.0031,
+      "recent_share": 0.0031,
+      "total": 34,
+      "weighted_total": 0.0624,
+      "weighted_total_raw": 34.0,
+      "active_days": 12,
       "recent_days": 3,
       "series": [
         {
@@ -3234,27 +3203,27 @@
         },
         {
           "date": "2026-02-03",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.004777
         },
         {
           "date": "2026-02-04",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.007862
         },
         {
           "date": "2026-02-05",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005008
         },
         {
           "date": "2026-02-06",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001745
         },
         {
           "date": "2026-02-07",
@@ -3264,33 +3233,142 @@
         },
         {
           "date": "2026-02-08",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.011132
         },
         {
           "date": "2026-02-09",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.010033
         },
         {
           "date": "2026-02-10",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003466
         },
         {
           "date": "2026-02-11",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003968
+        },
+        {
+          "date": "2026-02-12",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.003049
+        },
+        {
+          "date": "2026-02-13",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002083
+        },
+        {
+          "date": "2026-02-18",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.007042
+        },
+        {
+          "date": "2026-02-19",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002217
+        },
+        {
+          "date": "2026-02-23",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        }
+      ]
+    },
+    {
+      "keyword": "智能助手",
+      "canonical": "智能助手",
+      "score": 0.0031,
+      "growth": 0.0031,
+      "acceleration": -1.0533,
+      "tfidf": 0.0031,
+      "z_score": -1.0533,
+      "idf": 1.0,
+      "recent_freq": 0.0031,
+      "recent_share": 0.0031,
+      "total": 46,
+      "weighted_total": 0.0882,
+      "weighted_total_raw": 46.0,
+      "active_days": 14,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
           "count": 0,
           "weighted_count": 0.0,
           "share": 0.0
         },
         {
+          "date": "2026-02-03",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.006369
+        },
+        {
+          "date": "2026-02-04",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.009434
+        },
+        {
+          "date": "2026-02-05",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.008347
+        },
+        {
+          "date": "2026-02-06",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.010471
+        },
+        {
+          "date": "2026-02-07",
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.007407
+        },
+        {
+          "date": "2026-02-08",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003711
+        },
+        {
+          "date": "2026-02-09",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003344
+        },
+        {
+          "date": "2026-02-10",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003466
+        },
+        {
+          "date": "2026-02-11",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005952
+        },
+        {
           "date": "2026-02-12",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 4,
+          "weighted_count": 4.0,
+          "share": 0.012195
         },
         {
           "date": "2026-02-13",
@@ -3300,15 +3378,239 @@
         },
         {
           "date": "2026-02-18",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004695
+        },
+        {
+          "date": "2026-02-19",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002217
+        },
+        {
+          "date": "2026-02-23",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002294
+        }
+      ]
+    },
+    {
+      "keyword": "transformer",
+      "canonical": "transformer",
+      "score": 0.003,
+      "growth": 0.003,
+      "acceleration": -0.4233,
+      "tfidf": 0.003,
+      "z_score": -0.4233,
+      "idf": 1.0,
+      "recent_freq": 0.003,
+      "recent_share": 0.003,
+      "total": 33,
+      "weighted_total": 0.0662,
+      "weighted_total_raw": 33.0,
+      "active_days": 13,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.009615
+        },
+        {
+          "date": "2026-02-03",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003185
+        },
+        {
+          "date": "2026-02-04",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.004717
+        },
+        {
+          "date": "2026-02-05",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003339
+        },
+        {
+          "date": "2026-02-06",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.00349
+        },
+        {
+          "date": "2026-02-07",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003704
+        },
+        {
+          "date": "2026-02-08",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003711
+        },
+        {
+          "date": "2026-02-09",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003344
+        },
+        {
+          "date": "2026-02-10",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.003466
+        },
+        {
+          "date": "2026-02-11",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001984
+        },
+        {
+          "date": "2026-02-12",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-13",
+          "count": 8,
+          "weighted_count": 8.0,
+          "share": 0.016667
+        },
+        {
+          "date": "2026-02-18",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-19",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004587
+        }
+      ]
+    },
+    {
+      "keyword": "生成式",
+      "canonical": "生成式",
+      "score": 0.003,
+      "growth": 0.003,
+      "acceleration": -0.8481,
+      "tfidf": 0.003,
+      "z_score": -0.8481,
+      "idf": 1.0,
+      "recent_freq": 0.003,
+      "recent_share": 0.003,
+      "total": 46,
+      "weighted_total": 0.0855,
+      "weighted_total_raw": 46.0,
+      "active_days": 14,
+      "recent_days": 3,
+      "series": [
+        {
+          "date": "2026-02-02",
+          "count": 0,
+          "weighted_count": 0.0,
+          "share": 0.0
+        },
+        {
+          "date": "2026-02-03",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.009554
+        },
+        {
+          "date": "2026-02-04",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.009434
+        },
+        {
+          "date": "2026-02-05",
+          "count": 7,
+          "weighted_count": 7.0,
+          "share": 0.011686
+        },
+        {
+          "date": "2026-02-06",
+          "count": 5,
+          "weighted_count": 5.0,
+          "share": 0.008726
+        },
+        {
+          "date": "2026-02-07",
+          "count": 6,
+          "weighted_count": 6.0,
+          "share": 0.011111
+        },
+        {
+          "date": "2026-02-08",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001855
+        },
+        {
+          "date": "2026-02-09",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.001672
+        },
+        {
+          "date": "2026-02-10",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005199
+        },
+        {
+          "date": "2026-02-11",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.005952
+        },
+        {
+          "date": "2026-02-12",
+          "count": 3,
+          "weighted_count": 3.0,
+          "share": 0.009146
+        },
+        {
+          "date": "2026-02-13",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002083
+        },
+        {
+          "date": "2026-02-18",
           "count": 1,
           "weighted_count": 1.0,
           "share": 0.002347
         },
         {
           "date": "2026-02-19",
-          "count": 0,
-          "weighted_count": 0.0,
-          "share": 0.0
+          "count": 2,
+          "weighted_count": 2.0,
+          "share": 0.004435
+        },
+        {
+          "date": "2026-02-23",
+          "count": 1,
+          "weighted_count": 1.0,
+          "share": 0.002294
         }
       ]
     }
