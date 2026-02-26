@@ -220,11 +220,37 @@ def _delete_item_by_id(item_id: str) -> tuple[bool, str]:
     return True, f"已删除 {item_id}"
 
 
-def filter_items(df: pd.DataFrame, source: Optional[str], q: Optional[str]):
+def _match_column(row: dict, column: str) -> bool:
+    col = (column or "").strip().lower()
+    if not col:
+        return True
+    text = " ".join(
+        [
+            str(row.get("title", "")),
+            str(row.get("description_zh", "")),
+            str(row.get("description_en", "")),
+            " ".join(row.get("keywords", []) or []),
+            " ".join(row.get("tags", []) or []),
+        ]
+    ).lower()
+    if col == "openclaw":
+        # Keep this column strict to avoid pulling in generic MCP projects.
+        keys = ["openclaw", "clawdbot", "clawhub"]
+        return any(k in text for k in keys)
+    if col == "claudecode":
+        keys = ["claude code", "claudecode"]
+        return any(k in text for k in keys)
+    return True
+
+
+def filter_items(df: pd.DataFrame, source: Optional[str], q: Optional[str], column: Optional[str] = None):
     if df.empty:
         return df
     if source:
         df = df[df["source"] == source]
+    if column:
+        col = str(column)
+        df = df[df.apply(lambda r: _match_column(r.to_dict() if hasattr(r, "to_dict") else dict(r), col), axis=1)]
     if q:
         ql = q.lower()
         def m(row):
@@ -729,7 +755,7 @@ def _qp_get_str(key: str, default: str = "") -> str:
     return str(v)
 
 
-def build_masthead_html(active_view: str = "items", active_source: str = "") -> str:
+def build_masthead_html(active_view: str = "items", active_source: str = "", active_column: str = "") -> str:
     return f"""
 <div class="masthead-wrap">
   <div class="masthead-top">
@@ -742,6 +768,8 @@ def build_masthead_html(active_view: str = "items", active_source: str = "") -> 
       <a href="?view=trends" class="{_active_class(active_view == 'trends')}">Trends</a>
       <a href="?view=items&sort=%E8%B6%8B%E5%8A%BF%E5%88%86" class="{_active_class(active_view == 'items')}">Scores</a>
       <a href="?view=items&source=producthunt" class="{_active_class(active_view == 'items' and active_source == 'producthunt')}">Watchlist</a>
+      <a href="?view=items&column=openclaw" class="{_active_class(active_view == 'items' and active_column == 'openclaw')}">OpenClaw</a>
+      <a href="?view=items&column=claudecode" class="{_active_class(active_view == 'items' and active_column == 'claudecode')}">Claude Code</a>
     </div>
     <div class="masthead-brand">Daily AI Feeds</div>
   </div>
@@ -749,6 +777,8 @@ def build_masthead_html(active_view: str = "items", active_source: str = "") -> 
     <a href="?view=items&source=producthunt">Product Hunt</a>
     <a href="?view=items&source=github">GitHub</a>
     <a href="?view=items&source=arxiv">arXiv</a>
+    <a href="?view=items&column=openclaw">OpenClaw / Clawdbot 专栏</a>
+    <a href="?view=items&column=claudecode">Claude Code 专栏</a>
     <a href="?view=trends">Keyword Trend Intelligence</a>
   </div>
 </div>
@@ -760,8 +790,9 @@ view_param = _qp_get_str("view", "items").lower().strip()
 if view_param not in {"items", "trends"}:
     view_param = "items"
 source_param = _qp_get_str("source", "").strip()
+column_param = _qp_get_str("column", "").strip().lower()
 sort_param = _qp_get_str("sort", "").strip()
-st.markdown(build_masthead_html(active_view=view_param, active_source=source_param), unsafe_allow_html=True)
+st.markdown(build_masthead_html(active_view=view_param, active_source=source_param, active_column=column_param), unsafe_allow_html=True)
 
 df = load_items(_structured_signature())
 if df.empty:
@@ -800,7 +831,7 @@ with tab_items:
     )
 
     with left_col:
-        col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
+        col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 1])
         with col1:
             q = st.text_input("搜索标题 / 关键词 / 描述", "")
         with col2:
@@ -808,8 +839,17 @@ with tab_items:
             source_index = sources.index(source_param) if source_param in sources else 0
             source = st.selectbox("来源", sources, index=source_index, format_func=lambda x: "全部" if x == "" else x)
         with col3:
-            date_choice = st.selectbox("日期", date_values)
+            columns = ["", "openclaw", "claudecode"]
+            col_index = columns.index(column_param) if column_param in columns else 0
+            column = st.selectbox(
+                "专栏",
+                columns,
+                index=col_index,
+                format_func=lambda x: "全部" if x == "" else ("OpenClaw" if x == "openclaw" else "Claude Code"),
+            )
         with col4:
+            date_choice = st.selectbox("日期", date_values)
+        with col5:
             manage_mode = st.toggle("管理模式", value=False, key="items_manage_mode")
 
         inline_authed = True
@@ -827,7 +867,7 @@ with tab_items:
         if date_choice:
             df_items = df_items[df_items["date"].astype(str) == date_choice]
 
-        df_f = filter_items(df_items, source or None, q or None)
+        df_f = filter_items(df_items, source or None, q or None, column or None)
         if not df_f.empty and "score" in df_f.columns:
             df_f = df_f.copy()
             df_f["score_total"] = df_f["score"].apply(

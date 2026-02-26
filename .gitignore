@@ -3,6 +3,16 @@ __pycache__/
 *.pyo
 .env
 .DS_Store
+
+# Python envs
+.venv/
+venv/
+
+# Generated exports / reports
+exports/
+data/columns/
+*.html
+
 # Local helper scripts to skip from VCS
 test_quick.sh
 data/insights/keyword-trends-*.md

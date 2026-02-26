@@ -77,6 +77,20 @@ python scripts/github_trending_to_md.py
 ./test_all_sources.sh
 ```
 
+## 专栏（Columns）
+
+新增两个自动聚合专栏：
+- **OpenClaw / Clawdbot**：包含 OpenClaw/Clawdbot/MCP 等关键词的条目
+- **Claude Code**：包含 Claude Code/ClaudeCode 等关键词的条目
+
+生成专栏 Markdown（基于结构化数据，无需额外凭证）：
+
+```bash
+python scripts/generate_columns.py
+```
+
+Streamlit 页面也支持通过“专栏”下拉框或 URL 参数 `?column=openclaw|claudecode` 直接筛选。
+
 ## Streamlit 页面
 
 本地启动：
