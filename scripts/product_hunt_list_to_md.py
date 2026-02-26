@@ -1,5 +1,4 @@
 import os
-import signal
 try:
     from dotenv import load_dotenv
     # 加载 .env 文件
@@ -16,6 +15,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import requests
+import time
 from datetime import datetime, timedelta, timezone
 import openai
 from bs4 import BeautifulSoup
@@ -24,6 +24,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from common.storage import save_structured_items, build_item_id
 from common.scoring import score_content
+from common.openai_fallback import chat_completion_content, get_openai_timeout, is_gpt5_model
 from common.keyword_utils import (
     investor_keyword_prompt,
     investor_keyword_repair_prompt,
@@ -57,14 +58,7 @@ def _allow_mock_data() -> bool:
 
 
 def _get_request_timeout() -> float:
-    raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
-    try:
-        value = float(raw)
-        if value > 0:
-            return value
-    except Exception:
-        pass
-    return 60.0
+    return get_openai_timeout(60.0)
 
 
 def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
@@ -76,30 +70,7 @@ def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
 
 def _get_model_name() -> str:
     raw = os.getenv("OPENAI_MODEL", "").strip()
-    return raw or "gpt-5-2025-08-07"
-
-
-def _is_gpt5_model(model_name: str) -> bool:
-    return model_name.startswith("gpt-5")
-
-
-def _call_with_hard_timeout(fn, timeout_sec: float):
-    if timeout_sec <= 0:
-        return fn()
-    if not hasattr(signal, "setitimer") or not hasattr(signal, "SIGALRM"):
-        return fn()
-
-    def _handler(_signum, _frame):
-        raise TimeoutError(f"request timed out after {timeout_sec}s")
-
-    old = signal.getsignal(signal.SIGALRM)
-    signal.signal(signal.SIGALRM, _handler)
-    signal.setitimer(signal.ITIMER_REAL, timeout_sec)
-    try:
-        return fn()
-    finally:
-        signal.setitimer(signal.ITIMER_REAL, 0)
-        signal.signal(signal.SIGALRM, old)
+    return raw or "gpt-5.2-2025-12-11"
 
 
 def _looks_mostly_ascii(text: str) -> bool:
@@ -110,32 +81,37 @@ def _looks_mostly_ascii(text: str) -> bool:
 
 
 def _chat_json_content(messages, max_tokens: int, temperature: float) -> str:
-    """兼容部分网关对 response_format 的不完整支持。"""
     model_name = _get_model_name()
-    timeout = _get_request_timeout()
-    kwargs = {
-        "model": model_name,
-        "messages": messages,
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-        "response_format": {"type": "json_object"},
-        "timeout": timeout,
-    }
-    if _is_gpt5_model(model_name):
-        kwargs["reasoning_effort"] = "low"
-    try:
-        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
-    except TypeError:
-        kwargs.pop("reasoning_effort", None)
-        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
-    content = (resp.choices[0].message.content or "").strip()
-    if content:
-        return content
-    retry_kwargs = dict(kwargs)
-    retry_kwargs.pop("response_format", None)
-    retry_kwargs["max_tokens"] = max(max_tokens, 1200 if _is_gpt5_model(model_name) else 300)
-    resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**retry_kwargs), timeout + 2)
-    return (resp.choices[0].message.content or "").strip()
+    content, used_model = chat_completion_content(
+        client=client,
+        messages=messages,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        json_mode=True,
+        default_model=model_name,
+        timeout=_get_request_timeout(),
+        retry_max_tokens=max(max_tokens, 1200 if is_gpt5_model(model_name) else 300),
+    )
+    if used_model != model_name:
+        print(f"模型回退: {model_name} -> {used_model}")
+    return content
+
+
+def _chat_text_content(messages, max_tokens: int, temperature: float) -> str:
+    model_name = _get_model_name()
+    content, used_model = chat_completion_content(
+        client=client,
+        messages=messages,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        json_mode=False,
+        default_model=model_name,
+        timeout=_get_request_timeout(),
+        retry_max_tokens=max(max_tokens, 900 if is_gpt5_model(model_name) else 260),
+    )
+    if used_model != model_name:
+        print(f"模型回退: {model_name} -> {used_model}")
+    return content
 
 
 def _get_http_timeout(default: float = 45.0) -> float:
@@ -158,6 +134,17 @@ def _get_max_posts(default: int = 30) -> int:
     except Exception:
         return default
     return max(1, min(100, value))
+
+
+def _get_translate_retries(default: int = 3) -> int:
+    raw = os.getenv("PRODUCTHUNT_TRANSLATE_RETRIES", "").strip()
+    if not raw:
+        return default
+    try:
+        value = int(raw)
+    except Exception:
+        return default
+    return max(1, min(5, value))
 
 
 def _contains_any(text: str, keywords) -> bool:
@@ -206,6 +193,7 @@ class Product:
         self.translated_tagline = self.translate_text(self.tagline)
         self.translated_description = self.translate_text(self.description)
         self.keyword = self.generate_keywords()
+        self._score_cache = None
 
     def get_image_url_from_media(self, media):
         """从API返回的media字段中获取图片URL"""
@@ -280,7 +268,7 @@ class Product:
                         subtitle=zh_tagline or self.tagline,
                         description=prompt_desc,
                     ),
-                    max_tokens=1200 if _is_gpt5_model(_get_model_name()) else 220,
+                    max_tokens=1200 if is_gpt5_model(_get_model_name()) else 220,
                     temperature=0.3,
                 )
                 keywords_list = extract_keywords_from_response(raw)
@@ -296,7 +284,7 @@ class Product:
                             bad_keywords=keywords_list,
                             reason=reason,
                         ),
-                        max_tokens=1000 if _is_gpt5_model(_get_model_name()) else 220,
+                        max_tokens=1000 if is_gpt5_model(_get_model_name()) else 220,
                         temperature=0.2,
                     )
                     repaired = extract_keywords_from_response(repaired_raw)
@@ -341,25 +329,15 @@ class Product:
                 
             try:
                 print(f"正在翻译 {self.name} 的内容...")
-                for _ in range(3):
-                    kwargs = {
-                        "model": _get_model_name(),
-                        "messages": [
+                for _ in range(_get_translate_retries(3)):
+                    translated_text = _chat_text_content(
+                        messages=[
                             {"role": "system", "content": "你是专业中英翻译。请将输入准确翻译成地道中文，保留必要技术术语。只输出翻译结果。"},
                             {"role": "user", "content": text},
                         ],
-                        "max_tokens": 1200 if _is_gpt5_model(_get_model_name()) else 500,
-                        "temperature": 0.2,
-                        "timeout": _get_request_timeout(),
-                    }
-                    if _is_gpt5_model(_get_model_name()):
-                        kwargs["reasoning_effort"] = "low"
-                    try:
-                        response = client.chat.completions.create(**kwargs)
-                    except TypeError:
-                        kwargs.pop("reasoning_effort", None)
-                        response = client.chat.completions.create(**kwargs)
-                    translated_text = (response.choices[0].message.content or "").strip()
+                        max_tokens=1200 if is_gpt5_model(_get_model_name()) else 500,
+                        temperature=0.2,
+                    )
                     if translated_text and len(translated_text) >= 4:
                         # 若几乎全英文，继续重试一次
                         if _looks_mostly_ascii(translated_text):
@@ -386,12 +364,8 @@ class Product:
     def to_markdown(self, rank: int) -> str:
         """返回产品数据的Markdown格式"""
         og_image_markdown = f"![{self.name}]({self.og_image_url})"
-        # 简短评分展示
-        score = score_content(
-            f"名称: {self.name}\n标语: {self.tagline}\n描述: {self.description}\n关键词: {self.keyword}",
-            client,
-            kind="producthunt",
-        )
+        # 评分缓存复用，避免同一条目重复调用模型。
+        score = self._get_score()
         total_score = score.get("total", 0)
         return (
             f"## [{rank}. {self.name}]({self.url})\n"
@@ -411,11 +385,7 @@ class Product:
     def to_content_item(self, rank: int, date_str: str) -> dict:
         merged_text = f"{self.name} {self.tagline} {self.description}".lower()
         hit_keywords = [kw for kw in AI_KEYWORDS if kw in merged_text]
-        score = score_content(
-            f"名称: {self.name}\n标语: {self.tagline}\n描述: {self.description}\n关键词: {self.keyword}",
-            client,
-            kind="producthunt",
-        )
+        score = self._get_score()
         return {
             "id": build_item_id("ph", date_str, rank),
             "source": "producthunt",
@@ -437,6 +407,15 @@ class Product:
                 "created_at": self.created_at,
             },
         }
+
+    def _get_score(self) -> dict:
+        if self._score_cache is None:
+            self._score_cache = score_content(
+                f"名称: {self.name}\n标语: {self.tagline}\n描述: {self.description}\n关键词: {self.keyword}",
+                client,
+                kind="producthunt",
+            )
+        return self._score_cache
 
 def get_producthunt_token():
     """获取 Product Hunt 访问令牌"""
@@ -493,9 +472,15 @@ def fetch_product_hunt_data(target_date: str = ""):
 
     # 设置重试策略
     retry_strategy = Retry(
-        total=3,  # 最多重试3次
-        backoff_factor=1,  # 重试间隔时间
-        status_forcelist=[429, 500, 502, 503, 504]  # 需要重试的HTTP状态码
+        total=4,
+        connect=4,
+        read=4,
+        status=4,
+        backoff_factor=1.0,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=frozenset(["POST"]),
+        raise_on_status=False,
+        respect_retry_after_header=True,
     )
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session = requests.Session()
@@ -535,17 +520,38 @@ def fetch_product_hunt_data(target_date: str = ""):
 
     while has_next_page and len(all_posts) < max_posts:
         query = base_query % (date_str, date_str, cursor)
-        try:
-            response = session.post(
-                url,
-                headers=headers,
-                json={"query": query},
-                timeout=_get_http_timeout(),
-            )
-            response.raise_for_status()  # 抛出非200状态码的异常
-        except requests.exceptions.RequestException as e:
-            print(f"请求失败: {e}")
-            raise Exception(f"Failed to fetch data from Product Hunt: {e}")
+        response = None
+        last_error = None
+        for attempt in range(1, 4):
+            try:
+                response = session.post(
+                    url,
+                    headers=headers,
+                    json={"query": query},
+                    timeout=_get_http_timeout(),
+                )
+                if response.status_code in {429, 500, 502, 503, 504} and attempt < 3:
+                    wait_seconds = 2 * attempt
+                    print(
+                        f"Product Hunt 请求返回 {response.status_code}，"
+                        f"第 {attempt}/3 次重试，等待 {wait_seconds}s..."
+                    )
+                    time.sleep(wait_seconds)
+                    continue
+                response.raise_for_status()
+                break
+            except requests.exceptions.RequestException as e:
+                last_error = e
+                if attempt < 3:
+                    wait_seconds = 2 * attempt
+                    print(f"请求失败，第 {attempt}/3 次重试，等待 {wait_seconds}s: {e}")
+                    time.sleep(wait_seconds)
+                    continue
+                print(f"请求失败: {e}")
+                raise Exception(f"Failed to fetch data from Product Hunt: {e}")
+
+        if response is None:
+            raise Exception(f"Failed to fetch data from Product Hunt: {last_error}")
 
         data = response.json()['data']['posts']
         posts = data['nodes']

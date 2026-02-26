@@ -1,48 +1,12 @@
 import os
 import json
-import signal
 from typing import Any, Dict
-
-
-def _get_timeout() -> float:
-    raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
-    try:
-        value = float(raw)
-        if value > 0:
-            return value
-    except Exception:
-        pass
-    return 60.0
+from common.openai_fallback import chat_completion_content
 
 
 def _get_model_name() -> str:
     raw = os.getenv("OPENAI_MODEL", "").strip()
-    return raw or "gpt-5-2025-08-07"
-
-
-def _is_gpt5_model(model_name: str) -> bool:
-    return model_name.startswith("gpt-5")
-
-
-def _call_with_hard_timeout(fn, timeout_sec: float):
-    """Hard timeout guard for blocking network calls."""
-    if timeout_sec <= 0:
-        return fn()
-
-    if not hasattr(signal, "setitimer") or not hasattr(signal, "SIGALRM"):
-        return fn()
-
-    def _handler(_signum, _frame):
-        raise TimeoutError(f"request timed out after {timeout_sec}s")
-
-    old_handler = signal.getsignal(signal.SIGALRM)
-    signal.signal(signal.SIGALRM, _handler)
-    signal.setitimer(signal.ITIMER_REAL, timeout_sec)
-    try:
-        return fn()
-    finally:
-        signal.setitimer(signal.ITIMER_REAL, 0)
-        signal.signal(signal.SIGALRM, old_handler)
+    return raw or "gpt-5.2-2025-12-11"
 
 
 def _extract_json_object(raw: str) -> Dict[str, Any]:
@@ -267,46 +231,20 @@ def score_content(text: str, client, kind: str = "general") -> dict:
 
     try:
         model_name = _get_model_name()
-        kwargs = {
-            "model": model_name,
-            "messages": [
+        content, used_model = chat_completion_content(
+            client=client,
+            messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
-            "max_tokens": 900 if _is_gpt5_model(model_name) else 300,
-            "temperature": 0.2 if _is_gpt5_model(model_name) else 0.4,
-            "response_format": {"type": "json_object"},
-            "timeout": _get_timeout(),
-        }
-        if _is_gpt5_model(model_name):
-            kwargs["reasoning_effort"] = "low"
-
-        try:
-            response = _call_with_hard_timeout(
-                lambda: client.chat.completions.create(**kwargs),
-                _get_timeout() + 2,
-            )
-        except TypeError:
-            # 兼容不支持 reasoning_effort 的网关
-            kwargs.pop("reasoning_effort", None)
-            response = _call_with_hard_timeout(
-                lambda: client.chat.completions.create(**kwargs),
-                _get_timeout() + 2,
-            )
-
-        content = response.choices[0].message.content
-        if content and str(content).strip():
-            return _normalize_score_payload(_extract_json_object(content))
-
-        # 首次返回为空时再重试一次，放宽为纯文本 JSON 提取。
-        retry_kwargs = dict(kwargs)
-        retry_kwargs["max_tokens"] = 1400 if _is_gpt5_model(model_name) else 500
-        retry_kwargs.pop("response_format", None)
-        response = _call_with_hard_timeout(
-            lambda: client.chat.completions.create(**retry_kwargs),
-            _get_timeout() + 2,
+            max_tokens=900,
+            temperature=0.2,
+            json_mode=True,
+            default_model=model_name,
+            retry_max_tokens=1400,
         )
-        content = response.choices[0].message.content
+        if used_model != model_name:
+            print(f"评分模型回退: {model_name} -> {used_model}")
         return _normalize_score_payload(_extract_json_object(content))
     except Exception as e:
         print(f"评分失败: {e}")

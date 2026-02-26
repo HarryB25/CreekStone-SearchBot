@@ -1,5 +1,4 @@
 import os
-import signal
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -24,6 +23,7 @@ import base64
 import json
 from common.storage import save_structured_items, build_item_id
 from common.scoring import score_content
+from common.openai_fallback import chat_completion_content, get_openai_timeout, is_gpt5_model
 from common.keyword_utils import (
     investor_keyword_prompt,
     investor_keyword_repair_prompt,
@@ -69,96 +69,46 @@ def _get_int_env(name: str, default: int) -> int:
 
 
 def _get_request_timeout() -> float:
-    raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
-    try:
-        value = float(raw)
-        if value > 0:
-            return value
-    except Exception:
-        pass
-    return 60.0
+    return get_openai_timeout(60.0)
 
 
 def _get_model_name() -> str:
     raw = os.getenv("OPENAI_MODEL", "").strip()
-    return raw or "gpt-5-2025-08-07"
-
-
-def _is_gpt5_model(model_name: str) -> bool:
-    return model_name.startswith("gpt-5")
-
-
-def _call_with_hard_timeout(fn, timeout_sec: float):
-    if timeout_sec <= 0:
-        return fn()
-    if not hasattr(signal, "setitimer") or not hasattr(signal, "SIGALRM"):
-        return fn()
-
-    def _handler(_signum, _frame):
-        raise TimeoutError(f"request timed out after {timeout_sec}s")
-
-    old = signal.getsignal(signal.SIGALRM)
-    signal.signal(signal.SIGALRM, _handler)
-    signal.setitimer(signal.ITIMER_REAL, timeout_sec)
-    try:
-        return fn()
-    finally:
-        signal.setitimer(signal.ITIMER_REAL, 0)
-        signal.signal(signal.SIGALRM, old)
+    return raw or "gpt-5.2-2025-12-11"
 
 
 def _chat_json_content(messages, max_tokens: int, temperature: float) -> str:
     model_name = _get_model_name()
-    timeout = _get_request_timeout()
-    kwargs = {
-        "model": model_name,
-        "messages": messages,
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-        "response_format": {"type": "json_object"},
-        "timeout": timeout,
-    }
-    if _is_gpt5_model(model_name):
-        kwargs["reasoning_effort"] = "low"
-    try:
-        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
-    except TypeError:
-        kwargs.pop("reasoning_effort", None)
-        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
-    content = (resp.choices[0].message.content or "").strip()
-    if content:
-        return content
-    retry_kwargs = dict(kwargs)
-    retry_kwargs.pop("response_format", None)
-    retry_kwargs["max_tokens"] = max(max_tokens, 1200 if _is_gpt5_model(model_name) else 300)
-    resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**retry_kwargs), timeout + 2)
-    return (resp.choices[0].message.content or "").strip()
+    content, used_model = chat_completion_content(
+        client=client,
+        messages=messages,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        json_mode=True,
+        default_model=model_name,
+        timeout=_get_request_timeout(),
+        retry_max_tokens=max(max_tokens, 1200 if is_gpt5_model(model_name) else 300),
+    )
+    if used_model != model_name:
+        print(f"模型回退: {model_name} -> {used_model}")
+    return content
 
 
 def _chat_text_content(messages, max_tokens: int, temperature: float) -> str:
     model_name = _get_model_name()
-    timeout = _get_request_timeout()
-    kwargs = {
-        "model": model_name,
-        "messages": messages,
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-        "timeout": timeout,
-    }
-    if _is_gpt5_model(model_name):
-        kwargs["reasoning_effort"] = "low"
-    try:
-        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
-    except TypeError:
-        kwargs.pop("reasoning_effort", None)
-        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
-    content = (resp.choices[0].message.content or "").strip()
-    if content:
-        return content
-    retry_kwargs = dict(kwargs)
-    retry_kwargs["max_tokens"] = max(max_tokens, 900 if _is_gpt5_model(model_name) else 260)
-    resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**retry_kwargs), timeout + 2)
-    return (resp.choices[0].message.content or "").strip()
+    content, used_model = chat_completion_content(
+        client=client,
+        messages=messages,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        json_mode=False,
+        default_model=model_name,
+        timeout=_get_request_timeout(),
+        retry_max_tokens=max(max_tokens, 900 if is_gpt5_model(model_name) else 260),
+    )
+    if used_model != model_name:
+        print(f"模型回退: {model_name} -> {used_model}")
+    return content
 
 
 def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
@@ -442,7 +392,7 @@ class GitHubRepo:
                         f"{self.description}"
                     )}
                 ],
-                max_tokens=700 if _is_gpt5_model(_get_model_name()) else 200,
+                max_tokens=700 if is_gpt5_model(_get_model_name()) else 200,
                 temperature=0.7,
             )
             translated = (translated or "").strip()
@@ -478,7 +428,7 @@ class GitHubRepo:
                         ),
                     },
                 ],
-                max_tokens=700 if _is_gpt5_model(_get_model_name()) else 260,
+                max_tokens=700 if is_gpt5_model(_get_model_name()) else 260,
                 temperature=0.3,
             )
             result = (content or "").strip()
@@ -509,7 +459,7 @@ class GitHubRepo:
                     subtitle=f"Language: {self.language}",
                     description=source_text,
                 ),
-                max_tokens=1200 if _is_gpt5_model(_get_model_name()) else 220,
+                max_tokens=1200 if is_gpt5_model(_get_model_name()) else 220,
                 temperature=0.3,
             )
             items = extract_keywords_from_response(raw)
@@ -525,7 +475,7 @@ class GitHubRepo:
                         bad_keywords=items,
                         reason=reason,
                     ),
-                    max_tokens=1000 if _is_gpt5_model(_get_model_name()) else 220,
+                    max_tokens=1000 if is_gpt5_model(_get_model_name()) else 220,
                     temperature=0.2,
                 )
                 repaired = extract_keywords_from_response(repaired_raw)

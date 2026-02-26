@@ -61,9 +61,14 @@ def main() -> int:
         # GitHub: stamp outputs with that date.
         env["GITHUB_TARGET_DATE"] = d
 
+        # ClawHub: filter/update window and stamp outputs with that date.
+        env["CLAWHUB_TARGET_DATE"] = d
+        env["CLAWHUB_OUTPUT_DATE"] = d
+
         _run([sys.executable, "scripts/product_hunt_list_to_md.py"], env)
         _run([sys.executable, "scripts/arxiv_papers_to_md.py"], env)
         _run([sys.executable, "scripts/github_trending_to_md.py"], env)
+        _run([sys.executable, "scripts/clawhub_skills_to_md.py"], env)
 
     # refresh insights + columns after backfill
     _run([sys.executable, "scripts/keyword_trends.py"], base_env)

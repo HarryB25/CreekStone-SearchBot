@@ -183,6 +183,9 @@ test_script() {
                 "GitHub Trending")
                     pattern="$expected_dir/github-trending-${date_str}.md"
                     ;;
+                "ClawHub")
+                    pattern="$expected_dir/clawhub-daily-${date_str}.md"
+                    ;;
             esac
             
             if [ -f "$pattern" ]; then
@@ -222,6 +225,13 @@ test_script() {
                         ;;
                     "GitHub Trending")
                         if grep -q "GitHub Trending\|Stars:" "$file_found"; then
+                            echo -e "${GREEN}✓${NC} 文件格式正确"
+                        else
+                            echo -e "${YELLOW}⚠${NC} 文件格式可能异常"
+                        fi
+                        ;;
+                    "ClawHub")
+                        if grep -q "ClawHub Skills Daily\|Slug" "$file_found"; then
                             echo -e "${GREEN}✓${NC} 文件格式正确"
                         else
                             echo -e "${YELLOW}⚠${NC} 文件格式可能异常"
@@ -281,6 +291,13 @@ test_script \
     "data/github" \
     300
 
+# 测试 ClawHub
+test_script \
+    "scripts/clawhub_skills_to_md.py" \
+    "ClawHub" \
+    "data/clawhub" \
+    300
+
 # 测试总结
 echo "=========================================="
 echo "  测试总结"
@@ -303,7 +320,7 @@ echo ""
 # 检查目录结构
 echo "📁 生成的文件:"
 echo ""
-for dir in data/producthunt data/arxiv data/github; do
+for dir in data/producthunt data/arxiv data/github data/clawhub; do
     if [ -d "$dir" ]; then
         file_count=$(ls -1 "$dir"/*.md 2>/dev/null | wc -l | tr -d ' ')
         echo "  $dir: $file_count 个文件"
@@ -326,5 +343,6 @@ else
     echo "  - /tmp/Product_Hunt_test.log"
     echo "  - /tmp/arXiv_test.log"
     echo "  - /tmp/GitHub_Trending_test.log"
+    echo "  - /tmp/ClawHub_test.log"
     exit 1
 fi

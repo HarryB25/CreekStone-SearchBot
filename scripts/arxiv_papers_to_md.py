@@ -1,5 +1,5 @@
 import os
-import signal
+import time
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -14,12 +14,15 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from datetime import datetime, timezone, timedelta
 import openai
 import json
 from typing import List, Dict
 from common.storage import save_structured_items, build_item_id
 from common.scoring import score_content
+from common.openai_fallback import chat_completion_content, get_openai_timeout, is_gpt5_model
 from common.keyword_utils import (
     investor_keyword_prompt,
     investor_keyword_repair_prompt,
@@ -52,6 +55,24 @@ EXCLUDE_KEYWORDS = [
 def _allow_mock_data() -> bool:
     return os.getenv("ALLOW_MOCK_DATA", "").strip().lower() == "true"
 
+
+def _build_retry_session() -> requests.Session:
+    """构建带重试策略的会话，降低 arXiv 分页过程中的临时网络错误影响。"""
+    retry = Retry(
+        total=3,
+        connect=3,
+        read=3,
+        backoff_factor=1.0,
+        status_forcelist=[500, 502, 503, 504],
+        allowed_methods=["GET"],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session = requests.Session()
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
+    return session
+
 def _get_int_env(name: str, default: int) -> int:
     raw = os.getenv(name)
     if raw is None or raw.strip() == "":
@@ -68,70 +89,29 @@ def _get_int_env(name: str, default: int) -> int:
 
 
 def _get_request_timeout() -> float:
-    raw = os.getenv("OPENAI_REQUEST_TIMEOUT", "60").strip()
-    try:
-        value = float(raw)
-        if value > 0:
-            return value
-    except Exception:
-        pass
-    return 60.0
+    return get_openai_timeout(60.0)
 
 
 def _get_model_name() -> str:
     raw = os.getenv("OPENAI_MODEL", "").strip()
-    return raw or "gpt-5-2025-08-07"
-
-
-def _is_gpt5_model(model_name: str) -> bool:
-    return model_name.startswith("gpt-5")
-
-
-def _call_with_hard_timeout(fn, timeout_sec: float):
-    if timeout_sec <= 0:
-        return fn()
-    if not hasattr(signal, "setitimer") or not hasattr(signal, "SIGALRM"):
-        return fn()
-
-    def _handler(_signum, _frame):
-        raise TimeoutError(f"request timed out after {timeout_sec}s")
-
-    old = signal.getsignal(signal.SIGALRM)
-    signal.signal(signal.SIGALRM, _handler)
-    signal.setitimer(signal.ITIMER_REAL, timeout_sec)
-    try:
-        return fn()
-    finally:
-        signal.setitimer(signal.ITIMER_REAL, 0)
-        signal.signal(signal.SIGALRM, old)
+    return raw or "gpt-5.2-2025-12-11"
 
 
 def _chat_json_content(messages, max_tokens: int, temperature: float) -> str:
     model_name = _get_model_name()
-    timeout = _get_request_timeout()
-    kwargs = {
-        "model": model_name,
-        "messages": messages,
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-        "response_format": {"type": "json_object"},
-        "timeout": timeout,
-    }
-    if _is_gpt5_model(model_name):
-        kwargs["reasoning_effort"] = "low"
-    try:
-        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
-    except TypeError:
-        kwargs.pop("reasoning_effort", None)
-        resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**kwargs), timeout + 2)
-    content = (resp.choices[0].message.content or "").strip()
-    if content:
-        return content
-    retry_kwargs = dict(kwargs)
-    retry_kwargs.pop("response_format", None)
-    retry_kwargs["max_tokens"] = max(max_tokens, 1200 if _is_gpt5_model(model_name) else 300)
-    resp = _call_with_hard_timeout(lambda: client.chat.completions.create(**retry_kwargs), timeout + 2)
-    return (resp.choices[0].message.content or "").strip()
+    content, used_model = chat_completion_content(
+        client=client,
+        messages=messages,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        json_mode=True,
+        default_model=model_name,
+        timeout=_get_request_timeout(),
+        retry_max_tokens=max(max_tokens, 1200 if is_gpt5_model(model_name) else 300),
+    )
+    if used_model != model_name:
+        print(f"模型回退: {model_name} -> {used_model}")
+    return content
 
 
 def _get_base_url(default: str = "https://api.openai.com/v1") -> str:
@@ -175,7 +155,19 @@ class ArxivPaper:
         """从arXiv API返回的entry初始化论文对象"""
         self.id = entry.get('id', '').split('/')[-1]
         self.title = entry.get('title', '').replace('\n', ' ').strip()
-        self.authors = [author.get('name', '') for author in entry.get('author', [])]
+        authors_raw = entry.get('author', [])
+        if isinstance(authors_raw, dict):
+            authors_raw = [authors_raw]
+        elif isinstance(authors_raw, str):
+            authors_raw = [{"name": authors_raw}]
+        self.authors = []
+        for author in authors_raw:
+            if isinstance(author, dict):
+                name = str(author.get('name', '')).strip()
+            else:
+                name = str(author).strip()
+            if name:
+                self.authors.append(name)
         self.summary = entry.get('summary', '').replace('\n', ' ').strip()
         self.published = entry.get('published', '')
         self.url = f"https://arxiv.org/abs/{self.id}"
@@ -185,7 +177,16 @@ class ArxivPaper:
         categories = entry.get('category', [])
         if isinstance(categories, dict):
             categories = [categories]
-        self.categories = [cat.get('@term', '') for cat in categories]
+        elif isinstance(categories, str):
+            categories = [{"@term": categories}]
+        self.categories = []
+        for cat in categories:
+            if isinstance(cat, dict):
+                term = str(cat.get('@term', '')).strip()
+            else:
+                term = str(cat).strip()
+            if term:
+                self.categories.append(term)
         
         # AI增强字段
         self.ai_summary = self.generate_ai_summary()
@@ -216,7 +217,7 @@ class ArxivPaper:
                     subtitle=", ".join(self.categories[:3]),
                     description=self.summary,
                 ),
-                max_tokens=1200 if _is_gpt5_model(_get_model_name()) else 220,
+                max_tokens=1200 if is_gpt5_model(_get_model_name()) else 220,
                 temperature=0.3,
             )
             items = extract_keywords_from_response(raw)
@@ -232,7 +233,7 @@ class ArxivPaper:
                         bad_keywords=items,
                         reason=reason,
                     ),
-                    max_tokens=1000 if _is_gpt5_model(_get_model_name()) else 220,
+                    max_tokens=1000 if is_gpt5_model(_get_model_name()) else 220,
                     temperature=0.2,
                 )
                 repaired = extract_keywords_from_response(repaired_raw)
@@ -286,7 +287,7 @@ class ArxivPaper:
                     {"role": "system", "content": "你是一位专业的AI研究论文分析专家，擅长用简洁的中文总结论文要点。"},
                     {"role": "user", "content": prompt + "\nAI_KEYWORDS: " + ", ".join(AI_KEYWORDS) + "\nEXCLUDE_KEYWORDS: " + ", ".join(EXCLUDE_KEYWORDS)}
                 ],
-                max_tokens=1800 if _is_gpt5_model(_get_model_name()) else 800,
+                max_tokens=1800 if is_gpt5_model(_get_model_name()) else 800,
                 temperature=0.7,
             )
 
@@ -381,63 +382,123 @@ def fetch_arxiv_papers(
     # arXiv API endpoint
     base_url = 'http://export.arxiv.org/api/query'
     
-    # 获取最近7天窗口，可通过 target_date 固定窗口终点
+    # 获取最近7天窗口，可通过 target_date 固定窗口终点；
+    # 当给定 target_date 时，优先用 submittedDate 精确过滤当天，避免深分页触发限流。
+    strict_day_mode = False
+    target_day_dt = None
     if target_date:
         try:
-            end_date = datetime.strptime(target_date, '%Y-%m-%d').replace(tzinfo=timezone.utc) + timedelta(days=1)
+            target_day_dt = datetime.strptime(target_date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+            end_date = target_day_dt + timedelta(days=1)
+            strict_day_mode = True
         except ValueError:
             print(f"警告: ARXIV_TARGET_DATE={target_date!r} 格式无效，回退到当前日期窗口")
             end_date = datetime.now(timezone.utc)
     else:
         end_date = datetime.now(timezone.utc)
-    start_date = end_date - timedelta(days=7)
+    start_date = end_date - timedelta(days=1 if strict_day_mode else 7)
+
+    search_query = category_query
+    if strict_day_mode and target_day_dt is not None:
+        day_token = target_day_dt.strftime('%Y%m%d')
+        search_query = (
+            f"({category_query}) AND "
+            f"submittedDate:[{day_token}0000 TO {day_token}2359]"
+        )
     
-    # 注意：arXiv的submittedDate查询有时不稳定，改用更简单的查询方式
-    # 直接按分类查询最新的论文，然后按时间排序
-    # 为了确保获取足够的AI相关论文，我们获取更多结果再筛选
-    params = {
-        'search_query': category_query,
-        'start': 0,
-        'max_results': max_results * 3,  # 获取3倍数量用于筛选
-        'sortBy': 'submittedDate',
-        'sortOrder': 'descending'
-    }
+    # 历史回填时不能只抓第一页；需要分页向后翻，直到覆盖目标窗口。
+    batch_size = max(100, max_results * 4)
+    batch_size = min(batch_size, 200)
+    max_pages = _get_int_env("ARXIV_MAX_PAGES", 30)
+    if strict_day_mode:
+        max_pages = min(max_pages, 8)
+    page_sleep = float(os.getenv("ARXIV_PAGE_SLEEP", "0.35") or "0.35")
     
     print(f"正在从arXiv获取论文...")
     print(f"查询分类: {', '.join(categories)}")
     print(f"目标数量: {max_results}")
     
     try:
-        response = requests.get(base_url, params=params, timeout=30)
-        response.raise_for_status()
-        
-        # 解析XML响应（arXiv API返回Atom XML格式）
         import xmltodict
-        data = xmltodict.parse(response.text)
-        
-        entries = data.get('feed', {}).get('entry', [])
-        if isinstance(entries, dict):
-            entries = [entries]
-        
-        if not entries:
-            if _allow_mock_data():
-                print("未找到论文，ALLOW_MOCK_DATA=true，使用模拟数据...")
-                return fetch_mock_papers()
-            raise RuntimeError("未找到论文，且未启用 ALLOW_MOCK_DATA")
-        
-        print(f"API返回 {len(entries)} 篇论文")
-        
+        session = _build_retry_session()
+
         # 过滤最近7天的论文（且不超过目标日期）
         recent_entries = []
         cutoff_date = start_date.strftime('%Y-%m-%d')
         upper_date = (end_date - timedelta(days=1)).strftime('%Y-%m-%d')
-        for entry in entries:
-            published = entry.get('published', '')
-            published_day = published[:10]
-            if cutoff_date <= published_day <= upper_date:
-                recent_entries.append(entry)
-        
+
+        start_idx = 0
+        page = 0
+        while page < max_pages:
+            params = {
+                'search_query': search_query,
+                'start': start_idx,
+                'max_results': batch_size,
+                'sortBy': 'submittedDate',
+                'sortOrder': 'descending',
+            }
+            response = None
+            for attempt in range(1, 6):
+                response = session.get(base_url, params=params, timeout=30)
+                if response.status_code == 429:
+                    wait_seconds = min(30.0, 1.5 * (2 ** (attempt - 1)))
+                    print(
+                        f"arXiv 限流(429)，第 {attempt}/5 次重试，"
+                        f"等待 {wait_seconds:.1f}s 后继续..."
+                    )
+                    time.sleep(wait_seconds)
+                    continue
+                response.raise_for_status()
+                break
+            if response is None:
+                raise RuntimeError("arXiv 请求失败: 未收到有效响应")
+            if response.status_code == 429:
+                raise RuntimeError("arXiv 请求失败: 连续 5 次触发限流(429)")
+            data = xmltodict.parse(response.text)
+            entries = data.get('feed', {}).get('entry', [])
+            if isinstance(entries, dict):
+                entries = [entries]
+            if not entries:
+                break
+
+            page += 1
+            page_days = []
+            for entry in entries:
+                published_day = str(entry.get('published', ''))[:10]
+                if published_day:
+                    page_days.append(published_day)
+                if cutoff_date <= published_day <= upper_date:
+                    recent_entries.append(entry)
+
+            if page_days:
+                newest_day = max(page_days)
+                oldest_day = min(page_days)
+                print(
+                    f"第 {page} 页: {len(entries)} 篇, 日期区间 {oldest_day} ~ {newest_day}, "
+                    f"窗口命中累计 {len(recent_entries)}"
+                )
+                # 该页最旧日期已经早于窗口下界，后续只会更旧，可以停止。
+                if oldest_day < cutoff_date:
+                    break
+
+            # 安全限制：窗口命中足够多时提前停止。
+            if len(recent_entries) >= max_results * 8:
+                break
+
+            start_idx += len(entries)
+            if page_sleep > 0:
+                time.sleep(page_sleep)
+
         print(f"最近7天的论文: {len(recent_entries)} 篇")
+
+        if not recent_entries:
+            if _allow_mock_data():
+                print("未找到窗口内论文，ALLOW_MOCK_DATA=true，使用模拟数据...")
+                return fetch_mock_papers()
+            raise RuntimeError(
+                f"未找到 {cutoff_date}~{upper_date} 的论文；"
+                "请增大 ARXIV_MAX_PAGES 或检查目标日期。"
+            )
         
         # 关键：筛选主分类在目标分类列表中的论文，并再做一次关键词过滤
         target_categories_set = set(categories)

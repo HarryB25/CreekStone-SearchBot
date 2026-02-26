@@ -26,6 +26,11 @@ concurrency:
 jobs:
   fetch-all-sources:
     runs-on: ubuntu-latest
+    env:
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+      OPENAI_MODEL_ALTERNATE_1: ${{ vars.OPENAI_MODEL_ALTERNATE_1 }}
+      OPENAI_MODEL_ALTERNATE_2: ${{ vars.OPENAI_MODEL_ALTERNATE_2 }}
+      OPENAI_REQUEST_TIMEOUT: ${{ vars.OPENAI_REQUEST_TIMEOUT }}
 
     steps:
     - name: Checkout repository
@@ -94,6 +99,7 @@ jobs:
             # arXiv 采用当日窗口抓取并写当日，避免“抓昨天”导致空结果。
             "arxiv": {"fetch_date": today, "output_date": today},
             "github": {"fetch_date": today, "output_date": today},
+            "clawhub": {"fetch_date": today, "output_date": today},
         }
 
         outputs = {}
@@ -125,6 +131,9 @@ jobs:
         echo "skip_arxiv=${{ steps.precheck.outputs.skip_arxiv }}"
         echo "github_output_date=${{ steps.precheck.outputs.github_output_date }}"
         echo "skip_github=${{ steps.precheck.outputs.skip_github }}"
+        echo "clawhub_fetch_date=${{ steps.precheck.outputs.clawhub_fetch_date }}"
+        echo "clawhub_output_date=${{ steps.precheck.outputs.clawhub_output_date }}"
+        echo "skip_clawhub=${{ steps.precheck.outputs.skip_clawhub }}"
 
     - name: Fetch Product Hunt
       env:
@@ -165,6 +174,20 @@ jobs:
         export GITHUB_MAX_RESULTS="${GITHUB_MAX_RESULTS:-25}"
         python scripts/github_trending_to_md.py
 
+    - name: Fetch ClawHub Skills
+      if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.force_run == 'true') || steps.precheck.outputs.skip_clawhub != 'true' }}
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+        OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL || vars.OPENAI_BASE_URL }}
+        CLAWHUB_TARGET_DATE: ${{ steps.precheck.outputs.clawhub_fetch_date }}
+        CLAWHUB_OUTPUT_DATE: ${{ steps.precheck.outputs.clawhub_output_date }}
+        CLAWHUB_MAX_RESULTS: ${{ vars.CLAWHUB_MAX_RESULTS }}
+        CLAWHUB_TIMEZONE: ${{ vars.CLAWHUB_TIMEZONE }}
+      run: |
+        export CLAWHUB_MAX_RESULTS="${CLAWHUB_MAX_RESULTS:-25}"
+        export CLAWHUB_TIMEZONE="${CLAWHUB_TIMEZONE:-Asia/Singapore}"
+        python scripts/clawhub_skills_to_md.py
+
     - name: Post-check source completeness and quality
       env:
         HAS_OPENAI: ${{ steps.secrets.outputs.has_openai }}
@@ -178,6 +201,7 @@ jobs:
             "producthunt": "${{ steps.precheck.outputs.producthunt_output_date }}",
             "arxiv": "${{ steps.precheck.outputs.arxiv_output_date }}",
             "github": "${{ steps.precheck.outputs.github_output_date }}",
+            "clawhub": "${{ steps.precheck.outputs.clawhub_output_date }}",
         }
 
         def score_total(value):

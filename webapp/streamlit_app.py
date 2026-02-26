@@ -777,6 +777,7 @@ def build_masthead_html(active_view: str = "items", active_source: str = "", act
     <a href="?view=items&source=producthunt">Product Hunt</a>
     <a href="?view=items&source=github">GitHub</a>
     <a href="?view=items&source=arxiv">arXiv</a>
+    <a href="?view=items&source=clawhub">ClawHub</a>
     <a href="?view=items&column=openclaw">OpenClaw / Clawdbot 专栏</a>
     <a href="?view=items&column=claudecode">Claude Code 专栏</a>
     <a href="?view=trends">Keyword Trend Intelligence</a>
@@ -821,7 +822,7 @@ with tab_items:
 
     left_col, right_col = st.columns([5, 1])
 
-    date_values = (
+    all_date_values = (
         df_all["date"]
         .dropna()
         .astype(str)
@@ -831,25 +832,63 @@ with tab_items:
     )
 
     with left_col:
-        col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 1])
+        sources = [""] + sorted(df["source"].dropna().unique().tolist())
+        source = source_param if source_param in sources else ""
+        columns = ["", "openclaw", "claudecode"]
+        column = column_param if column_param in columns else ""
+
+        col1, col2, col3 = st.columns([3, 2, 1])
         with col1:
             q = st.text_input("搜索标题 / 关键词 / 描述", "")
         with col2:
-            sources = [""] + sorted(df["source"].dropna().unique().tolist())
-            source_index = sources.index(source_param) if source_param in sources else 0
-            source = st.selectbox("来源", sources, index=source_index, format_func=lambda x: "全部" if x == "" else x)
+            date_pool_df = df_all
+            if source:
+                date_pool_df = date_pool_df[date_pool_df["source"].astype(str) == str(source)]
+            if column:
+                date_pool_df = filter_items(date_pool_df, source=None, q=None, column=column)
+
+            date_values = (
+                date_pool_df["date"]
+                .dropna()
+                .astype(str)
+                .sort_values(ascending=False)
+                .unique()
+                .tolist()
+            ) if not date_pool_df.empty else []
+            if not date_values:
+                date_values = all_date_values
+
+            date_state_key = f"date_choice_{source or 'all'}_{column or 'all'}"
+            if date_state_key not in st.session_state or st.session_state[date_state_key] not in date_values:
+                st.session_state[date_state_key] = date_values[0]
+
+            if column in {"openclaw", "claudecode"} and len(date_values) > 1:
+                nav_l, nav_c, nav_r = st.columns([1, 2, 1])
+                current_date = str(st.session_state[date_state_key])
+                current_idx = date_values.index(current_date) if current_date in date_values else 0
+
+                with nav_l:
+                    # Keep arrow buttons baseline-aligned with the date selectbox control.
+                    st.markdown("<div style='height: 2.05rem;'></div>", unsafe_allow_html=True)
+                    older_disabled = current_idx >= len(date_values) - 1
+                    if st.button("←", key=f"older_{date_state_key}", use_container_width=True, disabled=older_disabled):
+                        st.session_state[date_state_key] = date_values[current_idx + 1]
+
+                # 重新读取，确保按钮点击后本次渲染生效
+                current_date = str(st.session_state[date_state_key])
+                current_idx = date_values.index(current_date) if current_date in date_values else 0
+
+                with nav_c:
+                    date_choice = st.selectbox("日期", date_values, key=date_state_key)
+
+                with nav_r:
+                    st.markdown("<div style='height: 2.05rem;'></div>", unsafe_allow_html=True)
+                    newer_disabled = current_idx <= 0
+                    if st.button("→", key=f"newer_{date_state_key}", use_container_width=True, disabled=newer_disabled):
+                        st.session_state[date_state_key] = date_values[current_idx - 1]
+            else:
+                date_choice = st.selectbox("日期", date_values, key=date_state_key)
         with col3:
-            columns = ["", "openclaw", "claudecode"]
-            col_index = columns.index(column_param) if column_param in columns else 0
-            column = st.selectbox(
-                "专栏",
-                columns,
-                index=col_index,
-                format_func=lambda x: "全部" if x == "" else ("OpenClaw" if x == "openclaw" else "Claude Code"),
-            )
-        with col4:
-            date_choice = st.selectbox("日期", date_values)
-        with col5:
             manage_mode = st.toggle("管理模式", value=False, key="items_manage_mode")
 
         inline_authed = True
