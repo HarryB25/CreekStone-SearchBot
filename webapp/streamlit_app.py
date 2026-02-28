@@ -8,6 +8,10 @@ import pandas as pd
 import streamlit as st
 import altair as alt
 try:
+    from weekly_report_view import render_weekly_report_view
+except ModuleNotFoundError:
+    from webapp.weekly_report_view import render_weekly_report_view
+try:
     from dotenv import load_dotenv
     load_dotenv()
 except Exception:
@@ -770,6 +774,7 @@ def build_masthead_html(active_view: str = "items", active_source: str = "", act
       <a href="?view=items&source=producthunt" class="{_active_class(active_view == 'items' and active_source == 'producthunt')}">Watchlist</a>
       <a href="?view=items&column=openclaw" class="{_active_class(active_view == 'items' and active_column == 'openclaw')}">OpenClaw</a>
       <a href="?view=items&column=claudecode" class="{_active_class(active_view == 'items' and active_column == 'claudecode')}">Claude Code</a>
+      <a href="?view=weekly" class="{_active_class(active_view == 'weekly')}">Weekly Research</a>
     </div>
     <div class="masthead-brand">Daily AI Feeds</div>
   </div>
@@ -781,6 +786,7 @@ def build_masthead_html(active_view: str = "items", active_source: str = "", act
     <a href="?view=items&column=openclaw">OpenClaw / Clawdbot 专栏</a>
     <a href="?view=items&column=claudecode">Claude Code 专栏</a>
     <a href="?view=trends">Keyword Trend Intelligence</a>
+    <a href="?view=weekly">Weekly Research Report</a>
   </div>
 </div>
 """
@@ -788,7 +794,7 @@ def build_masthead_html(active_view: str = "items", active_source: str = "", act
 st.set_page_config(page_title="Daily AI Feeds", layout="wide")
 st.markdown(STYLE, unsafe_allow_html=True)
 view_param = _qp_get_str("view", "items").lower().strip()
-if view_param not in {"items", "trends"}:
+if view_param not in {"items", "trends", "weekly"}:
     view_param = "items"
 source_param = _qp_get_str("source", "").strip()
 column_param = _qp_get_str("column", "").strip().lower()
@@ -804,13 +810,18 @@ df_all = df.copy()
 sort_labels = list(SORT_FIELD_OPTIONS.keys())
 sort_default = sort_param if sort_param in sort_labels else "趋势分"
 sort_index = sort_labels.index(sort_default) if sort_default in sort_labels else 0
-sort_label = st.selectbox("关键词趋势排序", sort_labels, index=sort_index)
+if view_param != "weekly":
+    sort_label = st.selectbox("关键词趋势排序", sort_labels, index=sort_index)
+else:
+    sort_label = sort_default
 sort_field = SORT_FIELD_OPTIONS[sort_label]
 
-if view_param == "trends":
-    tab_trends, tab_items = st.tabs(["关键词趋势", "内容浏览"])
+if view_param == "weekly":
+    tab_weekly, tab_items, tab_trends = st.tabs(["周度研究", "内容浏览", "关键词趋势"])
+elif view_param == "trends":
+    tab_trends, tab_items, tab_weekly = st.tabs(["关键词趋势", "内容浏览", "周度研究"])
 else:
-    tab_items, tab_trends = st.tabs(["内容浏览", "关键词趋势"])
+    tab_items, tab_trends, tab_weekly = st.tabs(["内容浏览", "关键词趋势", "周度研究"])
 
 with tab_items:
     trends = load_keyword_trends(_insights_signature())
@@ -1074,3 +1085,6 @@ with tab_trends:
                     )
                 )
                 st.altair_chart(chart, use_container_width=True)
+
+with tab_weekly:
+    render_weekly_report_view(BASE_DIR)

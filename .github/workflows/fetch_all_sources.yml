@@ -96,8 +96,8 @@ jobs:
         targets = {
             # Product Hunt 数据窗口取昨天，但写入按今天聚合，确保当日页三源齐全。
             "producthunt": {"fetch_date": yesterday, "output_date": today},
-            # arXiv 采用当日窗口抓取并写当日，避免“抓昨天”导致空结果。
-            "arxiv": {"fetch_date": today, "output_date": today},
+            # arXiv 抓前一天、写当天。arXiv 当天在 workflow 执行时点经常尚未出齐，直接抓当天容易空。
+            "arxiv": {"fetch_date": yesterday, "output_date": today},
             "github": {"fetch_date": today, "output_date": today},
             "clawhub": {"fetch_date": today, "output_date": today},
         }

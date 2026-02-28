@@ -1,0 +1,125 @@
+name: Weekly Research Report
+
+on:
+  schedule:
+    - cron: "0 1 * * 1" # 每周一 UTC 01:00（SGT 09:00）
+  workflow_dispatch:
+    inputs:
+      week_start:
+        description: "指定周一日期（YYYY-MM-DD，可选）"
+        required: false
+        default: ""
+        type: string
+      force_regen:
+        description: "忽略已有产物并重新生成"
+        required: false
+        default: false
+        type: boolean
+      depth:
+        description: "报告深度"
+        required: false
+        default: "deep"
+        type: choice
+        options:
+          - light
+          - standard
+          - deep
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-research-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  weekly-research:
+    runs-on: ubuntu-latest
+    env:
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+      OPENAI_MODEL_ALTERNATE_1: ${{ vars.OPENAI_MODEL_ALTERNATE_1 }}
+      OPENAI_MODEL_ALTERNATE_2: ${{ vars.OPENAI_MODEL_ALTERNATE_2 }}
+      OPENAI_REQUEST_TIMEOUT: ${{ vars.OPENAI_REQUEST_TIMEOUT }}
+      OPENAI_EMBEDDING_MODEL: ${{ vars.OPENAI_EMBEDDING_MODEL }}
+      WEEKLY_REPORT_CHAT_MODEL: ${{ vars.WEEKLY_REPORT_CHAT_MODEL }}
+      WEEKLY_REPORT_TIMEZONE: ${{ vars.WEEKLY_REPORT_TIMEZONE }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Validate OpenAI secret
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+      run: |
+        if [ -z "${OPENAI_API_KEY}" ]; then
+          echo "ERROR: OPENAI_API_KEY is required."
+          exit 1
+        fi
+
+    - name: Generate weekly research report
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+        OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL || vars.OPENAI_BASE_URL }}
+      run: |
+        CMD="python scripts/weekly_research_report.py --depth ${{ github.event.inputs.depth || 'deep' }}"
+        if [ -n "${{ github.event.inputs.week_start }}" ]; then
+          CMD="$CMD --week-start ${{ github.event.inputs.week_start }}"
+        fi
+        if [ "${{ github.event.inputs.force_regen }}" = "true" ]; then
+          CMD="$CMD --force"
+        fi
+        echo "$CMD"
+        eval "$CMD"
+
+    - name: Validate outputs
+      run: |
+        python - <<'PY'
+        import json
+        from pathlib import Path
+
+        weekly_dir = Path("data/insights/weekly")
+        latest_json = weekly_dir / "latest.json"
+        latest_md = weekly_dir / "latest.md"
+        if not latest_json.exists():
+            raise SystemExit("latest.json missing")
+        if not latest_md.exists():
+            raise SystemExit("latest.md missing")
+        payload = json.loads(latest_json.read_text(encoding="utf-8"))
+        themes = payload.get("report", {}).get("themes", [])
+        if not themes:
+            raise SystemExit("weekly themes empty")
+        if "qa_pass" not in payload.get("meta", {}):
+            raise SystemExit("qa_pass missing")
+        print("Weekly report validation passed.")
+        PY
+
+    - name: Commit files
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add data/insights/weekly requirements.txt .github/workflows/weekly_research_report.yml webapp/streamlit_app.py webapp/weekly_report_view.py common/weekly_research.py scripts/weekly_research_report.py
+        git commit -m "Generate weekly research report" || echo "No changes to commit"
+
+    - name: Push changes
+      run: |
+        BRANCH="${{ github.ref_name }}"
+        REMOTE_URL="https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git"
+        for i in 1 2 3; do
+          git pull --rebase "${REMOTE_URL}" "${BRANCH}" && \
+          git push "${REMOTE_URL}" "HEAD:${BRANCH}" && exit 0
+          echo "Push failed on attempt ${i}, retrying..."
+          sleep 5
+        done
+        echo "Push failed after retries."
+        exit 1

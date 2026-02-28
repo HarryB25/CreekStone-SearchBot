@@ -1,0 +1,5097 @@
+{
+  "meta": {
+    "week_start": "2026-02-23",
+    "week_end": "2026-03-01",
+    "generated_at": "2026-02-28T07:18:01Z",
+    "lookback_weeks": 8,
+    "k_selected": 4,
+    "embedding_model": "text-embedding-3-large",
+    "chat_model": "gpt-4o-mini, gpt-5.2-2025-12-11",
+    "source_counts": {
+      "arxiv": 32,
+      "clawhub": 15,
+      "github": 13,
+      "producthunt": 36
+    },
+    "qa_pass": false,
+    "qa_issues": [],
+    "report_depth": "deep"
+  },
+  "signals": {
+    "terms": [
+      {
+        "term": "api key",
+        "term_trend_score": 1.740684,
+        "freq_week": 8,
+        "freq_baseline": 1.2,
+        "support_projects": 8,
+        "support_sources": 3,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.4107,
+        "support_items": [
+          "ch-2026-02-23-3",
+          "ch-2026-02-23-5",
+          "ch-2026-02-23-7",
+          "ch-2026-02-24-1",
+          "ch-2026-02-25-1",
+          "gh-2026-02-24-1",
+          "ph-2026-02-23-15",
+          "ph-2026-02-24-4"
+        ]
+      },
+      {
+        "term": "用于自动化",
+        "term_trend_score": 0.898499,
+        "freq_week": 3,
+        "freq_baseline": 0.64,
+        "support_projects": 3,
+        "support_sources": 1,
+        "idf_like": 1.9163,
+        "novelty": 1.1,
+        "quality_weight": 0.4781,
+        "support_items": [
+          "gh-2026-02-23-5",
+          "gh-2026-02-23-6",
+          "gh-2026-02-24-5"
+        ]
+      },
+      {
+        "term": "自适应解析",
+        "term_trend_score": 0.831634,
+        "freq_week": 3,
+        "freq_baseline": 1.2,
+        "support_projects": 3,
+        "support_sources": 1,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.6011,
+        "support_items": [
+          "gh-2026-02-23-3",
+          "gh-2026-02-24-3",
+          "gh-2026-02-25-1"
+        ]
+      },
+      {
+        "term": "scrapy spider api",
+        "term_trend_score": 0.59925,
+        "freq_week": 3,
+        "freq_baseline": 1.6,
+        "support_projects": 3,
+        "support_sources": 1,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.6011,
+        "support_items": [
+          "gh-2026-02-23-3",
+          "gh-2026-02-24-3",
+          "gh-2026-02-25-1"
+        ]
+      },
+      {
+        "term": "spider api",
+        "term_trend_score": 0.59925,
+        "freq_week": 3,
+        "freq_baseline": 1.6,
+        "support_projects": 3,
+        "support_sources": 1,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.6011,
+        "support_items": [
+          "gh-2026-02-23-3",
+          "gh-2026-02-24-3",
+          "gh-2026-02-25-1"
+        ]
+      },
+      {
+        "term": "爬取框架",
+        "term_trend_score": 0.226076,
+        "freq_week": 3,
+        "freq_baseline": 2.4,
+        "support_projects": 3,
+        "support_sources": 1,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.6011,
+        "support_items": [
+          "gh-2026-02-23-3",
+          "gh-2026-02-24-3",
+          "gh-2026-02-25-1"
+        ]
+      },
+      {
+        "term": "多智能体编排",
+        "term_trend_score": 0.206242,
+        "freq_week": 4,
+        "freq_baseline": 3.2,
+        "support_projects": 4,
+        "support_sources": 2,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.4445,
+        "support_items": [
+          "gh-2026-02-23-5",
+          "gh-2026-02-23-6",
+          "gh-2026-02-24-6",
+          "ph-2026-02-23-18"
+        ]
+      },
+      {
+        "term": "代理轮换",
+        "term_trend_score": 0.071353,
+        "freq_week": 3,
+        "freq_baseline": 2.8,
+        "support_projects": 3,
+        "support_sources": 1,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.6011,
+        "support_items": [
+          "gh-2026-02-23-3",
+          "gh-2026-02-24-3",
+          "gh-2026-02-25-1"
+        ]
+      },
+      {
+        "term": "反爬绕过",
+        "term_trend_score": 0.071353,
+        "freq_week": 3,
+        "freq_baseline": 2.8,
+        "support_projects": 3,
+        "support_sources": 1,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.6011,
+        "support_items": [
+          "gh-2026-02-23-3",
+          "gh-2026-02-24-3",
+          "gh-2026-02-25-1"
+        ]
+      },
+      {
+        "term": "断点续爬",
+        "term_trend_score": 0.071353,
+        "freq_week": 3,
+        "freq_baseline": 2.8,
+        "support_projects": 3,
+        "support_sources": 1,
+        "idf_like": 2.204,
+        "novelty": 1.05,
+        "quality_weight": 0.6011,
+        "support_items": [
+          "gh-2026-02-23-3",
+          "gh-2026-02-24-3",
+          "gh-2026-02-25-1"
+        ]
+      }
+    ],
+    "projects": {
+      "rising_top": [
+        {
+          "id": "ch-2026-02-24-4",
+          "source": "clawhub",
+          "date": "2026-02-24",
+          "title": "Flux",
+          "url": "https://clawhub.ai/EckmanTechLLC/flux",
+          "hot": 1.9361,
+          "rise": 1.5489,
+          "score_total": 43,
+          "quality_weight": 0.6675
+        },
+        {
+          "id": "ph-2026-02-25-1",
+          "source": "producthunt",
+          "date": "2026-02-25",
+          "title": "KiloClaw",
+          "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6632,
+          "rise": 1.3306,
+          "score_total": 40,
+          "quality_weight": 0.6264
+        },
+        {
+          "id": "ph-2026-02-24-1",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Stitch by Google",
+          "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6093,
+          "rise": 1.2874,
+          "score_total": 38,
+          "quality_weight": 0.6126
+        },
+        {
+          "id": "ph-2026-02-23-1",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Siteline",
+          "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.5759,
+          "rise": 1.2607,
+          "score_total": 38,
+          "quality_weight": 0.6091
+        },
+        {
+          "id": "ax-2026-02-23-1",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+          "url": "https://arxiv.org/abs/2602.20426v1",
+          "hot": 1.5359,
+          "rise": 1.2287,
+          "score_total": 42,
+          "quality_weight": 0.6208
+        },
+        {
+          "id": "ph-2026-02-24-2",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Modelence App Builder",
+          "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.4458,
+          "rise": 1.1566,
+          "score_total": 34,
+          "quality_weight": 0.5792
+        },
+        {
+          "id": "ax-2026-02-23-2",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+          "url": "https://arxiv.org/abs/2602.20424v1",
+          "hot": 1.4161,
+          "rise": 1.1329,
+          "score_total": 42,
+          "quality_weight": 0.608
+        },
+        {
+          "id": "ph-2026-02-23-2",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Wispr Flow for Android",
+          "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.406,
+          "rise": 1.1248,
+          "score_total": 36,
+          "quality_weight": 0.5829
+        },
+        {
+          "id": "ax-2026-02-24-1",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+          "url": "https://arxiv.org/abs/2602.21435v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 37,
+          "quality_weight": 0.5848
+        },
+        {
+          "id": "ax-2026-02-25-1",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+          "url": "https://arxiv.org/abs/2602.22212v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 29,
+          "quality_weight": 0.5528
+        },
+        {
+          "id": "ch-2026-02-23-5",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-web-search",
+          "url": "https://clawhub.ai/Thincher/glm-web-search",
+          "hot": 1.3794,
+          "rise": 1.1035,
+          "score_total": 3,
+          "quality_weight": 0.4481
+        },
+        {
+          "id": "ph-2026-02-23-3",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "TypeBoost",
+          "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.3321,
+          "rise": 1.0656,
+          "score_total": 31,
+          "quality_weight": 0.555
+        },
+        {
+          "id": "ax-2026-02-23-3",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+          "url": "https://arxiv.org/abs/2602.20422v1",
+          "hot": 1.2962,
+          "rise": 1.037,
+          "score_total": 34,
+          "quality_weight": 0.5632
+        },
+        {
+          "id": "ax-2026-02-25-2",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+          "url": "https://arxiv.org/abs/2602.22209v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 0,
+          "quality_weight": 0.424
+        },
+        {
+          "id": "ax-2026-02-24-2",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+          "url": "https://arxiv.org/abs/2602.21428v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 39,
+          "quality_weight": 0.58
+        },
+        {
+          "id": "ph-2026-02-24-3",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Anima",
+          "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.258,
+          "rise": 1.0064,
+          "score_total": 48,
+          "quality_weight": 0.6151
+        },
+        {
+          "id": "ax-2026-02-24-3",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Automating Timed Up and Go Phase Segmentation and Gait Analysis via the tugturn Markerless 3D Pipeline",
+          "url": "https://arxiv.org/abs/2602.21425v1",
+          "hot": 1.1464,
+          "rise": 0.9172,
+          "score_total": 29,
+          "quality_weight": 0.5272
+        },
+        {
+          "id": "ph-2026-02-23-4",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Grok 4.2",
+          "url": "https://www.producthunt.com/products/grok?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.1333,
+          "rise": 0.9066,
+          "score_total": 37,
+          "quality_weight": 0.5578
+        },
+        {
+          "id": "ch-2026-02-23-3",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-understand-image",
+          "url": "https://clawhub.ai/Thincher/glm-understand-image",
+          "hot": 1.0592,
+          "rise": 0.8474,
+          "score_total": 7,
+          "quality_weight": 0.4299
+        },
+        {
+          "id": "ax-2026-02-24-4",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "ECHOSAT: Estimating Canopy Height Over Space And Time",
+          "url": "https://arxiv.org/abs/2602.21421v1",
+          "hot": 1.0266,
+          "rise": 0.8213,
+          "score_total": 37,
+          "quality_weight": 0.5464
+        }
+      ],
+      "hot_top": [
+        {
+          "id": "ch-2026-02-24-4",
+          "source": "clawhub",
+          "date": "2026-02-24",
+          "title": "Flux",
+          "url": "https://clawhub.ai/EckmanTechLLC/flux",
+          "hot": 1.9361,
+          "rise": 1.5489,
+          "score_total": 43,
+          "quality_weight": 0.6675
+        },
+        {
+          "id": "gh-2026-02-24-3",
+          "source": "github",
+          "date": "2026-02-24",
+          "title": "D4Vinci/Scrapling",
+          "url": "https://github.com/D4Vinci/Scrapling",
+          "hot": 1.7886,
+          "rise": 0.0535,
+          "score_total": 34,
+          "quality_weight": 0.6158
+        },
+        {
+          "id": "gh-2026-02-23-3",
+          "source": "github",
+          "date": "2026-02-23",
+          "title": "D4Vinci/Scrapling",
+          "url": "https://github.com/D4Vinci/Scrapling",
+          "hot": 1.7885,
+          "rise": 0.0535,
+          "score_total": 37,
+          "quality_weight": 0.6278
+        },
+        {
+          "id": "ph-2026-02-25-1",
+          "source": "producthunt",
+          "date": "2026-02-25",
+          "title": "KiloClaw",
+          "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6632,
+          "rise": 1.3306,
+          "score_total": 40,
+          "quality_weight": 0.6264
+        },
+        {
+          "id": "ph-2026-02-24-1",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Stitch by Google",
+          "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6093,
+          "rise": 1.2874,
+          "score_total": 38,
+          "quality_weight": 0.6126
+        },
+        {
+          "id": "ph-2026-02-23-1",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Siteline",
+          "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.5759,
+          "rise": 1.2607,
+          "score_total": 38,
+          "quality_weight": 0.6091
+        },
+        {
+          "id": "ax-2026-02-23-1",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+          "url": "https://arxiv.org/abs/2602.20426v1",
+          "hot": 1.5359,
+          "rise": 1.2287,
+          "score_total": 42,
+          "quality_weight": 0.6208
+        },
+        {
+          "id": "ph-2026-02-24-2",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Modelence App Builder",
+          "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.4458,
+          "rise": 1.1566,
+          "score_total": 34,
+          "quality_weight": 0.5792
+        },
+        {
+          "id": "ax-2026-02-23-2",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+          "url": "https://arxiv.org/abs/2602.20424v1",
+          "hot": 1.4161,
+          "rise": 1.1329,
+          "score_total": 42,
+          "quality_weight": 0.608
+        },
+        {
+          "id": "ph-2026-02-23-2",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Wispr Flow for Android",
+          "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.406,
+          "rise": 1.1248,
+          "score_total": 36,
+          "quality_weight": 0.5829
+        },
+        {
+          "id": "ax-2026-02-25-1",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+          "url": "https://arxiv.org/abs/2602.22212v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 29,
+          "quality_weight": 0.5528
+        },
+        {
+          "id": "ax-2026-02-24-1",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+          "url": "https://arxiv.org/abs/2602.21435v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 37,
+          "quality_weight": 0.5848
+        },
+        {
+          "id": "ch-2026-02-23-5",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-web-search",
+          "url": "https://clawhub.ai/Thincher/glm-web-search",
+          "hot": 1.3794,
+          "rise": 1.1035,
+          "score_total": 3,
+          "quality_weight": 0.4481
+        },
+        {
+          "id": "ph-2026-02-23-3",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "TypeBoost",
+          "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.3321,
+          "rise": 1.0656,
+          "score_total": 31,
+          "quality_weight": 0.555
+        },
+        {
+          "id": "gh-2026-02-24-4",
+          "source": "github",
+          "date": "2026-02-24",
+          "title": "obra/superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "hot": 1.2973,
+          "rise": 0.3283,
+          "score_total": 44,
+          "quality_weight": 0.6033
+        },
+        {
+          "id": "gh-2026-02-23-4",
+          "source": "github",
+          "date": "2026-02-23",
+          "title": "obra/superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "hot": 1.2971,
+          "rise": 0.3283,
+          "score_total": 44,
+          "quality_weight": 0.6033
+        },
+        {
+          "id": "ax-2026-02-23-3",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+          "url": "https://arxiv.org/abs/2602.20422v1",
+          "hot": 1.2962,
+          "rise": 1.037,
+          "score_total": 34,
+          "quality_weight": 0.5632
+        },
+        {
+          "id": "ax-2026-02-24-2",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+          "url": "https://arxiv.org/abs/2602.21428v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 39,
+          "quality_weight": 0.58
+        },
+        {
+          "id": "ax-2026-02-25-2",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+          "url": "https://arxiv.org/abs/2602.22209v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 0,
+          "quality_weight": 0.424
+        },
+        {
+          "id": "ph-2026-02-24-3",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Anima",
+          "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.258,
+          "rise": 1.0064,
+          "score_total": 48,
+          "quality_weight": 0.6151
+        }
+      ],
+      "novel_top": [
+        {
+          "id": "ch-2026-02-24-4",
+          "source": "clawhub",
+          "date": "2026-02-24",
+          "title": "Flux",
+          "url": "https://clawhub.ai/EckmanTechLLC/flux",
+          "hot": 1.9361,
+          "rise": 1.5489,
+          "score_total": 43,
+          "quality_weight": 0.6675
+        },
+        {
+          "id": "ph-2026-02-25-1",
+          "source": "producthunt",
+          "date": "2026-02-25",
+          "title": "KiloClaw",
+          "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6632,
+          "rise": 1.3306,
+          "score_total": 40,
+          "quality_weight": 0.6264
+        },
+        {
+          "id": "ph-2026-02-24-1",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Stitch by Google",
+          "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6093,
+          "rise": 1.2874,
+          "score_total": 38,
+          "quality_weight": 0.6126
+        },
+        {
+          "id": "ph-2026-02-23-1",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Siteline",
+          "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.5759,
+          "rise": 1.2607,
+          "score_total": 38,
+          "quality_weight": 0.6091
+        },
+        {
+          "id": "ax-2026-02-23-1",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+          "url": "https://arxiv.org/abs/2602.20426v1",
+          "hot": 1.5359,
+          "rise": 1.2287,
+          "score_total": 42,
+          "quality_weight": 0.6208
+        },
+        {
+          "id": "ph-2026-02-24-2",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Modelence App Builder",
+          "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.4458,
+          "rise": 1.1566,
+          "score_total": 34,
+          "quality_weight": 0.5792
+        },
+        {
+          "id": "ax-2026-02-23-2",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+          "url": "https://arxiv.org/abs/2602.20424v1",
+          "hot": 1.4161,
+          "rise": 1.1329,
+          "score_total": 42,
+          "quality_weight": 0.608
+        },
+        {
+          "id": "ph-2026-02-23-2",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Wispr Flow for Android",
+          "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.406,
+          "rise": 1.1248,
+          "score_total": 36,
+          "quality_weight": 0.5829
+        },
+        {
+          "id": "ax-2026-02-24-1",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+          "url": "https://arxiv.org/abs/2602.21435v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 37,
+          "quality_weight": 0.5848
+        },
+        {
+          "id": "ax-2026-02-25-1",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+          "url": "https://arxiv.org/abs/2602.22212v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 29,
+          "quality_weight": 0.5528
+        },
+        {
+          "id": "ch-2026-02-23-5",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-web-search",
+          "url": "https://clawhub.ai/Thincher/glm-web-search",
+          "hot": 1.3794,
+          "rise": 1.1035,
+          "score_total": 3,
+          "quality_weight": 0.4481
+        },
+        {
+          "id": "ph-2026-02-23-3",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "TypeBoost",
+          "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.3321,
+          "rise": 1.0656,
+          "score_total": 31,
+          "quality_weight": 0.555
+        },
+        {
+          "id": "ax-2026-02-23-3",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+          "url": "https://arxiv.org/abs/2602.20422v1",
+          "hot": 1.2962,
+          "rise": 1.037,
+          "score_total": 34,
+          "quality_weight": 0.5632
+        },
+        {
+          "id": "ax-2026-02-24-2",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+          "url": "https://arxiv.org/abs/2602.21428v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 39,
+          "quality_weight": 0.58
+        },
+        {
+          "id": "ax-2026-02-25-2",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+          "url": "https://arxiv.org/abs/2602.22209v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 0,
+          "quality_weight": 0.424
+        },
+        {
+          "id": "ph-2026-02-24-3",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Anima",
+          "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.258,
+          "rise": 1.0064,
+          "score_total": 48,
+          "quality_weight": 0.6151
+        },
+        {
+          "id": "ax-2026-02-24-3",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Automating Timed Up and Go Phase Segmentation and Gait Analysis via the tugturn Markerless 3D Pipeline",
+          "url": "https://arxiv.org/abs/2602.21425v1",
+          "hot": 1.1464,
+          "rise": 0.9172,
+          "score_total": 29,
+          "quality_weight": 0.5272
+        },
+        {
+          "id": "ph-2026-02-23-4",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Grok 4.2",
+          "url": "https://www.producthunt.com/products/grok?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.1333,
+          "rise": 0.9066,
+          "score_total": 37,
+          "quality_weight": 0.5578
+        },
+        {
+          "id": "ch-2026-02-23-3",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-understand-image",
+          "url": "https://clawhub.ai/Thincher/glm-understand-image",
+          "hot": 1.0592,
+          "rise": 0.8474,
+          "score_total": 7,
+          "quality_weight": 0.4299
+        },
+        {
+          "id": "ax-2026-02-24-4",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "ECHOSAT: Estimating Canopy Height Over Space And Time",
+          "url": "https://arxiv.org/abs/2602.21421v1",
+          "hot": 1.0266,
+          "rise": 0.8213,
+          "score_total": 37,
+          "quality_weight": 0.5464
+        }
+      ]
+    },
+    "clusters": [
+      {
+        "cluster_id": 8,
+        "member_project_ids": [
+          "gh-2026-02-24-3",
+          "gh-2026-02-23-3",
+          "gh-2026-02-25-1"
+        ],
+        "member_count": 3,
+        "top_projects": [
+          {
+            "id": "gh-2026-02-24-3",
+            "title": "D4Vinci/Scrapling",
+            "source": "github",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "summary": "Scrapling 是一个自适应 Web 抓取框架，覆盖从单次请求到大规模并发爬取的完整流程，面向爬虫开发者及需要抓取数据的普通用户。它的解析器可从网页变化中学习并在页面更新后自动重新定位元素，抓取端内置绕过反爬机制（如 Cloudflare Turnstile），并支持代理自动轮换。框架提供类似 Scrapy 的 Spider API，支持多会话（HTTP/浏览器）、并发与限速、断点续爬与流式输出，适用于长期运行的爬虫、数据管道或需要实时统计与增量结果的采集任务。",
+            "hot": 1.7886,
+            "rise": 0.0535,
+            "score_total": 34
+          },
+          {
+            "id": "gh-2026-02-23-3",
+            "title": "D4Vinci/Scrapling",
+            "source": "github",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "summary": "Scrapling 是一个自适应 Web 抓取框架，既支持单次请求也能扩展到并发的全站级爬取，面向需要从现代网站稳定采集数据的爬虫开发者与普通用户。它的解析器可随页面结构变化自动重新定位元素，抓取端内置绕过反爬（如 Cloudflare Turnstile）与被封检测重试，并提供类似 Scrapy 的 Spider API 支持多会话、暂停/恢复、代理自动轮换与实时流式输出。典型用于长时间运行的数据采集任务、需要实时展示/管道处理的抓取，以及在频繁改版或强反爬站点上的稳健爬取。",
+            "hot": 1.7885,
+            "rise": 0.0535,
+            "score_total": 37
+          },
+          {
+            "id": "gh-2026-02-25-1",
+            "title": "D4Vinci/Scrapling",
+            "source": "github",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "summary": "Scrapling 是一个自适应 Web 爬取框架，覆盖从单次请求到并发的全站级爬行，面向爬虫开发者与普通数据采集用户。它提供类似 Scrapy 的 Spider API 与异步回调，支持并发控制、按域限速、多会话（HTTP 与隐身无头浏览器统一接口）、暂停/恢复与流式输出实时统计。关键技术包括会随页面改动自动重定位元素的自学习解析器、内置绕过反爬（如 Cloudflare Turnstile）的抓取器、阻断检测重试与自动代理轮换，适用于长期运行的数据采集、UI/数据管道实时消费、以及需要高稳定性的规模化爬取场景。",
+            "hot": 1.2265,
+            "rise": 0.0535,
+            "score_total": 35
+          }
+        ],
+        "top_terms": [
+          "自适应解析",
+          "scrapy spider api",
+          "spider api",
+          "爬取框架",
+          "断点续爬",
+          "代理轮换",
+          "反爬绕过",
+          "流式输出",
+          "爬虫框架",
+          "web 爬虫框架"
+        ],
+        "source_mix": [
+          "github"
+        ],
+        "cluster_score": 1.085662,
+        "centroid": {
+          "x": -0.215379,
+          "y": -0.199229
+        }
+      },
+      {
+        "cluster_id": 0,
+        "member_project_ids": [
+          "ch-2026-02-23-5",
+          "ch-2026-02-23-3",
+          "ph-2026-02-24-15"
+        ],
+        "member_count": 3,
+        "top_projects": [
+          {
+            "id": "ch-2026-02-23-5",
+            "title": "glm-web-search",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/Thincher/glm-web-search",
+            "summary": "该能力通过 GLM 的 web_search 并结合 MCP 发起联网搜索，在用户明确要求在线查找信息或需要获取最新资讯、新闻与资料时触发。能力边界是仅负责检索与返回网络信息，不再自动从本地 auth-profiles.json 读取或推荐 API Key，而是需要用户手动输入；除这一点外其余配置与使用方式不变。典型场景包括实时新闻查询、最新资料/政策/产品动态检索与基于网页结果的快速信息汇总。关键技术形态为 MCP 连接的联网检索工具链调用（GLM web_search）。",
+            "hot": 1.3794,
+            "rise": 1.1035,
+            "score_total": 3
+          },
+          {
+            "id": "ch-2026-02-23-3",
+            "title": "glm-understand-image",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/Thincher/glm-understand-image",
+            "summary": "GLM 视觉 MCP 用于在用户提出分析/理解图片或需要识别图中物体、文字、场景时，调用 GLM 的视觉理解能力输出描述与分析结果。能力边界是仅对输入图片内容做识别与推理，不负责自动发现或读取本地已保存的 API Key 等环境信息。关键技术形态为基于 MCP 的视觉调用链路，当前配置流程改为直接向用户索要智谱 API Key，并支持手动填写与保存。",
+            "hot": 1.0592,
+            "rise": 0.8474,
+            "score_total": 7
+          },
+          {
+            "id": "ph-2026-02-24-15",
+            "title": "WebMCP",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/webmcp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "一种新的 JavaScript 接口，使 Web 开发者能够将其 Web 应用的功能以“工具”的形式对外暴露，即带有自然语言描述和结构化 Schema 的 JavaScript 函数，可被 AI 代理、浏览器助手以及辅助技术调用。WebMCP 支持协作式工作流，让用户与代理在同一 Web 界面中共同工作，在保持共享上下文与用户控制的同时，复用现有的应用逻辑。",
+            "hot": 0.267,
+            "rise": 0.2136,
+            "score_total": 72
+          }
+        ],
+        "top_terms": [
+          "api key",
+          "json api",
+          "联网搜索",
+          "使用",
+          "mcp",
+          "搜索插件",
+          "产品动态检索",
+          "交互式鉴权",
+          "mcp auth-profiles",
+          "能力边界是仅负责检索"
+        ],
+        "source_mix": [
+          "clawhub",
+          "producthunt"
+        ],
+        "cluster_score": 1.083334,
+        "centroid": {
+          "x": -0.038667,
+          "y": -0.051149
+        }
+      },
+      {
+        "cluster_id": 6,
+        "member_project_ids": [
+          "ph-2026-02-24-1",
+          "ph-2026-02-23-1",
+          "ph-2026-02-23-2",
+          "ph-2026-02-23-3",
+          "ph-2026-02-24-3",
+          "ph-2026-02-23-5",
+          "ph-2026-02-24-5",
+          "ph-2026-02-24-6",
+          "ph-2026-02-23-7",
+          "ph-2026-02-24-7",
+          "ph-2026-02-24-9",
+          "ph-2026-02-23-8",
+          "ph-2026-02-23-11",
+          "ph-2026-02-23-13",
+          "ph-2026-02-24-16",
+          "ph-2026-02-24-17"
+        ],
+        "member_count": 16,
+        "top_projects": [
+          {
+            "id": "ph-2026-02-24-1",
+            "title": "Stitch by Google",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "面向那些经不起在 mockup 上浪费一周时间的创始人和产品经理（PM）。描述你的 UI，即可获得可编辑的设计稿 + 可直接使用的真实代码。免费。由 Google 提供。它介绍了 Hatter——一个旨在处理多步骤设计任务的新智能体，同时还带来新的 App Store 素材生成以及原生 MCP 导出功能。",
+            "hot": 1.6093,
+            "rise": 1.2874,
+            "score_total": 38
+          },
+          {
+            "id": "ph-2026-02-23-1",
+            "title": "Siteline",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "追踪 AI 智能体和机器人如何与你的网站交互。按平台、页面和主题分析流量趋势。查看这些流量如何转化为真人访问。几分钟内获得第一手洞察——当你对它如何影响产品增长产生“顿悟”之后，还可以进一步深挖。",
+            "hot": 1.5759,
+            "rise": 1.2607,
+            "score_total": 38
+          },
+          {
+            "id": "ph-2026-02-23-2",
+            "title": "Wispr Flow for Android",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "现已登陆 Android：智能语音转文字，将啰嗦的口述内容整理为干净、可直接发送的文本。Wispr Flow 可在任何应用中无缝运行，切换应用时也能继续，并会自动清理口头填充词、自我修正、标点和格式。限时免费且不限量！",
+            "hot": 1.406,
+            "rise": 1.1248,
+            "score_total": 36
+          },
+          {
+            "id": "ph-2026-02-23-3",
+            "title": "TypeBoost",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "把你的提示词变成一套个人 AI 写作工具包。在 macOS 的任何应用里都能用。不用复制粘贴，不用在工具间来回切换。直接对选中文本应用自定义 AI 操作，查看并掌控每一处改动，用更快的速度写作，同时仍然保持你的风格。提示词可完全自定义，可选择模型，支持语音输入，并能随时间不断学习。写得更好，更快，依然是你的文字。",
+            "hot": 1.3321,
+            "rise": 1.0656,
+            "score_total": 31
+          },
+          {
+            "id": "ph-2026-02-24-3",
+            "title": "Anima",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "从粗略想法到 Figma 文件，Anima 的 AI 能生成与您的设计系统一致的高精度前端代码。告别千篇一律的通用代码智能体——构建真正的、响应式且符合品牌调性的 UI，随时可交付上线。",
+            "hot": 1.258,
+            "rise": 1.0064,
+            "score_total": 48
+          }
+        ],
+        "top_terms": [
+          "store mcp",
+          "原型自动化",
+          "步骤设计任务的新智能体",
+          "mcp",
+          "store mcp hunt",
+          "可编辑设计稿",
+          "代码生成",
+          "mcp hunt",
+          "自然语言ui生成",
+          "hatter store mcp"
+        ],
+        "source_mix": [
+          "producthunt"
+        ],
+        "cluster_score": 0.891548,
+        "centroid": {
+          "x": -0.185502,
+          "y": 0.238251
+        }
+      },
+      {
+        "cluster_id": 2,
+        "member_project_ids": [
+          "ax-2026-02-23-2",
+          "ax-2026-02-24-1",
+          "ax-2026-02-25-1",
+          "ax-2026-02-24-2",
+          "ax-2026-02-25-2",
+          "ax-2026-02-24-3",
+          "ax-2026-02-24-4",
+          "ax-2026-02-23-5",
+          "ax-2026-02-24-5",
+          "ax-2026-02-23-6",
+          "ax-2026-02-24-6",
+          "ax-2026-02-23-7",
+          "ax-2026-02-24-7",
+          "ax-2026-02-23-8",
+          "ax-2026-02-23-10",
+          "ax-2026-02-23-11",
+          "ax-2026-02-23-13",
+          "ax-2026-02-23-14",
+          "ax-2026-02-23-15",
+          "ax-2026-02-24-15"
+        ],
+        "member_count": 20,
+        "top_projects": [
+          {
+            "id": "ax-2026-02-23-2",
+            "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20424v1",
+            "summary": "提出“Implicit Intelligence”评测框架，用于衡量AI代理在用户未明说的隐含约束下是否能真正完成目标，而不仅是机械遵循提示。",
+            "hot": 1.4161,
+            "rise": 1.1329,
+            "score_total": 42
+          },
+          {
+            "id": "ax-2026-02-24-1",
+            "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.21435v1",
+            "summary": "提出“交错分析-起草循环”(AD-Loop)思维范式，让统一视觉语言模型在理解与生成之间动态交替推理，从而实现更强的协同解题能力。",
+            "hot": 1.3861,
+            "rise": 1.1089,
+            "score_total": 37
+          },
+          {
+            "id": "ax-2026-02-25-1",
+            "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.22212v1",
+            "summary": "Neu-PiG 通过“法线条件化”的多分辨率潜变量网格编码与 Sobolev 预条件优化，实现长序列动态物体的快速、无漂移高质量表面重建。",
+            "hot": 1.3861,
+            "rise": 1.1089,
+            "score_total": 29
+          },
+          {
+            "id": "ax-2026-02-24-2",
+            "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.21428v1",
+            "summary": "PSF-Med 系统评测医学VLM对同义改写问题的敏感性，发现大量“答案翻转”且部分稳定性来自语言先验而非图像理解，并提出基于稀疏特征干预的方法显著降低翻转。",
+            "hot": 1.2663,
+            "rise": 1.013,
+            "score_total": 39
+          },
+          {
+            "id": "ax-2026-02-25-2",
+            "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.22209v1",
+            "summary": "WHOLE通过学习手-物交互的生成式先验，在第一视角视频中联合重建手与物体在世界坐标系下的运动轨迹，并显著提升交互一致性与遮挡/出视野鲁棒性。",
+            "hot": 1.2663,
+            "rise": 1.013,
+            "score_total": 0
+          }
+        ],
+        "top_terms": [
+          "上下文约束推断",
+          "隐式需求推理",
+          "欠规范化指令",
+          "目标满足型智能体",
+          "llm 模拟环境",
+          "可访问性需求",
+          "交互式环境评测",
+          "智能体评测基准",
+          "环境探索",
+          "隐私边界约束"
+        ],
+        "source_mix": [
+          "arxiv"
+        ],
+        "cluster_score": 0.785711,
+        "centroid": {
+          "x": 0.340308,
+          "y": 0.046457
+        }
+      },
+      {
+        "cluster_id": 5,
+        "member_project_ids": [
+          "ch-2026-02-24-4",
+          "ph-2026-02-23-4",
+          "ch-2026-02-23-1",
+          "gh-2026-02-24-4",
+          "gh-2026-02-23-4",
+          "gh-2026-02-24-5",
+          "gh-2026-02-23-5",
+          "gh-2026-02-24-6",
+          "gh-2026-02-23-6",
+          "ch-2026-02-23-4",
+          "ch-2026-02-23-2"
+        ],
+        "member_count": 11,
+        "top_projects": [
+          {
+            "id": "ch-2026-02-24-4",
+            "title": "Flux",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/EckmanTechLLC/flux",
+            "summary": "该能力通过 Flux 状态引擎发布事件并查询共享世界状态，用于多智能体在同一命名空间内共享观测、基于共享数据协同决策、以及持续跟踪实体状态变化等场景。能力边界在于它主要提供状态存取与一致性保障的协作底座，不负责具体业务推理、任务编排或外部行动执行。关键技术形态为事件发布/订阅与状态查询接口相结合，依托公共 Flux 实例的鉴权与命名空间隔离，并对一致性机制与文档进行了更新完善。",
+            "hot": 1.9361,
+            "rise": 1.5489,
+            "score_total": 43
+          },
+          {
+            "id": "ph-2026-02-23-4",
+            "title": "Grok 4.2",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/grok?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "Grok 4.2 是一个原生的多智能体系统，由四个专业化“头”（heads）共享同一上下文。它们并行推理，并在内部进行辩论，在作答前交叉核查事实。此外，它还具备快速学习闭环（rapid learning loop），每周持续改进。",
+            "hot": 1.1333,
+            "rise": 0.9066,
+            "score_total": 37
+          },
+          {
+            "id": "ch-2026-02-23-1",
+            "title": "OpenTangl",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/8co/opentangl",
+            "summary": "这是一个“自动化开发团队”式的产品：你提供需求愿景，它能在多个代码仓库中自主完成构建、提交 PR、代码评审并合并交付。能力边界在于仍以你给出的目标、约束与验收标准为前提，适合端到端工程落地与持续迭代，但不等同于替你做产品决策或在缺少上下文时保证业务正确性。典型场景是跨仓库的功能开发、批量改动与发布流程自动化；关键技术形态是自治代理工作流编排叠加 PR/Review/Merge 管道，并结合向量检索增强可发现性（含可搜索标签与分类）与分步流程护栏来降低偏航。",
+            "hot": 1.0084,
+            "rise": 0.8067,
+            "score_total": 51
+          },
+          {
+            "id": "gh-2026-02-24-4",
+            "title": "obra/superpowers",
+            "source": "github",
+            "url": "https://github.com/obra/superpowers",
+            "summary": "Superpowers 是一套面向“代码智能体”的技能框架与软件开发方法论，把需求澄清、规格说明、设计评审、实现计划到执行落地串成可复用的工作流。它主要服务于使用 Claude Code/Cursor 等编程助手的开发者或团队，让智能体先从对话中提炼可读的 spec 并获得确认，再生成强调 TDD（红/绿）、YAGNI、DRY 的实施计划。随后通过“子智能体驱动开发”按任务分解执行、检查与复审，适合需要更长时间自治但仍希望按既定计划推进的开发场景。",
+            "hot": 1.2973,
+            "rise": 0.3283,
+            "score_total": 44
+          },
+          {
+            "id": "gh-2026-02-23-4",
+            "title": "obra/superpowers",
+            "source": "github",
+            "url": "https://github.com/obra/superpowers",
+            "summary": "Superpowers 是一套面向编码代理（如 Claude Code、Cursor 等）的技能框架与软件开发方法论，让代理先通过对话澄清需求并产出可阅读的规格与设计，再生成强调 TDD（红/绿）、YAGNI、DRY 的实现计划。随后它以“子代理驱动开发”方式将任务拆解并逐项执行、检查与评审，尽量让代理在既定计划内长时间自主推进。典型场景是用多代理工作流提升从需求到实现的规范性与一致性，减少代理直接上手写代码导致的偏航。",
+            "hot": 1.2971,
+            "rise": 0.3283,
+            "score_total": 44
+          }
+        ],
+        "top_terms": [
+          "用于自动化",
+          "多智能体编排",
+          "事件驱动架构",
+          "状态同步",
+          "状态引擎",
+          "观察共享",
+          "状态查询api",
+          "命名空间隔离",
+          "实体跟踪",
+          "多智能体协作"
+        ],
+        "source_mix": [
+          "clawhub",
+          "github",
+          "producthunt"
+        ],
+        "cluster_score": 0.613336,
+        "centroid": {
+          "x": -0.154865,
+          "y": -0.230911
+        }
+      },
+      {
+        "cluster_id": 7,
+        "member_project_ids": [
+          "ax-2026-02-23-1",
+          "ax-2026-02-23-3",
+          "ax-2026-02-23-4",
+          "ax-2026-02-24-8",
+          "ax-2026-02-23-9",
+          "ax-2026-02-24-9",
+          "ax-2026-02-24-10",
+          "ax-2026-02-24-11",
+          "ax-2026-02-23-12",
+          "ax-2026-02-24-12",
+          "ax-2026-02-24-13",
+          "ax-2026-02-24-14"
+        ],
+        "member_count": 12,
+        "top_projects": [
+          {
+            "id": "ax-2026-02-23-1",
+            "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20426v1",
+            "summary": "提出Trace-Free+通过“重写工具描述/接口”而非只微调Agent，在无执行轨迹条件下也能显著提升LLM-Agent的工具选择与调用可靠性。",
+            "hot": 1.5359,
+            "rise": 1.2287,
+            "score_total": 42
+          },
+          {
+            "id": "ax-2026-02-23-3",
+            "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20422v1",
+            "summary": "DMEMM通过显式建模并注入环境转移动力学与奖励机制来调制扩散式轨迹生成，从而提升离线RL规划的可行性与性能。",
+            "hot": 1.2962,
+            "rise": 1.037,
+            "score_total": 34
+          },
+          {
+            "id": "ax-2026-02-23-4",
+            "title": "Case-Aware LLM-as-a-Judge Evaluation for Enterprise-Scale RAG Systems",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20379v1",
+            "summary": "提出一种面向企业多轮RAG“工单/案件”场景的LLM-as-a-Judge评测框架，用更贴近真实运维流程的指标与严重度评分揭示关键失效模式与可行动改进点。",
+            "hot": 1.0266,
+            "rise": 0.8213,
+            "score_total": 44
+          },
+          {
+            "id": "ax-2026-02-24-8",
+            "title": "MINAR: Mechanistic Interpretability for Neural Algorithmic Reasoning",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.21442v1",
+            "summary": "MINAR将机制可解释性中的归因补丁（attribution patching）方法迁移到GNN的神经算法推理中，高效发现能实现算法计算的神经元级电路。",
+            "hot": 0.6371,
+            "rise": 0.5097,
+            "score_total": 66
+          },
+          {
+            "id": "ax-2026-02-23-9",
+            "title": "GauS: Differentiable Scheduling Optimization via Gaussian Reparameterization",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20427v1",
+            "summary": "GauS用高斯重参数化将算子调度连续化并可微优化，在GPU上高效进行梯度搜索，取得多目标下的Pareto最优调度结果。",
+            "hot": 0.5173,
+            "rise": 0.4138,
+            "score_total": 33
+          }
+        ],
+        "top_terms": [
+          "工具接口优化",
+          "口优化在冷启动或隐私",
+          "参数模式设计",
+          "无执行轨迹学习",
+          "课程学习",
+          "未见工具泛化",
+          "大规模工具选择",
+          "工具描述重写",
+          "隐私受限训练",
+          "冷启动部署"
+        ],
+        "source_mix": [
+          "arxiv"
+        ],
+        "cluster_score": 0.589416,
+        "centroid": {
+          "x": 0.36092,
+          "y": -0.065649
+        }
+      },
+      {
+        "cluster_id": 1,
+        "member_project_ids": [
+          "ph-2026-02-25-1",
+          "ph-2026-02-24-2",
+          "ph-2026-02-24-4",
+          "ch-2026-02-24-6",
+          "ph-2026-02-23-6",
+          "ph-2026-02-24-8",
+          "ph-2026-02-24-10",
+          "ph-2026-02-24-11",
+          "ph-2026-02-24-12",
+          "ph-2026-02-23-9",
+          "ph-2026-02-23-10",
+          "ph-2026-02-24-13",
+          "ph-2026-02-24-14",
+          "ph-2026-02-23-12",
+          "ph-2026-02-23-14",
+          "ch-2026-02-23-6",
+          "ch-2026-02-24-3",
+          "ch-2026-02-24-2",
+          "ch-2026-02-25-1",
+          "ph-2026-02-23-15",
+          "ph-2026-02-23-16",
+          "ph-2026-02-23-17",
+          "ph-2026-02-23-18"
+        ],
+        "member_count": 23,
+        "top_projects": [
+          {
+            "id": "ph-2026-02-25-1",
+            "title": "KiloClaw",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "OpenClaw 是全球最受欢迎的开源 AI Agent。自己部署运行？难点就在这里。KiloClaw 是 OpenClaw 的全托管托管版本。我们负责基础设施、安全、更新与监控，让你专注于你的 Agent 真正要做的事——而不是为了让它一直活着而操心。",
+            "hot": 1.6632,
+            "rise": 1.3306,
+            "score_total": 40
+          },
+          {
+            "id": "ph-2026-02-24-2",
+            "title": "Modelence App Builder",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "构建可直接用于生产的应用，所需的一切助你上线——开箱即用，内置身份认证、数据库和监控。由面向 AI 时代设计的开源框架驱动。",
+            "hot": 1.4458,
+            "rise": 1.1566,
+            "score_total": 34
+          },
+          {
+            "id": "ph-2026-02-24-4",
+            "title": "Orchids 1.0",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/orchids?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "构建任意应用、任意技术栈 + 使用你现有的 ChatGPT、Claude Code、Gemini、GitHub Copilot 订阅或任意 API key，即可免费构建。",
+            "hot": 0.9575,
+            "rise": 0.766,
+            "score_total": 16
+          },
+          {
+            "id": "ch-2026-02-24-6",
+            "title": "Kraken Exchange",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/askbeka/tentactl",
+            "summary": "该能力用于与 Kraken 加密货币交易所交互，覆盖现货与期货市场，并通过 REST 与 WebSocket 提供行情与账户相关数据的查询与订阅。典型场景包括获取实时/历史价格与市场数据、查看账户资产与持仓、跟踪订单与成交等。能力边界在于仅能操作 Kraken 交易所范围内的功能，实际下单/风控等受账户权限、API 限额与交易所规则约束，且对链上转账等非交易所接口不直接覆盖。关键技术形态是以 REST 进行请求-响应式查询与管理，以 WebSocket 进行低延迟行情/事件流推送。",
+            "hot": 0.8239,
+            "rise": 0.6592,
+            "score_total": 18
+          },
+          {
+            "id": "ph-2026-02-23-6",
+            "title": "OpenHunt",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/openhunt?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "SaaS 上线平台已经死了。在 AI 时代，注意力黑客和互刷点赞圈子根本无法规模化。OpenHunt 是面向开发者的 AI 原生发现层：由人类提交产品；自主智能体从多个维度进行分析，在大众涌入之前生成结构化信号；随后由人类验证哪些真正值得关注。没有把关人。不靠算法博弈。只有面向后算法互联网的可编程、以实力为导向的发现机制。",
+            "hot": 0.7277,
+            "rise": 0.5821,
+            "score_total": 41
+          }
+        ],
+        "top_terms": [
+          "api key",
+          "多智能体编排",
+          "安全管理",
+          "更新与监控",
+          "全托管部署",
+          "基础设施管理",
+          "免本地硬件",
+          "运行监控",
+          "自动更新",
+          "云托管"
+        ],
+        "source_mix": [
+          "clawhub",
+          "producthunt"
+        ],
+        "cluster_score": 0.201233,
+        "centroid": {
+          "x": -0.212818,
+          "y": 0.011545
+        }
+      },
+      {
+        "cluster_id": 3,
+        "member_project_ids": [
+          "gh-2026-02-24-2",
+          "gh-2026-02-23-2",
+          "gh-2026-02-24-1",
+          "gh-2026-02-23-1"
+        ],
+        "member_count": 4,
+        "top_projects": [
+          {
+            "id": "gh-2026-02-24-2",
+            "title": "huggingface/skills",
+            "source": "github",
+            "url": "https://github.com/huggingface/skills",
+            "summary": "Hugging Face Skills 提供一组用于数据集创建、模型训练与评估等 AI/ML 任务的“技能”定义，采用标准化的 Agent Skill 格式把说明、脚本和资源封装成自包含目录。它面向使用编程代理/代码助手的开发者与研究者，强调可在 Claude Code、OpenAI Codex、Gemini CLI、Cursor 等多种工具间互操作。典型场景是在不同代理工具中复用同一套任务流程与指令，让代理按需加载并执行特定用例的指导。",
+            "hot": 0.3435,
+            "rise": -0.3347,
+            "score_total": 43
+          },
+          {
+            "id": "gh-2026-02-23-2",
+            "title": "huggingface/skills",
+            "source": "github",
+            "url": "https://github.com/huggingface/skills",
+            "summary": "Hugging Face Skills 是一组面向 AI/ML 工作流的“技能”定义与模板，用于让编程代理按标准化格式执行数据集创建、模型训练与评测等任务。它面向使用编码智能体的开发者与研究者，核心是将每个技能封装为自包含目录，并用带 YAML 前置元数据的指令文件（遵循 Agent Skill format）来驱动代理行为。典型场景是在 Claude Code、OpenAI Codex、Gemini CLI、Cursor 等工具中复用同一套任务指令与资源，实现跨工具一致的自动化流程。",
+            "hot": 0.3434,
+            "rise": -0.3347,
+            "score_total": 44
+          },
+          {
+            "id": "gh-2026-02-24-1",
+            "title": "moonshine-ai/moonshine",
+            "source": "github",
+            "url": "https://github.com/moonshine-ai/moonshine",
+            "summary": "Moonshine Voice 是面向边缘设备的开源语音 AI 工具包，帮助开发者构建实时语音应用，在本地完成自动语音识别等处理以获得低延迟与隐私保护，无需账号或 API Key。它提供从高精度到约 26MB 级小模型的选择，并针对流式输入优化，可在用户说话过程中持续产出转写结果。典型场景包括跨平台的实时转写、说话人识别（diarization）以及基于语义匹配的语音指令识别，适用于手机、桌面、树莓派与各类 IoT/可穿戴设备的多语言语音交互。",
+            "hot": 0.0027,
+            "rise": 0.0002,
+            "score_total": 34
+          },
+          {
+            "id": "gh-2026-02-23-1",
+            "title": "moonshine-ai/moonshine",
+            "source": "github",
+            "url": "https://github.com/moonshine-ai/moonshine",
+            "summary": "Moonshine Voice 是面向边缘设备的开源语音 AI 工具包，帮助开发者构建实时语音应用，提供本地端的自动语音识别，并支持转写、说话人识别与语音指令识别等高层能力。它主打全程端上运行以获得低延迟与隐私保障，不依赖账号或云端 API，并针对流式场景在用户说话过程中提前计算以加速响应。其模型从头训练，覆盖从约 26MB 的轻量部署到高精度模型，并可在 Python、iOS、Android 及多种桌面/嵌入式平台上统一集成，适用于实时转写、语音控制与多语言语音交互等场景。",
+            "hot": 0.0026,
+            "rise": 0.0002,
+            "score_total": 34
+          }
+        ],
+        "top_terms": [
+          "api key",
+          "模型评估流水线",
+          "cli cursor",
+          "任务自动化",
+          "跨工具互操作",
+          "插件市场",
+          "代码代理",
+          "cli cursor yaml",
+          "代理技能包",
+          "它面向使用编程代理"
+        ],
+        "source_mix": [
+          "github"
+        ],
+        "cluster_score": 0.023904,
+        "centroid": {
+          "x": -0.147701,
+          "y": -0.107517
+        }
+      }
+    ],
+    "semantic_map": [
+      {
+        "id": "ch-2026-02-24-4",
+        "title": "Flux",
+        "source": "clawhub",
+        "cluster_id": 5,
+        "x": -0.018418,
+        "y": -0.273485,
+        "hot": 1.9361,
+        "rise": 1.5489,
+        "score_total": 43
+      },
+      {
+        "id": "ph-2026-02-25-1",
+        "title": "KiloClaw",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.294053,
+        "y": -0.07889,
+        "hot": 1.6632,
+        "rise": 1.3306,
+        "score_total": 40
+      },
+      {
+        "id": "ph-2026-02-24-1",
+        "title": "Stitch by Google",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.212542,
+        "y": 0.268413,
+        "hot": 1.6093,
+        "rise": 1.2874,
+        "score_total": 38
+      },
+      {
+        "id": "ph-2026-02-23-1",
+        "title": "Siteline",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.198914,
+        "y": 0.15293,
+        "hot": 1.5759,
+        "rise": 1.2607,
+        "score_total": 38
+      },
+      {
+        "id": "ax-2026-02-23-1",
+        "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.239758,
+        "y": -0.08261,
+        "hot": 1.5359,
+        "rise": 1.2287,
+        "score_total": 42
+      },
+      {
+        "id": "ph-2026-02-24-2",
+        "title": "Modelence App Builder",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.266998,
+        "y": 0.134684,
+        "hot": 1.4458,
+        "rise": 1.1566,
+        "score_total": 34
+      },
+      {
+        "id": "ax-2026-02-23-2",
+        "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.230457,
+        "y": -0.066526,
+        "hot": 1.4161,
+        "rise": 1.1329,
+        "score_total": 42
+      },
+      {
+        "id": "ph-2026-02-23-2",
+        "title": "Wispr Flow for Android",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.237283,
+        "y": 0.324971,
+        "hot": 1.406,
+        "rise": 1.1248,
+        "score_total": 36
+      },
+      {
+        "id": "ax-2026-02-24-1",
+        "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.313081,
+        "y": 0.0571,
+        "hot": 1.3861,
+        "rise": 1.1089,
+        "score_total": 37
+      },
+      {
+        "id": "ax-2026-02-25-1",
+        "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.389831,
+        "y": 0.055731,
+        "hot": 1.3861,
+        "rise": 1.1089,
+        "score_total": 29
+      },
+      {
+        "id": "ch-2026-02-23-5",
+        "title": "glm-web-search",
+        "source": "clawhub",
+        "cluster_id": 0,
+        "x": 0.005689,
+        "y": -0.128778,
+        "hot": 1.3794,
+        "rise": 1.1035,
+        "score_total": 3
+      },
+      {
+        "id": "ph-2026-02-23-3",
+        "title": "TypeBoost",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.18974,
+        "y": 0.326898,
+        "hot": 1.3321,
+        "rise": 1.0656,
+        "score_total": 31
+      },
+      {
+        "id": "ax-2026-02-23-3",
+        "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.357131,
+        "y": -0.105571,
+        "hot": 1.2962,
+        "rise": 1.037,
+        "score_total": 34
+      },
+      {
+        "id": "ax-2026-02-24-2",
+        "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.405218,
+        "y": 0.106848,
+        "hot": 1.2663,
+        "rise": 1.013,
+        "score_total": 39
+      },
+      {
+        "id": "ax-2026-02-25-2",
+        "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.33616,
+        "y": 0.106736,
+        "hot": 1.2663,
+        "rise": 1.013,
+        "score_total": 0
+      },
+      {
+        "id": "ph-2026-02-24-3",
+        "title": "Anima",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.187525,
+        "y": 0.262099,
+        "hot": 1.258,
+        "rise": 1.0064,
+        "score_total": 48
+      },
+      {
+        "id": "ax-2026-02-24-3",
+        "title": "Automating Timed Up and Go Phase Segmentation and Gait Analysis via the tugturn Markerless 3D Pipeline",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.221093,
+        "y": 0.018294,
+        "hot": 1.1464,
+        "rise": 0.9172,
+        "score_total": 29
+      },
+      {
+        "id": "ph-2026-02-23-4",
+        "title": "Grok 4.2",
+        "source": "producthunt",
+        "cluster_id": 5,
+        "x": -0.061749,
+        "y": -0.059431,
+        "hot": 1.1333,
+        "rise": 0.9066,
+        "score_total": 37
+      },
+      {
+        "id": "gh-2026-02-24-3",
+        "title": "D4Vinci/Scrapling",
+        "source": "github",
+        "cluster_id": 8,
+        "x": -0.221279,
+        "y": -0.201024,
+        "hot": 1.7886,
+        "rise": 0.0535,
+        "score_total": 34
+      },
+      {
+        "id": "gh-2026-02-23-3",
+        "title": "D4Vinci/Scrapling",
+        "source": "github",
+        "cluster_id": 8,
+        "x": -0.218213,
+        "y": -0.190445,
+        "hot": 1.7885,
+        "rise": 0.0535,
+        "score_total": 37
+      },
+      {
+        "id": "ch-2026-02-23-3",
+        "title": "glm-understand-image",
+        "source": "clawhub",
+        "cluster_id": 0,
+        "x": 0.09882,
+        "y": 0.02605,
+        "hot": 1.0592,
+        "rise": 0.8474,
+        "score_total": 7
+      },
+      {
+        "id": "ax-2026-02-23-4",
+        "title": "Case-Aware LLM-as-a-Judge Evaluation for Enterprise-Scale RAG Systems",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.209761,
+        "y": -0.108421,
+        "hot": 1.0266,
+        "rise": 0.8213,
+        "score_total": 44
+      },
+      {
+        "id": "ax-2026-02-24-4",
+        "title": "ECHOSAT: Estimating Canopy Height Over Space And Time",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.237403,
+        "y": 0.088547,
+        "hot": 1.0266,
+        "rise": 0.8213,
+        "score_total": 37
+      },
+      {
+        "id": "ch-2026-02-23-1",
+        "title": "OpenTangl",
+        "source": "clawhub",
+        "cluster_id": 5,
+        "x": -0.189046,
+        "y": -0.126355,
+        "hot": 1.0084,
+        "rise": 0.8067,
+        "score_total": 51
+      },
+      {
+        "id": "ph-2026-02-24-4",
+        "title": "Orchids 1.0",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.323447,
+        "y": 0.060533,
+        "hot": 0.9575,
+        "rise": 0.766,
+        "score_total": 16
+      },
+      {
+        "id": "gh-2026-02-24-4",
+        "title": "obra/superpowers",
+        "source": "github",
+        "cluster_id": 5,
+        "x": -0.246399,
+        "y": -0.337018,
+        "hot": 1.2973,
+        "rise": 0.3283,
+        "score_total": 44
+      },
+      {
+        "id": "gh-2026-02-23-4",
+        "title": "obra/superpowers",
+        "source": "github",
+        "cluster_id": 5,
+        "x": -0.223194,
+        "y": -0.353878,
+        "hot": 1.2971,
+        "rise": 0.3283,
+        "score_total": 44
+      },
+      {
+        "id": "ph-2026-02-23-5",
+        "title": "Replit Animated Videos",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.168828,
+        "y": 0.343411,
+        "hot": 0.9255,
+        "rise": 0.7404,
+        "score_total": 20
+      },
+      {
+        "id": "ax-2026-02-23-5",
+        "title": "How communicatively optimal are exact numeral systems? Once more on lexicon size and morphosyntactic complexity",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.247709,
+        "y": -0.005094,
+        "hot": 0.9068,
+        "rise": 0.7254,
+        "score_total": 14
+      },
+      {
+        "id": "ax-2026-02-24-5",
+        "title": "WildSVG: Towards Reliable SVG Generation Under Real-Word Conditions",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.348554,
+        "y": 0.083855,
+        "hot": 0.9068,
+        "rise": 0.7254,
+        "score_total": 32
+      },
+      {
+        "id": "ph-2026-02-24-5",
+        "title": "Liner Write",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.221923,
+        "y": 0.241271,
+        "hot": 0.8266,
+        "rise": 0.6612,
+        "score_total": 48
+      },
+      {
+        "id": "ch-2026-02-24-6",
+        "title": "Kraken Exchange",
+        "source": "clawhub",
+        "cluster_id": 1,
+        "x": -0.159963,
+        "y": -0.237086,
+        "hot": 0.8239,
+        "rise": 0.6592,
+        "score_total": 18
+      },
+      {
+        "id": "ph-2026-02-24-6",
+        "title": "What YC Is Really Betting On?",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.046467,
+        "y": 0.174922,
+        "hot": 0.7962,
+        "rise": 0.637,
+        "score_total": 21
+      },
+      {
+        "id": "ax-2026-02-23-6",
+        "title": "gQIR: Generative Quanta Image Reconstruction",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.340398,
+        "y": 0.115013,
+        "hot": 0.7869,
+        "rise": 0.6295,
+        "score_total": 33
+      },
+      {
+        "id": "ax-2026-02-24-6",
+        "title": "Exploring Vision-Language Models for Open-Vocabulary Zero-Shot Action Segmentation",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.328958,
+        "y": 0.051177,
+        "hot": 0.7869,
+        "rise": 0.6295,
+        "score_total": 25
+      },
+      {
+        "id": "gh-2026-02-25-1",
+        "title": "D4Vinci/Scrapling",
+        "source": "github",
+        "cluster_id": 8,
+        "x": -0.206647,
+        "y": -0.20622,
+        "hot": 1.2265,
+        "rise": 0.0535,
+        "score_total": 35
+      },
+      {
+        "id": "ph-2026-02-23-6",
+        "title": "OpenHunt",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.182112,
+        "y": 0.111235,
+        "hot": 0.7277,
+        "rise": 0.5821,
+        "score_total": 41
+      },
+      {
+        "id": "ax-2026-02-23-7",
+        "title": "SimLBR: Learning to Detect Fake Images by Learning to Detect Real Images",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.482808,
+        "y": 0.071962,
+        "hot": 0.6671,
+        "rise": 0.5337,
+        "score_total": 29
+      },
+      {
+        "id": "ax-2026-02-24-7",
+        "title": "FlowFixer: Towards Detail-Preserving Subject-Driven Generation",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.370363,
+        "y": 0.098953,
+        "hot": 0.6671,
+        "rise": 0.5337,
+        "score_total": 31
+      },
+      {
+        "id": "ph-2026-02-23-7",
+        "title": "YAP",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.148638,
+        "y": 0.244008,
+        "hot": 0.6645,
+        "rise": 0.5316,
+        "score_total": 39
+      },
+      {
+        "id": "ax-2026-02-24-8",
+        "title": "MINAR: Mechanistic Interpretability for Neural Algorithmic Reasoning",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.374137,
+        "y": 0.013571,
+        "hot": 0.6371,
+        "rise": 0.5097,
+        "score_total": 66
+      },
+      {
+        "id": "ph-2026-02-24-7",
+        "title": "Bazaar V4",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.152089,
+        "y": 0.15999,
+        "hot": 0.6088,
+        "rise": 0.487,
+        "score_total": 54
+      },
+      {
+        "id": "ph-2026-02-24-8",
+        "title": "Toggle for OpenClaw",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.266367,
+        "y": 0.006381,
+        "hot": 0.5623,
+        "rise": 0.4498,
+        "score_total": 53
+      },
+      {
+        "id": "ax-2026-02-23-8",
+        "title": "CLIPoint3D: Language-Grounded Few-Shot Unsupervised 3D Point Cloud Domain Adaptation",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.278145,
+        "y": 0.017694,
+        "hot": 0.5472,
+        "rise": 0.4378,
+        "score_total": 29
+      },
+      {
+        "id": "ph-2026-02-24-9",
+        "title": "Falconer",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.235833,
+        "y": 0.005012,
+        "hot": 0.5293,
+        "rise": 0.4235,
+        "score_total": 48
+      },
+      {
+        "id": "gh-2026-02-24-5",
+        "title": "bytedance/deer-flow",
+        "source": "github",
+        "cluster_id": 5,
+        "x": -0.18864,
+        "y": -0.266903,
+        "hot": 0.4209,
+        "rise": 0.5497,
+        "score_total": 42
+      },
+      {
+        "id": "gh-2026-02-23-5",
+        "title": "bytedance/deer-flow",
+        "source": "github",
+        "cluster_id": 5,
+        "x": -0.171535,
+        "y": -0.233516,
+        "hot": 0.4207,
+        "rise": 0.5497,
+        "score_total": 37
+      },
+      {
+        "id": "ax-2026-02-23-9",
+        "title": "GauS: Differentiable Scheduling Optimization via Gaussian Reparameterization",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.27979,
+        "y": -0.084175,
+        "hot": 0.5173,
+        "rise": 0.4138,
+        "score_total": 33
+      },
+      {
+        "id": "ax-2026-02-24-9",
+        "title": "Provably Safe Generative Sampling with Constricting Barrier Functions",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.481737,
+        "y": -0.020651,
+        "hot": 0.5173,
+        "rise": 0.4138,
+        "score_total": 42
+      },
+      {
+        "id": "ph-2026-02-24-10",
+        "title": "Collective OS",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.191304,
+        "y": 0.040865,
+        "hot": 0.5057,
+        "rise": 0.4046,
+        "score_total": 44
+      },
+      {
+        "id": "ph-2026-02-23-8",
+        "title": "InboxAgents",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.221275,
+        "y": 0.159198,
+        "hot": 0.4982,
+        "rise": 0.3985,
+        "score_total": 29
+      },
+      {
+        "id": "ph-2026-02-24-11",
+        "title": "Polsia",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.24677,
+        "y": 0.072047,
+        "hot": 0.4774,
+        "rise": 0.3819,
+        "score_total": 56
+      },
+      {
+        "id": "ph-2026-02-24-12",
+        "title": "Skills for Agents",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.267579,
+        "y": -0.147107,
+        "hot": 0.4442,
+        "rise": 0.3553,
+        "score_total": 54
+      },
+      {
+        "id": "ph-2026-02-23-9",
+        "title": "SkillForge",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.345587,
+        "y": -0.006981,
+        "hot": 0.4369,
+        "rise": 0.3495,
+        "score_total": 56
+      },
+      {
+        "id": "ph-2026-02-23-10",
+        "title": "Callio",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.240274,
+        "y": -0.059581,
+        "hot": 0.4078,
+        "rise": 0.3262,
+        "score_total": 58
+      },
+      {
+        "id": "ax-2026-02-23-10",
+        "title": "CREDIT: Certified Ownership Verification of Deep Neural Networks Against Model Extraction Attacks",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.369352,
+        "y": 0.053477,
+        "hot": 0.3975,
+        "rise": 0.318,
+        "score_total": 30
+      },
+      {
+        "id": "ax-2026-02-24-10",
+        "title": "Proximal-IMH: Proximal Posterior Proposals for Independent Metropolis-Hastings with Approximate Operators",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.392138,
+        "y": 0.014691,
+        "hot": 0.3975,
+        "rise": 0.318,
+        "score_total": 17
+      },
+      {
+        "id": "ph-2026-02-23-11",
+        "title": "Cuto",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.17986,
+        "y": 0.363757,
+        "hot": 0.3842,
+        "rise": 0.3074,
+        "score_total": 23
+      },
+      {
+        "id": "ph-2026-02-24-13",
+        "title": "Quilt",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.111311,
+        "y": 0.171844,
+        "hot": 0.3751,
+        "rise": 0.3001,
+        "score_total": 56
+      },
+      {
+        "id": "ph-2026-02-24-14",
+        "title": "Forum",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.130248,
+        "y": 0.065357,
+        "hot": 0.3355,
+        "rise": 0.2684,
+        "score_total": 37
+      },
+      {
+        "id": "ph-2026-02-23-12",
+        "title": "App Cleaner & Uninstaller 9.1",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.185314,
+        "y": 0.234072,
+        "hot": 0.2954,
+        "rise": 0.2363,
+        "score_total": 29
+      },
+      {
+        "id": "ax-2026-02-23-11",
+        "title": "CITED: A Decision Boundary-Aware Signature for GNNs Towards Model Extraction Defense",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.393033,
+        "y": 0.035153,
+        "hot": 0.2776,
+        "rise": 0.2221,
+        "score_total": 29
+      },
+      {
+        "id": "ax-2026-02-24-11",
+        "title": "On the Structural Non-Preservation of Epistemic Behaviour under Policy Transformation",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.438994,
+        "y": -0.162633,
+        "hot": 0.2776,
+        "rise": 0.2221,
+        "score_total": 20
+      },
+      {
+        "id": "ph-2026-02-24-15",
+        "title": "WebMCP",
+        "source": "producthunt",
+        "cluster_id": 0,
+        "x": -0.22051,
+        "y": -0.050719,
+        "hot": 0.267,
+        "rise": 0.2136,
+        "score_total": 72
+      },
+      {
+        "id": "ph-2026-02-23-13",
+        "title": "PipedriveSheets",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.214032,
+        "y": 0.127287,
+        "hot": 0.233,
+        "rise": 0.1864,
+        "score_total": 24
+      },
+      {
+        "id": "ph-2026-02-24-16",
+        "title": "Nag Alarm AI",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.150854,
+        "y": 0.313567,
+        "hot": 0.2317,
+        "rise": 0.1854,
+        "score_total": 13
+      },
+      {
+        "id": "ph-2026-02-23-14",
+        "title": "AnnotateAI",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.115509,
+        "y": 0.220014,
+        "hot": 0.2027,
+        "rise": 0.1622,
+        "score_total": 55
+      },
+      {
+        "id": "ph-2026-02-24-17",
+        "title": "Dictato",
+        "source": "producthunt",
+        "cluster_id": 6,
+        "x": -0.202228,
+        "y": 0.344275,
+        "hot": 0.1838,
+        "rise": 0.1471,
+        "score_total": 33
+      },
+      {
+        "id": "ax-2026-02-23-12",
+        "title": "$κ$-Explorer: A Unified Framework for Active Model Estimation in MDPs",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.329769,
+        "y": -0.122353,
+        "hot": 0.1578,
+        "rise": 0.1262,
+        "score_total": 39
+      },
+      {
+        "id": "ax-2026-02-24-12",
+        "title": "Overconfident Errors Need Stronger Correction: Asymmetric Confidence Penalties for Reinforcement Learning",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.432077,
+        "y": -0.003878,
+        "hot": 0.1578,
+        "rise": 0.1262,
+        "score_total": 31
+      },
+      {
+        "id": "gh-2026-02-24-2",
+        "title": "huggingface/skills",
+        "source": "github",
+        "cluster_id": 3,
+        "x": -0.168613,
+        "y": -0.285742,
+        "hot": 0.3435,
+        "rise": -0.3347,
+        "score_total": 43
+      },
+      {
+        "id": "gh-2026-02-23-2",
+        "title": "huggingface/skills",
+        "source": "github",
+        "cluster_id": 3,
+        "x": -0.161825,
+        "y": -0.266224,
+        "hot": 0.3434,
+        "rise": -0.3347,
+        "score_total": 44
+      },
+      {
+        "id": "ax-2026-02-23-13",
+        "title": "Three Concrete Challenges and Two Hopes for the Safety of Unsupervised Elicitation",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.410883,
+        "y": 0.001336,
+        "hot": 0.0379,
+        "rise": 0.0303,
+        "score_total": 27
+      },
+      {
+        "id": "ax-2026-02-24-13",
+        "title": "Benchmarking State Space Models, Transformers, and Recurrent Networks for US Grid Forecasting",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.366648,
+        "y": -0.072432,
+        "hot": 0.0379,
+        "rise": 0.0303,
+        "score_total": 17
+      },
+      {
+        "id": "gh-2026-02-24-1",
+        "title": "moonshine-ai/moonshine",
+        "source": "github",
+        "cluster_id": 3,
+        "x": -0.125852,
+        "y": 0.060403,
+        "hot": 0.0027,
+        "rise": 0.0002,
+        "score_total": 34
+      },
+      {
+        "id": "gh-2026-02-23-1",
+        "title": "moonshine-ai/moonshine",
+        "source": "github",
+        "cluster_id": 3,
+        "x": -0.134513,
+        "y": 0.061496,
+        "hot": 0.0026,
+        "rise": 0.0002,
+        "score_total": 34
+      },
+      {
+        "id": "ax-2026-02-23-14",
+        "title": "GeoPT: Scaling Physics Simulation via Lifted Geometric Pre-Training",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.400861,
+        "y": 0.032531,
+        "hot": -0.0819,
+        "rise": -0.0655,
+        "score_total": 41
+      },
+      {
+        "id": "ax-2026-02-24-14",
+        "title": "Generative Bayesian Computation as a Scalable Alternative to Gaussian Process Surrogates",
+        "source": "arxiv",
+        "cluster_id": 7,
+        "x": 0.429097,
+        "y": -0.053328,
+        "hot": -0.0819,
+        "rise": -0.0655,
+        "score_total": 21
+      },
+      {
+        "id": "ax-2026-02-23-15",
+        "title": "cc-Shapley: Measuring Multivariate Feature Importance Needs Causal Context",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.345298,
+        "y": -0.014379,
+        "hot": -0.2017,
+        "rise": -0.1614,
+        "score_total": 19
+      },
+      {
+        "id": "ax-2026-02-24-15",
+        "title": "FedVG: Gradient-Guided Aggregation for Enhanced Federated Learning",
+        "source": "arxiv",
+        "cluster_id": 2,
+        "x": 0.356559,
+        "y": 0.02073,
+        "hot": -0.2017,
+        "rise": -0.1614,
+        "score_total": 30
+      },
+      {
+        "id": "gh-2026-02-24-6",
+        "title": "ruvnet/claude-flow",
+        "source": "github",
+        "cluster_id": 5,
+        "x": -0.192072,
+        "y": -0.305741,
+        "hot": -0.5065,
+        "rise": 0.001,
+        "score_total": 51
+      },
+      {
+        "id": "gh-2026-02-23-6",
+        "title": "ruvnet/claude-flow",
+        "source": "github",
+        "cluster_id": 5,
+        "x": -0.156586,
+        "y": -0.296085,
+        "hot": -0.5074,
+        "rise": 0.001,
+        "score_total": 54
+      },
+      {
+        "id": "ch-2026-02-23-6",
+        "title": "App Store Deployment Guide",
+        "source": "clawhub",
+        "cluster_id": 1,
+        "x": -0.074026,
+        "y": -0.038709,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 16
+      },
+      {
+        "id": "ch-2026-02-23-4",
+        "title": "Dingtalk Ai Table",
+        "source": "clawhub",
+        "cluster_id": 5,
+        "x": -0.189575,
+        "y": -0.132577,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 40
+      },
+      {
+        "id": "ch-2026-02-23-7",
+        "title": "Omni Research",
+        "source": "clawhub",
+        "cluster_id": 4,
+        "x": -0.09663,
+        "y": -0.080328,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 39
+      },
+      {
+        "id": "ch-2026-02-23-8",
+        "title": "Polymarket Autopilot Experimental",
+        "source": "clawhub",
+        "cluster_id": 4,
+        "x": -0.055588,
+        "y": -0.13919,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 39
+      },
+      {
+        "id": "ch-2026-02-23-2",
+        "title": "Potato Tipper",
+        "source": "clawhub",
+        "cluster_id": 5,
+        "x": -0.066298,
+        "y": -0.155031,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 15
+      },
+      {
+        "id": "ch-2026-02-24-1",
+        "title": "Auto Memory",
+        "source": "clawhub",
+        "cluster_id": 4,
+        "x": -0.004717,
+        "y": -0.091761,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 47
+      },
+      {
+        "id": "ch-2026-02-24-3",
+        "title": "Onebot Adapter 1.0.0",
+        "source": "clawhub",
+        "cluster_id": 1,
+        "x": -0.160879,
+        "y": -0.145488,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 24
+      },
+      {
+        "id": "ch-2026-02-24-2",
+        "title": "OpenClaw Arena",
+        "source": "clawhub",
+        "cluster_id": 1,
+        "x": -0.154515,
+        "y": -0.345031,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 37
+      },
+      {
+        "id": "ch-2026-02-24-5",
+        "title": "Stable Browser",
+        "source": "clawhub",
+        "cluster_id": 4,
+        "x": -0.060966,
+        "y": -0.186397,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 40
+      },
+      {
+        "id": "ch-2026-02-25-1",
+        "title": "Built at GrowthX",
+        "source": "clawhub",
+        "cluster_id": 1,
+        "x": -0.194743,
+        "y": -0.069695,
+        "hot": -0.6312,
+        "rise": -0.505,
+        "score_total": 16
+      },
+      {
+        "id": "ph-2026-02-23-15",
+        "title": "Vibesafe",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.196225,
+        "y": 0.108187,
+        "hot": -0.7279,
+        "rise": -0.5823,
+        "score_total": 61
+      },
+      {
+        "id": "ph-2026-02-23-16",
+        "title": "aImsg",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.297642,
+        "y": 0.201839,
+        "hot": -0.7691,
+        "rise": -0.6153,
+        "score_total": 28
+      },
+      {
+        "id": "ph-2026-02-23-17",
+        "title": "Atomic AGI",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.145389,
+        "y": 0.093557,
+        "hot": -0.8295,
+        "rise": -0.6636,
+        "score_total": 49
+      },
+      {
+        "id": "ph-2026-02-23-18",
+        "title": "YourClaw: 1-Click Openclaw Orchestration",
+        "source": "producthunt",
+        "cluster_id": 1,
+        "x": -0.344562,
+        "y": -0.126512,
+        "hot": -0.9567,
+        "rise": -0.7653,
+        "score_total": 55
+      }
+    ],
+    "semantic_diagnostics": {
+      "silhouette_score": 0.063583,
+      "project_count": 96
+    }
+  },
+  "report": {
+    "summary_bullets": [],
+    "themes": [
+      {
+        "cluster_id": 8,
+        "cluster_score": 1.085662,
+        "theme_title": "自适应解析 + 反爬绕过的一体化 Web 爬虫框架（Scrapy Spider API 风格）",
+        "one_sentence_summary": "Scrapling 提供自学习解析器、内置反爬绕过与代理轮换，并以类似 Scrapy 的 Spider API 组织大规模并发爬取，支持断点续爬与流式输出以适配长期运行与实时数据管道场景。",
+        "why_now": "证据集中显示同一项目在短期内持续被关注：框架主打“页面更新后自动重新定位元素”的自适应解析能力，并内置绕过 Cloudflare Turnstile 等反爬、被封检测重试与代理自动轮换，同时补齐并发/限速、多会话（HTTP/浏览器）、暂停/恢复（断点续爬）与流式输出等长期运行爬虫所需能力，指向对现代网站稳定采集与实时增量结果的需求上升。",
+        "representative_projects": [
+          {
+            "id": "github:gh-2026-02-24-3",
+            "title": "D4Vinci/Scrapling",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "positioning": "自适应 Web 抓取框架：自学习解析器应对页面变化；内置反爬绕过（含 Cloudflare Turnstile）与代理轮换；提供类似 Scrapy 的 Spider API，支持多会话、并发/限速、断点续爬与流式输出，面向长期运行与实时管道采集。"
+          },
+          {
+            "id": "github:gh-2026-02-23-3",
+            "title": "D4Vinci/Scrapling",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "positioning": "面向现代网站稳定采集：页面结构变化自动重定位；绕过反爬与被封检测重试；Spider API 支持多会话、暂停/恢复、代理轮换与实时流式输出，适用于频繁改版或强反爬站点的稳健爬取。"
+          },
+          {
+            "id": "github:gh-2026-02-25-1",
+            "title": "D4Vinci/Scrapling",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "positioning": "覆盖单次请求到全站并发爬行：异步回调与并发控制、按域限速；HTTP 与隐身无头浏览器统一接口；暂停/恢复与实时统计流式输出；结合自适应解析、反爬绕过与自动代理轮换提升规模化稳定性。"
+          }
+        ],
+        "key_terms": [
+          "自适应解析",
+          "scrapy spider api",
+          "spider api",
+          "爬取框架",
+          "断点续爬",
+          "代理轮换",
+          "反爬绕过",
+          "流式输出",
+          "爬虫框架",
+          "web 爬虫框架"
+        ],
+        "risks_questions": [
+          "自学习解析器在页面大改版或元素语义变化时的稳健性与误匹配风险如何控制？",
+          "内置绕过反爬（如 Cloudflare Turnstile）在不同站点上的适用边界与失败回退策略是什么？",
+          "多会话（HTTP/浏览器）与隐身无头浏览器统一接口在资源消耗与并发规模上可能带来的成本问题？",
+          "暂停/恢复（断点续爬）与流式输出在长任务中如何保证数据一致性与去重？"
+        ],
+        "next_week_watchlist": [
+          "Scrapling 的自适应解析：页面更新后自动重定位元素的效果反馈与用例增多情况",
+          "反爬能力进展：Cloudflare Turnstile 绕过、被封检测重试与代理轮换的稳定性讨论",
+          "Spider API 生态：是否出现更多类似 Scrapy 的用法示例（异步回调、多会话、并发/限速）",
+          "长任务能力：断点续爬/暂停恢复与流式输出在实时统计、数据管道增量消费场景中的实践反馈"
+        ],
+        "source_mix": [
+          "github"
+        ],
+        "member_project_ids": [
+          "gh-2026-02-24-3",
+          "gh-2026-02-23-3",
+          "gh-2026-02-25-1"
+        ],
+        "top_projects": [
+          {
+            "id": "gh-2026-02-24-3",
+            "title": "D4Vinci/Scrapling",
+            "source": "github",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "summary": "Scrapling 是一个自适应 Web 抓取框架，覆盖从单次请求到大规模并发爬取的完整流程，面向爬虫开发者及需要抓取数据的普通用户。它的解析器可从网页变化中学习并在页面更新后自动重新定位元素，抓取端内置绕过反爬机制（如 Cloudflare Turnstile），并支持代理自动轮换。框架提供类似 Scrapy 的 Spider API，支持多会话（HTTP/浏览器）、并发与限速、断点续爬与流式输出，适用于长期运行的爬虫、数据管道或需要实时统计与增量结果的采集任务。",
+            "hot": 1.7886,
+            "rise": 0.0535,
+            "score_total": 34
+          },
+          {
+            "id": "gh-2026-02-23-3",
+            "title": "D4Vinci/Scrapling",
+            "source": "github",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "summary": "Scrapling 是一个自适应 Web 抓取框架，既支持单次请求也能扩展到并发的全站级爬取，面向需要从现代网站稳定采集数据的爬虫开发者与普通用户。它的解析器可随页面结构变化自动重新定位元素，抓取端内置绕过反爬（如 Cloudflare Turnstile）与被封检测重试，并提供类似 Scrapy 的 Spider API 支持多会话、暂停/恢复、代理自动轮换与实时流式输出。典型用于长时间运行的数据采集任务、需要实时展示/管道处理的抓取，以及在频繁改版或强反爬站点上的稳健爬取。",
+            "hot": 1.7885,
+            "rise": 0.0535,
+            "score_total": 37
+          },
+          {
+            "id": "gh-2026-02-25-1",
+            "title": "D4Vinci/Scrapling",
+            "source": "github",
+            "url": "https://github.com/D4Vinci/Scrapling",
+            "summary": "Scrapling 是一个自适应 Web 爬取框架，覆盖从单次请求到并发的全站级爬行，面向爬虫开发者与普通数据采集用户。它提供类似 Scrapy 的 Spider API 与异步回调，支持并发控制、按域限速、多会话（HTTP 与隐身无头浏览器统一接口）、暂停/恢复与流式输出实时统计。关键技术包括会随页面改动自动重定位元素的自学习解析器、内置绕过反爬（如 Cloudflare Turnstile）的抓取器、阻断检测重试与自动代理轮换，适用于长期运行的数据采集、UI/数据管道实时消费、以及需要高稳定性的规模化爬取场景。",
+            "hot": 1.2265,
+            "rise": 0.0535,
+            "score_total": 35
+          }
+        ]
+      },
+      {
+        "cluster_id": 0,
+        "cluster_score": 1.083334,
+        "theme_title": "MCP 工具化联网检索与交互式鉴权：AI 代理“只负责调用与检索”",
+        "one_sentence_summary": "围绕 MCP，把联网搜索、视觉理解与 Web 应用能力以“工具+Schema”的形式暴露给 AI 代理，同时将鉴权从自动读取转向用户手动输入/交互式控制，明确能力边界为仅执行检索/识别与返回结果。",
+        "why_now": "证据显示多个代表项目同时强调：1) 通过 MCP 连接工具链实现联网搜索与信息汇总（面向最新新闻/政策/产品动态检索）；2) 能力边界收敛为“仅负责检索/识别与返回”，不再自动读取或推荐本地 auth-profiles.json/API Key；3) 在 Web 侧出现将现有应用逻辑以自然语言描述+结构化 Schema 的“工具”形式开放给代理（WebMCP），并在同一界面中保持共享上下文与用户控制，推动可控的代理协作工作流落地。",
+        "representative_projects": [
+          {
+            "id": "clawhub:ch-2026-02-23-5",
+            "title": "glm-web-search",
+            "url": "",
+            "positioning": "通过 GLM 的 web_search 并结合 MCP 发起联网搜索；用于实时新闻、最新资料/政策/产品动态检索与基于网页结果的快速信息汇总；明确仅负责检索与返回网络信息，API Key 需用户手动输入（不再自动读取 auth-profiles.json）。"
+          },
+          {
+            "id": "clawhub:ch-2026-02-23-3",
+            "title": "glm-understand-image",
+            "url": "",
+            "positioning": "基于 MCP 的 GLM 视觉理解调用链路；用于图片内容识别与推理输出描述/分析；能力边界为仅处理图片内容，不自动发现/读取已保存 API Key；配置流程改为向用户索要并支持手动填写与保存。"
+          },
+          {
+            "id": "producthunt:ph-2026-02-24-15",
+            "title": "WebMCP",
+            "url": "",
+            "positioning": "提供新的 JavaScript 接口，将 Web 应用功能以带自然语言描述与结构化 Schema 的 JS 函数“工具”形式对外暴露，供 AI 代理/浏览器助手/辅助技术调用；支持用户与代理在同一 Web 界面协作并保持用户控制与共享上下文。"
+          }
+        ],
+        "key_terms": [
+          "mcp",
+          "联网搜索",
+          "json api",
+          "api key",
+          "交互式鉴权",
+          "mcp auth-profiles",
+          "搜索插件",
+          "产品动态检索",
+          "能力边界是仅负责检索",
+          "使用"
+        ],
+        "risks_questions": [
+          "交互式鉴权（手动输入/保存 API Key）如何在不同工具与 Web 界面中统一体验与安全存储（例如是否继续依赖 auth-profiles.json 的角色变化）？",
+          "当能力边界收敛为“只检索/只识别”时，代理侧如何避免把检索结果当作最终结论、以及如何处理网页结果汇总带来的偏差与遗漏？",
+          "WebMCP 将 Web 应用开放为可调用工具后，用户控制与共享上下文的边界如何定义（哪些操作允许代理直接调用、哪些需要二次确认）？"
+        ],
+        "next_week_watchlist": [
+          "是否出现更多基于 MCP 的“联网搜索/搜索插件”实现，继续强化“仅负责检索与返回”的边界声明。",
+          "auth-profiles.json（mcp auth-profiles）相关的交互式鉴权流程是否进一步标准化：例如更明确的手动输入、保存、切换 API Key 的方式。",
+          "WebMCP 类“Schema 化工具暴露”是否扩展到更多 Web 场景，强调在同一界面中的协作式工作流与用户控制。"
+        ],
+        "source_mix": [
+          "clawhub",
+          "producthunt"
+        ],
+        "member_project_ids": [
+          "ch-2026-02-23-5",
+          "ch-2026-02-23-3",
+          "ph-2026-02-24-15"
+        ],
+        "top_projects": [
+          {
+            "id": "ch-2026-02-23-5",
+            "title": "glm-web-search",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/Thincher/glm-web-search",
+            "summary": "该能力通过 GLM 的 web_search 并结合 MCP 发起联网搜索，在用户明确要求在线查找信息或需要获取最新资讯、新闻与资料时触发。能力边界是仅负责检索与返回网络信息，不再自动从本地 auth-profiles.json 读取或推荐 API Key，而是需要用户手动输入；除这一点外其余配置与使用方式不变。典型场景包括实时新闻查询、最新资料/政策/产品动态检索与基于网页结果的快速信息汇总。关键技术形态为 MCP 连接的联网检索工具链调用（GLM web_search）。",
+            "hot": 1.3794,
+            "rise": 1.1035,
+            "score_total": 3
+          },
+          {
+            "id": "ch-2026-02-23-3",
+            "title": "glm-understand-image",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/Thincher/glm-understand-image",
+            "summary": "GLM 视觉 MCP 用于在用户提出分析/理解图片或需要识别图中物体、文字、场景时，调用 GLM 的视觉理解能力输出描述与分析结果。能力边界是仅对输入图片内容做识别与推理，不负责自动发现或读取本地已保存的 API Key 等环境信息。关键技术形态为基于 MCP 的视觉调用链路，当前配置流程改为直接向用户索要智谱 API Key，并支持手动填写与保存。",
+            "hot": 1.0592,
+            "rise": 0.8474,
+            "score_total": 7
+          },
+          {
+            "id": "ph-2026-02-24-15",
+            "title": "WebMCP",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/webmcp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "一种新的 JavaScript 接口，使 Web 开发者能够将其 Web 应用的功能以“工具”的形式对外暴露，即带有自然语言描述和结构化 Schema 的 JavaScript 函数，可被 AI 代理、浏览器助手以及辅助技术调用。WebMCP 支持协作式工作流，让用户与代理在同一 Web 界面中共同工作，在保持共享上下文与用户控制的同时，复用现有的应用逻辑。",
+            "hot": 0.267,
+            "rise": 0.2136,
+            "score_total": 72
+          }
+        ]
+      },
+      {
+        "cluster_id": 6,
+        "cluster_score": 0.891548,
+        "theme_title": "从自然语言到可编辑设计稿与可用代码：多步骤设计智能体 + MCP 导出/生态",
+        "one_sentence_summary": "这一聚类集中在把“描述 UI”直接转成可编辑设计稿与真实可用代码，并通过多步骤设计智能体与原生 MCP 导出连接到更广的工作流与“store mcp / mcp hunt”式生态发现。",
+        "why_now": "代表项目已把“描述你的 UI→可编辑设计稿+可直接使用的真实代码”做成面向创始人/PM的快速路径，并进一步引入可处理多步骤设计任务的新智能体与原生 MCP 导出；同时，另一代表项目强调追踪 AI 智能体/机器人对网站的交互与转化，显示智能体进入产品增长与交付链路的现实需求正在上升。",
+        "representative_projects": [
+          {
+            "id": "producthunt:ph-2026-02-24-1",
+            "title": "Stitch by Google",
+            "url": "",
+            "positioning": "描述 UI 即可获得可编辑设计稿与可直接使用的真实代码；引入 Hatter 多步骤设计任务智能体，并提供原生 MCP 导出与 App Store 素材生成。"
+          },
+          {
+            "id": "producthunt:ph-2026-02-24-3",
+            "title": "Anima",
+            "url": "",
+            "positioning": "从粗略想法生成 Figma 文件，并产出与设计系统一致的高精度前端代码，强调响应式与品牌一致性、可交付上线。"
+          },
+          {
+            "id": "producthunt:ph-2026-02-23-1",
+            "title": "Siteline",
+            "url": "",
+            "positioning": "追踪 AI 智能体和机器人如何与网站交互，按平台/页面/主题分析趋势，并观察这些流量如何转化为真人访问。"
+          }
+        ],
+        "key_terms": [
+          "自然语言ui生成",
+          "可编辑设计稿",
+          "代码生成",
+          "原型自动化",
+          "步骤设计任务的新智能体",
+          "mcp",
+          "store mcp",
+          "mcp hunt",
+          "store mcp hunt",
+          "hatter store mcp"
+        ],
+        "risks_questions": [
+          "“可直接使用的真实代码”在不同团队的设计系统一致性与可维护性上，是否能稳定达标（代表项目强调“与设计系统一致”“告别通用代码智能体”）？",
+          "多步骤设计任务智能体（如 Hatter）在端到端链路中可控性如何：哪些步骤可编辑、哪些步骤会自动覆盖既有设计？",
+          "原生 MCP 导出将把设计/代码产物带到哪些工作流或“store mcp / mcp hunt”生态中，生态成熟度与可迁移性如何？",
+          "当 AI 智能体/机器人流量增长时（Siteline 关注），其对转化为真人访问的影响是否可被可靠归因与衡量？"
+        ],
+        "next_week_watchlist": [
+          "是否出现更多带“原生 MCP 导出”的设计到代码工具（mcp、store mcp）。",
+          "围绕“store mcp / mcp hunt / store mcp hunt”的生态发现与分发是否出现更集中爆发。",
+          "更多强调“可编辑设计稿 + 真实代码”的自然语言 UI 生成产品是否进入榜单。",
+          "是否出现把“多步骤设计任务智能体”作为核心卖点的新项目（步骤设计任务的新智能体）。"
+        ],
+        "source_mix": [
+          "producthunt"
+        ],
+        "member_project_ids": [
+          "ph-2026-02-24-1",
+          "ph-2026-02-23-1",
+          "ph-2026-02-23-2",
+          "ph-2026-02-23-3",
+          "ph-2026-02-24-3",
+          "ph-2026-02-23-5",
+          "ph-2026-02-24-5",
+          "ph-2026-02-24-6",
+          "ph-2026-02-23-7",
+          "ph-2026-02-24-7",
+          "ph-2026-02-24-9",
+          "ph-2026-02-23-8",
+          "ph-2026-02-23-11",
+          "ph-2026-02-23-13",
+          "ph-2026-02-24-16",
+          "ph-2026-02-24-17"
+        ],
+        "top_projects": [
+          {
+            "id": "ph-2026-02-24-1",
+            "title": "Stitch by Google",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "面向那些经不起在 mockup 上浪费一周时间的创始人和产品经理（PM）。描述你的 UI，即可获得可编辑的设计稿 + 可直接使用的真实代码。免费。由 Google 提供。它介绍了 Hatter——一个旨在处理多步骤设计任务的新智能体，同时还带来新的 App Store 素材生成以及原生 MCP 导出功能。",
+            "hot": 1.6093,
+            "rise": 1.2874,
+            "score_total": 38
+          },
+          {
+            "id": "ph-2026-02-23-1",
+            "title": "Siteline",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "追踪 AI 智能体和机器人如何与你的网站交互。按平台、页面和主题分析流量趋势。查看这些流量如何转化为真人访问。几分钟内获得第一手洞察——当你对它如何影响产品增长产生“顿悟”之后，还可以进一步深挖。",
+            "hot": 1.5759,
+            "rise": 1.2607,
+            "score_total": 38
+          },
+          {
+            "id": "ph-2026-02-23-2",
+            "title": "Wispr Flow for Android",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "现已登陆 Android：智能语音转文字，将啰嗦的口述内容整理为干净、可直接发送的文本。Wispr Flow 可在任何应用中无缝运行，切换应用时也能继续，并会自动清理口头填充词、自我修正、标点和格式。限时免费且不限量！",
+            "hot": 1.406,
+            "rise": 1.1248,
+            "score_total": 36
+          },
+          {
+            "id": "ph-2026-02-23-3",
+            "title": "TypeBoost",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "把你的提示词变成一套个人 AI 写作工具包。在 macOS 的任何应用里都能用。不用复制粘贴，不用在工具间来回切换。直接对选中文本应用自定义 AI 操作，查看并掌控每一处改动，用更快的速度写作，同时仍然保持你的风格。提示词可完全自定义，可选择模型，支持语音输入，并能随时间不断学习。写得更好，更快，依然是你的文字。",
+            "hot": 1.3321,
+            "rise": 1.0656,
+            "score_total": 31
+          },
+          {
+            "id": "ph-2026-02-24-3",
+            "title": "Anima",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "从粗略想法到 Figma 文件，Anima 的 AI 能生成与您的设计系统一致的高精度前端代码。告别千篇一律的通用代码智能体——构建真正的、响应式且符合品牌调性的 UI，随时可交付上线。",
+            "hot": 1.258,
+            "rise": 1.0064,
+            "score_total": 48
+          }
+        ]
+      },
+      {
+        "cluster_id": 2,
+        "cluster_score": 0.785711,
+        "theme_title": "面向“用户未明说约束”的目标满足型智能体评测",
+        "one_sentence_summary": "该聚类聚焦在欠规范化指令与隐式需求场景下，如何用交互式环境评测与基准来衡量智能体能否在上下文/隐私边界等未明说约束中真正完成目标。",
+        "why_now": "来自 arxiv 的代表性工作显示“Implicit Intelligence”正将评测重心从“是否遵循提示”转向“是否满足用户真实目标与隐含约束”，同时多模态模型的推理范式（如交错分析-起草循环）与稳健性评测（如同义改写敏感性）也在推动更贴近真实交互环境的评测需求。",
+        "representative_projects": [
+          {
+            "id": "arxiv:ax-2026-02-23-2",
+            "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+            "url": "arxiv:ax-2026-02-23-2",
+            "positioning": "提出“Implicit Intelligence”评测框架，直接对应隐式需求推理、上下文约束推断与欠规范化指令下的目标完成度评估。"
+          },
+          {
+            "id": "arxiv:ax-2026-02-24-1",
+            "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+            "url": "arxiv:ax-2026-02-24-1",
+            "positioning": "提出 AD-Loop 思维范式，强调理解与生成间的动态交替推理，可作为智能体在交互式环境中处理隐式约束时的推理机制参考。"
+          },
+          {
+            "id": "arxiv:ax-2026-02-24-2",
+            "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+            "url": "arxiv:ax-2026-02-24-2",
+            "positioning": "从“同义改写导致答案翻转”的角度评测稳健性，贴近欠规范化指令与表达变体对评测/对齐的挑战，并给出降低翻转的干预思路。"
+          },
+          {
+            "id": "arxiv:ax-2026-02-25-2",
+            "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+            "url": "arxiv:ax-2026-02-25-2",
+            "positioning": "围绕第一视角交互与世界坐标重建，提供更贴近“交互式环境”的感知-交互线索，为环境探索与交互评测提供潜在数据/任务形态参考。"
+          },
+          {
+            "id": "arxiv:ax-2026-02-25-1",
+            "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+            "url": "arxiv:ax-2026-02-25-1",
+            "positioning": "偏向动态表面重建的基础能力建设，属于与智能体评测间接相关的环境/序列建模方向，可作为高质量模拟环境或长期序列场景的底层支撑参考。"
+          }
+        ],
+        "key_terms": [
+          "上下文约束推断",
+          "隐式需求推理",
+          "欠规范化指令",
+          "目标满足型智能体",
+          "llm 模拟环境",
+          "可访问性需求",
+          "交互式环境评测",
+          "智能体评测基准",
+          "环境探索",
+          "隐私边界约束"
+        ],
+        "risks_questions": [
+          "评测如何区分“真正理解隐含约束并完成目标”与“依赖语言先验/套路化应答”的表现？（与 PSF-Med 提到的先验驱动稳定性相关）",
+          "欠规范化指令下，隐私边界约束与可访问性需求等“未明说但重要”的约束如何在基准中被形式化且可验证？",
+          "交互式环境评测中，环境探索行为的奖励/度量是否会诱导投机行为，从而偏离目标满足？",
+          "若使用 LLM 模拟环境进行评测，模拟偏差会在多大程度上影响对真实世界隐式约束能力的外推？"
+        ],
+        "next_week_watchlist": [
+          "“Implicit Intelligence”是否给出可复用的任务构型与可量化指标，用于系统评测用户未明说约束下的目标完成度。",
+          "AD-Loop 是否在更多理解-生成交替任务上展示对隐式约束推理的增益，并能否迁移到交互式环境评测设置。",
+          "PSF-Med 提出的稀疏特征干预降低“答案翻转”的方法，是否能推广到更一般的欠规范化指令/同义改写稳健性评测。"
+        ],
+        "source_mix": [
+          "arxiv"
+        ],
+        "member_project_ids": [
+          "ax-2026-02-23-2",
+          "ax-2026-02-24-1",
+          "ax-2026-02-25-1",
+          "ax-2026-02-24-2",
+          "ax-2026-02-25-2",
+          "ax-2026-02-24-3",
+          "ax-2026-02-24-4",
+          "ax-2026-02-23-5",
+          "ax-2026-02-24-5",
+          "ax-2026-02-23-6",
+          "ax-2026-02-24-6",
+          "ax-2026-02-23-7",
+          "ax-2026-02-24-7",
+          "ax-2026-02-23-8",
+          "ax-2026-02-23-10",
+          "ax-2026-02-23-11",
+          "ax-2026-02-23-13",
+          "ax-2026-02-23-14",
+          "ax-2026-02-23-15",
+          "ax-2026-02-24-15"
+        ],
+        "top_projects": [
+          {
+            "id": "ax-2026-02-23-2",
+            "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20424v1",
+            "summary": "提出“Implicit Intelligence”评测框架，用于衡量AI代理在用户未明说的隐含约束下是否能真正完成目标，而不仅是机械遵循提示。",
+            "hot": 1.4161,
+            "rise": 1.1329,
+            "score_total": 42
+          },
+          {
+            "id": "ax-2026-02-24-1",
+            "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.21435v1",
+            "summary": "提出“交错分析-起草循环”(AD-Loop)思维范式，让统一视觉语言模型在理解与生成之间动态交替推理，从而实现更强的协同解题能力。",
+            "hot": 1.3861,
+            "rise": 1.1089,
+            "score_total": 37
+          },
+          {
+            "id": "ax-2026-02-25-1",
+            "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.22212v1",
+            "summary": "Neu-PiG 通过“法线条件化”的多分辨率潜变量网格编码与 Sobolev 预条件优化，实现长序列动态物体的快速、无漂移高质量表面重建。",
+            "hot": 1.3861,
+            "rise": 1.1089,
+            "score_total": 29
+          },
+          {
+            "id": "ax-2026-02-24-2",
+            "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.21428v1",
+            "summary": "PSF-Med 系统评测医学VLM对同义改写问题的敏感性，发现大量“答案翻转”且部分稳定性来自语言先验而非图像理解，并提出基于稀疏特征干预的方法显著降低翻转。",
+            "hot": 1.2663,
+            "rise": 1.013,
+            "score_total": 39
+          },
+          {
+            "id": "ax-2026-02-25-2",
+            "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.22209v1",
+            "summary": "WHOLE通过学习手-物交互的生成式先验，在第一视角视频中联合重建手与物体在世界坐标系下的运动轨迹，并显著提升交互一致性与遮挡/出视野鲁棒性。",
+            "hot": 1.2663,
+            "rise": 1.013,
+            "score_total": 0
+          }
+        ]
+      },
+      {
+        "cluster_id": 5,
+        "cluster_score": 0.613336,
+        "theme_title": "多智能体协作的“共享状态+事件驱动”协作底座与工程自治工作流",
+        "one_sentence_summary": "围绕多智能体在同一上下文/命名空间内进行协作，出现了以事件发布/订阅与状态查询为核心的共享世界状态底座，以及面向软件工程的多智能体工作流编排与自治交付实践。",
+        "why_now": "代表项目一端在强化“状态引擎+状态查询 API+鉴权/命名空间隔离+一致性机制”（并更新文档），让多智能体能共享观测、同步状态并持续实体跟踪；另一端多智能体系统与“自动化开发团队”式产品正在把并行推理、内部交叉核查与长时间自治执行（含 PR/Review/Merge 管道、TDD/YAGNI/DRY 规范化流程）产品化，并出现“每周持续改进”的快速学习闭环。",
+        "representative_projects": [
+          {
+            "id": "clawhub:ch-2026-02-24-4",
+            "title": "Flux",
+            "url": "",
+            "positioning": "通过状态引擎发布事件并查询共享世界状态，提供多智能体共享观测、协同决策、实体跟踪的状态存取与一致性保障底座；不负责业务推理、任务编排或外部行动执行。"
+          },
+          {
+            "id": "producthunt:ph-2026-02-23-4",
+            "title": "Grok 4.2",
+            "url": "",
+            "positioning": "原生多智能体系统，四个专业化 heads 共享同一上下文并行推理、内部辩论与交叉核查事实，配合每周改进的快速学习闭环。"
+          },
+          {
+            "id": "clawhub:ch-2026-02-23-1",
+            "title": "OpenTangl",
+            "url": "",
+            "positioning": "“自动化开发团队”式自治代理：基于目标/约束/验收标准，跨多个代码仓库自主构建、提交 PR、代码评审并合并交付，强调工作流编排与流程护栏降低偏航。"
+          },
+          {
+            "id": "github:gh-2026-02-24-4",
+            "title": "obra/superpowers",
+            "url": "",
+            "positioning": "面向代码智能体的技能框架与方法论：从需求澄清到 spec/设计评审/实现计划，再到子智能体任务拆解执行与复审，强调 TDD（红/绿）、YAGNI、DRY，支持更长时间自治但尽量按计划推进。"
+          }
+        ],
+        "key_terms": [
+          "用于自动化",
+          "多智能体编排",
+          "事件驱动架构",
+          "状态同步",
+          "状态引擎",
+          "观察共享",
+          "状态查询api",
+          "命名空间隔离",
+          "实体跟踪",
+          "多智能体协作"
+        ],
+        "risks_questions": [
+          "协作底座（如共享状态/一致性保障）不负责业务推理与任务编排：在端到端系统里，推理、编排与外部行动的责任边界如何清晰定义与对接？",
+          "多智能体并行推理与内部辩论/交叉核查能提升可靠性，但其成本、延迟与适用任务边界如何权衡？",
+          "工程自治产品依赖输入的目标、约束与验收标准：在上下文不充分时如何保证业务正确性、避免偏航与错误合并？",
+          "共享世界状态依赖鉴权与命名空间隔离：跨团队/多租户场景下的隔离强度、一致性策略与可观测性要求如何落地？"
+        ],
+        "next_week_watchlist": [
+          "Flux：一致性机制与文档更新后，是否出现更明确的状态查询 API/事件订阅用法与多智能体协作范式沉淀。",
+          "Grok 4.2：快速学习闭环（每周持续改进）带来的多智能体协作质量变化，以及“交叉核查事实”能力的进一步产品化。",
+          "OpenTangl：跨仓库 PR/Review/Merge 管道与分步护栏的成熟度变化，是否扩展到更多端到端发布自动化场景。",
+          "obra/superpowers：面向 Claude Code/Cursor 等编码代理的 spec→计划→子代理执行流程是否进一步标准化与复用，提升长时间自治的一致性。"
+        ],
+        "source_mix": [
+          "clawhub",
+          "github",
+          "producthunt"
+        ],
+        "member_project_ids": [
+          "ch-2026-02-24-4",
+          "ph-2026-02-23-4",
+          "ch-2026-02-23-1",
+          "gh-2026-02-24-4",
+          "gh-2026-02-23-4",
+          "gh-2026-02-24-5",
+          "gh-2026-02-23-5",
+          "gh-2026-02-24-6",
+          "gh-2026-02-23-6",
+          "ch-2026-02-23-4",
+          "ch-2026-02-23-2"
+        ],
+        "top_projects": [
+          {
+            "id": "ch-2026-02-24-4",
+            "title": "Flux",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/EckmanTechLLC/flux",
+            "summary": "该能力通过 Flux 状态引擎发布事件并查询共享世界状态，用于多智能体在同一命名空间内共享观测、基于共享数据协同决策、以及持续跟踪实体状态变化等场景。能力边界在于它主要提供状态存取与一致性保障的协作底座，不负责具体业务推理、任务编排或外部行动执行。关键技术形态为事件发布/订阅与状态查询接口相结合，依托公共 Flux 实例的鉴权与命名空间隔离，并对一致性机制与文档进行了更新完善。",
+            "hot": 1.9361,
+            "rise": 1.5489,
+            "score_total": 43
+          },
+          {
+            "id": "ph-2026-02-23-4",
+            "title": "Grok 4.2",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/grok?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "Grok 4.2 是一个原生的多智能体系统，由四个专业化“头”（heads）共享同一上下文。它们并行推理，并在内部进行辩论，在作答前交叉核查事实。此外，它还具备快速学习闭环（rapid learning loop），每周持续改进。",
+            "hot": 1.1333,
+            "rise": 0.9066,
+            "score_total": 37
+          },
+          {
+            "id": "ch-2026-02-23-1",
+            "title": "OpenTangl",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/8co/opentangl",
+            "summary": "这是一个“自动化开发团队”式的产品：你提供需求愿景，它能在多个代码仓库中自主完成构建、提交 PR、代码评审并合并交付。能力边界在于仍以你给出的目标、约束与验收标准为前提，适合端到端工程落地与持续迭代，但不等同于替你做产品决策或在缺少上下文时保证业务正确性。典型场景是跨仓库的功能开发、批量改动与发布流程自动化；关键技术形态是自治代理工作流编排叠加 PR/Review/Merge 管道，并结合向量检索增强可发现性（含可搜索标签与分类）与分步流程护栏来降低偏航。",
+            "hot": 1.0084,
+            "rise": 0.8067,
+            "score_total": 51
+          },
+          {
+            "id": "gh-2026-02-24-4",
+            "title": "obra/superpowers",
+            "source": "github",
+            "url": "https://github.com/obra/superpowers",
+            "summary": "Superpowers 是一套面向“代码智能体”的技能框架与软件开发方法论，把需求澄清、规格说明、设计评审、实现计划到执行落地串成可复用的工作流。它主要服务于使用 Claude Code/Cursor 等编程助手的开发者或团队，让智能体先从对话中提炼可读的 spec 并获得确认，再生成强调 TDD（红/绿）、YAGNI、DRY 的实施计划。随后通过“子智能体驱动开发”按任务分解执行、检查与复审，适合需要更长时间自治但仍希望按既定计划推进的开发场景。",
+            "hot": 1.2973,
+            "rise": 0.3283,
+            "score_total": 44
+          },
+          {
+            "id": "gh-2026-02-23-4",
+            "title": "obra/superpowers",
+            "source": "github",
+            "url": "https://github.com/obra/superpowers",
+            "summary": "Superpowers 是一套面向编码代理（如 Claude Code、Cursor 等）的技能框架与软件开发方法论，让代理先通过对话澄清需求并产出可阅读的规格与设计，再生成强调 TDD（红/绿）、YAGNI、DRY 的实现计划。随后它以“子代理驱动开发”方式将任务拆解并逐项执行、检查与评审，尽量让代理在既定计划内长时间自主推进。典型场景是用多代理工作流提升从需求到实现的规范性与一致性，减少代理直接上手写代码导致的偏航。",
+            "hot": 1.2971,
+            "rise": 0.3283,
+            "score_total": 44
+          }
+        ]
+      },
+      {
+        "cluster_id": 7,
+        "cluster_score": 0.589416,
+        "theme_title": "从“调Agent”到“调工具”：面向冷启动/隐私受限的工具接口与描述优化",
+        "one_sentence_summary": "该主题聚焦在缺少执行轨迹、冷启动部署或隐私受限训练条件下，通过重写工具描述/接口与参数模式设计来提升LLM-Agent的大规模工具选择、未见工具泛化与调用可靠性。",
+        "why_now": "聚类证据显示“无执行轨迹学习、隐私受限训练、冷启动部署、大规模工具选择、未见工具泛化”等需求同时出现，促使研究从依赖轨迹与端到端微调转向更可控、可迁移的“工具接口/描述层”优化；同时企业级RAG评测框架开始以贴近真实工单流程的方式暴露失效模式，为工具化系统的可靠性改进提供落点。",
+        "representative_projects": [
+          {
+            "id": "arxiv:ax-2026-02-23-1",
+            "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+            "url": "",
+            "positioning": "Trace-Free+在无执行轨迹条件下，通过“重写工具描述/接口”而非仅微调Agent，显著提升LLM-Agent的工具选择与调用可靠性，直接对应工具接口优化、冷启动与隐私受限场景。"
+          },
+          {
+            "id": "arxiv:ax-2026-02-23-4",
+            "title": "Case-Aware LLM-as-a-Judge Evaluation for Enterprise-Scale RAG Systems",
+            "url": "",
+            "positioning": "面向企业多轮RAG工单/案件场景的LLM-as-a-Judge评测框架，用贴近真实运维流程的指标与严重度评分揭示关键失效模式与可行动改进点，为工具化/RAG系统可靠性优化提供评测抓手。"
+          },
+          {
+            "id": "arxiv:ax-2026-02-23-3",
+            "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+            "url": "",
+            "positioning": "通过显式建模并注入环境转移动力学与奖励机制来调制扩散式轨迹生成，提升离线RL规划可行性与性能，体现“机制/接口注入”式的可控优化取向。"
+          }
+        ],
+        "key_terms": [
+          "工具接口优化",
+          "工具描述重写",
+          "参数模式设计",
+          "无执行轨迹学习",
+          "课程学习",
+          "未见工具泛化",
+          "大规模工具选择",
+          "隐私受限训练",
+          "冷启动部署"
+        ],
+        "risks_questions": [
+          "在无执行轨迹学习条件下，工具描述重写的可靠性提升是否能稳定迁移到未见工具泛化与大规模工具选择？",
+          "冷启动或隐私受限训练场景中，工具接口/描述优化与Agent端能力提升之间的边界与最优分工是什么？",
+          "参数模式设计与课程学习在工具调用可靠性上的增益是否依赖特定工具集合/任务分布（泛化风险）？",
+          "企业RAG的Case-Aware评测揭示的失效模式，如何与工具描述/接口优化形成闭环改进（评测-优化耦合问题）？"
+        ],
+        "next_week_watchlist": [
+          "围绕Trace-Free+的后续：更多“只改工具描述/接口、不依赖执行轨迹”的可靠性与泛化证据（尤其是未见工具与大规模工具库）。",
+          "冷启动部署与隐私受限训练条件下的工具选择/调用方案：是否出现与参数模式设计、课程学习相关的可复用实践。",
+          "企业级RAG评测框架（Case-Aware LLM-as-a-Judge）在真实工单/案件流程中的失效模式清单是否进一步细化，并是否指向可操作的系统改进点。"
+        ],
+        "source_mix": [
+          "arxiv"
+        ],
+        "member_project_ids": [
+          "ax-2026-02-23-1",
+          "ax-2026-02-23-3",
+          "ax-2026-02-23-4",
+          "ax-2026-02-24-8",
+          "ax-2026-02-23-9",
+          "ax-2026-02-24-9",
+          "ax-2026-02-24-10",
+          "ax-2026-02-24-11",
+          "ax-2026-02-23-12",
+          "ax-2026-02-24-12",
+          "ax-2026-02-24-13",
+          "ax-2026-02-24-14"
+        ],
+        "top_projects": [
+          {
+            "id": "ax-2026-02-23-1",
+            "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20426v1",
+            "summary": "提出Trace-Free+通过“重写工具描述/接口”而非只微调Agent，在无执行轨迹条件下也能显著提升LLM-Agent的工具选择与调用可靠性。",
+            "hot": 1.5359,
+            "rise": 1.2287,
+            "score_total": 42
+          },
+          {
+            "id": "ax-2026-02-23-3",
+            "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20422v1",
+            "summary": "DMEMM通过显式建模并注入环境转移动力学与奖励机制来调制扩散式轨迹生成，从而提升离线RL规划的可行性与性能。",
+            "hot": 1.2962,
+            "rise": 1.037,
+            "score_total": 34
+          },
+          {
+            "id": "ax-2026-02-23-4",
+            "title": "Case-Aware LLM-as-a-Judge Evaluation for Enterprise-Scale RAG Systems",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20379v1",
+            "summary": "提出一种面向企业多轮RAG“工单/案件”场景的LLM-as-a-Judge评测框架，用更贴近真实运维流程的指标与严重度评分揭示关键失效模式与可行动改进点。",
+            "hot": 1.0266,
+            "rise": 0.8213,
+            "score_total": 44
+          },
+          {
+            "id": "ax-2026-02-24-8",
+            "title": "MINAR: Mechanistic Interpretability for Neural Algorithmic Reasoning",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.21442v1",
+            "summary": "MINAR将机制可解释性中的归因补丁（attribution patching）方法迁移到GNN的神经算法推理中，高效发现能实现算法计算的神经元级电路。",
+            "hot": 0.6371,
+            "rise": 0.5097,
+            "score_total": 66
+          },
+          {
+            "id": "ax-2026-02-23-9",
+            "title": "GauS: Differentiable Scheduling Optimization via Gaussian Reparameterization",
+            "source": "arxiv",
+            "url": "https://arxiv.org/abs/2602.20427v1",
+            "summary": "GauS用高斯重参数化将算子调度连续化并可微优化，在GPU上高效进行梯度搜索，取得多目标下的Pareto最优调度结果。",
+            "hot": 0.5173,
+            "rise": 0.4138,
+            "score_total": 33
+          }
+        ]
+      },
+      {
+        "cluster_id": 1,
+        "cluster_score": 0.201233,
+        "theme_title": "AI Agent/应用的云托管与生产化：全托管部署、监控更新与 API Key 复用",
+        "one_sentence_summary": "围绕“免自建基础设施”的 AI Agent 与应用上线方案正在聚合：提供全托管部署、安全管理、自动更新与运行监控，并允许开发者直接使用现有订阅或任意 API key 快速构建与上线。",
+        "why_now": "证据显示自部署开源 AI Agent 的难点集中在“基础设施、安全、更新与监控”，因此出现像 KiloClaw 这类全托管版本以降低运维负担；同时，Modelence 以“身份认证、数据库和监控”等生产要素开箱即用来缩短上线路径；Orchids 则强调可直接接入现有 ChatGPT/Claude/Gemini/Copilot 订阅或任意 API key，从而进一步降低集成与迁移成本。",
+        "representative_projects": [
+          {
+            "id": "producthunt:ph-2026-02-25-1",
+            "title": "KiloClaw",
+            "url": "",
+            "positioning": "OpenClaw 的全托管托管版本，负责基础设施、安全、更新与监控，让用户专注 Agent 业务而非自部署运维。"
+          },
+          {
+            "id": "producthunt:ph-2026-02-24-2",
+            "title": "Modelence App Builder",
+            "url": "",
+            "positioning": "用于构建可直接用于生产的应用，内置身份认证、数据库与监控，由面向 AI 时代的开源框架驱动。"
+          },
+          {
+            "id": "producthunt:ph-2026-02-24-4",
+            "title": "Orchids 1.0",
+            "url": "",
+            "positioning": "任意技术栈构建应用，并可使用现有 ChatGPT/Claude Code/Gemini/GitHub Copilot 订阅或任意 API key 免费构建。"
+          },
+          {
+            "id": "clawhub:ch-2026-02-24-6",
+            "title": "Kraken Exchange",
+            "url": "",
+            "positioning": "通过 REST/WebSocket 与 Kraken 交易所交互（行情、账户、订单等查询与订阅），受账户权限、API 限额与交易所规则约束。"
+          }
+        ],
+        "key_terms": [
+          "api key",
+          "多智能体编排",
+          "安全管理",
+          "更新与监控",
+          "全托管部署",
+          "基础设施管理",
+          "免本地硬件",
+          "运行监控",
+          "自动更新",
+          "云托管"
+        ],
+        "risks_questions": [
+          "全托管形态下的安全管理边界如何定义与验证（由平台负责哪些安全项、用户仍需承担哪些责任）？",
+          "自动更新可能带来行为变化或兼容性风险：更新策略、回滚与监控告警是否足以支撑生产使用？",
+          "当能力依赖外部服务与 API key 时，如何处理权限、配额与规则约束（例如受账户权限、API 限额与平台规则影响）？",
+          "运行监控覆盖到什么粒度（应用层/基础设施层）以及是否能支撑故障定位与 SLA 诉求？"
+        ],
+        "next_week_watchlist": [
+          "KiloClaw：全托管 OpenClaw 的“安全、更新、监控”承诺是否进一步明确（例如运维责任范围与监控能力）。",
+          "Modelence App Builder：其“开箱即用的身份认证、数据库、监控”是否成为开发者选择生产化框架/平台的核心卖点。",
+          "Orchids 1.0：用“现有订阅或任意 API key”构建的路径是否推动更多产品强调低迁移成本与快速集成。",
+          "Kraken Exchange：REST + WebSocket 形态下的实时订阅与账户/订单能力是否因配额与规则限制而成为采用门槛讨论点。"
+        ],
+        "source_mix": [
+          "clawhub",
+          "producthunt"
+        ],
+        "member_project_ids": [
+          "ph-2026-02-25-1",
+          "ph-2026-02-24-2",
+          "ph-2026-02-24-4",
+          "ch-2026-02-24-6",
+          "ph-2026-02-23-6",
+          "ph-2026-02-24-8",
+          "ph-2026-02-24-10",
+          "ph-2026-02-24-11",
+          "ph-2026-02-24-12",
+          "ph-2026-02-23-9",
+          "ph-2026-02-23-10",
+          "ph-2026-02-24-13",
+          "ph-2026-02-24-14",
+          "ph-2026-02-23-12",
+          "ph-2026-02-23-14",
+          "ch-2026-02-23-6",
+          "ch-2026-02-24-3",
+          "ch-2026-02-24-2",
+          "ch-2026-02-25-1",
+          "ph-2026-02-23-15",
+          "ph-2026-02-23-16",
+          "ph-2026-02-23-17",
+          "ph-2026-02-23-18"
+        ],
+        "top_projects": [
+          {
+            "id": "ph-2026-02-25-1",
+            "title": "KiloClaw",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "OpenClaw 是全球最受欢迎的开源 AI Agent。自己部署运行？难点就在这里。KiloClaw 是 OpenClaw 的全托管托管版本。我们负责基础设施、安全、更新与监控，让你专注于你的 Agent 真正要做的事——而不是为了让它一直活着而操心。",
+            "hot": 1.6632,
+            "rise": 1.3306,
+            "score_total": 40
+          },
+          {
+            "id": "ph-2026-02-24-2",
+            "title": "Modelence App Builder",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "构建可直接用于生产的应用，所需的一切助你上线——开箱即用，内置身份认证、数据库和监控。由面向 AI 时代设计的开源框架驱动。",
+            "hot": 1.4458,
+            "rise": 1.1566,
+            "score_total": 34
+          },
+          {
+            "id": "ph-2026-02-24-4",
+            "title": "Orchids 1.0",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/orchids?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "构建任意应用、任意技术栈 + 使用你现有的 ChatGPT、Claude Code、Gemini、GitHub Copilot 订阅或任意 API key，即可免费构建。",
+            "hot": 0.9575,
+            "rise": 0.766,
+            "score_total": 16
+          },
+          {
+            "id": "ch-2026-02-24-6",
+            "title": "Kraken Exchange",
+            "source": "clawhub",
+            "url": "https://clawhub.ai/askbeka/tentactl",
+            "summary": "该能力用于与 Kraken 加密货币交易所交互，覆盖现货与期货市场，并通过 REST 与 WebSocket 提供行情与账户相关数据的查询与订阅。典型场景包括获取实时/历史价格与市场数据、查看账户资产与持仓、跟踪订单与成交等。能力边界在于仅能操作 Kraken 交易所范围内的功能，实际下单/风控等受账户权限、API 限额与交易所规则约束，且对链上转账等非交易所接口不直接覆盖。关键技术形态是以 REST 进行请求-响应式查询与管理，以 WebSocket 进行低延迟行情/事件流推送。",
+            "hot": 0.8239,
+            "rise": 0.6592,
+            "score_total": 18
+          },
+          {
+            "id": "ph-2026-02-23-6",
+            "title": "OpenHunt",
+            "source": "producthunt",
+            "url": "https://www.producthunt.com/products/openhunt?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+            "summary": "SaaS 上线平台已经死了。在 AI 时代，注意力黑客和互刷点赞圈子根本无法规模化。OpenHunt 是面向开发者的 AI 原生发现层：由人类提交产品；自主智能体从多个维度进行分析，在大众涌入之前生成结构化信号；随后由人类验证哪些真正值得关注。没有把关人。不靠算法博弈。只有面向后算法互联网的可编程、以实力为导向的发现机制。",
+            "hot": 0.7277,
+            "rise": 0.5821,
+            "score_total": 41
+          }
+        ]
+      },
+      {
+        "cluster_id": 3,
+        "cluster_score": 0.023904,
+        "theme_title": "可跨工具复用的编程代理“技能包”与自动化流水线",
+        "one_sentence_summary": "以标准化的 Agent Skill/YAML 目录格式封装任务指令、脚本与资源，让编程代理在 Claude Code、OpenAI Codex、Gemini CLI、Cursor 等工具间复用同一套自动化工作流（含模型评估流水线等）。",
+        "why_now": "代表项目 Hugging Face Skills 明确强调“跨工具互操作”与“自包含技能目录+YAML 前置元数据”的统一格式，指向开发者在多种 CLI/代码代理/插件生态中复用任务自动化与评测流程的需求；同时，另一代表项目 Moonshine Voice 强调无需账号或 API Key 的本地端能力，进一步凸显开发者对降低外部依赖、可移植运行方式的关注。",
+        "representative_projects": [
+          {
+            "id": "github:gh-2026-02-24-2",
+            "title": "huggingface/skills",
+            "url": "https://github.com/huggingface/skills",
+            "positioning": "面向编程代理/代码助手的标准化“技能”定义与模板，将数据集创建、模型训练与模型评估等任务封装为可在 Claude Code、OpenAI Codex、Gemini CLI、Cursor 等工具间互操作的自包含目录（含 YAML 前置元数据指令文件）。"
+          },
+          {
+            "id": "github:gh-2026-02-24-1",
+            "title": "moonshine-ai/moonshine",
+            "url": "https://github.com/moonshine-ai/moonshine",
+            "positioning": "面向边缘设备的本地语音 AI 工具包（实时流式 ASR 等），强调低延迟与隐私、无需账号或 API Key，并支持多平台集成。"
+          }
+        ],
+        "key_terms": [
+          "api key",
+          "模型评估流水线",
+          "cli cursor",
+          "任务自动化",
+          "跨工具互操作",
+          "插件市场",
+          "代码代理",
+          "cli cursor yaml",
+          "代理技能包",
+          "它面向使用编程代理"
+        ],
+        "risks_questions": [
+          "Agent Skill format 与 YAML 前置元数据在不同工具（Claude Code、Codex、Gemini CLI、Cursor）中的兼容性与一致执行边界是什么？",
+          "技能目录的“自包含”程度是否足以覆盖真实工作流（脚本、资源、依赖）并保持可复现？",
+          "跨工具复用后，技能的版本管理、更新与回滚策略如何设计以避免流水线漂移（尤其是模型评估流程）？",
+          "当生态走向“插件市场/技能市场”时，技能质量审查与安全风险（脚本执行、资源来源）如何控制？",
+          "本地端方案（无需 API Key）与代理技能自动化结合时，端上资源限制会如何影响可执行任务范围与稳定性？"
+        ],
+        "next_week_watchlist": [
+          "huggingface/skills 是否新增或强化与 Claude Code、OpenAI Codex、Gemini CLI、Cursor 的互操作示例/适配说明",
+          "围绕“cli cursor yaml/Agent Skill format”的格式约定是否出现更明确的规范化与最佳实践沉淀",
+          "技能内容是否扩展到更完整的“模型评估流水线”模板与可复用脚本资源",
+          "是否出现更接近“插件市场”的分发/发现机制信号（例如技能集合的组织方式与复用入口）",
+          "moonshine-ai/moonshine 是否继续强化多平台端上集成与流式性能相关的能力表述（保持无需 API Key 的定位）"
+        ],
+        "source_mix": [
+          "github"
+        ],
+        "member_project_ids": [
+          "gh-2026-02-24-2",
+          "gh-2026-02-23-2",
+          "gh-2026-02-24-1",
+          "gh-2026-02-23-1"
+        ],
+        "top_projects": [
+          {
+            "id": "gh-2026-02-24-2",
+            "title": "huggingface/skills",
+            "source": "github",
+            "url": "https://github.com/huggingface/skills",
+            "summary": "Hugging Face Skills 提供一组用于数据集创建、模型训练与评估等 AI/ML 任务的“技能”定义，采用标准化的 Agent Skill 格式把说明、脚本和资源封装成自包含目录。它面向使用编程代理/代码助手的开发者与研究者，强调可在 Claude Code、OpenAI Codex、Gemini CLI、Cursor 等多种工具间互操作。典型场景是在不同代理工具中复用同一套任务流程与指令，让代理按需加载并执行特定用例的指导。",
+            "hot": 0.3435,
+            "rise": -0.3347,
+            "score_total": 43
+          },
+          {
+            "id": "gh-2026-02-23-2",
+            "title": "huggingface/skills",
+            "source": "github",
+            "url": "https://github.com/huggingface/skills",
+            "summary": "Hugging Face Skills 是一组面向 AI/ML 工作流的“技能”定义与模板，用于让编程代理按标准化格式执行数据集创建、模型训练与评测等任务。它面向使用编码智能体的开发者与研究者，核心是将每个技能封装为自包含目录，并用带 YAML 前置元数据的指令文件（遵循 Agent Skill format）来驱动代理行为。典型场景是在 Claude Code、OpenAI Codex、Gemini CLI、Cursor 等工具中复用同一套任务指令与资源，实现跨工具一致的自动化流程。",
+            "hot": 0.3434,
+            "rise": -0.3347,
+            "score_total": 44
+          },
+          {
+            "id": "gh-2026-02-24-1",
+            "title": "moonshine-ai/moonshine",
+            "source": "github",
+            "url": "https://github.com/moonshine-ai/moonshine",
+            "summary": "Moonshine Voice 是面向边缘设备的开源语音 AI 工具包，帮助开发者构建实时语音应用，在本地完成自动语音识别等处理以获得低延迟与隐私保护，无需账号或 API Key。它提供从高精度到约 26MB 级小模型的选择，并针对流式输入优化，可在用户说话过程中持续产出转写结果。典型场景包括跨平台的实时转写、说话人识别（diarization）以及基于语义匹配的语音指令识别，适用于手机、桌面、树莓派与各类 IoT/可穿戴设备的多语言语音交互。",
+            "hot": 0.0027,
+            "rise": 0.0002,
+            "score_total": 34
+          },
+          {
+            "id": "gh-2026-02-23-1",
+            "title": "moonshine-ai/moonshine",
+            "source": "github",
+            "url": "https://github.com/moonshine-ai/moonshine",
+            "summary": "Moonshine Voice 是面向边缘设备的开源语音 AI 工具包，帮助开发者构建实时语音应用，提供本地端的自动语音识别，并支持转写、说话人识别与语音指令识别等高层能力。它主打全程端上运行以获得低延迟与隐私保障，不依赖账号或云端 API，并针对流式场景在用户说话过程中提前计算以加速响应。其模型从头训练，覆盖从约 26MB 的轻量部署到高精度模型，并可在 Python、iOS、Android 及多种桌面/嵌入式平台上统一集成，适用于实时转写、语音控制与多语言语音交互等场景。",
+            "hot": 0.0026,
+            "rise": 0.0002,
+            "score_total": 34
+          }
+        ]
+      }
+    ],
+    "project_boards": {
+      "rising_top": [
+        {
+          "id": "ch-2026-02-24-4",
+          "source": "clawhub",
+          "date": "2026-02-24",
+          "title": "Flux",
+          "url": "https://clawhub.ai/EckmanTechLLC/flux",
+          "hot": 1.9361,
+          "rise": 1.5489,
+          "score_total": 43,
+          "quality_weight": 0.6675
+        },
+        {
+          "id": "ph-2026-02-25-1",
+          "source": "producthunt",
+          "date": "2026-02-25",
+          "title": "KiloClaw",
+          "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6632,
+          "rise": 1.3306,
+          "score_total": 40,
+          "quality_weight": 0.6264
+        },
+        {
+          "id": "ph-2026-02-24-1",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Stitch by Google",
+          "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6093,
+          "rise": 1.2874,
+          "score_total": 38,
+          "quality_weight": 0.6126
+        },
+        {
+          "id": "ph-2026-02-23-1",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Siteline",
+          "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.5759,
+          "rise": 1.2607,
+          "score_total": 38,
+          "quality_weight": 0.6091
+        },
+        {
+          "id": "ax-2026-02-23-1",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+          "url": "https://arxiv.org/abs/2602.20426v1",
+          "hot": 1.5359,
+          "rise": 1.2287,
+          "score_total": 42,
+          "quality_weight": 0.6208
+        },
+        {
+          "id": "ph-2026-02-24-2",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Modelence App Builder",
+          "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.4458,
+          "rise": 1.1566,
+          "score_total": 34,
+          "quality_weight": 0.5792
+        },
+        {
+          "id": "ax-2026-02-23-2",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+          "url": "https://arxiv.org/abs/2602.20424v1",
+          "hot": 1.4161,
+          "rise": 1.1329,
+          "score_total": 42,
+          "quality_weight": 0.608
+        },
+        {
+          "id": "ph-2026-02-23-2",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Wispr Flow for Android",
+          "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.406,
+          "rise": 1.1248,
+          "score_total": 36,
+          "quality_weight": 0.5829
+        },
+        {
+          "id": "ax-2026-02-24-1",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+          "url": "https://arxiv.org/abs/2602.21435v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 37,
+          "quality_weight": 0.5848
+        },
+        {
+          "id": "ax-2026-02-25-1",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+          "url": "https://arxiv.org/abs/2602.22212v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 29,
+          "quality_weight": 0.5528
+        },
+        {
+          "id": "ch-2026-02-23-5",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-web-search",
+          "url": "https://clawhub.ai/Thincher/glm-web-search",
+          "hot": 1.3794,
+          "rise": 1.1035,
+          "score_total": 3,
+          "quality_weight": 0.4481
+        },
+        {
+          "id": "ph-2026-02-23-3",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "TypeBoost",
+          "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.3321,
+          "rise": 1.0656,
+          "score_total": 31,
+          "quality_weight": 0.555
+        },
+        {
+          "id": "ax-2026-02-23-3",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+          "url": "https://arxiv.org/abs/2602.20422v1",
+          "hot": 1.2962,
+          "rise": 1.037,
+          "score_total": 34,
+          "quality_weight": 0.5632
+        },
+        {
+          "id": "ax-2026-02-25-2",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+          "url": "https://arxiv.org/abs/2602.22209v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 0,
+          "quality_weight": 0.424
+        },
+        {
+          "id": "ax-2026-02-24-2",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+          "url": "https://arxiv.org/abs/2602.21428v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 39,
+          "quality_weight": 0.58
+        },
+        {
+          "id": "ph-2026-02-24-3",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Anima",
+          "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.258,
+          "rise": 1.0064,
+          "score_total": 48,
+          "quality_weight": 0.6151
+        },
+        {
+          "id": "ax-2026-02-24-3",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Automating Timed Up and Go Phase Segmentation and Gait Analysis via the tugturn Markerless 3D Pipeline",
+          "url": "https://arxiv.org/abs/2602.21425v1",
+          "hot": 1.1464,
+          "rise": 0.9172,
+          "score_total": 29,
+          "quality_weight": 0.5272
+        },
+        {
+          "id": "ph-2026-02-23-4",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Grok 4.2",
+          "url": "https://www.producthunt.com/products/grok?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.1333,
+          "rise": 0.9066,
+          "score_total": 37,
+          "quality_weight": 0.5578
+        },
+        {
+          "id": "ch-2026-02-23-3",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-understand-image",
+          "url": "https://clawhub.ai/Thincher/glm-understand-image",
+          "hot": 1.0592,
+          "rise": 0.8474,
+          "score_total": 7,
+          "quality_weight": 0.4299
+        },
+        {
+          "id": "ax-2026-02-24-4",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "ECHOSAT: Estimating Canopy Height Over Space And Time",
+          "url": "https://arxiv.org/abs/2602.21421v1",
+          "hot": 1.0266,
+          "rise": 0.8213,
+          "score_total": 37,
+          "quality_weight": 0.5464
+        }
+      ],
+      "hot_top": [
+        {
+          "id": "ch-2026-02-24-4",
+          "source": "clawhub",
+          "date": "2026-02-24",
+          "title": "Flux",
+          "url": "https://clawhub.ai/EckmanTechLLC/flux",
+          "hot": 1.9361,
+          "rise": 1.5489,
+          "score_total": 43,
+          "quality_weight": 0.6675
+        },
+        {
+          "id": "gh-2026-02-24-3",
+          "source": "github",
+          "date": "2026-02-24",
+          "title": "D4Vinci/Scrapling",
+          "url": "https://github.com/D4Vinci/Scrapling",
+          "hot": 1.7886,
+          "rise": 0.0535,
+          "score_total": 34,
+          "quality_weight": 0.6158
+        },
+        {
+          "id": "gh-2026-02-23-3",
+          "source": "github",
+          "date": "2026-02-23",
+          "title": "D4Vinci/Scrapling",
+          "url": "https://github.com/D4Vinci/Scrapling",
+          "hot": 1.7885,
+          "rise": 0.0535,
+          "score_total": 37,
+          "quality_weight": 0.6278
+        },
+        {
+          "id": "ph-2026-02-25-1",
+          "source": "producthunt",
+          "date": "2026-02-25",
+          "title": "KiloClaw",
+          "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6632,
+          "rise": 1.3306,
+          "score_total": 40,
+          "quality_weight": 0.6264
+        },
+        {
+          "id": "ph-2026-02-24-1",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Stitch by Google",
+          "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6093,
+          "rise": 1.2874,
+          "score_total": 38,
+          "quality_weight": 0.6126
+        },
+        {
+          "id": "ph-2026-02-23-1",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Siteline",
+          "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.5759,
+          "rise": 1.2607,
+          "score_total": 38,
+          "quality_weight": 0.6091
+        },
+        {
+          "id": "ax-2026-02-23-1",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+          "url": "https://arxiv.org/abs/2602.20426v1",
+          "hot": 1.5359,
+          "rise": 1.2287,
+          "score_total": 42,
+          "quality_weight": 0.6208
+        },
+        {
+          "id": "ph-2026-02-24-2",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Modelence App Builder",
+          "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.4458,
+          "rise": 1.1566,
+          "score_total": 34,
+          "quality_weight": 0.5792
+        },
+        {
+          "id": "ax-2026-02-23-2",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+          "url": "https://arxiv.org/abs/2602.20424v1",
+          "hot": 1.4161,
+          "rise": 1.1329,
+          "score_total": 42,
+          "quality_weight": 0.608
+        },
+        {
+          "id": "ph-2026-02-23-2",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Wispr Flow for Android",
+          "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.406,
+          "rise": 1.1248,
+          "score_total": 36,
+          "quality_weight": 0.5829
+        },
+        {
+          "id": "ax-2026-02-25-1",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+          "url": "https://arxiv.org/abs/2602.22212v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 29,
+          "quality_weight": 0.5528
+        },
+        {
+          "id": "ax-2026-02-24-1",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+          "url": "https://arxiv.org/abs/2602.21435v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 37,
+          "quality_weight": 0.5848
+        },
+        {
+          "id": "ch-2026-02-23-5",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-web-search",
+          "url": "https://clawhub.ai/Thincher/glm-web-search",
+          "hot": 1.3794,
+          "rise": 1.1035,
+          "score_total": 3,
+          "quality_weight": 0.4481
+        },
+        {
+          "id": "ph-2026-02-23-3",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "TypeBoost",
+          "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.3321,
+          "rise": 1.0656,
+          "score_total": 31,
+          "quality_weight": 0.555
+        },
+        {
+          "id": "gh-2026-02-24-4",
+          "source": "github",
+          "date": "2026-02-24",
+          "title": "obra/superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "hot": 1.2973,
+          "rise": 0.3283,
+          "score_total": 44,
+          "quality_weight": 0.6033
+        },
+        {
+          "id": "gh-2026-02-23-4",
+          "source": "github",
+          "date": "2026-02-23",
+          "title": "obra/superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "hot": 1.2971,
+          "rise": 0.3283,
+          "score_total": 44,
+          "quality_weight": 0.6033
+        },
+        {
+          "id": "ax-2026-02-23-3",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+          "url": "https://arxiv.org/abs/2602.20422v1",
+          "hot": 1.2962,
+          "rise": 1.037,
+          "score_total": 34,
+          "quality_weight": 0.5632
+        },
+        {
+          "id": "ax-2026-02-24-2",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+          "url": "https://arxiv.org/abs/2602.21428v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 39,
+          "quality_weight": 0.58
+        },
+        {
+          "id": "ax-2026-02-25-2",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+          "url": "https://arxiv.org/abs/2602.22209v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 0,
+          "quality_weight": 0.424
+        },
+        {
+          "id": "ph-2026-02-24-3",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Anima",
+          "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.258,
+          "rise": 1.0064,
+          "score_total": 48,
+          "quality_weight": 0.6151
+        }
+      ],
+      "novel_top": [
+        {
+          "id": "ch-2026-02-24-4",
+          "source": "clawhub",
+          "date": "2026-02-24",
+          "title": "Flux",
+          "url": "https://clawhub.ai/EckmanTechLLC/flux",
+          "hot": 1.9361,
+          "rise": 1.5489,
+          "score_total": 43,
+          "quality_weight": 0.6675
+        },
+        {
+          "id": "ph-2026-02-25-1",
+          "source": "producthunt",
+          "date": "2026-02-25",
+          "title": "KiloClaw",
+          "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6632,
+          "rise": 1.3306,
+          "score_total": 40,
+          "quality_weight": 0.6264
+        },
+        {
+          "id": "ph-2026-02-24-1",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Stitch by Google",
+          "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.6093,
+          "rise": 1.2874,
+          "score_total": 38,
+          "quality_weight": 0.6126
+        },
+        {
+          "id": "ph-2026-02-23-1",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Siteline",
+          "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.5759,
+          "rise": 1.2607,
+          "score_total": 38,
+          "quality_weight": 0.6091
+        },
+        {
+          "id": "ax-2026-02-23-1",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+          "url": "https://arxiv.org/abs/2602.20426v1",
+          "hot": 1.5359,
+          "rise": 1.2287,
+          "score_total": 42,
+          "quality_weight": 0.6208
+        },
+        {
+          "id": "ph-2026-02-24-2",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Modelence App Builder",
+          "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.4458,
+          "rise": 1.1566,
+          "score_total": 34,
+          "quality_weight": 0.5792
+        },
+        {
+          "id": "ax-2026-02-23-2",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+          "url": "https://arxiv.org/abs/2602.20424v1",
+          "hot": 1.4161,
+          "rise": 1.1329,
+          "score_total": 42,
+          "quality_weight": 0.608
+        },
+        {
+          "id": "ph-2026-02-23-2",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Wispr Flow for Android",
+          "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.406,
+          "rise": 1.1248,
+          "score_total": 36,
+          "quality_weight": 0.5829
+        },
+        {
+          "id": "ax-2026-02-24-1",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+          "url": "https://arxiv.org/abs/2602.21435v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 37,
+          "quality_weight": 0.5848
+        },
+        {
+          "id": "ax-2026-02-25-1",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+          "url": "https://arxiv.org/abs/2602.22212v1",
+          "hot": 1.3861,
+          "rise": 1.1089,
+          "score_total": 29,
+          "quality_weight": 0.5528
+        },
+        {
+          "id": "ch-2026-02-23-5",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-web-search",
+          "url": "https://clawhub.ai/Thincher/glm-web-search",
+          "hot": 1.3794,
+          "rise": 1.1035,
+          "score_total": 3,
+          "quality_weight": 0.4481
+        },
+        {
+          "id": "ph-2026-02-23-3",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "TypeBoost",
+          "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.3321,
+          "rise": 1.0656,
+          "score_total": 31,
+          "quality_weight": 0.555
+        },
+        {
+          "id": "ax-2026-02-23-3",
+          "source": "arxiv",
+          "date": "2026-02-23",
+          "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+          "url": "https://arxiv.org/abs/2602.20422v1",
+          "hot": 1.2962,
+          "rise": 1.037,
+          "score_total": 34,
+          "quality_weight": 0.5632
+        },
+        {
+          "id": "ax-2026-02-24-2",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+          "url": "https://arxiv.org/abs/2602.21428v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 39,
+          "quality_weight": 0.58
+        },
+        {
+          "id": "ax-2026-02-25-2",
+          "source": "arxiv",
+          "date": "2026-02-25",
+          "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+          "url": "https://arxiv.org/abs/2602.22209v1",
+          "hot": 1.2663,
+          "rise": 1.013,
+          "score_total": 0,
+          "quality_weight": 0.424
+        },
+        {
+          "id": "ph-2026-02-24-3",
+          "source": "producthunt",
+          "date": "2026-02-24",
+          "title": "Anima",
+          "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.258,
+          "rise": 1.0064,
+          "score_total": 48,
+          "quality_weight": 0.6151
+        },
+        {
+          "id": "ax-2026-02-24-3",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "Automating Timed Up and Go Phase Segmentation and Gait Analysis via the tugturn Markerless 3D Pipeline",
+          "url": "https://arxiv.org/abs/2602.21425v1",
+          "hot": 1.1464,
+          "rise": 0.9172,
+          "score_total": 29,
+          "quality_weight": 0.5272
+        },
+        {
+          "id": "ph-2026-02-23-4",
+          "source": "producthunt",
+          "date": "2026-02-23",
+          "title": "Grok 4.2",
+          "url": "https://www.producthunt.com/products/grok?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29",
+          "hot": 1.1333,
+          "rise": 0.9066,
+          "score_total": 37,
+          "quality_weight": 0.5578
+        },
+        {
+          "id": "ch-2026-02-23-3",
+          "source": "clawhub",
+          "date": "2026-02-23",
+          "title": "glm-understand-image",
+          "url": "https://clawhub.ai/Thincher/glm-understand-image",
+          "hot": 1.0592,
+          "rise": 0.8474,
+          "score_total": 7,
+          "quality_weight": 0.4299
+        },
+        {
+          "id": "ax-2026-02-24-4",
+          "source": "arxiv",
+          "date": "2026-02-24",
+          "title": "ECHOSAT: Estimating Canopy Height Over Space And Time",
+          "url": "https://arxiv.org/abs/2602.21421v1",
+          "hot": 1.0266,
+          "rise": 0.8213,
+          "score_total": 37,
+          "quality_weight": 0.5464
+        }
+      ]
+    },
+    "keyword_boards": {
+      "emerging": [
+        {
+          "term": "用于自动化",
+          "term_trend_score": 0.898499,
+          "freq_week": 3,
+          "freq_baseline": 0.64,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 1.9163,
+          "novelty": 1.1,
+          "quality_weight": 0.4781,
+          "support_items": [
+            "gh-2026-02-23-5",
+            "gh-2026-02-23-6",
+            "gh-2026-02-24-5"
+          ]
+        }
+      ],
+      "surging": [
+        {
+          "term": "api key",
+          "term_trend_score": 1.740684,
+          "freq_week": 8,
+          "freq_baseline": 1.2,
+          "support_projects": 8,
+          "support_sources": 3,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.4107,
+          "support_items": [
+            "ch-2026-02-23-3",
+            "ch-2026-02-23-5",
+            "ch-2026-02-23-7",
+            "ch-2026-02-24-1",
+            "ch-2026-02-25-1",
+            "gh-2026-02-24-1",
+            "ph-2026-02-23-15",
+            "ph-2026-02-24-4"
+          ]
+        },
+        {
+          "term": "用于自动化",
+          "term_trend_score": 0.898499,
+          "freq_week": 3,
+          "freq_baseline": 0.64,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 1.9163,
+          "novelty": 1.1,
+          "quality_weight": 0.4781,
+          "support_items": [
+            "gh-2026-02-23-5",
+            "gh-2026-02-23-6",
+            "gh-2026-02-24-5"
+          ]
+        },
+        {
+          "term": "自适应解析",
+          "term_trend_score": 0.831634,
+          "freq_week": 3,
+          "freq_baseline": 1.2,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.6011,
+          "support_items": [
+            "gh-2026-02-23-3",
+            "gh-2026-02-24-3",
+            "gh-2026-02-25-1"
+          ]
+        },
+        {
+          "term": "scrapy spider api",
+          "term_trend_score": 0.59925,
+          "freq_week": 3,
+          "freq_baseline": 1.6,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.6011,
+          "support_items": [
+            "gh-2026-02-23-3",
+            "gh-2026-02-24-3",
+            "gh-2026-02-25-1"
+          ]
+        },
+        {
+          "term": "spider api",
+          "term_trend_score": 0.59925,
+          "freq_week": 3,
+          "freq_baseline": 1.6,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.6011,
+          "support_items": [
+            "gh-2026-02-23-3",
+            "gh-2026-02-24-3",
+            "gh-2026-02-25-1"
+          ]
+        },
+        {
+          "term": "爬取框架",
+          "term_trend_score": 0.226076,
+          "freq_week": 3,
+          "freq_baseline": 2.4,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.6011,
+          "support_items": [
+            "gh-2026-02-23-3",
+            "gh-2026-02-24-3",
+            "gh-2026-02-25-1"
+          ]
+        },
+        {
+          "term": "多智能体编排",
+          "term_trend_score": 0.206242,
+          "freq_week": 4,
+          "freq_baseline": 3.2,
+          "support_projects": 4,
+          "support_sources": 2,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.4445,
+          "support_items": [
+            "gh-2026-02-23-5",
+            "gh-2026-02-23-6",
+            "gh-2026-02-24-6",
+            "ph-2026-02-23-18"
+          ]
+        },
+        {
+          "term": "代理轮换",
+          "term_trend_score": 0.071353,
+          "freq_week": 3,
+          "freq_baseline": 2.8,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.6011,
+          "support_items": [
+            "gh-2026-02-23-3",
+            "gh-2026-02-24-3",
+            "gh-2026-02-25-1"
+          ]
+        },
+        {
+          "term": "反爬绕过",
+          "term_trend_score": 0.071353,
+          "freq_week": 3,
+          "freq_baseline": 2.8,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.6011,
+          "support_items": [
+            "gh-2026-02-23-3",
+            "gh-2026-02-24-3",
+            "gh-2026-02-25-1"
+          ]
+        },
+        {
+          "term": "断点续爬",
+          "term_trend_score": 0.071353,
+          "freq_week": 3,
+          "freq_baseline": 2.8,
+          "support_projects": 3,
+          "support_sources": 1,
+          "idf_like": 2.204,
+          "novelty": 1.05,
+          "quality_weight": 0.6011,
+          "support_items": [
+            "gh-2026-02-23-3",
+            "gh-2026-02-24-3",
+            "gh-2026-02-25-1"
+          ]
+        }
+      ],
+      "cooling": [
+        {
+          "term": "cli",
+          "term_trend_score": 0.0,
+          "freq_week": 4,
+          "freq_baseline": 10.272,
+          "support_projects": 4,
+          "support_sources": 2,
+          "idf_like": 1.6931,
+          "novelty": 1.15,
+          "quality_weight": 0.4475,
+          "support_items": [
+            "ch-2026-02-23-4",
+            "ch-2026-02-24-1",
+            "gh-2026-02-23-2",
+            "gh-2026-02-24-2"
+          ],
+          "cooling_score": 0.663687
+        },
+        {
+          "term": "mcp",
+          "term_trend_score": 0.0,
+          "freq_week": 7,
+          "freq_baseline": 9.232,
+          "support_projects": 7,
+          "support_sources": 3,
+          "idf_like": 1.6931,
+          "novelty": 1.15,
+          "quality_weight": 0.4751,
+          "support_items": [
+            "ch-2026-02-23-3",
+            "ch-2026-02-23-4",
+            "ch-2026-02-23-5",
+            "gh-2026-02-23-6",
+            "gh-2026-02-24-6",
+            "ph-2026-02-23-10",
+            "ph-2026-02-24-1"
+          ],
+          "cooling_score": 0.195892
+        }
+      ]
+    },
+    "cross_source_observations": [
+      {
+        "theme_title": "MCP 工具化联网检索与交互式鉴权：AI 代理“只负责调用与检索”",
+        "sources": [
+          "clawhub",
+          "producthunt"
+        ],
+        "note": "MCP 工具化联网检索与交互式鉴权：AI 代理“只负责调用与检索” 同时出现在 clawhub, producthunt"
+      },
+      {
+        "theme_title": "多智能体协作的“共享状态+事件驱动”协作底座与工程自治工作流",
+        "sources": [
+          "clawhub",
+          "github",
+          "producthunt"
+        ],
+        "note": "多智能体协作的“共享状态+事件驱动”协作底座与工程自治工作流 同时出现在 clawhub, github, producthunt"
+      },
+      {
+        "theme_title": "AI Agent/应用的云托管与生产化：全托管部署、监控更新与 API Key 复用",
+        "sources": [
+          "clawhub",
+          "producthunt"
+        ],
+        "note": "AI Agent/应用的云托管与生产化：全托管部署、监控更新与 API Key 复用 同时出现在 clawhub, producthunt"
+      }
+    ],
+    "watchlist": [
+      {
+        "theme_title": "自适应解析 + 反爬绕过的一体化 Web 爬虫框架（Scrapy Spider API 风格）",
+        "items": [
+          "Scrapling 的自适应解析：页面更新后自动重定位元素的效果反馈与用例增多情况",
+          "反爬能力进展：Cloudflare Turnstile 绕过、被封检测重试与代理轮换的稳定性讨论",
+          "Spider API 生态：是否出现更多类似 Scrapy 的用法示例（异步回调、多会话、并发/限速）",
+          "长任务能力：断点续爬/暂停恢复与流式输出在实时统计、数据管道增量消费场景中的实践反馈"
+        ]
+      },
+      {
+        "theme_title": "MCP 工具化联网检索与交互式鉴权：AI 代理“只负责调用与检索”",
+        "items": [
+          "是否出现更多基于 MCP 的“联网搜索/搜索插件”实现，继续强化“仅负责检索与返回”的边界声明。",
+          "auth-profiles.json（mcp auth-profiles）相关的交互式鉴权流程是否进一步标准化：例如更明确的手动输入、保存、切换 API Key 的方式。",
+          "WebMCP 类“Schema 化工具暴露”是否扩展到更多 Web 场景，强调在同一界面中的协作式工作流与用户控制。"
+        ]
+      },
+      {
+        "theme_title": "从自然语言到可编辑设计稿与可用代码：多步骤设计智能体 + MCP 导出/生态",
+        "items": [
+          "是否出现更多带“原生 MCP 导出”的设计到代码工具（mcp、store mcp）。",
+          "围绕“store mcp / mcp hunt / store mcp hunt”的生态发现与分发是否出现更集中爆发。",
+          "更多强调“可编辑设计稿 + 真实代码”的自然语言 UI 生成产品是否进入榜单。",
+          "是否出现把“多步骤设计任务智能体”作为核心卖点的新项目（步骤设计任务的新智能体）。"
+        ]
+      },
+      {
+        "theme_title": "面向“用户未明说约束”的目标满足型智能体评测",
+        "items": [
+          "“Implicit Intelligence”是否给出可复用的任务构型与可量化指标，用于系统评测用户未明说约束下的目标完成度。",
+          "AD-Loop 是否在更多理解-生成交替任务上展示对隐式约束推理的增益，并能否迁移到交互式环境评测设置。",
+          "PSF-Med 提出的稀疏特征干预降低“答案翻转”的方法，是否能推广到更一般的欠规范化指令/同义改写稳健性评测。"
+        ]
+      },
+      {
+        "theme_title": "多智能体协作的“共享状态+事件驱动”协作底座与工程自治工作流",
+        "items": [
+          "Flux：一致性机制与文档更新后，是否出现更明确的状态查询 API/事件订阅用法与多智能体协作范式沉淀。",
+          "Grok 4.2：快速学习闭环（每周持续改进）带来的多智能体协作质量变化，以及“交叉核查事实”能力的进一步产品化。",
+          "OpenTangl：跨仓库 PR/Review/Merge 管道与分步护栏的成熟度变化，是否扩展到更多端到端发布自动化场景。",
+          "obra/superpowers：面向 Claude Code/Cursor 等编码代理的 spec→计划→子代理执行流程是否进一步标准化与复用，提升长时间自治的一致性。"
+        ]
+      },
+      {
+        "theme_title": "从“调Agent”到“调工具”：面向冷启动/隐私受限的工具接口与描述优化",
+        "items": [
+          "围绕Trace-Free+的后续：更多“只改工具描述/接口、不依赖执行轨迹”的可靠性与泛化证据（尤其是未见工具与大规模工具库）。",
+          "冷启动部署与隐私受限训练条件下的工具选择/调用方案：是否出现与参数模式设计、课程学习相关的可复用实践。",
+          "企业级RAG评测框架（Case-Aware LLM-as-a-Judge）在真实工单/案件流程中的失效模式清单是否进一步细化，并是否指向可操作的系统改进点。"
+        ]
+      },
+      {
+        "theme_title": "AI Agent/应用的云托管与生产化：全托管部署、监控更新与 API Key 复用",
+        "items": [
+          "KiloClaw：全托管 OpenClaw 的“安全、更新、监控”承诺是否进一步明确（例如运维责任范围与监控能力）。",
+          "Modelence App Builder：其“开箱即用的身份认证、数据库、监控”是否成为开发者选择生产化框架/平台的核心卖点。",
+          "Orchids 1.0：用“现有订阅或任意 API key”构建的路径是否推动更多产品强调低迁移成本与快速集成。",
+          "Kraken Exchange：REST + WebSocket 形态下的实时订阅与账户/订单能力是否因配额与规则限制而成为采用门槛讨论点。"
+        ]
+      },
+      {
+        "theme_title": "可跨工具复用的编程代理“技能包”与自动化流水线",
+        "items": [
+          "huggingface/skills 是否新增或强化与 Claude Code、OpenAI Codex、Gemini CLI、Cursor 的互操作示例/适配说明",
+          "围绕“cli cursor yaml/Agent Skill format”的格式约定是否出现更明确的规范化与最佳实践沉淀",
+          "技能内容是否扩展到更完整的“模型评估流水线”模板与可复用脚本资源",
+          "是否出现更接近“插件市场”的分发/发现机制信号（例如技能集合的组织方式与复用入口）",
+          "moonshine-ai/moonshine 是否继续强化多平台端上集成与流式性能相关的能力表述（保持无需 API Key 的定位）"
+        ]
+      }
+    ],
+    "markdown": "# 周度科技趋势研究报告\n\n## 本周摘要\n在2026年2月23日至3月1日的这一周，科技领域的多个趋势主题引起了广泛关注，特别是在自适应解析与反爬绕过的Web爬虫框架、MCP工具化联网检索与交互式鉴权、以及多智能体协作等方面。新兴项目如Scrapling、KiloClaw和Flux等在各自领域内展现出强劲的增长势头，反映出市场对高效数据采集、智能化工具和多智能体系统的需求日益增加。\n\n## 趋势主题\n\n### 1. 自适应解析 + 反爬绕过的一体化 Web 爬虫框架\n**项目概述**：Scrapling框架提供自学习解析器、内置反爬绕过与代理轮换，支持大规模并发爬取，适配长期运行与实时数据管道场景。\n\n**Why Now**：随着现代网站的复杂性增加，数据采集的需求也在上升。Scrapling的自适应解析能力使其能够应对页面结构的频繁变化，同时内置的反爬机制确保了数据的稳定获取，这使得该框架在当前市场中具备了显著的竞争优势。\n\n**代表项目对比**：\n- **D4Vinci/Scrapling**：自适应Web抓取框架，支持多会话与流式输出。\n- **D4Vinci/Scrapling**：强调页面结构变化自动重定位，适用于强反爬站点。\n- **D4Vinci/Scrapling**：覆盖从单次请求到全站并发爬行，提升规模化稳定性。\n\n**风险与观察**：\n- 自学习解析器的稳健性如何控制？\n- 反爬绕过的适用边界与失败回退策略。\n- 多会话与隐身无头浏览器的资源消耗问题。\n\n**下周观察**：\n- 自适应解析效果反馈与用例增多情况。\n- 反爬能力的稳定性讨论。\n\n### 2. MCP 工具化联网检索与交互式鉴权\n**项目概述**：围绕MCP，多个项目将联网搜索与视觉理解能力以工具+Schema的形式暴露给AI代理，强调用户手动输入与交互式控制。\n\n**Why Now**：多个项目同时强调通过MCP实现联网搜索与信息汇总，能力边界收敛为“仅负责检索与返回”，推动可控的代理协作工作流落地。\n\n**代表项目对比**：\n- **glm-web-search**：用于实时新闻与资料检索，明确仅负责检索与返回。\n- **glm-understand-image**：用于图片内容识别，强调用户手动输入API Key。\n- **WebMCP**：提供JavaScript接口，将Web应用功能以工具形式对外暴露。\n\n**风险与观察**：\n- 交互式鉴权的统一体验与安全存储。\n- 代理如何避免检索结果的偏差与遗漏。\n\n**下周观察**：\n- 基于MCP的联网搜索实现是否出现更多示例。\n- 交互式鉴权流程是否进一步标准化。\n\n### 3. 多智能体协作的共享状态+事件驱动协作底座\n**项目概述**：多智能体系统通过共享状态与事件驱动架构实现协作，出现了以状态引擎与状态查询为核心的底座。\n\n**Why Now**：随着多智能体系统的复杂性增加，如何有效管理状态与协作成为关键。项目如Flux与Grok 4.2强调状态引擎与快速学习闭环，推动了多智能体协作的落地。\n\n**代表项目对比**：\n- **Flux**：提供状态引擎与事件查询，支持多智能体共享观测。\n- **Grok 4.2**：原生多智能体系统，具备快速学习闭环。\n- **OpenTangl**：跨多个代码仓库自主构建与交付。\n\n**风险与观察**：\n- 协作底座的责任边界如何定义？\n- 多智能体并行推理的成本与适用任务边界。\n\n**下周观察**：\n- Flux的一致性机制与文档更新后的应用情况。\n- Grok 4.2的协作质量变化。\n\n## 项目榜单\n1. **Flux** - [查看项目](https://clawhub.ai/EckmanTechLLC/flux)  \n   热度：1.9361，增长：1.5489，评分：43\n\n2. **KiloClaw** - [查看项目](https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)  \n   热度：1.6632，增长：1.3306，评分：40\n\n3. **Stitch by Google** - [查看项目](https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)  \n   热度：1.6093，增长：1.2874，评分：38\n\n4. **Siteline** - [查看项目](https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)  \n   热度：1.5759，增长：1.2607，评分：38\n\n5. **Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use** - [查看项目](https://arxiv.org/abs/2602.20426v1)  \n   热度：1.5359，增长：1.2287，评分：42\n\n## 关键词趋势\n- **API Key**：热度上升，频率增加，支持项目8个。\n- **自适应解析**：热度上升，频率增加，支持项目3个。\n- **多智能体编排**：热度上升，频率增加，支持项目4个。\n\n## 交叉来源观察\n本周的多个项目均强调了对用户隐私的重视，尤其是在交互式鉴权与工具接口优化方面。随着数据隐私法规的日益严格，如何在保证用户隐私的同时提供高效的服务成为了各大项目的共同关注点。\n\n## 下周预测\n预计下周将会有更多基于MCP的联网搜索实现出现，同时交互式鉴权流程的标准化将进一步推动项目的落地。此外，随着多智能体协作的深入，相关工具与框架的成熟度也将逐步提升，推动整个生态系统的健康发展。"
+  },
+  "citations": {
+    "ax-2026-02-23-12": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "$κ$-Explorer: A Unified Framework for Active Model Estimation in MDPs",
+      "url": "https://arxiv.org/abs/2602.20404v1"
+    },
+    "ax-2026-02-23-11": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "CITED: A Decision Boundary-Aware Signature for GNNs Towards Model Extraction Defense",
+      "url": "https://arxiv.org/abs/2602.20418v1"
+    },
+    "ax-2026-02-23-8": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "CLIPoint3D: Language-Grounded Few-Shot Unsupervised 3D Point Cloud Domain Adaptation",
+      "url": "https://arxiv.org/abs/2602.20409v1"
+    },
+    "ax-2026-02-23-10": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "CREDIT: Certified Ownership Verification of Deep Neural Networks Against Model Extraction Attacks",
+      "url": "https://arxiv.org/abs/2602.20419v1"
+    },
+    "ax-2026-02-23-4": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "Case-Aware LLM-as-a-Judge Evaluation for Enterprise-Scale RAG Systems",
+      "url": "https://arxiv.org/abs/2602.20379v1"
+    },
+    "ax-2026-02-23-3": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "Diffusion Modulation via Environment Mechanism Modeling for Planning",
+      "url": "https://arxiv.org/abs/2602.20422v1"
+    },
+    "ax-2026-02-23-9": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "GauS: Differentiable Scheduling Optimization via Gaussian Reparameterization",
+      "url": "https://arxiv.org/abs/2602.20427v1"
+    },
+    "ax-2026-02-23-14": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "GeoPT: Scaling Physics Simulation via Lifted Geometric Pre-Training",
+      "url": "https://arxiv.org/abs/2602.20399v1"
+    },
+    "ax-2026-02-23-5": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "How communicatively optimal are exact numeral systems? Once more on lexicon size and morphosyntactic complexity",
+      "url": "https://arxiv.org/abs/2602.20372v1"
+    },
+    "ax-2026-02-23-2": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "Implicit Intelligence -- Evaluating Agents on What Users Don't Say",
+      "url": "https://arxiv.org/abs/2602.20424v1"
+    },
+    "ax-2026-02-23-1": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+      "url": "https://arxiv.org/abs/2602.20426v1"
+    },
+    "ax-2026-02-23-7": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "SimLBR: Learning to Detect Fake Images by Learning to Detect Real Images",
+      "url": "https://arxiv.org/abs/2602.20412v1"
+    },
+    "ax-2026-02-23-13": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "Three Concrete Challenges and Two Hopes for the Safety of Unsupervised Elicitation",
+      "url": "https://arxiv.org/abs/2602.20400v1"
+    },
+    "ax-2026-02-23-15": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "cc-Shapley: Measuring Multivariate Feature Importance Needs Causal Context",
+      "url": "https://arxiv.org/abs/2602.20396v1"
+    },
+    "ax-2026-02-23-6": {
+      "source": "arxiv",
+      "date": "2026-02-23",
+      "title": "gQIR: Generative Quanta Image Reconstruction",
+      "url": "https://arxiv.org/abs/2602.20417v1"
+    },
+    "ch-2026-02-23-6": {
+      "source": "clawhub",
+      "date": "2026-02-23",
+      "title": "App Store Deployment Guide",
+      "url": "https://clawhub.ai/Skulick19/appstore-deployment-guide"
+    },
+    "ch-2026-02-23-4": {
+      "source": "clawhub",
+      "date": "2026-02-23",
+      "title": "Dingtalk Ai Table",
+      "url": "https://clawhub.ai/aliramw/dingtalk-ai-table"
+    },
+    "ch-2026-02-23-7": {
+      "source": "clawhub",
+      "date": "2026-02-23",
+      "title": "Omni Research",
+      "url": "https://clawhub.ai/lmanchu/omni-research"
+    },
+    "ch-2026-02-23-1": {
+      "source": "clawhub",
+      "date": "2026-02-23",
+      "title": "OpenTangl",
+      "url": "https://clawhub.ai/8co/opentangl"
+    },
+    "ch-2026-02-23-8": {
+      "source": "clawhub",
+      "date": "2026-02-23",
+      "title": "Polymarket Autopilot Experimental",
+      "url": "https://clawhub.ai/mauonga/polymarket-autopilot-experimental"
+    },
+    "ch-2026-02-23-2": {
+      "source": "clawhub",
+      "date": "2026-02-23",
+      "title": "Potato Tipper",
+      "url": "https://clawhub.ai/CJ42/potato-tipper"
+    },
+    "ch-2026-02-23-3": {
+      "source": "clawhub",
+      "date": "2026-02-23",
+      "title": "glm-understand-image",
+      "url": "https://clawhub.ai/Thincher/glm-understand-image"
+    },
+    "ch-2026-02-23-5": {
+      "source": "clawhub",
+      "date": "2026-02-23",
+      "title": "glm-web-search",
+      "url": "https://clawhub.ai/Thincher/glm-web-search"
+    },
+    "gh-2026-02-23-3": {
+      "source": "github",
+      "date": "2026-02-23",
+      "title": "D4Vinci/Scrapling",
+      "url": "https://github.com/D4Vinci/Scrapling"
+    },
+    "gh-2026-02-23-5": {
+      "source": "github",
+      "date": "2026-02-23",
+      "title": "bytedance/deer-flow",
+      "url": "https://github.com/bytedance/deer-flow"
+    },
+    "gh-2026-02-23-2": {
+      "source": "github",
+      "date": "2026-02-23",
+      "title": "huggingface/skills",
+      "url": "https://github.com/huggingface/skills"
+    },
+    "gh-2026-02-23-1": {
+      "source": "github",
+      "date": "2026-02-23",
+      "title": "moonshine-ai/moonshine",
+      "url": "https://github.com/moonshine-ai/moonshine"
+    },
+    "gh-2026-02-23-4": {
+      "source": "github",
+      "date": "2026-02-23",
+      "title": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers"
+    },
+    "gh-2026-02-23-6": {
+      "source": "github",
+      "date": "2026-02-23",
+      "title": "ruvnet/claude-flow",
+      "url": "https://github.com/ruvnet/claude-flow"
+    },
+    "ph-2026-02-23-14": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "AnnotateAI",
+      "url": "https://www.producthunt.com/products/annotateai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-12": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "App Cleaner & Uninstaller 9.1",
+      "url": "https://www.producthunt.com/products/app-cleaner-uninstaller?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-17": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "Atomic AGI",
+      "url": "https://www.producthunt.com/products/atomic-agi?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-10": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "Callio",
+      "url": "https://www.producthunt.com/products/callio-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-11": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "Cuto",
+      "url": "https://www.producthunt.com/products/cuto?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-4": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "Grok 4.2",
+      "url": "https://www.producthunt.com/products/grok?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-8": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "InboxAgents",
+      "url": "https://www.producthunt.com/products/inboxagents?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-6": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "OpenHunt",
+      "url": "https://www.producthunt.com/products/openhunt?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-13": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "PipedriveSheets",
+      "url": "https://www.producthunt.com/products/pipedrivesheets?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-5": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "Replit Animated Videos",
+      "url": "https://www.producthunt.com/products/replit?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-1": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "Siteline",
+      "url": "https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-9": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "SkillForge",
+      "url": "https://www.producthunt.com/products/skillforge-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-3": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "TypeBoost",
+      "url": "https://www.producthunt.com/products/typeboost-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-15": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "Vibesafe",
+      "url": "https://www.producthunt.com/products/vibesafe-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-2": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "Wispr Flow for Android",
+      "url": "https://www.producthunt.com/products/wisprflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-7": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "YAP",
+      "url": "https://www.producthunt.com/products/yap-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-18": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "YourClaw: 1-Click Openclaw Orchestration",
+      "url": "https://www.producthunt.com/products/yourclaw-1-click-openclaw-orchestration?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-23-16": {
+      "source": "producthunt",
+      "date": "2026-02-23",
+      "title": "aImsg",
+      "url": "https://www.producthunt.com/products/aimsg-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ax-2026-02-24-3": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "Automating Timed Up and Go Phase Segmentation and Gait Analysis via the tugturn Markerless 3D Pipeline",
+      "url": "https://arxiv.org/abs/2602.21425v1"
+    },
+    "ax-2026-02-24-13": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "Benchmarking State Space Models, Transformers, and Recurrent Networks for US Grid Forecasting",
+      "url": "https://arxiv.org/abs/2602.21415v1"
+    },
+    "ax-2026-02-24-4": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "ECHOSAT: Estimating Canopy Height Over Space And Time",
+      "url": "https://arxiv.org/abs/2602.21421v1"
+    },
+    "ax-2026-02-24-6": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "Exploring Vision-Language Models for Open-Vocabulary Zero-Shot Action Segmentation",
+      "url": "https://arxiv.org/abs/2602.21406v1"
+    },
+    "ax-2026-02-24-15": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "FedVG: Gradient-Guided Aggregation for Enhanced Federated Learning",
+      "url": "https://arxiv.org/abs/2602.21399v1"
+    },
+    "ax-2026-02-24-7": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "FlowFixer: Towards Detail-Preserving Subject-Driven Generation",
+      "url": "https://arxiv.org/abs/2602.21402v1"
+    },
+    "ax-2026-02-24-14": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "Generative Bayesian Computation as a Scalable Alternative to Gaussian Process Surrogates",
+      "url": "https://arxiv.org/abs/2602.21408v1"
+    },
+    "ax-2026-02-24-8": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "MINAR: Mechanistic Interpretability for Neural Algorithmic Reasoning",
+      "url": "https://arxiv.org/abs/2602.21442v1"
+    },
+    "ax-2026-02-24-11": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "On the Structural Non-Preservation of Epistemic Behaviour under Policy Transformation",
+      "url": "https://arxiv.org/abs/2602.21424v1"
+    },
+    "ax-2026-02-24-12": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "Overconfident Errors Need Stronger Correction: Asymmetric Confidence Penalties for Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2602.21420v1"
+    },
+    "ax-2026-02-24-2": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models",
+      "url": "https://arxiv.org/abs/2602.21428v1"
+    },
+    "ax-2026-02-24-9": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "Provably Safe Generative Sampling with Constricting Barrier Functions",
+      "url": "https://arxiv.org/abs/2602.21429v1"
+    },
+    "ax-2026-02-24-10": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "Proximal-IMH: Proximal Posterior Proposals for Independent Metropolis-Hastings with Approximate Operators",
+      "url": "https://arxiv.org/abs/2602.21426v1"
+    },
+    "ax-2026-02-24-1": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking",
+      "url": "https://arxiv.org/abs/2602.21435v1"
+    },
+    "ax-2026-02-24-5": {
+      "source": "arxiv",
+      "date": "2026-02-24",
+      "title": "WildSVG: Towards Reliable SVG Generation Under Real-Word Conditions",
+      "url": "https://arxiv.org/abs/2602.21416v1"
+    },
+    "ch-2026-02-24-1": {
+      "source": "clawhub",
+      "date": "2026-02-24",
+      "title": "Auto Memory",
+      "url": "https://clawhub.ai/jim-counter/auto-memory"
+    },
+    "ch-2026-02-24-4": {
+      "source": "clawhub",
+      "date": "2026-02-24",
+      "title": "Flux",
+      "url": "https://clawhub.ai/EckmanTechLLC/flux"
+    },
+    "ch-2026-02-24-6": {
+      "source": "clawhub",
+      "date": "2026-02-24",
+      "title": "Kraken Exchange",
+      "url": "https://clawhub.ai/askbeka/tentactl"
+    },
+    "ch-2026-02-24-3": {
+      "source": "clawhub",
+      "date": "2026-02-24",
+      "title": "Onebot Adapter 1.0.0",
+      "url": "https://clawhub.ai/haohaodlam/onebot-adapter-1-0-0"
+    },
+    "ch-2026-02-24-2": {
+      "source": "clawhub",
+      "date": "2026-02-24",
+      "title": "OpenClaw Arena",
+      "url": "https://clawhub.ai/billychl1/openclawarena-arena"
+    },
+    "ch-2026-02-24-5": {
+      "source": "clawhub",
+      "date": "2026-02-24",
+      "title": "Stable Browser",
+      "url": "https://clawhub.ai/jarvis563/stable-browser"
+    },
+    "gh-2026-02-24-3": {
+      "source": "github",
+      "date": "2026-02-24",
+      "title": "D4Vinci/Scrapling",
+      "url": "https://github.com/D4Vinci/Scrapling"
+    },
+    "gh-2026-02-24-5": {
+      "source": "github",
+      "date": "2026-02-24",
+      "title": "bytedance/deer-flow",
+      "url": "https://github.com/bytedance/deer-flow"
+    },
+    "gh-2026-02-24-2": {
+      "source": "github",
+      "date": "2026-02-24",
+      "title": "huggingface/skills",
+      "url": "https://github.com/huggingface/skills"
+    },
+    "gh-2026-02-24-1": {
+      "source": "github",
+      "date": "2026-02-24",
+      "title": "moonshine-ai/moonshine",
+      "url": "https://github.com/moonshine-ai/moonshine"
+    },
+    "gh-2026-02-24-4": {
+      "source": "github",
+      "date": "2026-02-24",
+      "title": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers"
+    },
+    "gh-2026-02-24-6": {
+      "source": "github",
+      "date": "2026-02-24",
+      "title": "ruvnet/claude-flow",
+      "url": "https://github.com/ruvnet/claude-flow"
+    },
+    "ph-2026-02-24-3": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Anima",
+      "url": "https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-7": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Bazaar V4",
+      "url": "https://www.producthunt.com/products/bazaar-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-10": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Collective OS",
+      "url": "https://www.producthunt.com/products/collective-os?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-17": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Dictato",
+      "url": "https://www.producthunt.com/products/dictato?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-9": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Falconer",
+      "url": "https://www.producthunt.com/products/falconer?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-14": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Forum",
+      "url": "https://www.producthunt.com/products/forum-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-5": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Liner Write",
+      "url": "https://www.producthunt.com/products/liner-write?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-2": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Modelence App Builder",
+      "url": "https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-16": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Nag Alarm AI",
+      "url": "https://www.producthunt.com/products/nag-alarm-ai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-4": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Orchids 1.0",
+      "url": "https://www.producthunt.com/products/orchids?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-11": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Polsia",
+      "url": "https://www.producthunt.com/products/polsia?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-13": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Quilt",
+      "url": "https://www.producthunt.com/products/quilt-5?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-12": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Skills for Agents",
+      "url": "https://www.producthunt.com/products/skills-for-agents?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-1": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Stitch by Google",
+      "url": "https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-8": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "Toggle for OpenClaw",
+      "url": "https://www.producthunt.com/products/togglex-openclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-15": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "WebMCP",
+      "url": "https://www.producthunt.com/products/webmcp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ph-2026-02-24-6": {
+      "source": "producthunt",
+      "date": "2026-02-24",
+      "title": "What YC Is Really Betting On?",
+      "url": "https://www.producthunt.com/products/what-yc-is-really-betting-on?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    },
+    "ax-2026-02-25-1": {
+      "source": "arxiv",
+      "date": "2026-02-25",
+      "title": "Neu-PiG: Neural Preconditioned Grids for Fast Dynamic Surface Reconstruction on Long Sequences",
+      "url": "https://arxiv.org/abs/2602.22212v1"
+    },
+    "ax-2026-02-25-2": {
+      "source": "arxiv",
+      "date": "2026-02-25",
+      "title": "WHOLE: World-Grounded Hand-Object Lifted from Egocentric Videos",
+      "url": "https://arxiv.org/abs/2602.22209v1"
+    },
+    "ch-2026-02-25-1": {
+      "source": "clawhub",
+      "date": "2026-02-25",
+      "title": "Built at GrowthX",
+      "url": "https://clawhub.ai/gxt-admin/growthx-bx-submit"
+    },
+    "gh-2026-02-25-1": {
+      "source": "github",
+      "date": "2026-02-25",
+      "title": "D4Vinci/Scrapling",
+      "url": "https://github.com/D4Vinci/Scrapling"
+    },
+    "ph-2026-02-25-1": {
+      "source": "producthunt",
+      "date": "2026-02-25",
+      "title": "KiloClaw",
+      "url": "https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29"
+    }
+  }
+}

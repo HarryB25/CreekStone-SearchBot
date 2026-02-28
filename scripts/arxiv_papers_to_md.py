@@ -371,6 +371,7 @@ def fetch_arxiv_papers(
     categories: List[str] = None,
     max_results: int = 10,
     target_date: str = "",
+    allow_previous_day_fallback: bool = True,
 ) -> List[ArxivPaper]:
     """从arXiv API获取最新论文"""
     if categories is None:
@@ -492,6 +493,17 @@ def fetch_arxiv_papers(
         print(f"最近7天的论文: {len(recent_entries)} 篇")
 
         if not recent_entries:
+            if strict_day_mode and target_day_dt is not None and allow_previous_day_fallback:
+                fallback_date = (target_day_dt - timedelta(days=1)).strftime('%Y-%m-%d')
+                print(
+                    f"目标日期 {upper_date} 未命中论文，自动回退到前一天 {fallback_date} 重试..."
+                )
+                return fetch_arxiv_papers(
+                    categories=categories,
+                    max_results=max_results,
+                    target_date=fallback_date,
+                    allow_previous_day_fallback=False,
+                )
             if _allow_mock_data():
                 print("未找到窗口内论文，ALLOW_MOCK_DATA=true，使用模拟数据...")
                 return fetch_mock_papers()
