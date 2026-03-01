@@ -1,88 +1,75 @@
 # Weekly Research Report | 2026-02-23 ~ 2026-03-01
 
-> generated_at: 2026-02-28T11:43:54Z
-> k_selected: 10
+> generated_at: 2026-02-28T17:54:51Z
+> k_selected: 4
 > embedding_model: text-embedding-3-large
 > chat_model: gpt-4o-mini, gpt-5.2-2025-12-11
 
 # 周度科技趋势研究报告
-**时间范围：2026年2月23日至2026年3月1日**
 
 ## 本周摘要
-本周科技领域的主要趋势集中在腾讯云的对象存储与多媒体处理的整合能力、智能体系统的自动化与安全性、以及多智能体协作的可复现性评测等方面。腾讯云推出的COS与CI一体化能力封装，提供了更高效的文件管理与多媒体处理能力，标志着云存储技术的进一步发展。同时，多智能体系统的安全框架和记忆管理机制的完善，显示出对长期运行的需求和风险控制的重视。此外，围绕LLM（大语言模型）的多代理协作与评测框架的研究也在不断深入，推动了智能体的可靠性与可复现性。
+在2026年2月23日至3月1日的这一周，科技领域的多个趋势主题持续升温，尤其是围绕多智能体的可评测与自我改进能力、MCP驱动的多智能体工具链以及AI智能体托管与端到端产品生产力工具等主题。多个项目在这些领域取得了显著进展，尤其是针对智能体的评测框架和工具使用的可靠性问题。与此同时，MCP（多通道处理）技术的应用也在不断扩展，推动了智能体的任务编排与共享上下文能力的提升。
 
 ## 趋势主题
 
-### 1. 腾讯云 COS/CI 一体化能力封装
-**概述**：腾讯云推出的COS与CI一体化能力封装，结合了对象存储管理与多媒体处理，提供了统一的技能接口，支持智能图片搜索、二维码识别、文档转PDF等功能。
+### 1. 面向多智能体的“可评测可自我改进”能力栈
+本周的研究显示，随着多智能体技术的进步，智能体的长期任务执行能力逐渐从“能跑起来”向“能长期稳定迭代”转变。这一转变需要在对话和任务中持续维护高质量的记忆，同时建立可复现的评测框架来驱动智能体的自我优化。相关项目如SurrealDB的知识图谱记忆系统、VeRO评测框架等，均展示了这一趋势的实际应用。
 
-**Why Now**：随着云计算的普及，企业对高效的数据管理与处理能力的需求日益增加。腾讯云通过整合COS与CI，解决了不同运行环境下工具可用性差的问题，提升了用户体验和操作效率。
+- **代表项目对比**：
+  - **SurrealDB**：提供语义检索与工作记忆，通过去重与修剪机制维持知识图谱的健康。
+  - **VeRO**：为智能体优化提供可复现的评测框架，支持迭代改进任务的评估。
 
-**代表项目对比**：
-- **Tencent COS**：集成COS与CI，支持云端文件上传下载与多媒体处理。
-- **腾讯云COS存储**：提供存储管理与媒体处理能力，强调统一执行策略与回退机制。
+- **风险与观察**：
+  - 知识图谱的维护需谨慎，避免误删关键事实。
+  - 评测框架的可复现性与实际应用目标的对齐仍需进一步验证。
 
-**风险与观察**：
-- 需关注能力边界是否限制了实际业务落地的需求。
-- 用户配置的复杂性可能影响功能的可用性。
+### 2. MCP驱动的多智能体工具链
+MCP技术的应用使得多智能体能够更好地整合外部工具，形成共享上下文与任务编排的能力。这一主题的兴起反映了智能体从单点调用向可编排、可共享的工程化落地的转变。项目如腾讯云COS与Flux等，展示了这一技术的实际应用。
 
-**下周观察**：
-- 自动探测与回退策略的演进。
-- 智能图片搜索等功能的标准化进展。
+- **代表项目对比**：
+  - **腾讯云COS**：集成文件管理与多媒体增值能力，支持多种执行策略。
+  - **Flux**：提供共享状态与一致性保障，支持多智能体协作。
 
-### 2. 多智能体系统的可运行生产栈
-**概述**：多智能体应用正向可长期运行的生产系统转变，核心在于共享上下文、动作级安全与审计、托管部署等。
+- **风险与观察**：
+  - 外部能力的强依赖可能导致配置复杂度增加。
+  - 多源抓取与聚合检索的稳定性与合规性需进一步评估。
 
-**Why Now**：随着多智能体技术的成熟，企业需要将其应用于实际业务中，确保系统的安全性与稳定性。
+### 3. AI智能体托管与端到端产品生产力工具
+随着智能体技术的成熟，越来越多的产品开始围绕智能体的托管与生产力工具展开。这一趋势显示出从演示到可持续运行的需求正在集中爆发，项目如KiloClaw与Stitch等，展示了这一方向的前景。
 
-**代表项目对比**：
-- **Self-improving Agent Memory Upgrade**：提供知识图谱记忆系统，支持上下文管理与自动清理。
-- **ShieldCortex**：面向AI Agent的安全框架，强调审计与保护机制。
+- **代表项目对比**：
+  - **KiloClaw**：提供全托管的AI智能体解决方案，减少用户的运维负担。
+  - **Stitch**：通过自然语言描述生成可编辑设计稿与真实代码，提升产品开发效率。
 
-**风险与观察**：
-- 记忆系统的串扰风险与自动上下文注入的准确性。
-- 托管平台的权限管理与密钥管理是否足够。
-
-**下周观察**：
-- 记忆管理与安全框架的标准化能力。
-- 托管平台的密钥管理与权限边界的集成实践。
-
-### 3. LLM多代理的可靠工具使用与可复现评测
-**概述**：围绕工具接口优化与评测框架的建设，提升LLM-Agent的可靠性与可复现性。
-
-**Why Now**：随着多代理协作的复杂性增加，提升工具使用的可靠性与评测的可复现性成为关键需求。
-
-**代表项目对比**：
-- **Learning to Rewrite Tool Descriptions**：通过重写工具描述提升工具调用可靠性。
-- **VeRO**：提供可复现的评测框架，系统评估智能体的表现。
-
-**风险与观察**：
-- 评测框架的覆盖范围与真实场景的适应性。
-- 多代理系统的收益提升与防泄漏回测的敏感度。
-
-**下周观察**：
-- 新评测框架的扩展与工具接口优化的闭环。
-- 多代理细粒度任务分解在其他领域的复用迹象。
+- **风险与观察**：
+  - 全托管智能体的安全性与可控性需加强。
+  - 跨设备的代码会话延续在隐私与访问控制上需明确边界。
 
 ## 项目榜单
-1. **[Tencent COS](https://clawhub.ai/ShawnMinh/tencent-cos-skill)** - 集成腾讯云COS与CI，支持多媒体处理与文件管理。
-2. **[腾讯云COS存储](https://clawhub.ai/ShawnMinh/tencent-cloud-cos)** - 提供存储管理与媒体处理能力，强调统一执行策略。
-3. **[Self-improving Agent Memory Upgrade](https://clawhub.ai/maverick-software/surrealdb-knowledge-graph-memory)** - 知识图谱记忆系统，支持上下文管理。
-4. **[KiloClaw](https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)** - 全托管的开源AI Agent版本。
-5. **[Search Cluster](https://clawhub.ai/1999AZZAR/search-cluster)** - 聚合式专业搜索工具，整合多来源网页与新闻结果。
+1. **[Tencent COS](https://clawhub.ai/ShawnMinh/tencent-cos-skill)** - 提供云端文件管理与多媒体增值能力。
+2. **[Self-improving Agent Memory Upgrade (SurrealDB)](https://clawhub.ai/maverick-software/surrealdb-knowledge-graph-memory)** - 面向多智能体的知识图谱记忆系统。
+3. **[VeRO: An Evaluation Harness for Agents to Optimize Agents](https://arxiv.org/abs/2602.22480v1)** - 可复现的评测框架。
+4. **[KiloClaw](https://www.producthunt.com/products/kiloclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)** - OpenClaw的全托管版本。
+5. **[Stitch by Google](https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)** - 用自然语言描述生成可编辑设计稿与可用真实代码。
 
 ## 关键词趋势
-- **任务编排**：频率上升，支持项目数量增加。
-- **评测框架**：持续受到关注，相关项目增多。
-- **报告生成**：相关项目数量稳定，显示出市场需求。
-- **多模态推理**：相关项目数量上升，显示出技术进步。
-- **云存储文件管理**：相关项目数量增加，显示出市场需求。
+- **评测框架**：支持项目数量增加，显示出对智能体优化的关注。
+- **任务编排**：相关项目的增加表明智能体协作能力的提升。
+- **MCP API**：随着MCP技术的普及，相关工具与应用逐渐增多。
+- **向量数据库**：在数据处理与检索中，向量数据库的应用逐渐显现出重要性。
 
 ## 交叉来源观察
-本周的项目与趋势主要来源于Clawhub与ProductHunt，反映出市场对云存储、多智能体系统与LLM技术的关注与需求。各项目之间的相互联系与技术交叉，显示出行业内的协同发展趋势。
+本周的多个项目与研究均来自于不同的来源，包括arXiv、Clawhub与Product Hunt，显示出跨平台的技术整合与创新。尤其是在多智能体与MCP技术的结合上，各项目之间的技术互补性与合作潜力逐渐显现。
 
 ## 下周预测
-预计下周将继续关注腾讯云COS与CI的整合能力的进展，特别是在智能图片搜索与二维码识别等功能的标准化方面。同时，多智能体系统的安全性与托管化运行的实践将成为重点关注对象。此外，LLM多代理的评测框架与工具接口优化的研究将持续推进，推动智能体的可靠性与可复现性。
+展望下周，预计以下几个方面将继续受到关注：
+- **Self-improving Agent Memory Upgrade**的图谱健康机制的落地效果与可用性反馈。
+- **VeRO**的迭代改进任务结果与可复现实验对比的进一步验证。
+- **Trace-Free+**在更多工具场景中的应用验证。
+- **Implicit Intelligence**的隐含约束完成度的检验任务类型的扩展。
+- **多智能体细粒度交易任务系统**的任务拆解与防泄漏回测设置的验证。
+
+本周的研究与观察显示出多智能体技术的持续演进与应用前景，未来几周将是这一领域创新与发展的关键时期。
 
 ## 引用索引
 
@@ -101,18 +88,10 @@
 - [arxiv:ax-2026-02-23-7] SimLBR: Learning to Detect Fake Images by Learning to Detect Real Images (https://arxiv.org/abs/2602.20412v1)
 - [arxiv:ax-2026-02-23-8] CLIPoint3D: Language-Grounded Few-Shot Unsupervised 3D Point Cloud Domain Adaptation (https://arxiv.org/abs/2602.20409v1)
 - [arxiv:ax-2026-02-23-9] GauS: Differentiable Scheduling Optimization via Gaussian Reparameterization (https://arxiv.org/abs/2602.20427v1)
-- [arxiv:ax-2026-02-24-1] Synergizing Understanding and Generation with Interleaved Analyzing-Drafting Thinking (https://arxiv.org/abs/2602.21435v1)
-- [arxiv:ax-2026-02-24-10] Proximal-IMH: Proximal Posterior Proposals for Independent Metropolis-Hastings with Approximate Operators (https://arxiv.org/abs/2602.21426v1)
-- [arxiv:ax-2026-02-24-11] On the Structural Non-Preservation of Epistemic Behaviour under Policy Transformation (https://arxiv.org/abs/2602.21424v1)
-- [arxiv:ax-2026-02-24-12] Overconfident Errors Need Stronger Correction: Asymmetric Confidence Penalties for Reinforcement Learning (https://arxiv.org/abs/2602.21420v1)
-- [arxiv:ax-2026-02-24-13] Benchmarking State Space Models, Transformers, and Recurrent Networks for US Grid Forecasting (https://arxiv.org/abs/2602.21415v1)
-- [arxiv:ax-2026-02-24-14] Generative Bayesian Computation as a Scalable Alternative to Gaussian Process Surrogates (https://arxiv.org/abs/2602.21408v1)
 - [arxiv:ax-2026-02-24-15] FedVG: Gradient-Guided Aggregation for Enhanced Federated Learning (https://arxiv.org/abs/2602.21399v1)
 - [arxiv:ax-2026-02-24-2] PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models (https://arxiv.org/abs/2602.21428v1)
-- [arxiv:ax-2026-02-24-3] Automating Timed Up and Go Phase Segmentation and Gait Analysis via the tugturn Markerless 3D Pipeline (https://arxiv.org/abs/2602.21425v1)
 - [arxiv:ax-2026-02-24-4] ECHOSAT: Estimating Canopy Height Over Space And Time (https://arxiv.org/abs/2602.21421v1)
 - [arxiv:ax-2026-02-24-5] WildSVG: Towards Reliable SVG Generation Under Real-Word Conditions (https://arxiv.org/abs/2602.21416v1)
-- [arxiv:ax-2026-02-24-6] Exploring Vision-Language Models for Open-Vocabulary Zero-Shot Action Segmentation (https://arxiv.org/abs/2602.21406v1)
 - [arxiv:ax-2026-02-24-7] FlowFixer: Towards Detail-Preserving Subject-Driven Generation (https://arxiv.org/abs/2602.21402v1)
 - [arxiv:ax-2026-02-24-8] MINAR: Mechanistic Interpretability for Neural Algorithmic Reasoning (https://arxiv.org/abs/2602.21442v1)
 - [arxiv:ax-2026-02-24-9] Provably Safe Generative Sampling with Constricting Barrier Functions (https://arxiv.org/abs/2602.21429v1)
@@ -122,15 +101,8 @@
 - [arxiv:ax-2026-02-25-12] Overconfident Errors Need Stronger Correction: Asymmetric Confidence Penalties for Reinforcement Learning (https://arxiv.org/abs/2602.21420v1)
 - [arxiv:ax-2026-02-25-13] Benchmarking State Space Models, Transformers, and Recurrent Networks for US Grid Forecasting (https://arxiv.org/abs/2602.21415v1)
 - [arxiv:ax-2026-02-25-14] Generative Bayesian Computation as a Scalable Alternative to Gaussian Process Surrogates (https://arxiv.org/abs/2602.21408v1)
-- [arxiv:ax-2026-02-25-15] FedVG: Gradient-Guided Aggregation for Enhanced Federated Learning (https://arxiv.org/abs/2602.21399v1)
-- [arxiv:ax-2026-02-25-2] PSF-Med: Measuring and Explaining Paraphrase Sensitivity in Medical Vision Language Models (https://arxiv.org/abs/2602.21428v1)
 - [arxiv:ax-2026-02-25-3] Automating Timed Up and Go Phase Segmentation and Gait Analysis via the tugturn Markerless 3D Pipeline (https://arxiv.org/abs/2602.21425v1)
-- [arxiv:ax-2026-02-25-4] ECHOSAT: Estimating Canopy Height Over Space And Time (https://arxiv.org/abs/2602.21421v1)
-- [arxiv:ax-2026-02-25-5] WildSVG: Towards Reliable SVG Generation Under Real-Word Conditions (https://arxiv.org/abs/2602.21416v1)
 - [arxiv:ax-2026-02-25-6] Exploring Vision-Language Models for Open-Vocabulary Zero-Shot Action Segmentation (https://arxiv.org/abs/2602.21406v1)
-- [arxiv:ax-2026-02-25-7] FlowFixer: Towards Detail-Preserving Subject-Driven Generation (https://arxiv.org/abs/2602.21402v1)
-- [arxiv:ax-2026-02-25-8] MINAR: Mechanistic Interpretability for Neural Algorithmic Reasoning (https://arxiv.org/abs/2602.21442v1)
-- [arxiv:ax-2026-02-25-9] Provably Safe Generative Sampling with Constricting Barrier Functions (https://arxiv.org/abs/2602.21429v1)
 - [arxiv:ax-2026-02-26-1] VeRO: An Evaluation Harness for Agents to Optimize Agents (https://arxiv.org/abs/2602.22480v1)
 - [arxiv:ax-2026-02-26-10] Beyond Dominant Patches: Spatial Credit Redistribution For Grounded Vision-Language Models (https://arxiv.org/abs/2602.22469v1)
 - [arxiv:ax-2026-02-26-11] MammoWise: Multi-Model Local RAG Pipeline for Mammography Report Generation (https://arxiv.org/abs/2602.22462v1)
@@ -153,7 +125,6 @@
 - [arxiv:ax-2026-02-27-13] Mean Estimation from Coarse Data: Characterizations and Efficient Algorithms (https://arxiv.org/abs/2602.23341v1)
 - [arxiv:ax-2026-02-27-14] Differentiable Zero-One Loss via Hypersimplex Projections (https://arxiv.org/abs/2602.23336v1)
 - [arxiv:ax-2026-02-27-15] ParamMem: Augmenting Language Agents with Parametric Reflective Memory (https://arxiv.org/abs/2602.23320v1)
-- [arxiv:ax-2026-02-27-2] LLM Novice Uplift on Dual-Use, In Silico Biology Tasks (https://arxiv.org/abs/2602.23329v1)
 - [arxiv:ax-2026-02-27-3] Invariant Transformation and Resampling based Epistemic-Uncertainty Reduction (https://arxiv.org/abs/2602.23315v1)
 - [arxiv:ax-2026-02-27-4] MediX-R1: Open Ended Medical Reinforcement Learning (https://arxiv.org/abs/2602.23363v1)
 - [arxiv:ax-2026-02-27-5] VGG-T$^3$: Offline Feed-Forward 3D Reconstruction at Scale (https://arxiv.org/abs/2602.23361v1)
@@ -161,29 +132,15 @@
 - [arxiv:ax-2026-02-27-7] Retrieve and Segment: Are a Few Examples Enough to Bridge the Supervision Gap in Open-Vocabulary Segmentation? (https://arxiv.org/abs/2602.23339v1)
 - [arxiv:ax-2026-02-27-8] ThinkOmni: Lifting Textual Reasoning to Omni-modal Scenarios via Guidance Decoding (https://arxiv.org/abs/2602.23306v1)
 - [arxiv:ax-2026-02-27-9] Model Agreement via Anchoring (https://arxiv.org/abs/2602.23360v1)
-- [arxiv:ax-2026-02-28-1] Toward Expert Investment Teams:A Multi-Agent LLM System with Fine-Grained Trading Tasks (https://arxiv.org/abs/2602.23330v1)
-- [arxiv:ax-2026-02-28-10] MediX-R1: Open Ended Medical Reinforcement Learning (https://arxiv.org/abs/2602.23363v1)
-- [arxiv:ax-2026-02-28-11] VGG-T$^3$: Offline Feed-Forward 3D Reconstruction at Scale (https://arxiv.org/abs/2602.23361v1)
-- [arxiv:ax-2026-02-28-12] Sensor Generalization for Adaptive Sensing in Event-based Object Detection via Joint Distribution Training (https://arxiv.org/abs/2602.23357v1)
-- [arxiv:ax-2026-02-28-13] Retrieve and Segment: Are a Few Examples Enough to Bridge the Supervision Gap in Open-Vocabulary Segmentation? (https://arxiv.org/abs/2602.23339v1)
-- [arxiv:ax-2026-02-28-14] ThinkOmni: Lifting Textual Reasoning to Omni-modal Scenarios via Guidance Decoding (https://arxiv.org/abs/2602.23306v1)
 - [arxiv:ax-2026-02-28-15] PRIMA: Pre-training with Risk-integrated Image-Metadata Alignment for Medical Diagnosis via LLM (https://arxiv.org/abs/2602.23297v1)
 - [arxiv:ax-2026-02-28-16] ManifoldGD: Training-Free Hierarchical Manifold Guidance for Diffusion-Based Dataset Distillation (https://arxiv.org/abs/2602.23295v1)
 - [arxiv:ax-2026-02-28-17] Towards Long-Form Spatio-Temporal Video Grounding (https://arxiv.org/abs/2602.23294v1)
 - [arxiv:ax-2026-02-28-18] PGVMS: A Prompt-Guided Unified Framework for Virtual Multiplex IHC Staining with Pathological Semantic Learning (https://arxiv.org/abs/2602.23292v1)
 - [arxiv:ax-2026-02-28-19] LineGraph2Road: Structural Graph Reasoning on Line Graphs for Road Network Extraction (https://arxiv.org/abs/2602.23290v1)
 - [arxiv:ax-2026-02-28-2] LLM Novice Uplift on Dual-Use, In Silico Biology Tasks (https://arxiv.org/abs/2602.23329v1)
-- [arxiv:ax-2026-02-28-20] Model Agreement via Anchoring (https://arxiv.org/abs/2602.23360v1)
-- [arxiv:ax-2026-02-28-21] A Dataset is Worth 1 MB (https://arxiv.org/abs/2602.23358v1)
-- [arxiv:ax-2026-02-28-22] SOTAlign: Semi-Supervised Alignment of Unimodal Vision and Language Models via Optimal Transport (https://arxiv.org/abs/2602.23353v1)
-- [arxiv:ax-2026-02-28-23] FlashOptim: Optimizers for Memory Efficient Training (https://arxiv.org/abs/2602.23349v1)
-- [arxiv:ax-2026-02-28-24] Mean Estimation from Coarse Data: Characterizations and Efficient Algorithms (https://arxiv.org/abs/2602.23341v1)
-- [arxiv:ax-2026-02-28-25] Differentiable Zero-One Loss via Hypersimplex Projections (https://arxiv.org/abs/2602.23336v1)
-- [arxiv:ax-2026-02-28-26] ParamMem: Augmenting Language Agents with Parametric Reflective Memory (https://arxiv.org/abs/2602.23320v1)
 - [arxiv:ax-2026-02-28-27] A Proper Scoring Rule for Virtual Staining (https://arxiv.org/abs/2602.23305v1)
 - [arxiv:ax-2026-02-28-28] Inferential Mechanics Part 1: Causal Mechanistic Theories of Machine Learning in Chemical Biology with Implications (https://arxiv.org/abs/2602.23303v1)
 - [arxiv:ax-2026-02-28-29] Conformalized Neural Networks for Federated Uncertainty Quantification under Dual Heterogeneity (https://arxiv.org/abs/2602.23296v1)
-- [arxiv:ax-2026-02-28-3] Invariant Transformation and Resampling based Epistemic-Uncertainty Reduction (https://arxiv.org/abs/2602.23315v1)
 - [arxiv:ax-2026-02-28-30] Physics Informed Viscous Value Representations (https://arxiv.org/abs/2602.23280v1)
 - [arxiv:ax-2026-02-28-4] The logic of KM belief update is contained in the logic of AGM belief revision (https://arxiv.org/abs/2602.23302v1)
 - [arxiv:ax-2026-02-28-5] ODEBrain: Continuous-Time EEG Graph for Modeling Dynamic Brain Networks (https://arxiv.org/abs/2602.23285v1)
@@ -207,7 +164,6 @@
 - [clawhub:ch-2026-02-24-6] Kraken Exchange (https://clawhub.ai/askbeka/tentactl)
 - [clawhub:ch-2026-02-28-1] 腾讯云COS存储 (https://clawhub.ai/ShawnMinh/tencent-cloud-cos)
 - [clawhub:ch-2026-02-28-10] Password Generator (https://clawhub.ai/Yukin1218/password-generator)
-- [clawhub:ch-2026-02-28-11] Tencent Cloud COS (https://clawhub.ai/ShawnMinh/tencentcloud-cos-skills)
 - [clawhub:ch-2026-02-28-12] Money Idea Generator (https://clawhub.ai/devotion-coding/openclaw-skill-money-idea-generator)
 - [clawhub:ch-2026-02-28-13] Self-improving Agent Memory Upgrade (SurrealDB) (https://clawhub.ai/maverick-software/surrealdb-knowledge-graph-memory)
 - [clawhub:ch-2026-02-28-14] smartsheet-write (https://clawhub.ai/Roollond/smartsheet-write)
@@ -223,73 +179,30 @@
 - [clawhub:ch-2026-02-28-23] Dogovor Ru (https://clawhub.ai/aggel008/dogovor-ru)
 - [clawhub:ch-2026-02-28-24] Chinovnik Ru (https://clawhub.ai/aggel008/chinovnik-ru)
 - [clawhub:ch-2026-02-28-25] Analizy Ru (https://clawhub.ai/aggel008/analizy-ru)
-- [clawhub:ch-2026-02-28-3] Tencent Cloud COS (https://clawhub.ai/ShawnMinh/tencent-cloud-cos-skill)
 - [clawhub:ch-2026-02-28-4] Tencent COS (https://clawhub.ai/ShawnMinh/tencent-cos-skill)
 - [clawhub:ch-2026-02-28-5] Veadk Go Skills (https://clawhub.ai/helloldm/veadk-go-skills)
 - [clawhub:ch-2026-02-28-6] 数联互通weather (https://clawhub.ai/jianmo1997/shulian-weather)
-- [clawhub:ch-2026-02-28-7] Tencent Cloud COS (https://clawhub.ai/ShawnMinh/tencentcloud-cos-skill)
 - [clawhub:ch-2026-02-28-8] Auto Doc Index (https://clawhub.ai/ERerGB/auto-doc-index)
 - [clawhub:ch-2026-02-28-9] notion-agent-memory (https://clawhub.ai/vladchatware/notion-agent-memory)
-- [github:gh-2026-02-23-1] moonshine-ai/moonshine (https://github.com/moonshine-ai/moonshine)
-- [github:gh-2026-02-23-2] huggingface/skills (https://github.com/huggingface/skills)
-- [github:gh-2026-02-23-3] D4Vinci/Scrapling (https://github.com/D4Vinci/Scrapling)
-- [github:gh-2026-02-23-4] obra/superpowers (https://github.com/obra/superpowers)
-- [github:gh-2026-02-23-5] bytedance/deer-flow (https://github.com/bytedance/deer-flow)
-- [github:gh-2026-02-23-6] ruvnet/claude-flow (https://github.com/ruvnet/claude-flow)
-- [github:gh-2026-02-24-1] moonshine-ai/moonshine (https://github.com/moonshine-ai/moonshine)
 - [github:gh-2026-02-24-2] huggingface/skills (https://github.com/huggingface/skills)
 - [github:gh-2026-02-24-3] D4Vinci/Scrapling (https://github.com/D4Vinci/Scrapling)
-- [github:gh-2026-02-24-4] obra/superpowers (https://github.com/obra/superpowers)
-- [github:gh-2026-02-24-5] bytedance/deer-flow (https://github.com/bytedance/deer-flow)
 - [github:gh-2026-02-24-6] ruvnet/claude-flow (https://github.com/ruvnet/claude-flow)
 - [github:gh-2026-02-25-1] moonshine-ai/moonshine (https://github.com/moonshine-ai/moonshine)
-- [github:gh-2026-02-25-10] ruvnet/ruflo (https://github.com/ruvnet/ruflo)
 - [github:gh-2026-02-25-11] abhigyanpatwari/GitNexus (https://github.com/abhigyanpatwari/GitNexus)
 - [github:gh-2026-02-25-2] tukaani-project/xz (https://github.com/tukaani-project/xz)
-- [github:gh-2026-02-25-3] bytedance/deer-flow (https://github.com/bytedance/deer-flow)
 - [github:gh-2026-02-25-4] datawhalechina/hello-agents (https://github.com/datawhalechina/hello-agents)
-- [github:gh-2026-02-25-5] D4Vinci/Scrapling (https://github.com/D4Vinci/Scrapling)
 - [github:gh-2026-02-25-6] alibaba/OpenSandbox (https://github.com/alibaba/OpenSandbox)
 - [github:gh-2026-02-25-7] ruvnet/ruvector (https://github.com/ruvnet/ruvector)
-- [github:gh-2026-02-25-8] obra/superpowers (https://github.com/obra/superpowers)
-- [github:gh-2026-02-25-9] anthropics/claude-code (https://github.com/anthropics/claude-code)
-- [github:gh-2026-02-26-1] tukaani-project/xz (https://github.com/tukaani-project/xz)
-- [github:gh-2026-02-26-10] anthropics/claude-code (https://github.com/anthropics/claude-code)
-- [github:gh-2026-02-26-11] obra/superpowers (https://github.com/obra/superpowers)
-- [github:gh-2026-02-26-12] ruvnet/ruflo (https://github.com/ruvnet/ruflo)
-- [github:gh-2026-02-26-13] superset-sh/superset (https://github.com/superset-sh/superset)
-- [github:gh-2026-02-26-2] moonshine-ai/moonshine (https://github.com/moonshine-ai/moonshine)
 - [github:gh-2026-02-26-3] PaddlePaddle/Paddle (https://github.com/PaddlePaddle/Paddle)
-- [github:gh-2026-02-26-4] Shubhamsaboo/awesome-llm-apps (https://github.com/Shubhamsaboo/awesome-llm-apps)
-- [github:gh-2026-02-26-5] bytedance/deer-flow (https://github.com/bytedance/deer-flow)
 - [github:gh-2026-02-26-6] NousResearch/hermes-agent (https://github.com/NousResearch/hermes-agent)
-- [github:gh-2026-02-26-7] datagouv/datagouv-mcp (https://github.com/datagouv/datagouv-mcp)
-- [github:gh-2026-02-26-8] X-PLUG/MobileAgent (https://github.com/X-PLUG/MobileAgent)
-- [github:gh-2026-02-26-9] alibaba/OpenSandbox (https://github.com/alibaba/OpenSandbox)
-- [github:gh-2026-02-27-1] tukaani-project/xz (https://github.com/tukaani-project/xz)
 - [github:gh-2026-02-27-10] anthropics/claude-code (https://github.com/anthropics/claude-code)
 - [github:gh-2026-02-27-11] obra/superpowers (https://github.com/obra/superpowers)
 - [github:gh-2026-02-27-12] ruvnet/ruflo (https://github.com/ruvnet/ruflo)
 - [github:gh-2026-02-27-13] superset-sh/superset (https://github.com/superset-sh/superset)
-- [github:gh-2026-02-27-2] moonshine-ai/moonshine (https://github.com/moonshine-ai/moonshine)
-- [github:gh-2026-02-27-3] PaddlePaddle/Paddle (https://github.com/PaddlePaddle/Paddle)
 - [github:gh-2026-02-27-4] Shubhamsaboo/awesome-llm-apps (https://github.com/Shubhamsaboo/awesome-llm-apps)
 - [github:gh-2026-02-27-5] bytedance/deer-flow (https://github.com/bytedance/deer-flow)
-- [github:gh-2026-02-27-6] NousResearch/hermes-agent (https://github.com/NousResearch/hermes-agent)
 - [github:gh-2026-02-27-7] datagouv/datagouv-mcp (https://github.com/datagouv/datagouv-mcp)
 - [github:gh-2026-02-27-8] X-PLUG/MobileAgent (https://github.com/X-PLUG/MobileAgent)
-- [github:gh-2026-02-27-9] alibaba/OpenSandbox (https://github.com/alibaba/OpenSandbox)
-- [github:gh-2026-02-28-1] moonshine-ai/moonshine (https://github.com/moonshine-ai/moonshine)
-- [github:gh-2026-02-28-10] ruvnet/ruflo (https://github.com/ruvnet/ruflo)
-- [github:gh-2026-02-28-11] abhigyanpatwari/GitNexus (https://github.com/abhigyanpatwari/GitNexus)
-- [github:gh-2026-02-28-2] tukaani-project/xz (https://github.com/tukaani-project/xz)
-- [github:gh-2026-02-28-3] bytedance/deer-flow (https://github.com/bytedance/deer-flow)
-- [github:gh-2026-02-28-4] datawhalechina/hello-agents (https://github.com/datawhalechina/hello-agents)
-- [github:gh-2026-02-28-5] D4Vinci/Scrapling (https://github.com/D4Vinci/Scrapling)
-- [github:gh-2026-02-28-6] alibaba/OpenSandbox (https://github.com/alibaba/OpenSandbox)
-- [github:gh-2026-02-28-7] ruvnet/ruvector (https://github.com/ruvnet/ruvector)
-- [github:gh-2026-02-28-8] obra/superpowers (https://github.com/obra/superpowers)
-- [github:gh-2026-02-28-9] anthropics/claude-code (https://github.com/anthropics/claude-code)
 - [producthunt:ph-2026-02-23-1] Siteline (https://www.producthunt.com/products/siteline?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-23-10] Callio (https://www.producthunt.com/products/callio-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-23-11] Cuto (https://www.producthunt.com/products/cuto?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
@@ -308,35 +221,19 @@
 - [producthunt:ph-2026-02-23-7] YAP (https://www.producthunt.com/products/yap-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-23-8] InboxAgents (https://www.producthunt.com/products/inboxagents?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-23-9] SkillForge (https://www.producthunt.com/products/skillforge-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-1] Stitch by Google (https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-10] Collective OS (https://www.producthunt.com/products/collective-os?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-11] Polsia (https://www.producthunt.com/products/polsia?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-12] Skills for Agents (https://www.producthunt.com/products/skills-for-agents?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-24-13] Quilt (https://www.producthunt.com/products/quilt-5?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-14] Forum (https://www.producthunt.com/products/forum-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-15] WebMCP (https://www.producthunt.com/products/webmcp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-24-16] Nag Alarm AI (https://www.producthunt.com/products/nag-alarm-ai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-24-17] Dictato (https://www.producthunt.com/products/dictato?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-24-2] Modelence App Builder (https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-24-3] Anima (https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-4] Orchids 1.0 (https://www.producthunt.com/products/orchids?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-5] Liner Write (https://www.producthunt.com/products/liner-write?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-6] What YC Is Really Betting On? (https://www.producthunt.com/products/what-yc-is-really-betting-on?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-7] Bazaar V4 (https://www.producthunt.com/products/bazaar-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-24-8] Toggle for OpenClaw (https://www.producthunt.com/products/togglex-openclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-24-9] Falconer (https://www.producthunt.com/products/falconer?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-1] Stitch by Google (https://www.producthunt.com/products/stitch-by-google?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-10] Collective OS (https://www.producthunt.com/products/collective-os?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-11] Skills for Agents (https://www.producthunt.com/products/skills-for-agents?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-25-12] Toggle for OpenClaw (https://www.producthunt.com/products/togglex-openclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-25-13] Quilt (https://www.producthunt.com/products/quilt-5?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-14] Forum (https://www.producthunt.com/products/forum-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-15] WebMCP (https://www.producthunt.com/products/webmcp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-25-16] Nag Alarm AI (https://www.producthunt.com/products/nag-alarm-ai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-17] ClawRecipes (https://www.producthunt.com/products/clawrecipes-openclaw-recipes?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-25-18] Dictato (https://www.producthunt.com/products/dictato?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-19] Scriptmine (https://www.producthunt.com/products/scriptmine-turn-trends-into-scripts?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-25-2] Modelence App Builder (https://www.producthunt.com/products/modelence-app-builder?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-20] Prosaic (https://www.producthunt.com/products/prosaic?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-21] Kivicube (https://www.producthunt.com/products/kivicube?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-22] SoloGuard (https://www.producthunt.com/products/sologuard?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
@@ -344,7 +241,6 @@
 - [producthunt:ph-2026-02-25-24] Live AI Design Benchmark (https://www.producthunt.com/products/live-ai-design-benchmark?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-25] Gemma (https://www.producthunt.com/products/gemma?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-26] Dock 3.0 (https://www.producthunt.com/products/dock-developer-optimization-content-kit?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
-- [producthunt:ph-2026-02-25-3] Anima (https://www.producthunt.com/products/anima-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-4] Orchids 1.0 (https://www.producthunt.com/products/orchids?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-5] Liner Write (https://www.producthunt.com/products/liner-write?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)
 - [producthunt:ph-2026-02-25-6] What YC Is Really Betting On? (https://www.producthunt.com/products/what-yc-is-really-betting-on?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Agent+%28ID%3A+266065%29)

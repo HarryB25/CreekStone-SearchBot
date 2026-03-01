@@ -3,6 +3,7 @@ import os
 from html import escape
 from pathlib import Path
 from typing import Optional
+from uuid import uuid4
 
 import pandas as pd
 import streamlit as st
@@ -20,6 +21,7 @@ except Exception:
 BASE_DIR = Path(__file__).resolve().parent.parent
 STRUCTURED_DIR = BASE_DIR / "data" / "structured"
 INSIGHTS_DIR = BASE_DIR / "data" / "insights"
+COMMENTS_FILE = INSIGHTS_DIR / "item_comments.json"
 
 def _file_signature(paths: list[Path]) -> str:
     parts = []
@@ -40,6 +42,10 @@ def _structured_signature() -> str:
 def _insights_signature() -> str:
     trends_file = INSIGHTS_DIR / "keyword_trends.json"
     return _file_signature([trends_file])
+
+
+def _comments_signature() -> str:
+    return _file_signature([COMMENTS_FILE])
 
 
 @st.cache_data
@@ -102,6 +108,69 @@ def load_keyword_trends(_signature: str) -> dict:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return {"dates": [], "keywords": []}
+
+
+def _normalize_comment_record(value, fallback_id: str = "") -> Optional[dict]:
+    if isinstance(value, dict):
+        comment_id = str(value.get("id", "")).strip() or fallback_id or uuid4().hex[:12]
+        comment = str(value.get("comment", "")).strip()
+        created_at = str(value.get("created_at", "")).strip()
+        updated_at = str(value.get("updated_at", "")).strip()
+    else:
+        comment_id = fallback_id or uuid4().hex[:12]
+        comment = str(value or "").strip()
+        created_at = ""
+        updated_at = ""
+    if not comment:
+        return None
+    return {
+        "id": comment_id,
+        "comment": comment,
+        "created_at": created_at,
+        "updated_at": updated_at,
+    }
+
+
+@st.cache_data
+def load_item_comments(_signature: str) -> dict[str, list[dict]]:
+    if not COMMENTS_FILE.exists():
+        return {}
+    try:
+        raw = json.loads(COMMENTS_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    if not isinstance(raw, dict):
+        return {}
+    out: dict[str, list[dict]] = {}
+    for key, value in raw.items():
+        if not key:
+            continue
+        item_key = str(key)
+        normalized: list[dict] = []
+        if isinstance(value, list):
+            for idx, entry in enumerate(value):
+                record = _normalize_comment_record(entry, fallback_id=f"{item_key}-{idx+1}")
+                if record:
+                    normalized.append(record)
+        else:
+            record = _normalize_comment_record(value, fallback_id=f"{item_key}-1")
+            if record:
+                normalized.append(record)
+        if not normalized:
+            continue
+        normalized.sort(key=lambda x: (str(x.get("updated_at", "")), str(x.get("created_at", "")), str(x.get("id", ""))))
+        out[item_key] = normalized
+    return out
+
+
+def _write_item_comments(payload: dict[str, list[dict]]) -> None:
+    COMMENTS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = COMMENTS_FILE.with_suffix(".tmp")
+    temp_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    temp_path.replace(COMMENTS_FILE)
 
 
 def _load_ndjson_rows() -> list[dict]:
@@ -221,7 +290,72 @@ def _delete_item_by_id(item_id: str) -> tuple[bool, str]:
     target_date = str(target_row.get("date", ""))
     if target_date:
         _rewrite_date_parquet(target_date, kept)
+    comments = load_item_comments(_comments_signature()).copy()
+    if comments.pop(str(item_id), None) is not None:
+        _write_item_comments(comments)
     return True, f"已删除 {item_id}"
+
+
+def _save_item_comment(item_id: str, comment: str, comment_id: str = "") -> tuple[bool, str]:
+    item_key = str(item_id).strip()
+    if not item_key:
+        return False, "缺少项目 ID"
+    text = str(comment or "").strip()
+    if len(text) > 1200:
+        return False, "评论过长，请控制在 1200 字以内"
+    if not text:
+        return False, "评论内容不能为空；如需删除请使用“删除评论”。"
+
+    comments = load_item_comments(_comments_signature()).copy()
+    item_comments = [dict(x) for x in comments.get(item_key, [])]
+    now = pd.Timestamp.now().isoformat()
+    target_id = str(comment_id or "").strip()
+    if target_id:
+        found = False
+        for entry in item_comments:
+            if str(entry.get("id", "")) == target_id:
+                entry["comment"] = text
+                entry["updated_at"] = now
+                if not entry.get("created_at"):
+                    entry["created_at"] = now
+                found = True
+                break
+        if not found:
+            return False, f"未找到评论 id={target_id}"
+        action = "已更新评论"
+    else:
+        item_comments.append(
+            {
+                "id": uuid4().hex[:12],
+                "comment": text,
+                "created_at": now,
+                "updated_at": now,
+            }
+        )
+        action = "已新增评论"
+    comments[item_key] = item_comments
+    _write_item_comments(comments)
+    return True, f"{action}：{item_key}"
+
+
+def _delete_item_comment(item_id: str, comment_id: str) -> tuple[bool, str]:
+    item_key = str(item_id).strip()
+    target_id = str(comment_id).strip()
+    if not item_key or not target_id:
+        return False, "缺少项目 ID 或评论 ID"
+    comments = load_item_comments(_comments_signature()).copy()
+    item_comments = [dict(x) for x in comments.get(item_key, [])]
+    if not item_comments:
+        return False, "当前项目没有评论"
+    kept = [entry for entry in item_comments if str(entry.get("id", "")) != target_id]
+    if len(kept) == len(item_comments):
+        return False, f"未找到评论 id={target_id}"
+    if kept:
+        comments[item_key] = kept
+    else:
+        comments.pop(item_key, None)
+    _write_item_comments(comments)
+    return True, f"已删除评论：{item_key} / {target_id}"
 
 
 def _match_column(row: dict, column: str) -> bool:
@@ -344,7 +478,7 @@ def _format_reason_html(score_obj: Optional[dict]) -> str:
     return f"<div class='reason'><span class='reason-neutral'>{escape(text)}</span></div>"
 
 
-def card_html(item, radar_svg: Optional[str] = None):
+def card_html(item, radar_svg: Optional[str] = None, comments: Optional[list[dict]] = None):
     title = escape(item.get("title", ""))
     url = item.get("url", "#")
     desc = escape(item.get("description_zh") or item.get("description_en") or "")
@@ -364,6 +498,30 @@ def card_html(item, radar_svg: Optional[str] = None):
 
     score = (item.get("score") or {}).get("total")
     reason_html = _format_reason_html(item.get("score"))
+    safe_comments = comments or []
+    if safe_comments:
+        comment_parts = ["<div class='comment-box'><div class='comment-label'>项目评论</div>"]
+        for idx, entry in enumerate(safe_comments, start=1):
+            raw_text = str(entry.get("comment", "")).strip()
+            if not raw_text:
+                continue
+            safe_comment_html = "<br/>".join(
+                escape(line) for line in raw_text.splitlines() if line.strip() or len(raw_text.splitlines()) == 1
+            )
+            updated_at = str(entry.get("updated_at", "")).replace("T", " ")[:16]
+            meta_label = f"#{idx}"
+            if updated_at:
+                meta_label = f"{meta_label} · {updated_at}"
+            comment_parts.append(
+                "<div class='comment-entry'>"
+                f"<div class='comment-text'>{safe_comment_html}</div>"
+                f"<div class='comment-meta'>{escape(meta_label)}</div>"
+                "</div>"
+            )
+        comment_parts.append("</div>")
+        comment_html = "".join(comment_parts)
+    else:
+        comment_html = ""
     score_class = "s1" if score is not None and score < 74 else "s2" if score is not None and score < 78 else "s3"
     score_html = f"<span class='score {score_class}'>{score}</span>" if score is not None else ""
 
@@ -399,6 +557,7 @@ def card_html(item, radar_svg: Optional[str] = None):
         "</div>",
         f"<div class='desc'>{desc}</div>",
         reason_html,
+        comment_html,
         chips_html,
         f"<div class='meta'>{meta}</div>",
         "</div>",
@@ -652,6 +811,37 @@ div[data-baseweb="select"] > div:focus-within {
 .reason-neutral { color:var(--muted); }
 .reason-plus { color:#15803d; font-weight:600; }
 .reason-minus { color:#dc2626; font-weight:600; }
+.comment-box {
+  margin: 8px 0 12px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(187,158,85,0.08);
+  border: 1px solid rgba(187,158,85,0.22);
+}
+.comment-label {
+  color: #8e7534;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.comment-text {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: normal;
+  word-break: break-word;
+}
+.comment-entry + .comment-entry {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(187,158,85,0.22);
+}
+.comment-meta {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
 .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
     .chip { padding:7px 11px; border-radius:10px; background:rgba(187,158,85,0.12); border:1px solid var(--accent-line); color:var(--text); font-size:13px; font-weight:600; }
     .thumb { width:100%; height:150px; object-fit:cover; border-radius:12px; border:1px solid rgba(70,58,39,0.18); box-shadow:0 8px 16px rgba(42,35,25,0.10); background:#f9f6ef; }
@@ -825,6 +1015,7 @@ else:
 
 with tab_items:
     trends = load_keyword_trends(_insights_signature())
+    item_comments = load_item_comments(_comments_signature())
     t_keywords = (
         sort_keywords_for_display(trends.get("keywords", []), sort_field=sort_field)
         if trends
@@ -933,9 +1124,17 @@ with tab_items:
         for _, row in df_f.iterrows():
             row_dict = row.to_dict() if hasattr(row, "to_dict") else dict(row)
             radar_svg = build_score_radar_svg(row_dict)
-            st.markdown(card_html(row_dict, radar_svg=radar_svg), unsafe_allow_html=True)
+            item_id = str(row_dict.get("id", ""))
+            comment_entries = item_comments.get(item_id, [])
+            st.markdown(
+                card_html(
+                    row_dict,
+                    radar_svg=radar_svg,
+                    comments=comment_entries,
+                ),
+                unsafe_allow_html=True,
+            )
             if manage_mode:
-                item_id = str(row_dict.get("id", ""))
                 st.caption(f"管理ID: `{item_id}`")
                 with st.expander("编辑关键词 / 删除项目", expanded=False):
                     current_kw = row_dict.get("keywords", []) if isinstance(row_dict.get("keywords"), list) else []
@@ -971,6 +1170,70 @@ with tab_items:
                                     st.rerun()
                                 else:
                                     st.error(msg)
+                with st.expander("项目评论", expanded=False):
+                    st.caption("评论仅按纯文本保存和展示，不渲染 Markdown / HTML。")
+                    if comment_entries:
+                        for idx, entry in enumerate(comment_entries, start=1):
+                            comment_id = str(entry.get("id", ""))
+                            entry_updated = str(entry.get("updated_at", "")).replace("T", " ")[:16]
+                            label = f"评论 #{idx}"
+                            if entry_updated:
+                                label = f"{label}（更新于 {entry_updated}）"
+                            with st.container():
+                                st.markdown(f"**{label}**")
+                                edit_text = st.text_area(
+                                    "编辑评论",
+                                    value=str(entry.get("comment", "")),
+                                    height=110,
+                                    key=f"inline_comment_{item_id}_{comment_id}",
+                                    disabled=not inline_authed,
+                                )
+                                c1, c2, c3 = st.columns([1, 1, 2])
+                                with c1:
+                                    if st.button("保存修改", key=f"inline_save_comment_{item_id}_{comment_id}", disabled=not inline_authed):
+                                        ok, msg = _save_item_comment(item_id, edit_text, comment_id=comment_id)
+                                        if ok:
+                                            st.success(msg)
+                                            st.cache_data.clear()
+                                            st.rerun()
+                                        else:
+                                            st.error(msg)
+                                with c2:
+                                    confirm_delete_comment = st.checkbox(
+                                        "确认删除",
+                                        key=f"inline_confirm_delete_comment_{item_id}_{comment_id}",
+                                        disabled=not inline_authed,
+                                    )
+                                    if st.button("删除评论", key=f"inline_delete_comment_{item_id}_{comment_id}", disabled=not inline_authed):
+                                        if not confirm_delete_comment:
+                                            st.warning("请先勾选“确认删除”。")
+                                        else:
+                                            ok, msg = _delete_item_comment(item_id, comment_id)
+                                            if ok:
+                                                st.success(msg)
+                                                st.cache_data.clear()
+                                                st.rerun()
+                                            else:
+                                                st.error(msg)
+                    else:
+                        st.caption("当前还没有评论。")
+
+                    new_comment_text = st.text_area(
+                        "新增评论",
+                        value="",
+                        height=120,
+                        key=f"inline_comment_new_{item_id}",
+                        disabled=not inline_authed,
+                        help="新增后会为该项目附加一条独立评论。",
+                    )
+                    if st.button("新增评论", key=f"inline_add_comment_{item_id}", disabled=not inline_authed):
+                        ok, msg = _save_item_comment(item_id, new_comment_text)
+                        if ok:
+                            st.success(msg)
+                            st.cache_data.clear()
+                            st.rerun()
+                        else:
+                            st.error(msg)
 
     with right_col:
         if t_keywords:

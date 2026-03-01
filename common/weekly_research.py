@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Iterable
+from urllib.parse import parse_qs, unquote, urlparse
 
 import pandas as pd
 from sklearn.cluster import KMeans
@@ -383,6 +384,61 @@ def _source_weight_base(source: str) -> float:
     }.get(source, 1.0)
 
 
+def _collapse_identity_token(value: str) -> str:
+    lowered = unquote((value or "").strip().lower())
+    return re.sub(r"[^a-z0-9]+", "", lowered)
+
+
+def _normalize_slugish(value: str) -> str:
+    lowered = unquote((value or "").strip().lower())
+    tokens = [token for token in re.split(r"[^a-z0-9]+", lowered) if token]
+    while tokens and tokens[-1] in {"skill", "skills", "app", "apps"}:
+        tokens.pop()
+    if not tokens:
+        return ""
+    return "".join(tokens)
+
+
+def _canonical_project_key(source: str, title: str, row: dict[str, Any]) -> str:
+    url = str(row.get("url", "") or "").strip()
+    detail_url = str(row.get("detail_url", "") or "").strip()
+    parsed = urlparse(url) if url else None
+
+    if source == "github" and parsed:
+        parts = [part for part in parsed.path.split("/") if part]
+        if len(parts) >= 2:
+            owner = _collapse_identity_token(parts[0])
+            repo = _collapse_identity_token(parts[1])
+            if owner and repo:
+                return f"{owner}/{repo}"
+
+    if source == "producthunt" and parsed:
+        parts = [part for part in parsed.path.split("/") if part]
+        if len(parts) >= 2 and parts[0] == "products":
+            slug = _normalize_slugish(parts[1])
+            if slug:
+                return slug
+
+    if source == "clawhub" and parsed:
+        parts = [part for part in parsed.path.split("/") if part]
+        if parts:
+            slug = _normalize_slugish(parts[-1])
+            if slug:
+                return slug
+        query_slug = _normalize_slugish(parse_qs(parsed.query).get("q", [""])[0])
+        if query_slug:
+            return query_slug
+
+    if source == "arxiv":
+        arxiv_ref = detail_url or url
+        match = re.search(r"(\d{4}\.\d{4,5})(?:v\d+)?", arxiv_ref)
+        if match:
+            return match.group(1)
+
+    fallback = _normalize_slugish(title)
+    return fallback or _collapse_identity_token(title) or title.lower()
+
+
 def _build_signals(row: dict[str, Any]) -> dict[str, Any]:
     source = str(row.get("source", "")).lower()
     metrics = row.get("metrics") if isinstance(row.get("metrics"), dict) else {}
@@ -452,7 +508,7 @@ def build_event_frame(df: pd.DataFrame) -> pd.DataFrame:
                 "date": item_date,
                 "date_str": date_raw,
                 "id": item_id,
-                "stable_key": f"{source}::{title.lower()}",
+                "stable_key": f"{source}::{_canonical_project_key(source, title, row)}",
                 "title": title,
                 "summary": summary,
                 "url": str(row.get("url", "")).strip(),
@@ -670,6 +726,12 @@ def compute_project_trends(events: pd.DataFrame, window: WeekWindow) -> dict[str
     week_events["rise"] = week_events["stable_key"].map(rise_map).fillna(0.0)
     week_events["novel_candidate"] = week_events["stable_key"].map(novel_map).fillna(False)
     week_events["composite"] = 0.55 * week_events["hot"] + 0.45 * week_events["rise"]
+    week_events = (
+        week_events
+        .sort_values(["composite", "hot", "quality_weight", "score_total"], ascending=[False, False, False, False])
+        .drop_duplicates(subset=["stable_key"], keep="first")
+        .reset_index(drop=True)
+    )
 
     def _records(sub: pd.DataFrame, sort_col: str, limit: int = 20) -> list[dict[str, Any]]:
         data = sub.sort_values(sort_col, ascending=False).head(limit)
@@ -735,6 +797,7 @@ def compute_term_trends(events_with_scores: pd.DataFrame, window: WeekWindow) ->
                     "week_start": row["week_start"],
                     "source": row["source"],
                     "item_id": row["id"],
+                    "stable_key": row["stable_key"],
                     "quality_weight": float(row["quality_weight"]),
                 }
             )
@@ -743,9 +806,13 @@ def compute_term_trends(events_with_scores: pd.DataFrame, window: WeekWindow) ->
         return {"terms": [], "cooling_terms": [], "term_to_items": {}}
 
     term_df = pd.DataFrame(term_rows)
-    term_to_items = (
-        term_df.groupby("term")["item_id"].apply(lambda x: sorted(set(x.tolist()))).to_dict()
-    )
+    term_to_items = {}
+    for term, sub in term_df.groupby("term"):
+        stable_reps = (
+            sub.sort_values(["week_start", "quality_weight"], ascending=[False, False])
+            .drop_duplicates(subset=["stable_key"], keep="first")
+        )
+        term_to_items[term] = stable_reps["item_id"].tolist()
 
     min_support = max(1, _get_int_env("WEEKLY_REPORT_MIN_TERM_SUPPORT", 3))
     top_k = max(20, _get_int_env("WEEKLY_REPORT_TERM_TOPK", WEEKLY_DEFAULT_TERM_TOPK))
@@ -754,14 +821,20 @@ def compute_term_trends(events_with_scores: pd.DataFrame, window: WeekWindow) ->
     cooling: list[dict[str, Any]] = []
 
     for term, sub in term_df.groupby("term"):
-        week_group = sub.groupby("week_start")["item_id"].nunique().to_dict()
+        week_group = sub.groupby("week_start")["stable_key"].nunique().to_dict()
         freq_week = int(week_group.get(window.week_start, 0))
         if freq_week <= 0:
             continue
 
-        support_items = sorted(set(sub[sub["week_start"] == window.week_start]["item_id"].tolist()))
-        support_projects = len(support_items)
-        support_sources = len(set(sub[sub["week_start"] == window.week_start]["source"].tolist()))
+        support_rows = (
+            sub[sub["week_start"] == window.week_start]
+            .sort_values("quality_weight", ascending=False)
+            .drop_duplicates(subset=["stable_key"], keep="first")
+        )
+        support_items = support_rows["item_id"].tolist()
+        support_keys = support_rows["stable_key"].tolist()
+        support_projects = int(support_rows["stable_key"].nunique())
+        support_sources = int(support_rows["source"].nunique())
         if freq_week < min_support and support_projects < min_support:
             continue
         if support_sources < 1:
@@ -780,8 +853,13 @@ def compute_term_trends(events_with_scores: pd.DataFrame, window: WeekWindow) ->
         weeks_since_first = max(0, (window.week_start - first_seen).days // 7)
         novelty = 1.0 + min(0.35, 0.05 * min(7, weeks_since_first))
 
-        week_quality = float(sub[sub["week_start"] == window.week_start]["quality_weight"].mean())
-        baseline_quality = float(sub[sub["week_start"] < window.week_start]["quality_weight"].mean()) if not sub[sub["week_start"] < window.week_start].empty else week_quality
+        week_quality = float(support_rows["quality_weight"].mean()) if not support_rows.empty else 0.0
+        baseline_rows = (
+            sub[sub["week_start"] < window.week_start]
+            .sort_values("quality_weight", ascending=False)
+            .drop_duplicates(subset=["week_start", "stable_key"], keep="first")
+        )
+        baseline_quality = float(baseline_rows["quality_weight"].mean()) if not baseline_rows.empty else week_quality
 
         cross_source_bonus = 1.0 + 0.15 * max(0, support_sources - 1)
         if week_quality < 0.15:
@@ -801,6 +879,7 @@ def compute_term_trends(events_with_scores: pd.DataFrame, window: WeekWindow) ->
             "novelty": round(float(novelty), 4),
             "quality_weight": round(float(week_quality), 4),
             "support_items": support_items,
+            "support_keys": support_keys,
         }
         if score > 0:
             candidates.append(payload)
@@ -847,18 +926,26 @@ def select_candidate_projects(
         return week_events
 
     limit = max(20, _get_int_env("WEEKLY_REPORT_PROJECT_TOPK", WEEKLY_DEFAULT_PROJECT_TOPK))
-    hot_ids = week_events.sort_values("hot", ascending=False)["id"].head(limit).tolist()
+    hot_keys = week_events.sort_values("hot", ascending=False)["stable_key"].head(limit).tolist()
 
-    selected_ids = set(hot_ids)
+    selected_keys = set(hot_keys)
     for term in term_trends[:80]:
-        for item_id in term_to_items.get(str(term.get("term", "")), [])[:10]:
-            selected_ids.add(item_id)
-            if len(selected_ids) >= limit:
+        support_keys = term.get("support_keys")
+        if isinstance(support_keys, list) and support_keys:
+            key_source = [str(key) for key in support_keys]
+        else:
+            key_source = []
+            for item_id in term_to_items.get(str(term.get("term", "")), [])[:10]:
+                matched = week_events.loc[week_events["id"] == item_id, "stable_key"].tolist()
+                key_source.extend([str(key) for key in matched])
+        for stable_key in key_source[:10]:
+            selected_keys.add(stable_key)
+            if len(selected_keys) >= limit:
                 break
-        if len(selected_ids) >= limit:
+        if len(selected_keys) >= limit:
             break
 
-    selected = week_events[week_events["id"].isin(selected_ids)].copy()
+    selected = week_events[week_events["stable_key"].isin(selected_keys)].copy()
     return selected.sort_values(["composite", "hot"], ascending=[False, False]).head(limit)
 
 

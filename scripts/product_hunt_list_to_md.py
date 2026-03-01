@@ -180,11 +180,13 @@ else:
 
 class Product:
     def __init__(self, id: str, name: str, tagline: str, description: str, votesCount: int, createdAt: str, featuredAt: str, website: str, url: str, media=None, **kwargs):
+        self.product_id = str(id)
         self.name = name
         self.tagline = tagline
         self.description = description
         self.votes_count = votesCount
         self.created_at = self.convert_to_beijing_time(createdAt)
+        self.is_featured = bool(featuredAt)
         self.featured = "是" if featuredAt else "否"
         self.website = website
         self.url = url
@@ -382,10 +384,19 @@ class Product:
             f"---\n\n"
         )
 
-    def to_content_item(self, rank: int, date_str: str) -> dict:
+    def to_content_item(self, rank: int, date_str: str, extra_tags=None, featured_rank: int | None = None) -> dict:
         merged_text = f"{self.name} {self.tagline} {self.description}".lower()
         hit_keywords = [kw for kw in AI_KEYWORDS if kw in merged_text]
         score = self._get_score()
+        tags = ["Product Hunt", "daily_ai"]
+        if extra_tags:
+            for tag in extra_tags:
+                if tag and tag not in tags:
+                    tags.append(tag)
+        metrics = {"votes": self.votes_count, "featured": self.featured}
+        if featured_rank is not None:
+            metrics["featured_rank"] = int(featured_rank)
+        metrics["product_id"] = self.product_id
         return {
             "id": build_item_id("ph", date_str, rank),
             "source": "producthunt",
@@ -397,8 +408,8 @@ class Product:
             "description_en": self.description,
             "description_zh": self.translated_description,
             "keywords": [k.strip() for k in self.keyword.split(",") if k.strip()],
-            "tags": ["Product Hunt"],
-            "metrics": {"votes": self.votes_count, "featured": self.featured},
+            "tags": tags,
+            "metrics": metrics,
             "media": {"image": self.og_image_url},
             "ai_flags": {"is_ai": True, "hit_keywords": hit_keywords, "hit_excludes": []},
             "score": score,
@@ -514,11 +525,13 @@ def fetch_product_hunt_data(target_date: str = ""):
     """
 
     max_posts = _get_max_posts(30)
+    scan_limit = max(max_posts * 4, 60)
+    scan_limit = min(scan_limit, 200)
     all_posts = []
     has_next_page = True
     cursor = ""
 
-    while has_next_page and len(all_posts) < max_posts:
+    while has_next_page and len(all_posts) < scan_limit:
         query = base_query % (date_str, date_str, cursor)
         response = None
         last_error = None
@@ -560,8 +573,23 @@ def fetch_product_hunt_data(target_date: str = ""):
         has_next_page = data['pageInfo']['hasNextPage']
         cursor = data['pageInfo']['endCursor']
 
-    # 保留前 N 个产品（默认 30）
-    return [Product(**post) for post in sorted(all_posts, key=lambda x: x['votesCount'], reverse=True)[:max_posts]]
+    deduped_posts = []
+    seen_ids = set()
+    for post in sorted(all_posts, key=lambda x: x['votesCount'], reverse=True):
+        post_id = str(post.get("id", "")).strip()
+        if not post_id or post_id in seen_ids:
+            continue
+        seen_ids.add(post_id)
+        deduped_posts.append(post)
+
+    ai_posts = []
+    for post in deduped_posts:
+        if is_ai_related(post.get("name", ""), post.get("tagline", ""), post.get("description", "")):
+            ai_posts.append(post)
+        if len(ai_posts) >= max_posts:
+            break
+
+    return [Product(**post) for post in ai_posts]
 
 def fetch_mock_data():
     """生成模拟数据用于测试"""
@@ -608,16 +636,58 @@ def fetch_mock_data():
 
 def generate_markdown(products, date_str):
     """生成Markdown内容并保存到data/producthunt目录"""
-    markdown_content = f"# PH今日热榜 | {date_str}\n\n"
-    rank = 1
-    structured_items = []
+    ai_products = []
+    seen_ids = set()
     for product in products:
         if not is_ai_related(product.name, product.tagline, product.description):
             print(f"跳过非AI产品: {product.name}")
             continue
-        markdown_content += product.to_markdown(rank)
-        structured_items.append(product.to_content_item(rank, date_str))
-        rank += 1
+        if product.product_id in seen_ids:
+            continue
+        seen_ids.add(product.product_id)
+        ai_products.append(product)
+
+    max_posts = _get_max_posts(30)
+    daily_ai = ai_products[:max_posts]
+    featured_ai = [product for product in daily_ai if product.is_featured][:max_posts]
+    featured_ids = {product.product_id for product in featured_ai}
+    remaining_daily_ai = [product for product in daily_ai if product.product_id not in featured_ids]
+
+    markdown_content = f"# PH AI 日榜 | {date_str}\n\n"
+    markdown_content += (
+        f"> Daily Featured AI: {len(featured_ai)} | "
+        f"Daily AI(去重后): {len(daily_ai)}\n\n"
+    )
+
+    structured_items = []
+    featured_rank_map = {product.product_id: idx for idx, product in enumerate(featured_ai, start=1)}
+
+    markdown_content += "## Daily Featured AI\n\n"
+    if featured_ai:
+        for rank, product in enumerate(featured_ai, start=1):
+            markdown_content += product.to_markdown(rank)
+    else:
+        markdown_content += "> 当天无 Featured AI 产品。\n\n"
+
+    markdown_content += "## Daily AI（去重后，已排除上方 Featured 项）\n\n"
+    if remaining_daily_ai:
+        for rank, product in enumerate(remaining_daily_ai, start=1):
+            markdown_content += product.to_markdown(rank)
+    else:
+        markdown_content += "> 当天无额外 AI 产品。\n\n"
+
+    for rank, product in enumerate(daily_ai, start=1):
+        extra_tags = []
+        if product.product_id in featured_rank_map:
+            extra_tags.append("daily_featured_ai")
+        structured_items.append(
+            product.to_content_item(
+                rank,
+                date_str,
+                extra_tags=extra_tags,
+                featured_rank=featured_rank_map.get(product.product_id),
+            )
+        )
 
     # 确保 data/producthunt 目录存在
     os.makedirs('data/producthunt', exist_ok=True)
